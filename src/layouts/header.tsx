@@ -26,7 +26,7 @@ const Header = () => {
               </li>
             </ul>
             <span className='block'>
-              <Button size="lg">button</Button>
+              <Button size='sm'>button</Button>
               <Button variant='secondary'>button</Button>
             </span>
           </div>
