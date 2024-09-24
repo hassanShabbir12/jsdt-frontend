@@ -8,6 +8,13 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+	container: {
+	  center: true,
+	  screens: {
+		'2xl': '1190px',
+	  },
+	},
+
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -77,8 +84,12 @@ module.exports = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+		fontFamily: {
+			montserrat: ['Montserrat', 'Arial', 'sans-serif'],
+		},
   	}
   },
+
   plugins: [require("tailwindcss-animate")],
 }
