@@ -12,7 +12,7 @@ const Banner = () => {
           <strong className='mb-2 block text-base font-semibold uppercase text-primary'>
             ONLINE EXAM SYSTEM
           </strong>
-          <h1 className='mb-4 text-3xl font-semibold leading-tight md:text-4xl lg:mb-8 lg:text-5xl xl:text-6xl'>
+          <h1 className='mb-4 text-3xl font-semibold leading-tight text-zinc-800 md:text-4xl lg:mb-8 lg:text-5xl xl:text-6xl'>
             Create Customized Exams in Minutes
           </h1>
           <p className='mb-4 text-base leading-normal lg:mb-8 lg:text-xl'>
