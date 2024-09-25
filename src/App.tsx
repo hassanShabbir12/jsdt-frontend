@@ -1,7 +1,7 @@
-import Layout from '@/layouts/layout';
+import { AppRoutes } from '@/routes';
 
 function App() {
-  return <Layout />;
+  return <AppRoutes />;
 }
 
 export default App;
