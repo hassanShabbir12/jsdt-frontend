@@ -1,10 +1,12 @@
-import { Button } from '@/components/ui/button';
+import Banner from './layouts/banner';
+import Header from './layouts/header';
 
 function App() {
   return (
-    <>
-      <Button>sdfsdfdf</Button>
-    </>
+    <div className='wrapper'>
+      <Header />
+      <Banner />
+    </div>
   );
 }
 
