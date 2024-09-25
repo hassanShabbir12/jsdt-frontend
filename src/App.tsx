@@ -1,13 +1,7 @@
-import Banner from './layouts/banner';
-import Header from './layouts/header';
+import Layout from '@/layouts/layout';
 
 function App() {
-  return (
-    <div className='wrapper'>
-      <Header />
-      <Banner />
-    </div>
-  );
+  return <Layout />;
 }
 
 export default App;
