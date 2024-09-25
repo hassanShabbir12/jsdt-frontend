@@ -1,5 +1,11 @@
+import Banner from '@/layouts/banner';
+
 const Home = () => {
-  return <div>home test here</div>;
+  return (
+    <div>
+      <Banner />
+    </div>
+  );
 };
 
 export default Home;
