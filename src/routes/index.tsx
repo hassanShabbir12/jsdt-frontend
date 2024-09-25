@@ -1,7 +1,8 @@
+// src/routes/index.tsx
 import { RouteObject, useRoutes } from 'react-router-dom';
 import Home from '@/pages/Home';
-import About from '@/pages/About';
-import Layout from '@/layouts/MainLayout';
+import PricingPlan from '@/pages/PricingPlan';
+import Layout from '@/layouts/layout';
 
 const routes: RouteObject[] = [
   {
@@ -9,7 +10,7 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'about', element: <About /> },
+      { path: 'pricing-plan', element: <PricingPlan /> },
     ],
   },
 ];

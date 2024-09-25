@@ -1,13 +1,7 @@
-import Banner from './layouts/banner';
-import Header from './layouts/header';
+import { AppRoutes } from '@/routes';
 
 function App() {
-  return (
-    <div className='wrapper'>
-      <Header />
-      <Banner />
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
