@@ -1,8 +1,8 @@
 // src/routes/index.tsx
 import { RouteObject, useRoutes } from 'react-router-dom';
-import Home from '@/pages/Home';
 import PricingPlan from '@/pages/PricingPlan';
 import Layout from '@/layouts/layout';
+import Home from '@/pages/home';
 
 const routes: RouteObject[] = [
   {
