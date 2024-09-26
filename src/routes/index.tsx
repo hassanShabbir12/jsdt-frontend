@@ -1,5 +1,5 @@
 import { RouteObject, useRoutes } from 'react-router-dom';
-import Home from '@/pages/Home';
+import Home from '@/pages/home';
 import PricingPlan from '@/pages/PricingPlan';
 import LandingLayout from '@/layouts/landing-layout';
 

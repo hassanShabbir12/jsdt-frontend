@@ -1,4 +1,4 @@
-import { Banner, Pricing } from './components';
+import { Banner, Pricing } from '@/pages/home/components';
 
 const Home = () => {
   return (
