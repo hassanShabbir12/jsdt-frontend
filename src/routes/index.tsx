@@ -1,13 +1,12 @@
-// src/routes/index.tsx
 import { RouteObject, useRoutes } from 'react-router-dom';
 import Home from '@/pages/Home';
-import PricingPlan from '@/pages/PricingPlan';
-import Layout from '@/layouts/layout';
+import LandingLayout from '@/layouts/LandingLayout';
+import PricingPlan from '@/pages/PircingPlan';
 
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Layout />,
+    element: <LandingLayout />,
     children: [
       { index: true, element: <Home /> },
       { path: 'pricing-plan', element: <PricingPlan /> },

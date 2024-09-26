@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import Header from '@/layouts/header';
+import Header from './header';
 
-const Layout = () => {
+const LandingLayout = () => {
   return (
     <div className='wrapper w-full overflow-hidden'>
       <Header />
@@ -10,4 +10,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LandingLayout;
