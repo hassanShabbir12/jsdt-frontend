@@ -1,7 +1,7 @@
 import { RouteObject, useRoutes } from 'react-router-dom';
 import Home from '@/pages/Home';
-import LandingLayout from '@/layouts/LandingLayout';
-import PricingPlan from '@/pages/PircingPlan';
+import PricingPlan from '@/pages/PricingPlan';
+import LandingLayout from '@/layouts/landing-layout';
 
 const routes: RouteObject[] = [
   {

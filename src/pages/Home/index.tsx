@@ -1,5 +1,4 @@
-import Banner from '@/pages/Home/components/banner';
-import Pricing from '@/pages/Home/components/pricing';
+import { Banner, Pricing } from './components';
 
 const Home = () => {
   return (
