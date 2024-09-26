@@ -16,11 +16,6 @@ module.exports = {
 	},
 
   	extend: {
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -47,6 +42,14 @@ module.exports = {
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			yellow: {
+  				DEFAULT: 'hsl(var(--yellow))',
+  				foreground: 'hsl(var(--yellow-foreground))'
+  			},
+  			gray: {
+  				DEFAULT: 'hsl(var(--gray))',
+  				foreground: 'hsl(var(--gray-foreground))'
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
@@ -87,6 +90,12 @@ module.exports = {
   		},
 		fontFamily: {
 			montserrat: ['Montserrat', 'Arial', 'sans-serif'],
+		},
+  		borderRadius: {
+			'4xl': 'calc(var(--radius) + 20px)',
+  		},
+		boxShadow: {
+			'dark': '0 1px 3px 0 rgba(0, 0, 0, 0.4)',
 		},
   	}
   },
