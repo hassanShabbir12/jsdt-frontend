@@ -1,5 +1,5 @@
-import { Banner, Pricing } from '@/pages/home/components';
-import { GeneratorDetail } from '@/layouts/GeneratorDetail';
+import { Banner, Pricing, GeneratorDetail } from '@/pages/home/components';
+
 const Home = () => {
   return (
     <div>
