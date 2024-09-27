@@ -8,8 +8,8 @@ const Banner = () => {
   return (
     <section className='relative w-full overflow-hidden bg-accent px-4 pb-6 pt-14 text-neutral-900 sm:pb-20 sm:pt-16'>
       <div className='container xl:-mt-1'>
-        <div className='relative flex flex-wrap items-start justify-between'>
-          <div className='mb-7 min-w-0 flex-grow basis-0 overflow-hidden py-5 sm:mb-0 md:py-8 lg:py-11'>
+        <div className='relative flex-wrap items-start justify-between md:flex'>
+          <div className='mb-3 overflow-hidden py-5 sm:mb-0 md:mb-7 md:min-w-0 md:flex-grow md:basis-0 md:py-8 lg:py-11'>
             <div className='mb-4 text-base font-semibold uppercase text-primary'>
               ONLINE EXAM SYSTEM
             </div>
@@ -41,7 +41,7 @@ const Banner = () => {
             </ul>
             <Button size='lg'>Sign Up Now</Button>
           </div>
-          <div className='relative w-1/2 pl-10 pr-1'>
+          <div className='relative w-full pl-10 md:w-1/2 md:pr-1'>
             <div className='absolute -top-9 right-0'>
               <img className='w-full' src={ImagePattern01} alt='Image Description' />
             </div>
