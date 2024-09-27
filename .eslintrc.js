@@ -1,6 +1,6 @@
 const rulesDirPlugin = require('eslint-plugin-rulesdir');
 const { join } = require('path');
-rulesDirPlugin.RULES_DIR = join(__dirname, './tools/custom-eslint-rules');
+rulesDirPlugin.RULES_DIR = join(__dirname, './tool/custom-eslint-rules');
 
 /** @type {import('eslint').Linter.Config} */
 

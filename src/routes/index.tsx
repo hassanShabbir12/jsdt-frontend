@@ -6,6 +6,7 @@ import Payment from '@/pages/payment';
 import LearnerSignUp from '@/pages/learners-signup';
 import EducatorSignUp from '@/pages/educator-signup';
 
+// sdfds;
 const routes: RouteObject[] = [
   {
     path: '/',
