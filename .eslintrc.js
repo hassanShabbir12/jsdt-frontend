@@ -1,3 +1,9 @@
+const rulesDirPlugin = require('eslint-plugin-rulesdir');
+const { join } = require('path');
+rulesDirPlugin.RULES_DIR = join(__dirname, './tools/custom-eslint-rules');
+
+/** @type {import('eslint').Linter.Config} */
+
 module.exports = {
   extends: [
     'eslint:recommended',
@@ -26,6 +32,9 @@ module.exports = {
   ],
   root: true,
   rules: {
+    //custom-rules
+    'rulesdir/naming-convention': 'warn',
+
     // Prettier
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
@@ -44,7 +53,10 @@ module.exports = {
     ],
 
     // Code structure and readability
-    'max-len': ['error', { code: 100, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true }],
+    'max-len': [
+      'error',
+      { code: 100, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true },
+    ],
     'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
     'padding-line-between-statements': [
       'error',
@@ -60,7 +72,10 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-non-null-assertion': 'error',
-    '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: true, variables: true }],
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { functions: false, classes: true, variables: true },
+    ],
     '@typescript-eslint/consistent-type-assertions': 'error',
     '@typescript-eslint/no-array-constructor': 'error',
     '@typescript-eslint/no-namespace': 'error',
@@ -93,8 +108,8 @@ module.exports = {
     'no-alert': 'error',
     'no-var': 'error',
     'prefer-const': 'error',
-    'eqeqeq': ['error', 'always'],
-    'curly': ['error', 'all'],
+    eqeqeq: ['error', 'always'],
+    curly: ['error', 'all'],
     'no-eval': 'error',
     'no-implied-eval': 'error',
     'no-return-await': 'error',
