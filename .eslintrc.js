@@ -33,7 +33,7 @@ module.exports = {
   root: true,
   rules: {
     //custom-rules
-    'rulesdir/naming-convention': 'warn',
+    'rulesdir/check-naming-convention': 'warn',
 
     // Prettier
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
