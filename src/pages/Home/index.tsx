@@ -1,5 +1,5 @@
 import { Banner, Pricing } from '@/pages/home/components';
-import GeneratorDetail from '../../layouts/GeneratorDetail';
+import GeneratorDetail from '@/layouts/GeneratorDetail';
 
 const Home = () => {
   return (
