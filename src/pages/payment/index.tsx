@@ -1,5 +1,5 @@
-const PricingPlan = () => {
-  return <div>pricing page here</div>;
+const Payment = () => {
+  return <div>payment page here</div>;
 };
 
-export default PricingPlan;
+export default Payment;
