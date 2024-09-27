@@ -70,6 +70,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    @apply font-montserrat;
+    /* @apply font-montserrat; */
   }
 }
