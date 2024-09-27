@@ -8,10 +8,10 @@ import Generate02 from '@/assets/images/generate-2.png';
 import Generate03 from '@/assets/images/generate-3.png';
 import Generate04 from '@/assets/images/generate-4.png';
 
-const GeneratorDetail = () => {
+export const GeneratorDetail = () => {
   return (
-    <section className='relative w-full bg-accent py-24 text-neutral-900 sm:pb-60 sm:pt-10 lg:pb-96'>
-      <div className='container px-4'>
+    <section className='relative w-full bg-accent px-4 py-24 text-neutral-900 sm:pb-60 sm:pt-10 lg:pb-96'>
+      <div className='container'>
         <div className='absolute right-0 top-28 z-10'>
           <img src={Generate02} alt='Generate-1' />
         </div>
@@ -56,5 +56,3 @@ const GeneratorDetail = () => {
     </section>
   );
 };
-
-export default GeneratorDetail;
