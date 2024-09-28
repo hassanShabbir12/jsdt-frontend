@@ -1,25 +1,35 @@
-name: Preview Environment
-
-env:
-  VERCEL_ACCESS_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+name: Deploy Vercel PR Preview (Team)
 
 on:
   pull_request:
-    types: [opened, synchronize, closed]
-    branches:
-      - master
+    types: [opened, synchronize]
 
 jobs:
   deploy:
-    if: ${{ github.event.action == 'opened' || github.event.action == 'synchronize' }}
     runs-on: ubuntu-latest
+
     steps:
-      - uses: snaplet/vercel-action@v3
-  delete:
-    if: ${{ github.event.action == 'closed' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: snaplet/vercel-action@v3
-        with:
-          delete: true
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: yarn install # or npm install
+
+      - name: Deploy to Vercel (Team)
+        run: |
+          curl -X POST https://api.vercel.com/v13/deployments \
+          -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "name": "your-project-name",
+            "project": "${{ secrets.VERCEL_PROJECT_ID }}",
+            "teamId": "${{ secrets.VERCEL_TEAM_ID }}",
+            "gitSource": {
+              "org": "your-github-org",
+              "repo": "your-repo-name",
+              "pr": "'${{ github.event.number }}'"
+            }
+          }'
+
+      - name: Output Vercel Deployment URL
+        run: echo "PR deployed to Vercel"
