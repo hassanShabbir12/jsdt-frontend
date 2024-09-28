@@ -12,6 +12,8 @@ import { dirname, resolve } from 'path';
 import tseslint from 'typescript-eslint';
 import { fileURLToPath } from 'url';
 
+import { noAbsolutePathImgSrc } from './tool/custom-eslint-rules/no-absolute-path-img-src.mjs';
+
 // You'll need to adjust this import for your custom rules
 // import customRules from './tool/custom-eslint-rules/index.js';
 
@@ -64,8 +66,10 @@ export default tseslint.config(
       tailwindcss,
       prettier,
       import: importPlugin,
+      'custom-rules': { rules: { 'no-absolute-path-img-src': noAbsolutePathImgSrc } },
     },
     rules: {
+      'custom-rules/no-absolute-path-img-src': 'error',
       'prettier/prettier': ['error', {}, { usePrettierrc: true }],
       'tailwindcss/classnames-order': 'warn',
       'tailwindcss/no-custom-classname': 'error',
