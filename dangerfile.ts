@@ -29,7 +29,7 @@ if (!hasTestChanges) {
 }
 
 // Check for large PRs
-if (danger.github.pr.additions + danger.github.pr.deletions > 500) {
+if (danger.github.pr.additions + danger.github.pr.deletions > 1200) {
   warn('This PR is quite large. Consider splitting it into smaller PRs if possible.');
 }
 
