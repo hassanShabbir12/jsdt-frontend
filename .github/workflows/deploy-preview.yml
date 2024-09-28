@@ -2,7 +2,7 @@ name: Deploy Vercel Preview for PR
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened] # Trigger on PR creation, update, and reopening
+    types: [opened, synchronize, reopened]
     branches:
       - '**' # Deploy for all PR branches
 
@@ -20,9 +20,9 @@ jobs:
           node-version: '18' # Use the Node.js version for your project
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install # Use Yarn to install dependencies
 
       - name: Deploy to Vercel (Preview)
-        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_ORG_ID }} --project ${{ secrets.VERCEL_PROJECT_ID }} --pre
+        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --project ${{ secrets.VERCEL_PROJECT_ID }} --pre
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
