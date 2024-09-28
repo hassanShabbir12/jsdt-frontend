@@ -1,12 +1,13 @@
+import { type ReactElement } from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
-import PricingPlan from '@/pages/pricing-plan';
-import LandingLayout from '@/layouts/landing-layout';
-import Home from '@/pages/home';
-import Payment from '@/pages/payment';
-import LearnerSignUp from '@/pages/learners-signup';
-import EducatorSignUp from '@/pages/educator-signup';
 
-// sdfds;
+import LandingLayout from '@/layouts/landing-layout';
+import EducatorSignUp from '@/pages/educator-signup';
+import Home from '@/pages/home';
+import LearnerSignUp from '@/pages/learners-signup';
+import Payment from '@/pages/payment';
+import PricingPlan from '@/pages/pricing-plan';
+
 const routes: RouteObject[] = [
   {
     path: '/',
@@ -21,6 +22,6 @@ const routes: RouteObject[] = [
   },
 ];
 
-export function AppRoutes() {
+export function AppRoutes(): ReactElement | null {
   return useRoutes(routes);
 }

@@ -1,11 +1,14 @@
+import { FC } from 'react';
+
 interface Props {
   width?: string;
   height?: string;
   fill?: string;
   stroke?: string;
 }
-const Check = (props: Props) => {
+const Check: FC = (props: Props) => {
   const { width = '16', height = '16', fill = 'none', ...rest } = props;
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -22,4 +25,5 @@ const Check = (props: Props) => {
     </svg>
   );
 };
+
 export default Check;

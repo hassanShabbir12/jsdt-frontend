@@ -15,8 +15,11 @@ module.exports = {
 
     return {
       Program(node) {
+        console.log('🚀 ~ Program ~ node:', node);
+
         const fileName = context.getFilename();
         const baseName = fileName.split('/').pop();
+        console.log('🚀 ~ Program ~ baseName:', baseName);
 
         if (!allowedPattern.test(baseName)) {
           context.report({

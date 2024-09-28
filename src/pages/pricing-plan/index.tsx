@@ -1,5 +1,5 @@
-const PricingPlan = () => {
-  return <div>pricing page here</div>;
-};
+import { FC } from 'react';
+
+const PricingPlan: FC = () => <div>pricing page here</div>;
 
 export default PricingPlan;

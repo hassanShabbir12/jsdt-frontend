@@ -1,13 +1,13 @@
-import { Banner, Pricing, GeneratorDetail } from '@/pages/home/components';
+import { FC } from 'react';
 
-const Home = () => {
-  return (
-    <div>
-      <Banner />
-      <GeneratorDetail />
-      <Pricing />
-    </div>
-  );
-};
+import { Banner, GeneratorDetail, Pricing } from '@/pages/home/components';
+
+const Home: FC = () => (
+  <div>
+    <Banner />
+    <GeneratorDetail />
+    <Pricing />
+  </div>
+);
 
 export default Home;

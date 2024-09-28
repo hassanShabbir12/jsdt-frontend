@@ -1,0 +1,37 @@
+# # Dependencies
+# node_modules/
+
+# # Build outputs
+# dist/
+# build/
+
+# # Coverage directory used by tools like istanbul
+# coverage/
+
+# # Temporary files
+# *.log
+# *.tmp
+
+# # Environment files
+# .env
+# .env.*
+
+# # IDE and editor folders
+# .idea/
+# .vscode/
+
+# # Ignore public assets
+# public/
+
+# # Ignore any auto-generated files
+# *.generated.*
+
+# # Ignore markdown files (optional, if you don't want Prettier to format them)
+# # *.md
+
+# # Ignore JSON files (optional, if you prefer to keep them as-is)
+# # *.json
+
+# # Ignore YAML files (optional)
+# # *.yaml
+# # *.yml
