@@ -1,28 +1,27 @@
-name: Deploy Vercel Preview for PR
+# .github/workflows/preview.yml
+
+name: Preview Environment
+
+env:
+  VERCEL_ACCESS_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, closed]
     branches:
-      - '**' # Deploy for all PR branches
+      - main
 
 jobs:
   deploy:
+    if: ${{ github.event.action == 'opened' || github.event.action == 'synchronize' }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: snaplet/vercel-action@v3
+  delete:
+    if: ${{ github.event.action == 'closed' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: snaplet/vercel-action@v3
         with:
-          node-version: '18' # Or your project Node.js version
-
-      - name: Install dependencies
-        run: yarn install # Use Yarn to install dependencies
-
-      - name: Deploy to Vercel (Preview)
-        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} -p ${{ secrets.VERCEL_PROJECT_ID }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          delete: true
