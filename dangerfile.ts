@@ -53,9 +53,3 @@ const hasFeatureChanges = changedFiles.some((file) => file.includes('feature'));
 if (hasFeatureChanges && !hasChangelogChanges) {
   warn('This PR may require a CHANGELOG entry. Please check if you need to add one.');
 }
-
-// Type coverage
-const typeCheckCommand = await danger.git.diffForFile('package.json');
-if (typeCheckCommand && typeCheckCommand.after.includes('"type-check"')) {
-  message('Remember to run type-check before submitting the PR');
-}
