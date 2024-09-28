@@ -19,13 +19,10 @@ jobs:
         with:
           node-version: '18' # Or your project Node.js version
 
-      - name: Change to project directory
-        working-directory: ./jsdt-frontend # Change this if your project is in a different folder
-        run: |
-          yarn install  # Use Yarn to install dependencies
+      - name: Install dependencies
+        run: yarn install # Use Yarn to install dependencies
 
       - name: Deploy to Vercel (Preview)
-        working-directory: ./jsdt-frontend # Change this if your project is in a different folder
         run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} -p ${{ secrets.VERCEL_PROJECT_ID }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
