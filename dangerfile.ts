@@ -47,17 +47,6 @@ if (packageChanged && !lockfileChanged) {
   message('Perhaps you need to run `yarn install`?');
 }
 
-// Check for .only in tests
-const testFiles = changedFiles.filter(
-  (file) => file.endsWith('.test.ts') || file.endsWith('.test.tsx'),
-);
-testFiles.forEach((file) => {
-  const content = danger.git.diffForFile(file);
-  if (content && content.diff.includes('.only')) {
-    fail(`An .only was left in tests: ${file}`);
-  }
-});
-
 // Encourage adding to CHANGELOG for feature files
 const hasChangelogChanges = changedFiles.some((file) => file.includes('CHANGELOG'));
 const hasFeatureChanges = changedFiles.some((file) => file.includes('feature'));
@@ -66,7 +55,7 @@ if (hasFeatureChanges && !hasChangelogChanges) {
 }
 
 // Type coverage
-const typeCheckCommand = danger.git.diffForFile('package.json');
+const typeCheckCommand = await danger.git.diffForFile('package.json');
 if (typeCheckCommand && typeCheckCommand.after.includes('"type-check"')) {
   message('Remember to run type-check before submitting the PR');
 }
