@@ -6,11 +6,6 @@ import { assetUrl } from '@/lib/asset-url';
 
 const Banner: FC = () => (
   <section className='relative w-full overflow-hidden bg-accent px-4 pb-6 pt-14 text-neutral-900 sm:pb-20 sm:pt-16'>
-    <img
-      className='w-20'
-      src={assetUrl('/img/signup/dots-illustration.svg')}
-      alt='Image Description'
-    />
     <div className='container xl:-mt-1'>
       <div className='relative flex-wrap items-start justify-between md:flex'>
         <div className='mb-3 overflow-hidden py-5 sm:mb-0 md:mb-7 md:min-w-0 md:flex-grow md:basis-0 md:py-8 lg:py-11'>
