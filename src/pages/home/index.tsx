@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
-import { Banner, ExamGenerator, GeneratorDetail, Pricing } from '@/pages/home/components';
+import { Banner, ExamGenerator, GeneratorDetail, Header, Pricing } from '@/pages/home/components';
 
 const Home: FC = () => (
   <div>
+    <Header />
     <Banner />
     <ExamGenerator />
     <GeneratorDetail />
