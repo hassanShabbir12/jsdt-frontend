@@ -44,7 +44,7 @@ const Banner: FC = () => (
           <div className='absolute -top-9 right-0'>
             <img
               className='w-full'
-              src={assetUrl('/assets/img/dots-pattern.svg')}
+              src={assetUrl('/assets/img/home/dots-pattern.svg')}
               alt='Image Description'
             />
           </div>
@@ -53,7 +53,7 @@ const Banner: FC = () => (
             <div className='h-full w-full origin-bottom-right skew-y-6 transform overflow-hidden object-cover'>
               <img
                 className='h-full w-full origin-bottom-right -skew-y-6 transform object-cover'
-                src={assetUrl('/assets/img/img-banner.png')}
+                src={assetUrl('/assets/img/home/img-banner.png')}
                 alt='Create Customized Exams in Minutes.'
               />
             </div>
@@ -64,7 +64,7 @@ const Banner: FC = () => (
     <div className='absolute -right-12 bottom-6'>
       <img
         className='w-full'
-        src={assetUrl('/assets/img/dots-circle.svg')}
+        src={assetUrl('/assets/img/home/dots-circle.svg')}
         alt='Image Description'
       />
     </div>
