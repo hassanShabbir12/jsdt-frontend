@@ -46,18 +46,18 @@ const ExamGenerator: FC = () => {
           </span>{' '}
           Our Exam Generator:
         </h2>
-        <div className='exam-boxes-wrap -ml-2 -mr-2 flex flex-wrap lg:-ml-4 lg:-mr-4'>
+        <div className='-ml-2 -mr-2 flex flex-wrap lg:-ml-4 lg:-mr-4'>
           {boxData.map((box, index) => (
             <div
               key={index}
               className='mb-5 w-full pl-2 pr-2 md:w-1/2 lg:mb-10 lg:w-2/6 lg:pl-4 lg:pr-4'
             >
-              <div className='box-holder h-full rounded-3xl bg-accent'>
-                <div className='box-data px-3 py-3 text-xl leading-6 text-zinc-800 md:pb-9 md:pl-4 md:pr-5 md:pt-5'>
-                  <div className='box-icon mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white shadow md:mb-6'>
+              <div className='h-full rounded-3xl bg-accent'>
+                <div className='px-3 py-3 text-xl leading-6 text-zinc-800 md:pb-9 md:pl-4 md:pr-5 md:pt-5'>
+                  <div className='mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white shadow md:mb-6'>
                     <img src={box.icon} alt={box.title} />
                   </div>
-                  <strong className='title mb-3 block text-base tracking-wider text-zinc-900 lg:mb-7 lg:text-xl'>
+                  <strong className='mb-3 block text-base tracking-wider text-zinc-900 lg:mb-7 lg:text-xl'>
                     {box.title}
                   </strong>
                   <p className='m-0'>{box.description}</p>
