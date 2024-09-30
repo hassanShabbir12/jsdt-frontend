@@ -57,9 +57,9 @@ const ExamGenerator: FC = () => {
                   <div className='mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white shadow md:mb-6'>
                     <img src={box.icon} alt={box.title} />
                   </div>
-                  <strong className='mb-3 block text-base tracking-wider text-zinc-900 lg:mb-7 lg:text-xl'>
+                  <h3 className='mb-3 block text-base tracking-wider text-zinc-900 lg:mb-7 lg:text-xl'>
                     {box.title}
-                  </strong>
+                  </h3>
                   <p className='m-0'>{box.description}</p>
                 </div>
               </div>
