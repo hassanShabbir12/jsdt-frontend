@@ -40,7 +40,7 @@ const ExamGenerator: FC = () => {
   return (
     <section className='relative w-full overflow-hidden py-6 text-neutral-900 sm:pb-20 sm:pt-28'>
       <div className='container relative mx-auto px-4'>
-        <h2 className='mb-10 max-w-80 text-[28px] font-semibold leading-tight md:mb-20 md:max-w-2xl md:text-6xl'>
+        <h2 className='mb-10 max-w-72 text-[28px] font-semibold leading-tight md:mb-20 md:max-w-xl md:text-6xl'>
           <span className='relative z-10 before:absolute before:left-1.5 before:top-4 before:-z-10 before:h-3 before:w-full before:bg-amber-300 md:before:top-9 md:before:h-5'>
             Unique Benefits of
           </span>{' '}
