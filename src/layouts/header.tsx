@@ -10,7 +10,11 @@ const Header: FC = () => (
       <div className='relative flex flex-wrap items-center justify-between text-black'>
         <div className='w-20 md:w-24'>
           <Link to='/'>
-            <img className='w-full' src={assetUrl('/assets/img/logo.png')} alt='JSDT Examiner' />
+            <img
+              className='w-full'
+              src={assetUrl('/assets/img/home/logo.png')}
+              alt='JSDT Examiner'
+            />
           </Link>
         </div>
         <Button variant='secondary' size='lg'>

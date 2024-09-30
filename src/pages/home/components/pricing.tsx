@@ -51,7 +51,7 @@ const Pricing: FC = () => (
                   <div className='absolute hidden md:block lg:static lg:mb-16'>
                     <img
                       className='w-20'
-                      src={assetUrl('/assets/img/illustration.svg')}
+                      src={assetUrl('/assets/img/home/illustration.svg')}
                       alt='Image Description'
                     />
                   </div>
@@ -64,7 +64,7 @@ const Pricing: FC = () => (
                   <div className='mb-6 flex justify-center lg:mb-14'>
                     <img
                       className='w-24 md:w-28 lg:w-56'
-                      src={assetUrl('/assets/img/img-learning.svg')}
+                      src={assetUrl('/assets/img/home/img-learning.svg')}
                       alt='Image Description'
                     />
                   </div>
