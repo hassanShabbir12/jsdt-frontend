@@ -1,36 +1,31 @@
-# //sds
-name: Deploy Vercel PR Preview (Team)
+name: Deploy Preview
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    branches:
+      - main # Change to your default branch if it's not 'main'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Use your required Node.js version
 
       - name: Install dependencies
-        run: yarn install # or npm install
+        run: yarn install
 
-      - name: Deploy to Vercel (Team)
+      - name: Build the project
+        run: yarn build
+
+      - name: Deploy to Surge
+        env:
+          PROJECT_NAME: ${{ secrets.SURGE_PROJECT_NAME }}-${{ github.event.number }} # Construct project name with PR number
         run: |
-          curl -X POST https://api.vercel.com/v13/deployments \
-          -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "name": "your-project-name",
-            "project": "${{ secrets.VERCEL_PROJECT_ID }}",
-            "teamId": "${{ secrets.VERCEL_TEAM_ID }}",
-            "gitSource": {
-              "org": "your-github-org",
-              "repo": "your-repo-name",
-              "pr": "'${{ github.event.number }}'"
-            }
-          }'
-
-      - name: Output Vercel Deployment URL
-        run: echo "PR deployed to Vercel"
+          yarn global add surge  # Install Surge CLI in the GitHub Actions environment
+          surge --project ./dist --domain $PROJECT_NAME.surge.sh --token ${{ secrets.SURGE_TOKEN }}
