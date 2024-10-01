@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import Star from '@/components/icon/star';
+import RatingStar from '@/components/icon/rating-star';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { assetUrl } from '@/lib/asset-url';
 
@@ -50,11 +50,11 @@ const Sidebar: FC = () => {
                     <div className='text-sm text-white'>John Doe</div>
                     <div className='text-sm text-white'>Grade 11th Student</div>
                     <div className='flex gap-0.5 pb-2 pt-1 text-yellow'>
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
                     </div>
                     <div className='text-sm text-white'>
                       “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -81,11 +81,11 @@ const Sidebar: FC = () => {
                     <div className='text-sm text-white'>John Doe</div>
                     <div className='text-sm text-white'>Grade 11th Student</div>
                     <div className='flex gap-0.5 pb-2 pt-1 text-yellow'>
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
                     </div>
                     <div className='text-sm text-white'>
                       “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -112,11 +112,11 @@ const Sidebar: FC = () => {
                     <div className='text-sm text-white'>John Doe</div>
                     <div className='text-sm text-white'>Grade 11th Student</div>
                     <div className='flex gap-0.5 pb-2 pt-1 text-yellow'>
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
-                      <Star />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
+                      <RatingStar />
                     </div>
                     <div className='text-sm text-white'>
                       “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
