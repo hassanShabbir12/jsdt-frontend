@@ -1,0 +1,16 @@
+name: Delete Surge Preview
+
+on:
+  pull_request:
+    types:
+      - closed # Trigger on closed PR
+
+jobs:
+  delete:
+    if: github.event.pull_request.base.ref == 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Surge Preview
+        run: |
+          PROJECT_NAME=${{ secrets.SURGE_PROJECT_NAME }}-${{ github.event.pull_request.number }}  # Construct project name with PR number
+          surge remove $PROJECT_NAME.surge.sh --token ${{ secrets.SURGE_TOKEN }} --yes  # Delete the deployment
