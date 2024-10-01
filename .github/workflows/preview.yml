@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18' # Use your required Node.js version
+          node-version: '16' # Use your required Node.js version
 
       - name: Install dependencies
         run: yarn install
@@ -29,3 +29,11 @@ jobs:
         run: |
           yarn global add surge  # Install Surge CLI in the GitHub Actions environment
           surge --project ./dist --domain $PROJECT_NAME.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+
+      - name: Comment on PR with live URL
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.DANGER_GITHUB_API_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
+          -d '{"body": "Preview deployed at: https://'"${{ secrets.SURGE_PROJECT_NAME }}-${{ github.event.number }}".surge.sh"'. Visit the link for a live preview."}'
