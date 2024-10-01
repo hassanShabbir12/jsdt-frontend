@@ -31,5 +31,7 @@ jobs:
           surge --project ./dist --domain $PROJECT_NAME.surge.sh --token ${{ secrets.SURGE_TOKEN }}
 
       - name: Prompt live URL
+        env:
+          PROJECT_NAME: ${{ secrets.SURGE_PROJECT_NAME }}-${{ github.event.number }}
         run: |
           echo "Preview deployed at: https://$PROJECT_NAME.surge.sh. Visit the link for a live preview."
