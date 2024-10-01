@@ -8,6 +8,7 @@ import {
   GeneratorDetail,
   Header,
   Pricing,
+  Works,
 } from '@/pages/home/components';
 
 const Home: FC = () => (
@@ -15,6 +16,7 @@ const Home: FC = () => (
     <Header />
     <Banner />
     <ExamGenerator />
+    <Works />
     <GeneratorDetail />
     <Pricing />
     <Faq />

@@ -1,11 +1,14 @@
+import { FC } from 'react';
+
 interface Props {
   width?: string;
   height?: string;
   fill?: string;
   stroke?: string;
 }
-const Star = (props: Props) => {
+const Star: FC = (props: Props) => {
   const { width = '15', height = '14', fill = 'none', ...rest } = props;
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -22,4 +25,5 @@ const Star = (props: Props) => {
     </svg>
   );
 };
+
 export default Star;
