@@ -3,7 +3,7 @@ name: Deploy Preview
 on:
   pull_request:
     branches:
-      - main # Change to your default branch if it's not 'main'
+      - master # Change to your default branch if it's not 'main'
 
 jobs:
   deploy:
