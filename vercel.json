@@ -3,5 +3,8 @@
     "env": {
       "IGNORECASE": "false"
     }
-  }
+  },
+  "rewrites": [
+      {"source": "/(.*)", "destination": "/"}
+  ]
 }
