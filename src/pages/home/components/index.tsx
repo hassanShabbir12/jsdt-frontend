@@ -6,5 +6,6 @@ import GeneratorDetail from '@/pages/home/components/generator-detail';
 import Header from '@/pages/home/components/header';
 import Pricing from '@/pages/home/components/pricing';
 import Testimonial from '@/pages/home/components/testimonial';
+import Works from '@/pages/home/components/works';
 
-export { Header, Banner, GeneratorDetail, ExamGenerator, Testimonial, Pricing, Faq, Footer };
+export { Header, Banner, GeneratorDetail, ExamGenerator, Testimonial, Works, Pricing, Faq, Footer };
