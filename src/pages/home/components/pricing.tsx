@@ -48,36 +48,38 @@ const Pricing: FC = () => (
             <div className='container'>
               <div className='relative flex flex-wrap items-end'>
                 <div className='w-full rounded-lg bg-primary px-4 py-5 text-center text-white lg:w-3/12 lg:min-w-72 lg:text-left xl:min-w-[333px] xl:rounded-2xl'>
-                  <div className='absolute hidden md:block lg:static lg:mb-16'>
+                  <div className='absolute hidden md:block lg:static lg:mb-12'>
                     <img
                       className='w-20'
                       src={assetUrl('/assets/img/home/illustration.svg')}
                       alt='Image Description'
                     />
                   </div>
-                  <h3 className='mb-6 text-2xl lg:mb-16 lg:text-xl xl:text-2xl'>
+                  <h3 className='mb-6 text-2xl lg:mb-20 lg:text-xl xl:text-2xl'>
                     Unlock Your
                     <strong className='ml-1 font-bold lg:ml-0 lg:block'>
                       Full Learning Potential
                     </strong>
                   </h3>
-                  <div className='mb-6 flex justify-center lg:mb-14'>
+                  <div className='mb-6 flex justify-center lg:mb-16'>
                     <img
                       className='w-24 md:w-28 lg:w-56'
                       src={assetUrl('/assets/img/home/img-learning.svg')}
                       alt='Image Description'
                     />
                   </div>
-                  <p className='mb-2 text-center text-sm font-medium leading-tight text-zinc-100 lg:mb-6 lg:text-base'>
+                  <p className='mb-2 text-center text-sm font-medium leading-tight text-zinc-100 lg:mb-11 lg:text-base'>
                     Enhance your learning with unlimited access to advanced resources and
                     personalized study guides.
                   </p>
                 </div>
-                <div className='pt-5 lg:mt-0 lg:min-w-0 lg:flex-grow lg:basis-0 lg:pl-5'>
+                <div className='pt-6 lg:mt-0 lg:min-w-0 lg:flex-grow lg:basis-0 lg:pl-5'>
                   <div className='-mx-2.5 flex flex-wrap'>
                     <div className='relative mb-5 w-full px-2.5 sm:mb-0 sm:w-1/2'>
                       <div className='relative rounded-lg bg-gray p-3 shadow-dark md:p-5 xl:rounded-2xl xl:p-7'>
-                        <h3 className='mb-3 text-2xl font-semibold uppercase md:mb-5'>PLAN A</h3>
+                        <h3 className='mb-3 text-2xl font-semibold uppercase leading-6 md:mb-5'>
+                          PLAN A
+                        </h3>
                         <h4 className='mb-3 text-base font-semibold uppercase text-primary md:mb-5'>
                           R39,99/MONTHLY
                         </h4>
@@ -121,7 +123,7 @@ const Pricing: FC = () => (
                             </p>
                           </li>
                         </ul>
-                        <div className='mb-2 flex justify-center md:mb-0 md:pt-4'>
+                        <div className='mb-2 flex justify-center md:mb-0 md:pt-6'>
                           <Button className='min-w-52 rounded-4xl xl:text-xl' size='lg'>
                             Buy Plan A
                           </Button>
