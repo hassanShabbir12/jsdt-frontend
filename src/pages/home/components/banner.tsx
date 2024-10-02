@@ -5,14 +5,14 @@ import { Button } from '@/components/ui/button';
 import { assetUrl } from '@/lib/asset-url';
 
 const Banner: FC = () => (
-  <section className=' sdfdsdlkd relative w-full overflow-hidden bg-accent px-4 pb-6 pt-14 text-neutral-900 sm:pb-20 sm:pt-16'>
+  <section className=' sdfdsdlkd relative w-full overflow-hidden bg-accent px-4 pb-6 pt-14 text-zinc-800 sm:pb-20 sm:pt-16'>
     <div className='container xl:-mt-1'>
       <div className='relative flex-wrap items-start justify-between md:flex'>
         <div className='mb-3 overflow-hidden py-5 sm:mb-0 md:mb-7 md:min-w-0 md:flex-grow md:basis-0 md:py-8 lg:py-11'>
           <div className='mb-4 text-base font-semibold uppercase text-primary'>
             ONLINE EXAM SYSTEM
           </div>
-          <h1 className='relative mb-4 text-3xl font-semibold text-zinc-800 md:text-4xl lg:mb-12 lg:text-5xl xl:text-6xl'>
+          <h1 className='relative mb-4 text-3xl font-bold text-zinc-800 md:text-4xl lg:mb-12 lg:text-5xl xl:text-6xl'>
             Create Customized Exams in Minutes
           </h1>
           <p className='mb-4 text-base leading-normal lg:mb-10 lg:text-xl'>
