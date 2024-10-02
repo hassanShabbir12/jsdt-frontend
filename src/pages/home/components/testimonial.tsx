@@ -35,63 +35,63 @@ const Testimonial: FC = () => {
             alt='Image Description'
           />
           <ul className='hidden list-none md:block'>
-            <li className='2x:top-0 absolute -top-16 left-[300px] lg:-top-16 xl:-top-4 xl:left-[400px] 2xl:left-[500px]'>
+            <li className='2x:top-0 absolute -top-16 left-[300px] overflow-hidden rounded-full lg:-top-16 xl:-top-4 xl:left-[400px] 2xl:left-[500px]'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image1.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='2x:right-80 2x:top-5 absolute -top-8 right-24 lg:-top-4 xl:right-60 xl:top-3'>
+            <li className='2x:right-80 2x:top-5 absolute -top-8 right-24 overflow-hidden rounded-full lg:-top-4 xl:right-60 xl:top-3'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image2.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='absolute right-10 top-24 lg:right-0 lg:top-32 xl:right-32 xl:top-40 2xl:top-32'>
+            <li className='absolute right-10 top-24 overflow-hidden rounded-full lg:right-0 lg:top-32 xl:right-32 xl:top-40 2xl:top-32'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image3.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='2x:right-72 absolute bottom-28 right-24 xl:bottom-60 xl:right-60 2xl:bottom-72'>
+            <li className='2x:right-72 absolute bottom-28 right-24 overflow-hidden rounded-full xl:bottom-60 xl:right-60 2xl:bottom-72'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image1.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='2x:bottom-20 2x:right-56 absolute bottom-0 right-10 lg:right-0 xl:bottom-10 xl:right-40'>
+            <li className='2x:bottom-20 2x:right-56 absolute bottom-0 right-10 overflow-hidden rounded-full lg:right-0 xl:bottom-10 xl:right-40'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image3.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='absolute bottom-0 right-[290px] lg:right-[390px] xl:bottom-10 xl:right-[490px] 2xl:bottom-24 2xl:right-[590px]'>
+            <li className='absolute bottom-0 right-[290px] overflow-hidden rounded-full lg:right-[390px] xl:bottom-10 xl:right-[490px] 2xl:bottom-24 2xl:right-[590px]'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image4.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='absolute bottom-0 left-60 xl:bottom-10 xl:left-80 2xl:bottom-20 2xl:left-96'>
+            <li className='absolute bottom-0 left-60 overflow-hidden rounded-full xl:bottom-10 xl:left-80 2xl:bottom-20 2xl:left-96'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image3.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='absolute left-16 top-60 xl:left-32 xl:top-72 2xl:left-48 2xl:top-72'>
+            <li className='absolute left-16 top-60 overflow-hidden rounded-full xl:left-32 xl:top-72 2xl:left-48 2xl:top-72'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image4.png')}
                 alt='Image Description'
               />
             </li>
-            <li className='absolute left-20 top-16 xl:top-28 2xl:left-56'>
+            <li className='absolute left-20 top-16 overflow-hidden rounded-full xl:top-28 2xl:left-56'>
               <img
                 className='h-16 w-16 lg:h-24 lg:w-24'
                 src={assetUrl('/assets/img/home/image3.png')}
@@ -204,7 +204,7 @@ const Testimonial: FC = () => {
               {[0, 1, 2].map((index) => (
                 <button
                   key={index}
-                  className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                  className={`h-1.5 w-1.5 rounded-full outline-none transition-colors ${
                     activeIndex === index ? 'bg-white' : 'bg-stone-300'
                   }`}
                   onClick={() => handleBulletClick(index)}
