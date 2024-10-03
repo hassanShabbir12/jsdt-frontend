@@ -206,15 +206,19 @@ export const CarouselDots = React.forwardRef<HTMLDivElement, React.HTMLAttribute
     const { api, currentSlide } = useCarousel();
 
     return (
-      <div ref={ref} className={cn('flex justify-center space-x-2', className)} {...props}>
+      <div
+        ref={ref}
+        className={cn('flex flex-wrap justify-center items-center gap-2', className)}
+        {...props}
+      >
         {api?.slideNodes().map((_, index) => (
           <Button
             key={index}
             variant='outline'
             size='icon'
             className={cn(
-              'h-2 w-2 border-none rounded-full hover:bg-primary',
-              currentSlide === index ? 'bg-black' : 'bg-gray-300',
+              'h-2 w-2 border-none shadow-none outline-none rounded-full hover:bg-white',
+              currentSlide === index ? 'bg-white' : 'bg-gray-300',
             )}
             onClick={() => api?.scrollTo(index)}
           >
