@@ -11,7 +11,7 @@ const Payment: FC = () => (
     <div className='container'>
       <div className='mb-4 overflow-hidden px-4 pt-2 text-center md:mb-6 xl:mb-8'>
         <h2 className='mb-4 text-3xl font-semibold uppercase leading-tight text-zinc-800 md:mb-7 md:text-4xl lg:mb-12 lg:text-5xl xl:mb-8 xl:text-6xl'>
-          <span className='relative px-2 before:absolute before:bottom-5 before:left-0 before:right-0 before:top-12 before:bg-yellow xl:py-2'>
+          <span className='relative px-0 before:absolute before:bottom-2 before:left-0 before:right-0 before:top-6 before:bg-yellow lg:before:bottom-3 lg:before:top-8 xl:py-2 xl:before:bottom-5 xl:before:top-12'>
             <span className='relative'>PRICING</span>
           </span>{' '}
           FOR EDUCATORS

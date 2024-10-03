@@ -67,7 +67,7 @@ const Works: FC = () => {
             ))}
           </ul>
           <div className='mx-auto flex justify-center md:w-2/4 lg:m-0 lg:justify-end'>
-            <div className='flex h-[350px] w-[350px] items-center justify-center rounded-full border-4 border-dashed border-amber-400 sm:h-[450px] sm:w-[450px] xl:h-[525px] xl:w-[525px]'>
+            <div className='flex h-[350px] w-[350px] items-center justify-center rounded-full border-2 border-dashed border-amber-400 sm:h-[450px] sm:w-[450px] xl:h-[525px] xl:w-[525px]'>
               <div className='flex h-[330px] w-[330px] items-center justify-center overflow-hidden rounded-full bg-blue-500 sm:h-[430px] sm:w-[430px] xl:h-[497px] xl:w-[497px]'>
                 <img
                   src={assetUrl('assets/img/home/work-img.png')}
