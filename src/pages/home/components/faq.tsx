@@ -11,7 +11,7 @@ const Faq: FC = () => (
   <section className='relative'>
     <div className='container'>
       <div className='mx-auto px-4 md:w-1/2 md:px-8 lg:px-16 xl:px-0'>
-        <h2 className='relative mb-4 text-center text-3xl font-bold !leading-tight text-zinc-800 md:px-5 md:text-4xl lg:mb-0 lg:px-6 lg:text-5xl xl:text-6xl'>
+        <h2 className='relative mb-4 text-center text-3xl font-semibold !leading-tight text-zinc-800 md:px-5 md:text-4xl lg:mb-0 lg:px-6 lg:text-5xl xl:text-6xl'>
           <span className='relative mr-1 inline-block before:absolute before:left-0 before:right-0 before:top-1/2 before:-z-10 before:h-4 before:bg-yellow md:mr-0 md:before:h-5 lg:before:h-6'>
             Any Questions?
           </span>
