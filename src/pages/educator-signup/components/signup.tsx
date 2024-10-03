@@ -9,7 +9,7 @@ const Signup: FC = () => (
     <div className='w-full py-4 sm:py-8 md:py-16'>
       <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
         <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Sign up for educators</h1>
-        <p className='mb-1 text-black'>Let’s get started with 5 days free trail</p>
+        <p className='mb-1 text-black'>Let’s get started with 5 days free trial</p>
       </div>
       <div className='-mx-2 flex flex-wrap lg:-mx-3'>
         <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>

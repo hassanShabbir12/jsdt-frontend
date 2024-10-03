@@ -118,7 +118,7 @@ export const Sidebar: FC = () => (
               </div>
             </CarouselItem>
           </CarouselContent>
-          <div className='absolute bottom-20 left-1/2 inline-block -translate-x-1/2 transform rounded-full bg-black bg-opacity-50 p-2 sm:relative sm:bottom-0 sm:m-auto sm:mt-2 sm:block sm:bg-opacity-0 sm:p-0 sm:text-center'>
+          <div className='relative mt-7'>
             <CarouselDots />
           </div>
         </Carousel>
