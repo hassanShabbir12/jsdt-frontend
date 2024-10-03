@@ -7,10 +7,11 @@ import {
   Footer,
   GeneratorDetail,
   Header,
-  Pricing,
   Testimonial,
   Works,
 } from '@/pages/home/components';
+
+import Payment from '../payment';
 
 const Home: FC = () => (
   <div>
@@ -20,7 +21,7 @@ const Home: FC = () => (
     <Works />
     <GeneratorDetail />
     <Testimonial />
-    <Pricing />
+    <Payment />
     <Faq />
     <Footer />
   </div>
