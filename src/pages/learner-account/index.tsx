@@ -31,9 +31,9 @@ import {
 import { assetUrl } from '@/lib/asset-url';
 
 const LearnerAccount: FC = () => (
-  <section className='pt-14'>
+  <section className='pb-10 pt-14'>
     <div className='mx-auto max-w-[1340px] px-3'>
-      <h2 className='mb-12 text-2xl font-semibold leading-7 text-zinc-800'>
+      <h2 className='mb-12 text-xl font-semibold leading-7 text-zinc-800 sm:text-2xl'>
         Investigation/Exam (Learner account)
       </h2>
       <div className='-mx-4 mb-8 flex flex-wrap'>
@@ -232,13 +232,11 @@ const LearnerAccount: FC = () => (
             </div>
           </div>
         </div>
-        <Carousel className='w-full'>
-          <div className='relative'>
-            <CarouselPrevious className='absolute left-0 top-20 z-50 h-12 w-12 bg-blue-500 hover:bg-blue-300 lg:h-16 lg:w-16'></CarouselPrevious>
-          </div>
+        <Carousel className='relative w-full'>
+          <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselPrevious>
           <CarouselContent>
             <CarouselItem className='carousel-item'>
-              <div className='max-w-6xl pl-24 pr-36 text-base font-semibold text-black md:text-xl lg:text-2xl'>
+              <div className='max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-xl lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -248,7 +246,7 @@ const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='max-w-5xl pl-24 pr-14 text-xl font-semibold leading-tight text-black xl:text-2xl'>
+              <div className='max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 2</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -258,7 +256,7 @@ const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='max-w-5xl pl-24 pr-14 text-xl font-semibold leading-tight text-black xl:text-2xl'>
+              <div className='max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-xl lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -268,9 +266,7 @@ const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
           </CarouselContent>
-          <div className='relative'>
-            <CarouselNext className='absolute -top-40 right-0 z-50 h-12 w-12 bg-blue-500 hover:bg-blue-300 lg:h-16 lg:w-16 xl:-top-32'></CarouselNext>
-          </div>
+          <CarouselNext className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselNext>
         </Carousel>
         <Pagination>
           <PaginationContent>

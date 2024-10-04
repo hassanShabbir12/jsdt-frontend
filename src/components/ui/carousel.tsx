@@ -167,7 +167,7 @@ const CarouselContent = React.forwardRef<
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className={cn('overflow-hidden', innerClassName)}>
+    <div ref={carouselRef} className={cn('overflow-hidden mb-20', innerClassName)}>
       <div
         ref={ref}
         className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
@@ -241,18 +241,16 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         variant={variant}
         size={size}
         className={cn(
-          'absolute  h-8 w-8 rounded-full shadow-round-shadow border-none text-black/50',
-          orientation === 'horizontal'
-            ? '-left-2 sm:-left-5 top-1/2 -translate-y-1/2'
-            : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
-          canScrollPrev ? '' : 'hidden',
+          'absolute h-8 w-8 rounded-full shadow-round-shadow border-none text-stone-300',
+          orientation === 'horizontal' ? 'top-40 sm:!left-0 sm:!top-12' : '',
+          canScrollPrev ? '' : 'bg-zinc-100 text-stone-300',
           className,
         )}
         disabled={!canScrollPrev}
         onClick={scrollPrev}
         {...props}
       >
-        <ChevronLeft className='h-4 w-4' />
+        <ChevronLeft className='h-8 w-8' />
         <span className='sr-only'>Previous slide</span>
       </Button>
     );
@@ -271,18 +269,16 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         variant={variant}
         size={size}
         className={cn(
-          'absolute h-8 w-8 rounded-full shadow-round-shadow border-none text-black/50',
-          orientation === 'horizontal'
-            ? '-right-2 sm:-right-5 top-1/2 -translate-y-1/2'
-            : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
-          canScrollNext ? '' : 'hidden',
+          'absolute h-8 w-8 rounded-full shadow-round-shadow border-none text-stone-300',
+          orientation === 'horizontal' ? 'top-40 left-24 sm:right-0 sm:left-auto sm:!top-12' : '',
+          canScrollNext ? '' : 'bg-zinc-100 text-stone-300',
           className,
         )}
         disabled={!canScrollNext}
         onClick={scrollNext}
         {...props}
       >
-        <ChevronRight className='h-4 w-4' />
+        <ChevronRight className='h-8 w-8' />
         <span className='sr-only'>Next slide</span>
       </Button>
     );
