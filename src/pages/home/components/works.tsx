@@ -50,11 +50,11 @@ const Works: FC = () => {
         <div className='block items-center gap-4 lg:flex'>
           <ul className='lg:b-0 m-0 mb-10 w-full p-0 lg:w-11/12'>
             {steps.map((step, index) => (
-              <li className='group mb-6 ml-0 flex list-none items-center xl:-ml-6 xl:-mr-6'>
-                <div
-                  key={index}
-                  className='flex h-16 w-16 items-center justify-center rounded-xl bg-rose-500 text-white shadow-md group-odd:bg-blue-500 md:h-20 md:w-20'
-                >
+              <li
+                key={index}
+                className='group mb-6 ml-0 flex list-none items-center xl:-ml-6 xl:-mr-6'
+              >
+                <div className='flex h-16 w-16 items-center justify-center rounded-xl bg-rose-500 text-white shadow-md group-odd:bg-blue-500 md:h-20 md:w-20'>
                   <img src={step.icon} alt={step.title} />
                 </div>
                 <div className='w-full pl-3 text-sm sm:pl-8 sm:text-lg lg:max-w-lg lg:text-xl xl:pl-12'>
