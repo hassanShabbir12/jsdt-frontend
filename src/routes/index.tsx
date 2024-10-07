@@ -4,6 +4,7 @@ import { RouteObject, useRoutes } from 'react-router-dom';
 import AdminLayout from '@/layouts/admin-layout';
 import LandingLayout from '@/layouts/landing-layout';
 import SignupLayout from '@/layouts/signup-layout';
+import BasicEducation from '@/pages/Education';
 import EducatorSignUp from '@/pages/educator-signup';
 import Grades from '@/pages/grades';
 import Home from '@/pages/home';
@@ -24,6 +25,7 @@ const routes: RouteObject[] = [
       { path: 'payment', element: <Payment /> },
       { path: 'login', element: <Login /> },
       { path: 'learner-account', element: <LearnerAccount /> },
+      { path: 'basic-education', element: <BasicEducation /> },
     ],
   },
 
