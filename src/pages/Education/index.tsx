@@ -101,7 +101,7 @@ const BasicEducation: FC = () => {
           ac a magna at elementum. Cras.
         </div>
         <div className='mb-14 items-center justify-between sm:mb-28 sm:flex'>
-          <div className='mb-5 flex w-full sm:mb-0 sm:w-52'>
+          <div className='mb-5 w-full sm:mb-0 sm:flex sm:w-52'>
             <Label htmlFor='subject' className='text-base text-zinc-800'>
               Marks:
             </Label>
@@ -110,7 +110,7 @@ const BasicEducation: FC = () => {
               className='h-[18px] w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             />
           </div>
-          <div className='flex w-full sm:w-52'>
+          <div className='w-full sm:flex sm:w-52'>
             <Label htmlFor='subject' className='text-base text-zinc-800'>
               Total:
             </Label>
