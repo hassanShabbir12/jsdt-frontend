@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Grades from '@/components/icon/grades';
-import Logout from '@/components/icon/logout';
-import Question from '@/components/icon/question';
-import Settings from '@/components/icon/settings';
-import Subject from '@/components/icon/subject';
-import Topics from '@/components/icon/topics';
+import { Grades } from '@/components/icon/grades';
+import { Logout } from '@/components/icon/logout';
+import { Question } from '@/components/icon/question';
+import { Settings } from '@/components/icon/settings';
+import { Subject } from '@/components/icon/subject';
+import { Topics } from '@/components/icon/topics';
 
 export const Sidebar: FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);

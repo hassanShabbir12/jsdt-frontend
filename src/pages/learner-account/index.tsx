@@ -30,7 +30,7 @@ import {
 } from '@/components/ui/select';
 import { assetUrl } from '@/lib/asset-url';
 
-const LearnerAccount: FC = () => (
+export const LearnerAccount: FC = () => (
   <section className='pb-10 pt-14'>
     <div className='mx-auto max-w-[1340px] px-3'>
       <h2 className='mb-12 text-xl font-semibold leading-7 text-zinc-800 sm:text-2xl'>
@@ -298,5 +298,3 @@ const LearnerAccount: FC = () => (
     </div>
   </section>
 );
-
-export default LearnerAccount;

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import Check from '@/components/icon/check';
+import { Check } from '@/components/icon/check';
 import { Button } from '@/components/ui/button';
 import { assetUrl } from '@/lib/asset-url';
 
-const Banner: FC = () => (
+export const Banner: FC = () => (
   <section className='relative w-full overflow-hidden bg-accent px-4 pb-6 pt-14 text-zinc-800 sm:pb-20 sm:pt-16'>
     <div className='container xl:-mt-1'>
       <div className='relative flex-wrap items-start justify-between text-zinc-800 md:flex'>
@@ -71,5 +71,3 @@ const Banner: FC = () => (
     <div className='absolute bottom-0 left-0 border-b-0 border-l-[100vw] border-r-0 border-t-[40px] border-solid border-transparent border-l-white sm:border-t-[50px] md:border-t-[100px] lg:border-t-[140px]'></div>
   </section>
 );
-
-export default Banner;

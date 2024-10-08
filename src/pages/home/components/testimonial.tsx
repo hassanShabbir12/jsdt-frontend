@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import Quote from '@/components/icon/quote';
-import RatingStar from '@/components/icon/rating-star';
+import { Quote } from '@/components/icon/quote';
+import { RatingStar } from '@/components/icon/rating-star';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@/components/ui/carousel';
 import { assetUrl } from '@/lib/asset-url';
 
-const Testimonial: FC = () => (
+export const Testimonial: FC = () => (
   <div>
     <div className='mx-auto max-w-screen-2xl py-10 2xl:px-14'>
       <div className='relative mb-10 px-4 pt-3 md:mb-24 xl:px-32 2xl:px-8'>
@@ -200,5 +200,3 @@ const Testimonial: FC = () => (
     </div>
   </div>
 );
-
-export default Testimonial;

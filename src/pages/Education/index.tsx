@@ -5,7 +5,7 @@ import { Label } from '@radix-ui/react-label';
 import { Input } from '@/components/ui/input';
 import { assetUrl } from '@/lib/asset-url';
 
-const BasicEducation: FC = () => {
+export const BasicEducation: FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -138,5 +138,3 @@ const BasicEducation: FC = () => {
     </section>
   );
 };
-
-export default BasicEducation;

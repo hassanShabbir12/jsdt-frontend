@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Header } from '@/layouts/admin-header';
 import { Sidebar } from '@/layouts/admin-sidebar';
 
-const AdminLayout: FC = () => {
+export const AdminLayout: FC = () => {
   const [isActive, setIsActive] = useState(true);
 
   const handleToggleClick = (): void => {
@@ -19,5 +19,3 @@ const AdminLayout: FC = () => {
     </div>
   );
 };
-
-export default AdminLayout;
