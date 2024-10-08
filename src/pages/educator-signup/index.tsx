@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-const EducatorSignUp: FC = () => (
+export const EducatorSignUp: FC = () => (
   <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 sm:w-1/2 lg:p-6 xl:p-10'>
     <div className='w-full py-4 sm:py-8 md:py-16'>
       <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
@@ -136,5 +136,3 @@ const EducatorSignUp: FC = () => (
     </div>
   </section>
 );
-
-export default EducatorSignUp;

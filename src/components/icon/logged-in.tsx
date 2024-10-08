@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const LoggedIn: FC = (props: Props) => {
+
+export const LoggedIn: FC = (props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { width = '24', height = '24', stroke = 'none', ...rest } = props;
 
@@ -36,5 +37,3 @@ const LoggedIn: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default LoggedIn;

@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const Grades: FC = (props: Props) => {
+
+export const Grades: FC = (props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { width = '18', height = '18', stroke = 'none', ...rest } = props;
 
@@ -46,5 +47,3 @@ const Grades: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default Grades;
