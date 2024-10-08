@@ -40,8 +40,8 @@ const BasicEducation: FC = () => {
             </div>
           )}
           <Input
-            ref={fileInputRef}
             id='file-upload'
+            ref={fileInputRef}
             type='file'
             className='hidden'
             onChange={handleFileChange}
