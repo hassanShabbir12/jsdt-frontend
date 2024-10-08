@@ -8,8 +8,7 @@ interface Props {
 }
 
 export const Topics: FC = (props: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { width = '24', height = '24', stroke = 'none', ...rest } = props;
+  const { width = '24', height = '24', stroke = 'currentColor', ...rest } = props;
 
   return (
     <svg
@@ -26,7 +25,7 @@ export const Topics: FC = (props: Props) => {
         width='4'
         height='16'
         rx='1'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
@@ -37,21 +36,21 @@ export const Topics: FC = (props: Props) => {
         width='4'
         height='16'
         rx='1'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M5 8H9'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M9 16H13'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
@@ -63,21 +62,21 @@ export const Topics: FC = (props: Props) => {
         height='16'
         rx='1'
         transform='rotate(-13 13.2517 4.65503)'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M14.1515 8.55261L18.049 7.65281'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M15.9511 16.3475L19.8486 15.4477'
-        stroke='currentColor'
+        stroke={stroke}
         strokeWidth='1.75'
         strokeLinecap='round'
         strokeLinejoin='round'
