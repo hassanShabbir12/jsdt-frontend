@@ -8,11 +8,11 @@ import Settings from '@/components/icon/settings';
 import Subject from '@/components/icon/subject';
 import Topics from '@/components/icon/topics';
 
-const Sidebar: FC = () => {
+export const Sidebar: FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className='fixed bottom-auto left-0 top-0 z-50 h-full w-64 overflow-y-auto overflow-x-hidden border-r-2 border-zinc-300 bg-white transition-all'>
+    <div className='fixed bottom-auto left-0 top-0 z-50 h-full w-64 -translate-x-80 overflow-y-auto overflow-x-hidden border-r-2 border-zinc-300 bg-white transition-all md:translate-x-0'>
       <div className='pb-10 pl-0 pr-2.5 pt-8'>
         <h1 className='text-center text-2xl font-semibold text-zinc-800'>Admin Panel</h1>
       </div>
@@ -126,5 +126,3 @@ const Sidebar: FC = () => {
     </div>
   );
 };
-
-export default Sidebar;

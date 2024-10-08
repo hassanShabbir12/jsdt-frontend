@@ -1,5 +1,11 @@
 import { FC } from 'react';
 
-const Grades: FC = () => <section className='relative'>grade page here</section>;
+import { GradesMain } from '@/pages/grades-main';
 
-export default Grades;
+export const Grades: FC = () => (
+  <div className='relative'>
+    <div className='md:pl-72 md:pt-16'>
+      <GradesMain />
+    </div>
+  </div>
+);

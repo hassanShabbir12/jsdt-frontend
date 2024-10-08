@@ -1,13 +1,23 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Sidebar from './admin-sidebar';
+import { Header } from '@/layouts/admin-header';
+import { Sidebar } from '@/layouts/admin-sidebar';
 
-const AdminLayout: FC = () => (
-  <div className='relative'>
-    <Sidebar />
-    <Outlet />
-  </div>
-);
+const AdminLayout: FC = () => {
+  const [isActive, setIsActive] = useState(true);
+
+  const handleToggleClick = (): void => {
+    setIsActive(!isActive);
+  };
+
+  return (
+    <div className={`relative ${isActive ? '' : 'active'}`}>
+      <Header onToggleClick={handleToggleClick} />
+      <Sidebar />
+      <Outlet />
+    </div>
+  );
+};
 
 export default AdminLayout;
