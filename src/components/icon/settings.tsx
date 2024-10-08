@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const Settings: FC = (props: Props) => {
+
+export const Settings: FC = (props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { width = '24', height = '24', stroke = 'none', ...rest } = props;
 
@@ -40,5 +41,3 @@ const Settings: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default Settings;

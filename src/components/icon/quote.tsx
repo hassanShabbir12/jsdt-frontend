@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const Quote: FC = (props: Props) => {
+
+export const Quote: FC = (props: Props) => {
   const { width = '32', height = '32', fill = 'none', ...rest } = props;
 
   return (
@@ -25,5 +26,3 @@ const Quote: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default Quote;

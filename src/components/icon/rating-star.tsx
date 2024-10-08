@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const RatingStar: FC = (props: Props) => {
+
+export const RatingStar: FC = (props: Props) => {
   const { width = '28', height = '27', fill = 'none', ...rest } = props;
 
   return (
@@ -25,5 +26,3 @@ const RatingStar: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default RatingStar;

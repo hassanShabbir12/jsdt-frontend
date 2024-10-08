@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer: FC = () => (
+export const Footer: FC = () => (
   <footer className='relative bg-blue-500 py-4 text-white lg:py-5'>
     <div className='container mx-auto px-4 lg:px-10 xl:px-20'>
       <div className='relative text-center text-base'>
@@ -14,5 +14,3 @@ const Footer: FC = () => (
     </div>
   </footer>
 );
-
-export default Footer;

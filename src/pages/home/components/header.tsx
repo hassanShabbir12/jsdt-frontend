@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { assetUrl } from '@/lib/asset-url';
 
-const Header: FC = () => (
+export const Header: FC = () => (
   <header className='relative bg-white p-4'>
     <div className='container lg:py-0.5'>
       <div className='relative flex flex-wrap items-center justify-between text-black'>
@@ -24,5 +24,3 @@ const Header: FC = () => (
     </div>
   </header>
 );
-
-export default Header;

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import Star from '@/components/icon/star';
+import { Star } from '@/components/icon/star';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@/components/ui/carousel';
 import { assetUrl } from '@/lib/asset-url';
 
-const Sidebar: FC = () => (
+export const Sidebar: FC = () => (
   <aside className='relative flex min-h-full flex-col justify-center overflow-hidden bg-primary px-4 py-6 sm:w-1/2 lg:p-6 xl:p-10'>
     <div className='absolute left-4 top-4 hidden md:block'>
       <img
@@ -133,5 +133,3 @@ const Sidebar: FC = () => (
     </div>
   </aside>
 );
-
-export default Sidebar;

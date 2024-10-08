@@ -11,9 +11,9 @@ import {
   Works,
 } from '@/pages/home/components';
 
-import Payment from '../payment';
+import { Payment } from '../payment';
 
-const Home: FC = () => (
+export const Home: FC = () => (
   <div>
     <Header />
     <Banner />
@@ -26,5 +26,3 @@ const Home: FC = () => (
     <Footer />
   </div>
 );
-
-export default Home;

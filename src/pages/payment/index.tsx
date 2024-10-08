@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { assetUrl } from '@/lib/asset-url';
 
-const Payment: FC = () => (
+export const Payment: FC = () => (
   <section className='relative bg-white py-10 text-zinc-800 sm:pb-20 sm:pt-16'>
     <div className='container'>
       <div className='mb-4 overflow-hidden px-4 pt-2 text-center md:mb-6 xl:mb-8'>
@@ -337,5 +337,3 @@ const Payment: FC = () => (
     </div>
   </section>
 );
-
-export default Payment;

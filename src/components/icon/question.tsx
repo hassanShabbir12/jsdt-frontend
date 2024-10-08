@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const Question: FC = (props: Props) => {
+
+export const Question: FC = (props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { width = '24', height = '24', stroke = 'none', ...rest } = props;
 
@@ -38,5 +39,3 @@ const Question: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default Question;
