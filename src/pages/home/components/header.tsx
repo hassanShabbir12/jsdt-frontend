@@ -17,7 +17,7 @@ export const Header: FC = () => (
             />
           </Link>
         </div>
-        <Button className='!h-16 !px-9' variant='secondary' size='lg'>
+        <Button className='!h-16 !px-9 text-blue-500' variant='secondary' size='lg'>
           Sign Up Now
         </Button>
       </div>

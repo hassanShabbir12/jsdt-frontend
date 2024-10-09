@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Grades } from '@/components/icon/grades';
 import { Logout } from '@/components/icon/logout';
+import { Polaroid } from '@/components/icon/polaroid';
 import { Question } from '@/components/icon/question';
 import { Settings } from '@/components/icon/settings';
 import { Subject } from '@/components/icon/subject';
@@ -118,6 +119,23 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
+              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500  ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
+              onClick={() => setActiveIndex(4)}
+            >
+              <Link to='' className='flex items-center gap-x-3'>
+                <div
+                  className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
+                >
+                  <Polaroid />
+                </div>
+                <h2
+                  className={`text-base font-semibold ${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
+                >
+                  Logo
+                </h2>
+              </Link>
+            </li>
+            <li
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(4)}
             >
@@ -138,10 +156,10 @@ export const Sidebar: FC = () => {
         </div>
         <div className='absolute bottom-0 left-0 right-0 z-30 bg-white'>
           <div className='flex cursor-pointer items-center gap-3 p-5'>
-            <div className='h-6 w-6 text-slate-600'>
+            <div className='h-6 w-6 text-blue-500'>
               <Logout />
             </div>
-            <h2 className='text-base text-slate-600'>Logout</h2>
+            <h2 className='text-base font-semibold text-blue-500'>Logout</h2>
           </div>
         </div>
       </div>
