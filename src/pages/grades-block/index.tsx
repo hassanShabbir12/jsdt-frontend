@@ -23,7 +23,7 @@ export const GradesMain: FC = () => {
   };
 
   return (
-    <div className='px-6 pt-24 md:pr-6 md:pt-16'>
+    <div className='px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='border-b border-neutral-200 px-6 py-3'>
           <h1 className='text-lg font-semibold text-zinc-800'>Grades</h1>
