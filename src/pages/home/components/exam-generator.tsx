@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const ExamGenerator: FC = () => {
+export const ExamGenerator: FC = () => {
   const boxData = [
     {
       title: 'Easy-to-use interface',
@@ -70,5 +70,3 @@ const ExamGenerator: FC = () => {
     </section>
   );
 };
-
-export default ExamGenerator;

@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { assetUrl } from '@/lib/asset-url';
 
-const GeneratorDetail: FC = () => (
+export const GeneratorDetail: FC = () => (
   <section className='relative w-full bg-accent px-4 py-24 text-neutral-900 sm:pb-60 sm:pt-10 lg:pb-96'>
     <div className='container'>
       <div className='absolute right-0 top-28 z-10 hidden lg:block'>
@@ -70,5 +70,3 @@ const GeneratorDetail: FC = () => (
     <div className='absolute bottom-0 left-0 border-b-0 border-l-[100vw] border-r-0 border-t-[40px] border-solid border-transparent border-l-white sm:border-t-[50px] md:border-t-[100px] lg:border-t-[400px] xl:border-t-[444px]'></div>
   </section>
 );
-
-export default GeneratorDetail;

@@ -123,5 +123,3 @@ export const LearnerSignUp: FC = () => (
     </div>
   </section>
 );
-
-export default LearnerSignUp;
