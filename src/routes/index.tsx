@@ -7,6 +7,7 @@ import { SignupLayout } from '@/layouts/signup-layout';
 import { EducatorSignUp } from '@/pages/educator-signup';
 import { Grades } from '@/pages/grades';
 import { Home } from '@/pages/home';
+import { Instructions } from '@/pages/instructions';
 import { LearnerAccount } from '@/pages/learner-account';
 import { LearnerSignUp } from '@/pages/learners-signup';
 import { Login } from '@/pages/login';
@@ -24,6 +25,7 @@ const routes: RouteObject[] = [
       { path: 'payment', element: <Payment /> },
       { path: 'login', element: <Login /> },
       { path: 'learner-account', element: <LearnerAccount /> },
+      { path: 'instructions', element: <Instructions /> },
     ],
   },
 
