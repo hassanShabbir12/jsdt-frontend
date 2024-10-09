@@ -96,7 +96,7 @@ export const Testimonial: FC = () => (
             <CarouselContent>
               <CarouselItem className='carousel-item'>
                 <div className='mb-5 flex items-center justify-between'>
-                  <div>
+                  <div className='text-white'>
                     <Quote />
                   </div>
                   <div className='flex gap-3 pb-2 pt-1 text-zinc-100'>
@@ -128,7 +128,7 @@ export const Testimonial: FC = () => (
               </CarouselItem>
               <CarouselItem className='carousel-item'>
                 <div className='mb-5 flex items-center justify-between'>
-                  <div>
+                  <div className='text-white'>
                     <Quote />
                   </div>
                   <div className='flex gap-3 pb-2 pt-1 text-zinc-100'>
@@ -160,7 +160,7 @@ export const Testimonial: FC = () => (
               </CarouselItem>
               <CarouselItem className='carousel-item'>
                 <div className='mb-5 flex items-center justify-between'>
-                  <div>
+                  <div className='text-white'>
                     <Quote />
                   </div>
                   <div className='flex gap-3 pb-2 pt-1 text-zinc-100'>

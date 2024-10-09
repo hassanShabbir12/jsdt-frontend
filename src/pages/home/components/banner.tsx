@@ -38,7 +38,9 @@ export const Banner: FC = () => (
               <strong className='text-base font-semibold lg:text-lg'>Practice Exams</strong>
             </li>
           </ul>
-          <Button size='lg'>Sign Up Now</Button>
+          <Button className='h-16' size='lg'>
+            Sign Up Now
+          </Button>
         </div>
         <div className='relative w-full pl-10 md:w-1/2 md:pr-1'>
           <div className='absolute -top-9 right-0'>
