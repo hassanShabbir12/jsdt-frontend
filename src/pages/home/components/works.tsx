@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { assetUrl } from '@/lib/asset-url';
 
-const Works: FC = () => {
+export const Works: FC = () => {
   const steps = [
     {
       title: 'Sign Up or Log In:',
@@ -89,5 +89,3 @@ const Works: FC = () => {
     </section>
   );
 };
-
-export default Works;

@@ -1,19 +1,19 @@
 import { type ReactElement } from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 
-import AdminLayout from '@/layouts/admin-layout';
-import LandingLayout from '@/layouts/landing-layout';
-import SignupLayout from '@/layouts/signup-layout';
-import EducatorSignUp from '@/pages/educator-signup';
-import Grades from '@/pages/grades';
-import Home from '@/pages/home';
+import { AdminLayout } from '@/layouts/admin-layout';
+import { LandingLayout } from '@/layouts/landing-layout';
+import { SignupLayout } from '@/layouts/signup-layout';
+import { EducatorSignUp } from '@/pages/educator-signup';
+import { Grades } from '@/pages/grades';
+import { Home } from '@/pages/home';
 import { Instructions } from '@/pages/instructions';
-import LearnerAccount from '@/pages/learner-account';
-import LearnerSignUp from '@/pages/learners-signup';
-import Login from '@/pages/login';
-import Payment from '@/pages/payment';
-import PricingPlan from '@/pages/pricing-plan';
-import Subjects from '@/pages/subject';
+import { LearnerAccount } from '@/pages/learner-account';
+import { LearnerSignUp } from '@/pages/learners-signup';
+import { Login } from '@/pages/login';
+import { Payment } from '@/pages/payment';
+import { PricingPlan } from '@/pages/pricing-plan';
+import { Subjects } from '@/pages/subject';
 
 const routes: RouteObject[] = [
   {

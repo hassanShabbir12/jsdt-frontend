@@ -6,7 +6,8 @@ interface Props {
   fill?: string;
   stroke?: string;
 }
-const Check: FC = (props: Props) => {
+
+export const Check: FC = (props: Props) => {
   const { width = '16', height = '16', fill = 'none', ...rest } = props;
 
   return (
@@ -25,5 +26,3 @@ const Check: FC = (props: Props) => {
     </svg>
   );
 };
-
-export default Check;

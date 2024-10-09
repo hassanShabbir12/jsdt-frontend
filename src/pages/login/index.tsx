@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { Label } from '@radix-ui/react-label';
 import { EyeOff } from 'lucide-react';
 
-import LoggedIn from '@/components/icon/logged-in';
+import { LoggedIn } from '@/components/icon/logged-in';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-const Login: FC = () => (
+export const Login: FC = () => (
   <section className='mx-auto max-w-[468px] px-4 py-24'>
     <div className='mb-12 text-center text-base'>
       <h2 className='mb-3 text-center text-2xl font-semibold text-zinc-800'>JSDT Examiner</h2>
@@ -58,5 +58,3 @@ const Login: FC = () => (
     <Button className='mx-auto flex h-12 w-80'>Log In</Button>
   </section>
 );
-
-export default Login;

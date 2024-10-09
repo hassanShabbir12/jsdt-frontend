@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-const Faq: FC = () => (
+export const Faq: FC = () => (
   <section className='relative'>
     <div className='container'>
       <div className='mx-auto px-4 md:w-1/2 md:px-8 lg:px-16 xl:px-0'>
@@ -69,5 +69,3 @@ const Faq: FC = () => (
     </div>
   </section>
 );
-
-export default Faq;
