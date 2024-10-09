@@ -205,14 +205,14 @@ export const Instructions: FC = () => (
                   </label>
                   <textarea
                     placeholder='Type here'
-                    className='mb-4 block h-48 w-full resize-none rounded-md border-0 px-4 py-4 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6'
+                    className='mb-4 block h-48 w-full resize-none rounded-md border-0 px-4 py-4 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-transparent sm:text-sm sm:leading-6'
                   ></textarea>
                 </form>
                 <div className='flex gap-4'>
-                  <Button className='flex w-1/2 border border-primary bg-white px-20 py-6 text-base font-semibold text-primary hover:text-white'>
+                  <Button className='flex w-1/2 border border-primary bg-white px-10 py-6 text-base font-semibold text-primary hover:text-white'>
                     Cancel
                   </Button>
-                  <Button className='flex w-1/2 border border-primary px-20 py-6 text-base font-semibold'>
+                  <Button className='flex w-1/2 border border-primary px-10 py-6 text-base font-semibold'>
                     Save
                   </Button>
                 </div>
