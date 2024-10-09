@@ -37,9 +37,7 @@ export const Sidebar: FC = () => {
     <>
       <div className='relative' onClick={handleToggle}>
         <div className='absolute left-8 top-8'>
-          <div
-            className={`relative z-50 block h-5 w-4 cursor-pointer border-t-2 border-zinc-800 before:absolute before:top-3.5 before:h-0.5 before:w-4 before:bg-zinc-800 after:absolute after:right-0 after:top-1.5 after:m-0 after:h-0.5 after:w-4 after:bg-zinc-800 after:transition-all md:hidden ${isToggled ? 'active' : ''}`}
-          ></div>
+          <div className='relative z-50 block h-5 w-4 cursor-pointer border-t-2 border-zinc-800 before:absolute before:top-3.5 before:h-0.5 before:w-4 before:bg-zinc-800 after:absolute after:right-0 after:top-1.5 after:m-0 after:h-0.5 after:w-4 after:bg-zinc-800 after:transition-all md:hidden'></div>
         </div>
       </div>
       <div
