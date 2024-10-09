@@ -1,5 +1,7 @@
 import { FC, useState } from 'react';
 
+import { Edit, Trash2 } from 'lucide-react';
+
 import GradeDots from '@/components/icon/grade-dots';
 import { Button } from '@/components/ui/button';
 import {
@@ -46,6 +48,22 @@ export const Subjects: FC = () => {
               >
                 <GradeDots />
               </div>
+              {isDropdownOpen && (
+                <ul className='absolute -bottom-28 right-0 m-0 w-36 rounded-md bg-white p-3 shadow-2xl'>
+                  <li className='flex cursor-pointer items-center p-1.5'>
+                    <div className='text-zinc-800'>
+                      <Edit />
+                    </div>
+                    <h3 className='ml-1.5 text-base text-zinc-800'>Edit</h3>
+                  </li>
+                  <li className='flex cursor-pointer items-center p-1.5'>
+                    <div className='text-zinc-800'>
+                      <Trash2 />
+                    </div>
+                    <h3 className='ml-1.5 text-base text-zinc-800'>Delete</h3>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
@@ -73,14 +91,10 @@ export const Subjects: FC = () => {
             </div>
             <DialogFooter>
               <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold' type='submit'>
-                  Cancel
-                </Button>
+                <Button className='h-12 w-full text-base font-semibold'>Cancel</Button>
               </div>
               <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold' type='submit'>
-                  Save
-                </Button>
+                <Button className='h-12 w-full text-base font-semibold'>Save</Button>
               </div>
             </DialogFooter>
           </DialogContent>

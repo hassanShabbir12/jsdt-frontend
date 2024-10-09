@@ -91,14 +91,10 @@ export const Grades: FC = () => {
             </div>
             <DialogFooter>
               <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold' type='submit'>
-                  Cancel
-                </Button>
+                <Button className='h-12 w-full text-base font-semibold'>Cancel</Button>
               </div>
               <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold' type='submit'>
-                  Save
-                </Button>
+                <Button className='h-12 w-full text-base font-semibold'>Save</Button>
               </div>
             </DialogFooter>
           </DialogContent>
