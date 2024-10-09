@@ -8,6 +8,7 @@ import { BasicEducation } from '@/pages/education';
 import { EducatorSignUp } from '@/pages/educator-signup';
 import { Grades } from '@/pages/grades';
 import { Home } from '@/pages/home';
+import { Instructions } from '@/pages/instructions';
 import { LearnerAccount } from '@/pages/learner-account';
 import { LearnerSignUp } from '@/pages/learners-signup';
 import { Login } from '@/pages/login';
@@ -26,6 +27,7 @@ const routes: RouteObject[] = [
       { path: 'login', element: <Login /> },
       { path: 'learner-account', element: <LearnerAccount /> },
       { path: 'basic-education', element: <BasicEducation /> },
+      { path: 'instructions', element: <Instructions /> },
     ],
   },
 
