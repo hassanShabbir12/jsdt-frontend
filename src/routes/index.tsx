@@ -4,16 +4,19 @@ import { RouteObject, useRoutes } from 'react-router-dom';
 import { AdminLayout } from '@/layouts/admin-layout';
 import { LandingLayout } from '@/layouts/landing-layout';
 import { SignupLayout } from '@/layouts/signup-layout';
+import { AdminLogin } from '@/pages/admin-login';
 import { BasicEducation } from '@/pages/education';
+import { EducatorLogin } from '@/pages/educator-login';
 import { EducatorSignUp } from '@/pages/educator-signup';
+import { ForgotPassword } from '@/pages/forgot-password';
 import { Grades } from '@/pages/grades';
 import { Home } from '@/pages/home';
-import { Instructions } from '@/pages/instructions';
 import { LearnerAccount } from '@/pages/learner-account';
+import { LearnerLogin } from '@/pages/learner-login';
 import { LearnerSignUp } from '@/pages/learners-signup';
-import { Login } from '@/pages/login';
 import { Payment } from '@/pages/payment';
 import { PricingPlan } from '@/pages/pricing-plan';
+import { ResetPassword } from '@/pages/reset-password';
 import { Subjects } from '@/pages/subject';
 
 const routes: RouteObject[] = [
@@ -24,10 +27,11 @@ const routes: RouteObject[] = [
       { index: true, element: <Home /> },
       { path: 'pricing-plan', element: <PricingPlan /> },
       { path: 'payment', element: <Payment /> },
-      { path: 'login', element: <Login /> },
+      { path: 'admin-login', element: <AdminLogin /> },
       { path: 'learner-account', element: <LearnerAccount /> },
-      { path: 'instructions', element: <Instructions /> },
       { path: 'basic-education', element: <BasicEducation /> },
+      { path: 'forgot-password', element: <ForgotPassword /> },
+      { path: 'reset-password', element: <ResetPassword /> },
     ],
   },
 
@@ -37,6 +41,15 @@ const routes: RouteObject[] = [
     children: [
       { index: true, element: <LearnerSignUp /> },
       { path: 'educator', element: <EducatorSignUp /> },
+    ],
+  },
+
+  {
+    path: '/login',
+    element: <SignupLayout />,
+    children: [
+      { index: true, element: <LearnerLogin /> },
+      { path: 'educator', element: <EducatorLogin /> },
     ],
   },
 

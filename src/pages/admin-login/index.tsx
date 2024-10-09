@@ -8,7 +8,7 @@ import { LoggedIn } from '@/components/icon/logged-in';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export const Login: FC = () => (
+export const AdminLogin: FC = () => (
   <section className='mx-auto max-w-[468px] px-4 py-24'>
     <div className='mb-12 text-center text-base'>
       <h2 className='mb-3 text-center text-2xl font-semibold text-zinc-800'>JSDT Examiner</h2>
