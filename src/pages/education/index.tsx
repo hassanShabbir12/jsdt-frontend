@@ -13,7 +13,7 @@ export const BasicEducation: FC = () => (
           htmlFor='file-upload'
           className='mb-2.5 flex h-28 w-28 cursor-pointer items-center justify-center rounded-full border border-solid border-zinc-800 text-center text-base text-zinc-800 hover:opacity-90'
         >
-          Logo <br></br> Here
+          Logo Here
         </Label>
         <Input id='file-upload' type='file' className='hidden' />
       </div>
