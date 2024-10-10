@@ -11,6 +11,7 @@ import { EducatorSignUp } from '@/pages/educator-signup';
 import { ForgotPassword } from '@/pages/forgot-password';
 import { Grades } from '@/pages/grades';
 import { Home } from '@/pages/home';
+import { Instructions } from '@/pages/instructions';
 import { LearnerAccount } from '@/pages/learner-account';
 import { LearnerLogin } from '@/pages/learner-login';
 import { LearnerSignUp } from '@/pages/learners-signup';
@@ -32,6 +33,7 @@ const routes: RouteObject[] = [
       { path: 'basic-education', element: <BasicEducation /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password', element: <ResetPassword /> },
+      { path: 'instructions', element: <Instructions /> },
     ],
   },
 

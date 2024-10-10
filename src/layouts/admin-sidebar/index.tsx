@@ -136,17 +136,17 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(4)}
+              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 5 ? 'bg-blue-500' : ''}`}
+              onClick={() => setActiveIndex(5)}
             >
               <Link to='' className='flex items-center gap-x-3'>
                 <div
-                  className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
+                  className={`${activeIndex === 5 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
                   <Settings />
                 </div>
                 <h2
-                  className={`text-base font-semibold ${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
+                  className={`text-base font-semibold ${activeIndex === 5 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
                   Settings
                 </h2>
