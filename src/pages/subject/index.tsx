@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import { Edit, Trash2 } from 'lucide-react';
 
@@ -17,10 +17,25 @@ import { Label } from '@/components/ui/label';
 
 export const Subjects: FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = (): void => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent): void => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return (): void => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className='px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
@@ -41,7 +56,7 @@ export const Subjects: FC = () => {
               className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
               placeholder='Chemistry'
             />
-            <div className='relative'>
+            <div className='relative' ref={dropdownRef}>
               <div
                 className='ml-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-zinc-800'
                 onClick={toggleDropdown}
