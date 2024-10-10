@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import { Edit, Trash2 } from 'lucide-react';
 
@@ -15,33 +15,52 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export const Subjects: FC = () => {
+export const Topic: FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = (): void => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleClickOutside = (event: MouseEvent): void => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return (): void => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <div className='px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='border-b border-neutral-200 px-6 py-3'>
-          <h1 className='text-lg font-semibold text-zinc-800'>Subjects</h1>
+          <h1 className='text-lg font-semibold text-zinc-800'>Topics</h1>
         </div>
         <div className='p-4 sm:px-6 sm:pb-3 sm:pt-8'>
           <Label
             htmlFor='name'
             className='mb-1.5 block text-sm font-normal leading-none text-zinc-800'
           >
-            Subject Name
+            Topics
           </Label>
           <div className='flex items-center'>
             <Input
               id='name'
               className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
-              placeholder='Chemistry'
+              placeholder='Basic Education'
             />
-            <div className='relative'>
+            <div className='relative' ref={dropdownRef}>
               <div
                 className='ml-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-zinc-800'
                 onClick={toggleDropdown}
@@ -70,16 +89,16 @@ export const Subjects: FC = () => {
         <Dialog>
           <DialogTrigger asChild>
             <div className='mx-auto flex max-w-80 justify-center px-4'>
-              <Button className='h-12 w-80 text-base font-semibold'>Add New Subject</Button>
+              <Button className='h-12 w-80 text-base font-semibold'>Add New topic</Button>
             </div>
           </DialogTrigger>
           <DialogContent className='max-w-[620px]'>
             <DialogHeader>
-              <DialogTitle className='text-center'>Add New Subject</DialogTitle>
+              <DialogTitle className='text-center'>Add New Topic</DialogTitle>
             </DialogHeader>
             <div className='grid py-4'>
               <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
-                New Subject
+                New Topic
               </Label>
               <div className='flex items-center'>
                 <Input

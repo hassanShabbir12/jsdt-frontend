@@ -69,7 +69,7 @@ export const Grades: FC = () => {
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <div className='flex justify-center px-4'>
+            <div className='mx-auto flex max-w-80 justify-center px-4'>
               <Button className='h-12 w-80 text-base font-semibold'>Add New Grade</Button>
             </div>
           </DialogTrigger>
