@@ -20,6 +20,7 @@ import { Payment } from '@/pages/payment';
 import { PricingPlan } from '@/pages/pricing-plan';
 import { Question } from '@/pages/question';
 import { ResetPassword } from '@/pages/reset-password';
+import { Settings } from '@/pages/settings';
 import { Subjects } from '@/pages/subject';
 import { Taxonomy } from '@/pages/taxonomy';
 import { Topic } from '@/pages/topic';
@@ -69,6 +70,7 @@ const routes: RouteObject[] = [
       { path: 'topics', element: <Topic /> },
       { path: 'questions', element: <Question /> },
       { path: 'logo', element: <Logo /> },
+      { path: 'settings', element: <Settings /> },
     ],
   },
 ];
