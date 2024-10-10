@@ -19,6 +19,7 @@ import { Payment } from '@/pages/payment';
 import { PricingPlan } from '@/pages/pricing-plan';
 import { ResetPassword } from '@/pages/reset-password';
 import { Subjects } from '@/pages/subject';
+import { Topic } from '@/pages/topic';
 
 const routes: RouteObject[] = [
   {
@@ -61,6 +62,7 @@ const routes: RouteObject[] = [
     children: [
       { index: true, element: <Grades /> },
       { path: 'subjects', element: <Subjects /> },
+      { path: 'topics', element: <Topic /> },
     ],
   },
 ];
