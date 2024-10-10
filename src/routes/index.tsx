@@ -20,6 +20,7 @@ import { PricingPlan } from '@/pages/pricing-plan';
 import { Question } from '@/pages/question';
 import { ResetPassword } from '@/pages/reset-password';
 import { Subjects } from '@/pages/subject';
+import { Taxonomy } from '@/pages/taxonomy';
 import { Topic } from '@/pages/topic';
 
 const routes: RouteObject[] = [
@@ -36,6 +37,7 @@ const routes: RouteObject[] = [
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password', element: <ResetPassword /> },
       { path: 'instructions', element: <Instructions /> },
+      { path: 'taxonomy', element: <Taxonomy /> },
     ],
   },
 
