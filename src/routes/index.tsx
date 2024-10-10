@@ -14,6 +14,7 @@ import { Home } from '@/pages/home';
 import { Instructions } from '@/pages/instructions';
 import { LearnerAccount } from '@/pages/learner-account';
 import { LearnerLogin } from '@/pages/learner-login';
+import { LearnerTeacher } from '@/pages/learner-teachers';
 import { LearnerSignUp } from '@/pages/learners-signup';
 import { Logo } from '@/pages/logo';
 import { Payment } from '@/pages/payment';
@@ -35,6 +36,7 @@ const routes: RouteObject[] = [
       { path: 'payment', element: <Payment /> },
       { path: 'admin-login', element: <AdminLogin /> },
       { path: 'learner-account', element: <LearnerAccount /> },
+      { path: 'learner-teacher', element: <LearnerTeacher /> },
       { path: 'basic-education', element: <BasicEducation /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password', element: <ResetPassword /> },
