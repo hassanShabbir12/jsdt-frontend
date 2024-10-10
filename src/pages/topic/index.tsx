@@ -110,7 +110,9 @@ export const Topic: FC = () => {
             </div>
             <DialogFooter>
               <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold'>Cancel</Button>
+                <Button variant='outline' className='h-12 w-full text-base font-semibold'>
+                  Cancel
+                </Button>
               </div>
               <div className='w-1/2'>
                 <Button className='h-12 w-full text-base font-semibold'>Save</Button>

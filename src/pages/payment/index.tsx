@@ -124,7 +124,7 @@ export const Payment: FC = () => (
                           </li>
                         </ul>
                         <div className='mb-2 flex justify-center md:mb-0 md:pt-6'>
-                          <Button className='min-w-52 rounded-4xl xl:text-xl' size='lg'>
+                          <Button className='h-14 min-w-52 rounded-4xl xl:text-xl' size='lg'>
                             Buy Plan A
                           </Button>
                         </div>
@@ -177,7 +177,7 @@ export const Payment: FC = () => (
                           </li>
                         </ul>
                         <div className='mb-2 flex justify-center md:mb-0 md:pt-4'>
-                          <Button className='min-w-52 rounded-4xl xl:text-xl' size='lg'>
+                          <Button className='h-14 min-w-52 rounded-4xl xl:text-xl' size='lg'>
                             Buy Plan B
                           </Button>
                         </div>
@@ -268,7 +268,7 @@ export const Payment: FC = () => (
                           </li>
                         </ul>
                         <div className='mb-2 flex justify-center md:mb-0 md:pt-6'>
-                          <Button className='min-w-52 rounded-4xl xl:text-xl' size='lg'>
+                          <Button className='h-14 min-w-52 rounded-4xl xl:text-xl' size='lg'>
                             Buy Plan A
                           </Button>
                         </div>
@@ -321,7 +321,7 @@ export const Payment: FC = () => (
                           </li>
                         </ul>
                         <div className='mb-2 flex justify-center md:mb-0 md:pt-4'>
-                          <Button className='min-w-52 rounded-4xl xl:text-xl' size='lg'>
+                          <Button className='h-14 min-w-52 rounded-4xl xl:text-xl' size='lg'>
                             Buy Plan B
                           </Button>
                         </div>
