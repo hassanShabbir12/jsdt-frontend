@@ -102,12 +102,12 @@ export const Question: FC = () => {
               <Button className='h-12 w-80 text-base font-semibold'>Add New question</Button>
             </div>
           </DialogTrigger>
-          <DialogContent className='max-w-[1173px]'>
+          <DialogContent className='h-full max-w-[1173px] overflow-y-auto overflow-x-hidden'>
             <DialogHeader>
               <DialogTitle className='mb-8 text-center text-2xl'>Add New Question</DialogTitle>
             </DialogHeader>
-            <div className='-mx-2.5 flex flex-wrap'>
-              <div className='mb-4 w-1/2 px-2.5'>
+            <div className='-mx-2.5 block flex-wrap sm:flex'>
+              <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                 <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
                   IEB/NSC
                 </Label>
@@ -129,7 +129,7 @@ export const Question: FC = () => {
                   </Select>
                 </div>
               </div>
-              <div className='mb-4 w-1/2 px-2.5'>
+              <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                 <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
                   Choose Grade
                 </Label>
@@ -151,7 +151,7 @@ export const Question: FC = () => {
                   </Select>
                 </div>
               </div>
-              <div className='mb-4 w-1/2 px-2.5'>
+              <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                 <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
                   Assessment Type
                 </Label>
@@ -173,7 +173,7 @@ export const Question: FC = () => {
                   </Select>
                 </div>
               </div>
-              <div className='mb-4 w-1/2 px-2.5'>
+              <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                 <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
                   Choose Topic
                 </Label>
@@ -195,7 +195,7 @@ export const Question: FC = () => {
                   </Select>
                 </div>
               </div>
-              <div className='mb-4 w-1/2 px-2.5'>
+              <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                 <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
                   Choose Subject
                 </Label>
@@ -217,7 +217,7 @@ export const Question: FC = () => {
                   </Select>
                 </div>
               </div>
-              <div className='mb-4 w-1/2 px-2.5'>
+              <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                 <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
                   EASY/INTERMEDIATE/DIFFICULT
                 </Label>
