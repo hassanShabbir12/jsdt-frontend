@@ -273,7 +273,9 @@ export const Question: FC = () => {
             <DialogFooter>
               <div className='mx-auto flex max-w-xl gap-x-4'>
                 <div className='w-64'>
-                  <Button className='h-12 w-full text-base font-semibold'>Cancel</Button>
+                  <Button variant='outline' className='h-12 w-full text-base font-semibold'>
+                    Cancel
+                  </Button>
                 </div>
                 <div className='w-64'>
                   <Button className='h-12 w-full text-base font-semibold'>Save</Button>

@@ -214,7 +214,6 @@ export const CarouselDots = React.forwardRef<HTMLDivElement, React.HTMLAttribute
         {api?.slideNodes().map((_, index) => (
           <Button
             key={index}
-            variant='outline'
             size='icon'
             className={cn(
               'h-2 w-2 border-none shadow-none outline-none rounded-full hover:bg-white',
