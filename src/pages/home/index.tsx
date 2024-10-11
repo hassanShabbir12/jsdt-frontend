@@ -11,7 +11,7 @@ import {
   Works,
 } from '@/pages/home/components';
 
-import { Payment } from '../payment';
+import { PricingPlan } from '../pricing-plan';
 
 export const Home: FC = () => (
   <div>
@@ -21,7 +21,7 @@ export const Home: FC = () => (
     <Works />
     <GeneratorDetail />
     <Testimonial />
-    <Payment />
+    <PricingPlan />
     <Faq />
     <Footer />
   </div>
