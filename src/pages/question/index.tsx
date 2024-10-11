@@ -55,17 +55,19 @@ export const Question: FC = () => (
             </DropdownMenuTrigger>
             <DropdownMenuContent className='absolute -right-4 top-4 rounded-md drop-shadow-xl'>
               <ul className='m-0 px-2 py-3'>
-                <li className='mb-2 flex cursor-pointer items-center p-1.5'>
-                  <div className='text-zinc-800'>
+                <li className='group mb-2 flex cursor-pointer items-center p-1.5'>
+                  <div className='text-zinc-800 group-hover:text-blue-500'>
                     <Edit />
                   </div>
-                  <h3 className='ml-1.5 text-base text-zinc-800'>Edit</h3>
+                  <h3 className='ml-1.5 text-base text-zinc-800 group-hover:text-blue-500'>Edit</h3>
                 </li>
-                <li className='flex cursor-pointer items-center p-1.5'>
-                  <div className='text-zinc-800'>
+                <li className='group flex cursor-pointer items-center p-1.5'>
+                  <div className='text-zinc-800 group-hover:text-blue-500'>
                     <Trash2 />
                   </div>
-                  <h3 className='ml-1.5 text-base text-zinc-800'>Delete</h3>
+                  <h3 className='ml-1.5 text-base text-zinc-800 group-hover:text-blue-500'>
+                    Delete
+                  </h3>
                 </li>
               </ul>
             </DropdownMenuContent>
