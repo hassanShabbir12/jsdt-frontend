@@ -48,10 +48,7 @@ export const AdminLogin: FC = () => (
         </div>
         <h3>Keep me logged in</h3>
       </div>
-      <Link
-        to=''
-        className='border-b border-blue-500 text-sm font-semibold text-blue-500 hover:border-none'
-      >
+      <Link to='' className='text-sm font-semibold text-blue-500 underline hover:text-blue-700'>
         Forgot Password?
       </Link>
     </div>
