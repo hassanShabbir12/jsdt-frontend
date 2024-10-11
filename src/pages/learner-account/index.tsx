@@ -203,15 +203,24 @@ export const LearnerAccount: FC = () => (
         </div>
       </div>
       <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-        <div className='mb-10 items-center justify-between sm:flex'>
-          <div className='mb-5 flex justify-between sm:mb-0 sm:justify-start sm:gap-x-3'>
-            <Button variant='destructive' className='px-6 py-5 text-base sm:px-16 sm:py-6'>
+        <div className='mb-10 block items-center justify-between md:flex'>
+          <div className='mb-5 block sm:mb-0 sm:justify-start sm:gap-x-3 md:flex'>
+            <Button
+              variant='destructive'
+              className='mb-1.5 w-full px-6 py-5 text-base sm:px-16 sm:py-6 md:m-0 md:w-auto'
+            >
               Test
             </Button>
-            <Button variant='destructive' className='px-6 py-5 text-base sm:px-12 sm:py-6'>
+            <Button
+              variant='destructive'
+              className='mb-1.5 w-full px-6 py-5 text-base sm:px-12 sm:py-6 md:m-0 md:w-auto'
+            >
               Solution
             </Button>
-            <Button variant='destructive' className='px-6 py-5 text-base sm:px-9 sm:py-6'>
+            <Button
+              variant='destructive'
+              className='mb-1.5 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:m-0 md:w-auto'
+            >
               Instructions
             </Button>
           </div>
@@ -236,7 +245,7 @@ export const LearnerAccount: FC = () => (
           <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselPrevious>
           <CarouselContent>
             <CarouselItem className='carousel-item'>
-              <div className='mb-7 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -246,7 +255,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-7 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 2</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -256,7 +265,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-7 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

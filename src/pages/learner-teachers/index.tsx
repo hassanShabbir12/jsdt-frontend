@@ -185,23 +185,23 @@ export const LearnerTeacher: FC = () => (
         </div>
       </div>
       <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-        <div className='mb-10 items-center justify-between sm:flex'>
-          <div className='mb-5 flex justify-between sm:-mx-4 sm:mb-0 sm:justify-start'>
-            <div className='px-4'>
+        <div className='mb-10 block items-center justify-between md:flex'>
+          <div className='mb-5 block sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
+            <div className='px-2'>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
                     variant='destructive'
-                    className='w-40 px-6 py-5 text-base sm:px-9 sm:py-6'
+                    className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
                   >
                     Test
                   </Button>
                 </DialogTrigger>
-                <DialogContent className='h-full max-w-[1173px] overflow-y-auto overflow-x-hidden'>
+                <DialogContent className='block h-[90%] max-h-[913px] w-[90%] max-w-[1173px] overflow-y-auto overflow-x-hidden'>
                   <DialogHeader>
-                    <div className='flex items-center pt-8'>
+                    <div className='mb-8 flex justify-between pt-8 sm:items-center sm:justify-start'>
                       <DialogTitle className=''>Answer of the following questions</DialogTitle>
-                      <div className='ml-11 h-6 w-6 cursor-pointer'>
+                      <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-11'>
                         <img
                           src={assetUrl('assets/img/home/attach-download.svg')}
                           alt='Generate-2'
@@ -210,7 +210,7 @@ export const LearnerTeacher: FC = () => (
                       </div>
                     </div>
                   </DialogHeader>
-                  <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-2xl'>
+                  <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg'>
                     <div className='mb-10 max-w-4xl'>
                       <h1 className='mb-3 text-2xl font-semibold'>Question No. 1</h1>
                       <p className='m-0'>
@@ -229,7 +229,7 @@ export const LearnerTeacher: FC = () => (
                       </p>
                     </div>
                   </div>
-                  <div className='w-full rounded-xl border border-solid border-neutral-200 p-3 text-2xl'>
+                  <div className='w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg'>
                     <div className='mb-10 max-w-4xl'>
                       <h1 className='mb-3 text-2xl font-semibold'>Question No. 2</h1>
                       <p className='m-0'>
@@ -251,30 +251,32 @@ export const LearnerTeacher: FC = () => (
                 </DialogContent>
               </Dialog>
             </div>
-            <div className='px-4'>
+            <div className='px-2'>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
                     variant='destructive'
-                    className='w-40 px-6 py-5 text-base sm:px-9 sm:py-6'
+                    className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
                   >
                     Solutions
                   </Button>
                 </DialogTrigger>
-                <DialogContent className='h-full max-w-[1173px] overflow-y-auto overflow-x-hidden'>
+                <DialogContent className='block h-[70%] max-h-[913px] w-[90%] max-w-[1173px] overflow-y-auto overflow-x-hidden sm:h-[90%]'>
                   <DialogHeader>
-                    <DialogTitle>Following are the questions</DialogTitle>
+                    <div className='mb-6 text-left'>
+                      <DialogTitle>Following are the questions</DialogTitle>
+                    </div>
                   </DialogHeader>
-                  <div className='mb-7 w-full p-3 text-2xl'>
-                    <div className='mb-10 max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Question No. 1</h1>
+                  <div className='mb-1 w-full p-0 text-sm sm:p-3 sm:text-lg md:mb-0'>
+                    <div className='mb-14 max-w-4xl'>
+                      <h1 className='mb-5 text-2xl font-semibold'>Question No. 1</h1>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis.
                       </p>
                     </div>
-                    <div className='mb-10 max-w-4xl'>
+                    <div className='mb-14 max-w-4xl'>
                       <h1 className='mb-3 text-2xl font-semibold'>Question No. 2</h1>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -282,7 +284,7 @@ export const LearnerTeacher: FC = () => (
                         quis.
                       </p>
                     </div>
-                    <div className='mb-10 max-w-4xl'>
+                    <div className='mb-14 max-w-4xl'>
                       <h1 className='mb-3 text-2xl font-semibold'>Question No. 3</h1>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -302,13 +304,19 @@ export const LearnerTeacher: FC = () => (
                 </DialogContent>
               </Dialog>
             </div>
-            <div className='px-4'>
-              <Button variant='destructive' className='w-40 px-6 py-5 text-base sm:px-9 sm:py-6'>
+            <div className='px-2'>
+              <Button
+                variant='destructive'
+                className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+              >
                 Tax. Grid
               </Button>
             </div>
-            <div className='px-4'>
-              <Button variant='destructive' className='w-40 px-6 py-5 text-base sm:px-9 sm:py-6'>
+            <div className='px-2'>
+              <Button
+                variant='destructive'
+                className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+              >
                 Instructions
               </Button>
             </div>
@@ -334,7 +342,7 @@ export const LearnerTeacher: FC = () => (
           <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselPrevious>
           <CarouselContent>
             <CarouselItem className='carousel-item'>
-              <div className='mb-7 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -344,7 +352,7 @@ export const LearnerTeacher: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-7 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 2</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -354,7 +362,7 @@ export const LearnerTeacher: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-7 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

@@ -54,7 +54,7 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 0 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(0)}
             >
-              <Link to='' className='ml-1 flex items-center gap-x-3'>
+              <Link to='/admin' className='ml-1 flex items-center gap-x-3'>
                 <div
                   className={`${activeIndex === 0 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -71,7 +71,7 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 1 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(1)}
             >
-              <Link to='' className='flex items-center gap-x-3'>
+              <Link to='/admin/subjects' className='flex items-center gap-x-3'>
                 <div
                   className={`${activeIndex === 1 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -88,7 +88,7 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 2 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(2)}
             >
-              <Link to='' className='flex items-center gap-x-3'>
+              <Link to='/admin/topics' className='flex items-center gap-x-3'>
                 <div
                   className={`${activeIndex === 2 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -105,7 +105,7 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500  ${activeIndex === 3 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(3)}
             >
-              <Link to='' className='flex items-center gap-x-3'>
+              <Link to='/admin/questions' className='flex items-center gap-x-3'>
                 <div
                   className={`${activeIndex === 3 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -122,7 +122,7 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500  ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(4)}
             >
-              <Link to='' className='flex items-center gap-x-3'>
+              <Link to='/admin/logo' className='flex items-center gap-x-3'>
                 <div
                   className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -139,7 +139,7 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 5 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(5)}
             >
-              <Link to='' className='flex items-center gap-x-3'>
+              <Link to='/admin/settings' className='flex items-center gap-x-3'>
                 <div
                   className={`${activeIndex === 5 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
