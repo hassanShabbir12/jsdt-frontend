@@ -197,11 +197,11 @@ export const LearnerTeacher: FC = () => (
                     Test
                   </Button>
                 </DialogTrigger>
-                <DialogContent className='block h-[90%] max-h-[913px] w-[90%] max-w-[1173px] overflow-y-auto overflow-x-hidden'>
+                <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                   <DialogHeader>
                     <div className='mb-8 flex justify-between pt-8 sm:items-center sm:justify-start'>
                       <DialogTitle className=''>Answer of the following questions</DialogTitle>
-                      <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-11'>
+                      <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
                         <img
                           src={assetUrl('assets/img/home/attach-download.svg')}
                           alt='Generate-2'
@@ -210,42 +210,52 @@ export const LearnerTeacher: FC = () => (
                       </div>
                     </div>
                   </DialogHeader>
-                  <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg'>
-                    <div className='mb-10 max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Question No. 1</h1>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
+                  <div className='relative'>
+                    <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
+                      <div className='mb-4 md:mb-7'>
+                        <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                          Question No. 1
+                        </h2>
+                        <p className='m-0'>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                          veniam, quis.
+                        </p>
+                      </div>
+                      <div className='mb-4 md:mb-7'>
+                        <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                          Answer :
+                        </h2>
+                        <p className='m-0'>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                          commodo consequat?
+                        </p>
+                      </div>
                     </div>
-                    <div className='max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Answer :</h1>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat?
-                      </p>
-                    </div>
-                  </div>
-                  <div className='w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg'>
-                    <div className='mb-10 max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Question No. 2</h1>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Answer :</h1>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat?
-                      </p>
+                    <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
+                      <div className='mb-4 md:mb-7'>
+                        <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                          Question No. 2
+                        </h2>
+                        <p className='m-0'>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                          veniam, quis.
+                        </p>
+                      </div>
+                      <div className='mb-4 md:mb-7'>
+                        <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                          Answer :
+                        </h2>
+                        <p className='m-0'>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                          commodo consequat?
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </DialogContent>
@@ -261,39 +271,47 @@ export const LearnerTeacher: FC = () => (
                     Solutions
                   </Button>
                 </DialogTrigger>
-                <DialogContent className='block h-[70%] max-h-[913px] w-[90%] max-w-[1173px] overflow-y-auto overflow-x-hidden sm:h-[90%]'>
+                <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                   <DialogHeader>
                     <div className='mb-6 text-left'>
                       <DialogTitle>Following are the questions</DialogTitle>
                     </div>
                   </DialogHeader>
-                  <div className='mb-1 w-full p-0 text-sm sm:p-3 sm:text-lg md:mb-0'>
-                    <div className='mb-14 max-w-4xl'>
-                      <h1 className='mb-5 text-2xl font-semibold'>Question No. 1</h1>
+                  <div className='w-full text-sm sm:text-lg'>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 1
+                      </h2>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis.
                       </p>
                     </div>
-                    <div className='mb-14 max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Question No. 2</h1>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 2
+                      </h2>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis.
                       </p>
                     </div>
-                    <div className='mb-14 max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Question No. 3</h1>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 3
+                      </h2>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis.
                       </p>
                     </div>
-                    <div className='max-w-4xl'>
-                      <h1 className='mb-3 text-2xl font-semibold'>Question No. 4</h1>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 4
+                      </h2>
                       <p className='m-0'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -339,7 +357,7 @@ export const LearnerTeacher: FC = () => (
           </div>
         </div>
         <Carousel className='relative w-full'>
-          <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselPrevious>
+          <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
           <CarouselContent>
             <CarouselItem className='carousel-item'>
               <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
@@ -372,7 +390,7 @@ export const LearnerTeacher: FC = () => (
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselNext className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselNext>
+          <CarouselNext className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
         </Carousel>
         <Pagination>
           <PaginationContent>
