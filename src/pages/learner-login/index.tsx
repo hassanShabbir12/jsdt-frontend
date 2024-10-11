@@ -24,8 +24,8 @@ export const LearnerLogin: FC = () => (
           </Label>
           <Input
             id='name'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Enter your name'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
+            placeholder='Username'
           />
         </div>
         <div className='relative mb-2 w-full px-2 md:mb-5 lg:mb-3 lg:px-3'>
@@ -37,8 +37,8 @@ export const LearnerLogin: FC = () => (
           </Label>
           <Input
             id='password'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Password'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
+            placeholder='..........'
           />
           <div className='absolute right-7 top-9 cursor-pointer lg:top-11'>
             <EyeOff className='h-5 w-5' />
@@ -59,7 +59,7 @@ export const LearnerLogin: FC = () => (
           </div>
           <Link
             to='/'
-            className='text-xs font-semibold text-primary underline hover:no-underline md:text-sm'
+            className='text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'
           >
             Forgot Password?
           </Link>

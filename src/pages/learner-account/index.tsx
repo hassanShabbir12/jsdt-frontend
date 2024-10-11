@@ -24,7 +24,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -51,7 +50,6 @@ export const LearnerAccount: FC = () => (
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
                   <SelectItem value='apple'>Apple</SelectItem>
                   <SelectItem value='banana'>Banana</SelectItem>
                   <SelectItem value='blueberry'>Blueberry</SelectItem>
@@ -76,7 +74,6 @@ export const LearnerAccount: FC = () => (
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Grades</SelectLabel>
                   <SelectItem value='apple'>Grade A</SelectItem>
                   <SelectItem value='banana'>Grade B</SelectItem>
                   <SelectItem value='blueberry'>Grade C</SelectItem>
@@ -101,7 +98,6 @@ export const LearnerAccount: FC = () => (
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Subjects</SelectLabel>
                   <SelectItem value='apple'>Subject 01</SelectItem>
                   <SelectItem value='banana'>Subject 02</SelectItem>
                   <SelectItem value='blueberry'>Subject 03</SelectItem>
@@ -126,7 +122,6 @@ export const LearnerAccount: FC = () => (
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Types</SelectLabel>
                   <SelectItem value='apple'>Type 01</SelectItem>
                   <SelectItem value='banana'>Type 02</SelectItem>
                   <SelectItem value='blueberry'>Type 03</SelectItem>
@@ -151,7 +146,6 @@ export const LearnerAccount: FC = () => (
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Topics</SelectLabel>
                   <SelectItem value='apple'>Topic 01</SelectItem>
                   <SelectItem value='banana'>Topic 02</SelectItem>
                   <SelectItem value='blueberry'>Topic 03</SelectItem>
@@ -176,7 +170,6 @@ export const LearnerAccount: FC = () => (
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Levels</SelectLabel>
                   <SelectItem value='apple'>Level 01</SelectItem>
                   <SelectItem value='banana'>Level 02</SelectItem>
                   <SelectItem value='blueberry'>Level 03</SelectItem>
@@ -242,7 +235,7 @@ export const LearnerAccount: FC = () => (
           </div>
         </div>
         <Carousel className='relative w-full'>
-          <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselPrevious>
+          <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
           <CarouselContent>
             <CarouselItem className='carousel-item'>
               <div className='mb-20 max-w-6xl text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
@@ -275,7 +268,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselNext className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white lg:h-16 lg:w-16'></CarouselNext>
+          <CarouselNext className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
         </Carousel>
         <Pagination>
           <PaginationContent>
