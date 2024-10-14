@@ -217,6 +217,67 @@ export const LearnerAccount: FC = () => (
                 </DialogTrigger>
                 <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                   <DialogHeader>
+                    <div className='mb-6 text-left'>
+                      <DialogTitle>Following are the questions</DialogTitle>
+                    </div>
+                  </DialogHeader>
+                  <div className='w-full text-sm sm:text-lg'>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 1
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 2
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 3
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 4
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className='px-2'>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant='destructive'
+                    className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                  >
+                    Solutions
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                  <DialogHeader>
                     <div className='mb-8 flex justify-between pt-8 sm:items-center sm:justify-start'>
                       <DialogTitle className=''>Answer of the following questions</DialogTitle>
                       <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
@@ -280,72 +341,13 @@ export const LearnerAccount: FC = () => (
               </Dialog>
             </div>
             <div className='px-2'>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button
-                    variant='destructive'
-                    className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                  >
-                    Solutions
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                  <DialogHeader>
-                    <div className='mb-6 text-left'>
-                      <DialogTitle>Following are the questions</DialogTitle>
-                    </div>
-                  </DialogHeader>
-                  <div className='w-full text-sm sm:text-lg'>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 1
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 2
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 3
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 4
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <Button
+                variant='destructive'
+                className='mb-1.5 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:m-0 md:w-auto'
+              >
+                Instructions
+              </Button>
             </div>
-            <Button
-              variant='destructive'
-              className='mb-1.5 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:m-0 md:w-auto'
-            >
-              Instructions
-            </Button>
           </div>
           <div className='flex gap-x-2 sm:gap-x-4'>
             <div className='h-6 w-6 cursor-pointer'>
@@ -388,7 +390,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-20mb-6 flex items-center justify-between text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -405,7 +407,7 @@ export const LearnerAccount: FC = () => (
             <PaginationItem>
               <PaginationPrevious href='#' />
             </PaginationItem>
-            <PaginationItem>
+            <PaginationItem className='bg-blue-500'>
               <PaginationLink href='#'>1</PaginationLink>
             </PaginationItem>
             <PaginationItem>

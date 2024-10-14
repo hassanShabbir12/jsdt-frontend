@@ -2,15 +2,6 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { assetUrl } from '@/lib/asset-url';
 
@@ -53,51 +44,22 @@ export const Logo: FC = () => {
             <img
               src={assetUrl('assets/img/home/upload-logo.png')}
               alt='round-arrow'
-              className='ml-2 block h-auto'
+              className='h-autsso ml-2 block'
             />
           </div>
           <div className='mb-5 flex w-full justify-center py-3 text-sm font-semibold'>
             Drop your image her or
             <Link
               to=''
-              className='ml-1 border-b border-blue-500 text-blue-500 transition-all hover:border-white'
+              className='ml-1 border-b text-blue-500 underline transition-all hover:text-blue-600'
             >
               browse
             </Link>
           </div>
         </div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <div className='mx-auto flex max-w-80 justify-center px-4'>
-              <Button className='h-12 w-80 text-base font-semibold'>Upload</Button>
-            </div>
-          </DialogTrigger>
-          <DialogContent className='max-w-[620px]'>
-            <DialogHeader>
-              <DialogTitle className='text-center'>Add New Topic</DialogTitle>
-            </DialogHeader>
-            <div className='grid py-4'>
-              <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
-                New Topic
-              </Label>
-              <div className='flex items-center'>
-                <Input
-                  id='name'
-                  className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3 lg:py-2'
-                  placeholder='Type here'
-                />
-              </div>
-            </div>
-            <DialogFooter>
-              <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold'>Cancel</Button>
-              </div>
-              <div className='w-1/2'>
-                <Button className='h-12 w-full text-base font-semibold'>Save</Button>
-              </div>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <div className='mx-auto flex max-w-80 justify-center'>
+          <Button className='h-12 w-80 text-base font-semibold'>Upload</Button>
+        </div>
       </div>
     </div>
   );

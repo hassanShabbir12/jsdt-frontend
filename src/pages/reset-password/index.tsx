@@ -16,7 +16,7 @@ export const ResetPassword: FC = () => (
       </Label>
       <Input
         id='iem'
-        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
+        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-base text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
         placeholder='.........'
       />
     </div>
@@ -26,7 +26,7 @@ export const ResetPassword: FC = () => (
       </Label>
       <Input
         id='iem'
-        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
+        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-base text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
         placeholder='.........'
       />
     </div>

@@ -199,6 +199,67 @@ export const LearnerTeacher: FC = () => (
                 </DialogTrigger>
                 <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                   <DialogHeader>
+                    <div className='mb-6 text-left'>
+                      <DialogTitle>Following are the questions</DialogTitle>
+                    </div>
+                  </DialogHeader>
+                  <div className='w-full text-sm sm:text-lg'>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 1
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 2
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 3
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                    <div className='mb-5 md:mb-10'>
+                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                        Question No. 4
+                      </h2>
+                      <p className='m-0'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis.
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className='px-2'>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant='destructive'
+                    className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                  >
+                    Solutions
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                  <DialogHeader>
                     <div className='mb-8 flex justify-between pt-8 sm:items-center sm:justify-start'>
                       <DialogTitle className=''>Answer of the following questions</DialogTitle>
                       <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
@@ -256,67 +317,6 @@ export const LearnerTeacher: FC = () => (
                           commodo consequat?
                         </p>
                       </div>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <div className='px-2'>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button
-                    variant='destructive'
-                    className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                  >
-                    Solutions
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                  <DialogHeader>
-                    <div className='mb-6 text-left'>
-                      <DialogTitle>Following are the questions</DialogTitle>
-                    </div>
-                  </DialogHeader>
-                  <div className='w-full text-sm sm:text-lg'>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 1
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 2
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 3
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
-                    </div>
-                    <div className='mb-5 md:mb-10'>
-                      <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                        Question No. 4
-                      </h2>
-                      <p className='m-0'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis.
-                      </p>
                     </div>
                   </div>
                 </DialogContent>
