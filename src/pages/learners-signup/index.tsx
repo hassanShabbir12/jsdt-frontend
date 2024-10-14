@@ -117,7 +117,7 @@ export const LearnerSignUp: FC = () => (
           />
         </div>
         <div className='flex w-full justify-center px-3'>
-          <Button className='min-w-48 lg:min-w-80'>Sign up</Button>
+          <Button className='min-w-48 text-base lg:min-w-80'>Sign up</Button>
         </div>
       </div>
     </div>

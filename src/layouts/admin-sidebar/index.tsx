@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Grades } from '@/components/icon/grades';
 import { Logout } from '@/components/icon/logout';
@@ -10,17 +10,43 @@ import { Subject } from '@/components/icon/subject';
 import { Topics } from '@/components/icon/topics';
 
 export const Sidebar: FC = () => {
+  const location = useLocation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isToggled, setIsToggled] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+
   const handleToggle = (): void => {
     setIsToggled(!isToggled);
   };
+
   const handleClickOutside = (event: MouseEvent): void => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
       setIsToggled(false);
     }
   };
+
+  const determineActiveIndex = (): number => {
+    switch (location.pathname) {
+      case '/admin':
+        return 0;
+      case '/admin/subjects':
+        return 1;
+      case '/admin/topics':
+        return 2;
+      case '/admin/questions':
+        return 3;
+      case '/admin/logo':
+        return 4;
+      case '/admin/settings':
+        return 5;
+      default:
+        return 0;
+    }
+  };
+
+  useEffect(() => {
+    setActiveIndex(determineActiveIndex);
+  }, [location]);
 
   useEffect(() => {
     if (isToggled) {
@@ -51,10 +77,10 @@ export const Sidebar: FC = () => {
           </div>
           <ul className='m-0 list-none px-2 pb-16'>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 0 ? 'bg-blue-500' : ''}`}
+              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 0 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(0)}
             >
-              <Link to='/admin' className='ml-1 flex items-center gap-x-3'>
+              <Link to='/admin' className='ml-1 flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 0 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -68,10 +94,13 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 1 ? 'bg-blue-500' : ''}`}
+              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 1 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(1)}
             >
-              <Link to='/admin/subjects' className='flex items-center gap-x-3'>
+              <Link
+                to='/admin/subjects'
+                className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
+              >
                 <div
                   className={`${activeIndex === 1 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -85,10 +114,10 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 2 ? 'bg-blue-500' : ''}`}
+              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 2 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(2)}
             >
-              <Link to='/admin/topics' className='flex items-center gap-x-3'>
+              <Link to='/admin/topics' className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 2 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -102,10 +131,13 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500  ${activeIndex === 3 ? 'bg-blue-500' : ''}`}
+              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 3 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(3)}
             >
-              <Link to='/admin/questions' className='flex items-center gap-x-3'>
+              <Link
+                to='/admin/questions'
+                className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
+              >
                 <div
                   className={`${activeIndex === 3 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -119,10 +151,10 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500  ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
+              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(4)}
             >
-              <Link to='/admin/logo' className='flex items-center gap-x-3'>
+              <Link to='/admin/logo' className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -136,10 +168,13 @@ export const Sidebar: FC = () => {
               </Link>
             </li>
             <li
-              className={`group mb-4 cursor-pointer rounded pb-3.5 pl-5 pr-2 pt-3 transition-all hover:bg-blue-500 ${activeIndex === 5 ? 'bg-blue-500' : ''}`}
+              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 5 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(5)}
             >
-              <Link to='/admin/settings' className='flex items-center gap-x-3'>
+              <Link
+                to='/admin/settings'
+                className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
+              >
                 <div
                   className={`${activeIndex === 5 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >

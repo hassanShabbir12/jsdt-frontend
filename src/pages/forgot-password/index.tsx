@@ -16,8 +16,8 @@ export const ForgotPassword: FC = () => (
       </Label>
       <Input
         id='iem'
-        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
-        placeholder='Mansoor.Luqman@gmail.com'
+        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-base text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
+        placeholder='Username@gmail.com'
       />
     </div>
     <div className='flex justify-center'>

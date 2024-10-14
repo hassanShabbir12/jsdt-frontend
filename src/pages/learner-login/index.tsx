@@ -65,7 +65,7 @@ export const LearnerLogin: FC = () => (
           </Link>
         </div>
         <div className='flex w-full justify-center px-3'>
-          <Button className='h-12 min-w-48 font-montserrat font-semibold lg:min-w-80'>
+          <Button className='h-12 min-w-48 font-montserrat text-base font-semibold lg:min-w-80'>
             Log In
           </Button>
         </div>

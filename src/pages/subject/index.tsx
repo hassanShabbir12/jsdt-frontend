@@ -40,7 +40,7 @@ export const Subjects: FC = () => (
             placeholder='Chemistry'
           />
           <DropdownMenu>
-            <DropdownMenuTrigger className='ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-zinc-800 hover:bg-zinc-800 hover:text-white data-[state=open]:bg-zinc-800 data-[state=open]:text-white'>
+            <DropdownMenuTrigger className='ml-4 flex h-8 w-8 items-center justify-center rounded-full border border-zinc-800'>
               <GradeDots />
             </DropdownMenuTrigger>
             <DropdownMenuContent className='absolute -right-4 top-4 rounded-md drop-shadow-xl'>
@@ -66,7 +66,7 @@ export const Subjects: FC = () => (
       </div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className='mx-auto flex max-w-80 justify-center px-4'>
+          <div className='mx-auto flex max-w-80 justify-center'>
             <Button className='h-12 w-80 text-base font-semibold'>Add New Subject</Button>
           </div>
         </DialogTrigger>
