@@ -11,7 +11,7 @@ export const LearnerLogin: FC = () => (
   <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 font-montserrat sm:w-1/2 lg:p-6 xl:p-10'>
     <div className='w-full py-4 sm:py-8 md:py-14'>
       <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
-        <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Login for Leaners</h1>
+        <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Login for Learners</h1>
         <p className='mb-1 text-black'>Let’s get started</p>
       </div>
       <div className='-mx-2 flex flex-wrap lg:-mx-3'>
