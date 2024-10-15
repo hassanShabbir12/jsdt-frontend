@@ -78,7 +78,7 @@ export const Grades: FC = () => (
             <div className='flex items-center'>
               <Input
                 id='name'
-                className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
+                className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3 lg:py-2'
                 placeholder='Grade 1'
               />
             </div>
