@@ -225,7 +225,7 @@ export const Question: FC = () => (
             <div className='relative'>
               <Textarea
                 className='h-44 w-full resize-none rounded-xl border border-solid
-  border-neutral-200 p-4 text-sm text-stone-300 placeholder:text-stone-300'
+  border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
                 placeholder='Type here...'
               />
               <div className='absolute bottom-5 left-4 cursor-pointer rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
@@ -240,7 +240,7 @@ export const Question: FC = () => (
             <div className='relative'>
               <Textarea
                 className='h-44 w-full resize-none rounded-xl border border-solid
-  border-neutral-200 p-4 text-sm text-stone-300 placeholder:text-stone-300'
+  border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
                 placeholder='Type here...'
               />
               <div className='absolute bottom-5 left-4 cursor-pointer rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
