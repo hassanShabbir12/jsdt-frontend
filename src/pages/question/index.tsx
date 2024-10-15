@@ -56,13 +56,13 @@ export const Question: FC = () => (
             <DropdownMenuContent className='absolute -right-4 top-4 rounded-md drop-shadow-xl'>
               <ul className='m-0 px-2 py-3'>
                 <li className='group mb-2 flex cursor-pointer items-center p-1.5'>
-                  <div className='text-zinc-800 group-hover:text-blue-500'>
+                  <div className='text-zinc-800 duration-300 ease-in  group-hover:text-blue-500'>
                     <Edit />
                   </div>
                   <h3 className='ml-1.5 text-base text-zinc-800 group-hover:text-blue-500'>Edit</h3>
                 </li>
                 <li className='group flex cursor-pointer items-center p-1.5'>
-                  <div className='text-zinc-800 group-hover:text-blue-500'>
+                  <div className='text-zinc-800 duration-300 ease-in group-hover:text-blue-500'>
                     <Trash2 />
                   </div>
                   <h3 className='ml-1.5 text-base text-zinc-800 group-hover:text-blue-500'>
@@ -80,7 +80,7 @@ export const Question: FC = () => (
             <Button className='h-12 w-80 text-base font-semibold'>Add New Question</Button>
           </div>
         </DialogTrigger>
-        <DialogContent className='h-full max-w-[1173px] overflow-y-auto overflow-x-hidden'>
+        <DialogContent className='!container max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden'>
           <DialogHeader>
             <DialogTitle className='mb-8 text-center text-2xl'>Add New Question</DialogTitle>
           </DialogHeader>
@@ -228,7 +228,7 @@ export const Question: FC = () => (
   border-neutral-200 p-4 text-sm text-stone-300 placeholder:text-stone-300'
                 placeholder='Type here...'
               />
-              <div className='absolute bottom-5 left-4 rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
+              <div className='absolute bottom-5 left-4 cursor-pointer rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
                 Write question with AI
               </div>
             </div>
@@ -243,7 +243,7 @@ export const Question: FC = () => (
   border-neutral-200 p-4 text-sm text-stone-300 placeholder:text-stone-300'
                 placeholder='Type here...'
               />
-              <div className='absolute bottom-5 left-4 rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
+              <div className='absolute bottom-5 left-4 cursor-pointer rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
                 Write question with AI
               </div>
             </div>
