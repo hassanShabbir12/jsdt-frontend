@@ -26,7 +26,7 @@ export const Settings: FC = () => (
             className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
             placeholder='.........'
           />
-          <div className='absolute right-4 top-3'>
+          <div className='absolute right-4 top-3 cursor-pointer'>
             <EyeOff />
           </div>
         </div>
