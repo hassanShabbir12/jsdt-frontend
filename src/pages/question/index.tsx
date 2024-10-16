@@ -102,13 +102,13 @@ export const Question: FC = () => {
               <Button className='h-12 w-80 text-base font-semibold'>Add New question</Button>
             </div>
           </DialogTrigger>
-          <DialogContent className='h-full max-w-[1173px] overflow-y-auto overflow-x-hidden'>
+          <DialogContent className='max-h-full max-w-[1173px] overflow-y-auto overflow-x-hidden'>
             <DialogHeader>
-              <DialogTitle className='mb-8 text-center text-2xl'>Add New Question</DialogTitle>
+              <DialogTitle className='mb-4 text-center text-2xl'>Add New Question</DialogTitle>
             </DialogHeader>
             <div className='-mx-2.5 block flex-wrap sm:flex'>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+                <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                   IEB/NSC
                 </Label>
                 <div className='w-full'>
@@ -130,7 +130,7 @@ export const Question: FC = () => {
                 </div>
               </div>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+                <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                   Choose Grade
                 </Label>
                 <div className='w-full'>
@@ -152,7 +152,7 @@ export const Question: FC = () => {
                 </div>
               </div>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+                <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                   Assessment Type
                 </Label>
                 <div className='w-full'>
@@ -174,7 +174,7 @@ export const Question: FC = () => {
                 </div>
               </div>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+                <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                   Choose Topic
                 </Label>
                 <div className='w-full'>
@@ -196,7 +196,7 @@ export const Question: FC = () => {
                 </div>
               </div>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+                <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                   Choose Subject
                 </Label>
                 <div className='w-full'>
@@ -218,7 +218,7 @@ export const Question: FC = () => {
                 </div>
               </div>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+                <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                   EASY/INTERMEDIATE/DIFFICULT
                 </Label>
                 <div className='w-full'>
@@ -241,13 +241,12 @@ export const Question: FC = () => {
               </div>
             </div>
             <div className='w-full'>
-              <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+              <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                 Question
               </Label>
               <div className='relative'>
                 <Textarea
-                  className='h-44 w-full resize-none rounded-xl border border-solid
-    border-neutral-200 p-4 text-sm text-stone-300 placeholder:text-stone-300'
+                  className='h-44 w-full resize-none rounded-xl border border-solid border-neutral-200 p-4 text-sm text-stone-300 placeholder:text-stone-300'
                   placeholder='Type here...'
                 />
                 <div className='absolute bottom-5 left-4 rounded-full bg-gray-200 px-3 py-2 text-xs text-blue-500'>
@@ -256,7 +255,7 @@ export const Question: FC = () => {
               </div>
             </div>
             <div className='w-full'>
-              <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
+              <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                 Answer
               </Label>
               <div className='relative'>
@@ -273,12 +272,15 @@ export const Question: FC = () => {
             <DialogFooter>
               <div className='mx-auto flex max-w-xl gap-x-4'>
                 <div className='w-64'>
-                  <Button variant='outline' className='h-12 w-full text-base font-semibold'>
+                  <Button
+                    variant='outline'
+                    className='h-12 w-full text-base font-semibold hover:bg-primary hover:text-white'
+                  >
                     Cancel
                   </Button>
                 </div>
                 <div className='w-64'>
-                  <Button className='h-12 w-full text-base font-semibold'>Save</Button>
+                  <Button className='h-12 w-full text-base font-semibold '>Save</Button>
                 </div>
               </div>
             </DialogFooter>
