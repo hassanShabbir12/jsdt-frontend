@@ -31,7 +31,7 @@ export const ResetPassword: FC = () => (
       />
     </div>
     <div className='flex justify-center'>
-      <Button className='mx-auto h-12 w-80'>Reset Password</Button>
+      <Button className='mx-auto h-12 w-52 md:w-80'>Reset Password</Button>
     </div>
   </div>
 );

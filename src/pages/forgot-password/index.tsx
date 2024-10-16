@@ -21,7 +21,7 @@ export const ForgotPassword: FC = () => (
       />
     </div>
     <div className='flex justify-center'>
-      <Button className='mx-auto h-12 w-80'>Send Link</Button>
+      <Button className='mx-auto h-12 w-52 md:w-80'>Send Link</Button>
     </div>
   </div>
 );

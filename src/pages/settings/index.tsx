@@ -61,7 +61,7 @@ export const Settings: FC = () => (
           />
         </div>
       </div>
-      <Button className='h-12 w-80 text-base'>Save</Button>
+      <Button className='h-12 w-52 text-base md:w-80'>Save</Button>
     </div>
   </div>
 );
