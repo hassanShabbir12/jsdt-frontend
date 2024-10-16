@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { Eye, EyeOff } from 'lucide-react';
+import { EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,16 +35,15 @@ export const EducatorLogin: FC = () => (
           >
             Password
           </Label>
-          <Input
-            id='password'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Enter Your Password'
-          />
-          <div className='absolute right-7 top-9 cursor-pointer lg:top-11'>
-            <EyeOff className='h-5 w-5' />
-          </div>
-          <div className='absolute right-7 top-9 hidden cursor-pointer lg:top-11'>
-            <Eye className='h-5 w-5' />
+          <div className='relative'>
+            <Input
+              id='Enter your password'
+              className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+              placeholder='Enter Your Password'
+            />
+            <div className='absolute right-4 top-2 cursor-pointer lg:top-3'>
+              <EyeOff />
+            </div>
           </div>
         </div>
         <div className='mb-6 flex w-full justify-between px-3 lg:mb-7'>
