@@ -5,6 +5,7 @@ import { Label } from '@radix-ui/react-label';
 import { EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 
 export const EducatorLogin: FC = () => (
@@ -47,8 +48,8 @@ export const EducatorLogin: FC = () => (
           </div>
         </div>
         <div className='mb-6 flex w-full justify-between px-3 lg:mb-7'>
-          <div className='flex gap-2'>
-            <input type='checkbox' id='check' />
+          <div className='flex items-center gap-2'>
+            <Checkbox />
             <Label
               htmlFor='check'
               className='font-montserrat text-xs font-medium text-zinc-800 md:text-base'

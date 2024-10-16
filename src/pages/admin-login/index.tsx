@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { Label } from '@radix-ui/react-label';
 import { EyeOff } from 'lucide-react';
 
-import { LoggedIn } from '@/components/icon/logged-in';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 
 export const AdminLogin: FC = () => (
@@ -42,10 +42,8 @@ export const AdminLogin: FC = () => (
       </div>
     </div>
     <div className='mb-6 flex items-center justify-between'>
-      <div className='flex gap-x-1'>
-        <div className='text-zinc-800'>
-          <LoggedIn />
-        </div>
+      <div className='flex items-center gap-x-1'>
+        <Checkbox />
         <h3>Keep me logged in</h3>
       </div>
       <Link to='' className='text-sm font-semibold text-blue-500 underline hover:text-blue-700'>

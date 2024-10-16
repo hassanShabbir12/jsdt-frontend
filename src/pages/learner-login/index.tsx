@@ -2,9 +2,10 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { Eye, EyeOff } from 'lucide-react';
+import { EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 
 export const LearnerLogin: FC = () => (
@@ -45,16 +46,10 @@ export const LearnerLogin: FC = () => (
               <EyeOff />
             </div>
           </div>
-          <div className='absolute right-7 top-9 cursor-pointer lg:top-11'>
-            <EyeOff className='h-5 w-5' />
-          </div>
-          <div className='absolute right-7 top-9 hidden cursor-pointer lg:top-11'>
-            <Eye className='h-5 w-5' />
-          </div>
         </div>
         <div className='mb-6 flex w-full justify-between px-3 lg:mb-7'>
-          <div className='flex gap-2'>
-            <input type='checkbox' id='check' />
+          <div className='flex items-center gap-2'>
+            <Checkbox />
             <Label
               htmlFor='check'
               className='font-montserrat text-xs font-medium text-zinc-800 md:text-base'
