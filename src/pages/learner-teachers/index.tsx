@@ -192,7 +192,7 @@ export const LearnerTeacher: FC = () => {
               id='iem'
               type='number'
               placeholder='Enter total marks (e.g., 500, 1000)'
-              className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-neutral-400 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+              className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             />
           </div>
         </div>
