@@ -29,7 +29,8 @@ const PaginationItem = React.forwardRef<HTMLLIElement, React.ComponentProps<'li'
     <li
       ref={ref}
       className={cn(
-        'h-7 w-7 rounded text-stone-300 flex items-center cursor-pointer justify-center bg-zinc-100 hover:text-white hover:bg-blue-500 hover:w-7 hover:h-7',
+        'group h-7 w-7 rounded text-stone-300 flex items-center cursor-pointer justify-center bg-zinc-100 hover:text-white focus:text-stone-300 hover:bg-blue-500 hover:w-7 hover:h-7',
+        'nth-child-2:bg-green-500 nth-child-2:text-white',
         className,
       )}
       {...props}
@@ -75,7 +76,7 @@ const PaginationNext: React.FC<React.ComponentProps<typeof PaginationLink>> = ({
   <PaginationLink
     aria-label='Go to next page'
     size='default'
-    className={cn('gap-1 text-blue-500', _className)}
+    className={cn('gap-1 text-blue-500 group-hover:text-white', _className)}
     {...props}
   >
     <ChevronRightIcon className='h-4 w-4' />

@@ -11,7 +11,7 @@ export const LearnerLogin: FC = () => (
   <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 font-montserrat sm:w-1/2 lg:p-6 xl:p-10'>
     <div className='w-full py-4 sm:py-8 md:py-14'>
       <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
-        <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Login for Leaners</h1>
+        <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Login for Learners</h1>
         <p className='mb-1 text-black'>Let’s get started</p>
       </div>
       <div className='-mx-2 flex flex-wrap lg:-mx-3'>
@@ -25,7 +25,7 @@ export const LearnerLogin: FC = () => (
           <Input
             id='name'
             className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Enter your name'
+            placeholder='Username'
           />
         </div>
         <div className='relative mb-2 w-full px-2 md:mb-5 lg:mb-3 lg:px-3'>
@@ -38,7 +38,7 @@ export const LearnerLogin: FC = () => (
           <Input
             id='password'
             className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Password'
+            placeholder='Enter Your Password'
           />
           <div className='absolute right-7 top-9 cursor-pointer lg:top-11'>
             <EyeOff className='h-5 w-5' />
@@ -59,13 +59,13 @@ export const LearnerLogin: FC = () => (
           </div>
           <Link
             to='/'
-            className='text-xs font-semibold text-primary underline hover:no-underline md:text-sm'
+            className='text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'
           >
             Forgot Password?
           </Link>
         </div>
         <div className='flex w-full justify-center px-3'>
-          <Button className='h-12 min-w-48 font-montserrat font-semibold lg:min-w-80'>
+          <Button className='h-12 min-w-48 font-montserrat text-base font-semibold lg:min-w-80'>
             Log In
           </Button>
         </div>

@@ -16,8 +16,8 @@ export const ResetPassword: FC = () => (
       </Label>
       <Input
         id='iem'
-        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
-        placeholder='.........'
+        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-base text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+        placeholder='Enter Your Password'
       />
     </div>
     <div className='mb-4 w-full px-2 md:mb-3 lg:mb-5 lg:px-3'>
@@ -26,12 +26,12 @@ export const ResetPassword: FC = () => (
       </Label>
       <Input
         id='iem'
-        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-5'
-        placeholder='.........'
+        className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-base text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+        placeholder='Enter Your Password'
       />
     </div>
     <div className='flex justify-center'>
-      <Button className='mx-auto h-12 w-80'>Reset Password</Button>
+      <Button className='mx-auto h-12 w-52 md:w-80'>Reset Password</Button>
     </div>
   </div>
 );

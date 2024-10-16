@@ -16,13 +16,13 @@ export const AdminLogin: FC = () => (
     </div>
     <div className='mb-7 w-full'>
       <Label htmlFor='name' className='mb-1 block font-normal leading-none text-black lg:text-base'>
-        User Name
+        Username
       </Label>
       <Input
         id='iem'
         type='text'
-        placeholder='Mansoor.Luqman'
-        className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-zinc-800 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+        placeholder='Username'
+        className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
       />
     </div>
     <div className='mb-2 w-full'>
@@ -33,8 +33,8 @@ export const AdminLogin: FC = () => (
         <Input
           id='iem'
           type='number'
-          placeholder='..........'
-          className='flex h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-zinc-800 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+          placeholder='Enter Your Password'
+          className='flex h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
         />
         <div className='absolute right-7 top-3'>
           <EyeOff />
@@ -48,10 +48,7 @@ export const AdminLogin: FC = () => (
         </div>
         <h3>Keep me logged in</h3>
       </div>
-      <Link
-        to=''
-        className='border-b border-blue-500 text-sm font-semibold text-blue-500 hover:border-none'
-      >
+      <Link to='' className='text-sm font-semibold text-blue-500 underline hover:text-blue-700'>
         Forgot Password?
       </Link>
     </div>

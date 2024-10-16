@@ -23,10 +23,10 @@ export const Settings: FC = () => (
         <div className='relative'>
           <Input
             id='name'
-            className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
-            placeholder='.........'
+            className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3 lg:py-2'
+            placeholder='Enter Your Password'
           />
-          <div className='absolute right-4 top-3'>
+          <div className='absolute right-4 top-2 cursor-pointer'>
             <EyeOff />
           </div>
         </div>
@@ -41,8 +41,8 @@ export const Settings: FC = () => (
         <div className='relative'>
           <Input
             id='name'
-            className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
-            placeholder='.........'
+            className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3 lg:py-2'
+            placeholder='Enter Your Password'
           />
         </div>
       </div>
@@ -56,12 +56,12 @@ export const Settings: FC = () => (
         <div className='relative'>
           <Input
             id='name'
-            className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-zinc-800 lg:h-12 lg:px-3 lg:py-2'
-            placeholder='.........'
+            className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3 lg:py-2'
+            placeholder='Enter Your Password'
           />
         </div>
       </div>
-      <Button className='h-12 w-80'>Save</Button>
+      <Button className='h-12 w-52 text-base md:w-80'>Save</Button>
     </div>
   </div>
 );
