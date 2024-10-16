@@ -376,7 +376,7 @@ export const LearnerAccount: FC = () => {
             </div>
           </div>
           <Carousel className='relative w-full'>
-            <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
+            <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-200 disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
             <CarouselContent>
               <CarouselItem className='carousel-item'>
                 <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
@@ -409,7 +409,7 @@ export const LearnerAccount: FC = () => {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselNext className='z-50 h-12 w-12 bg-blue-500 hover:bg-blue-200 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
+            <CarouselNext className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-200 disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
           </Carousel>
           <Pagination>
             <PaginationContent>
