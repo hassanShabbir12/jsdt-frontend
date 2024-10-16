@@ -35,11 +35,16 @@ export const LearnerLogin: FC = () => (
           >
             Password
           </Label>
-          <Input
-            id='password'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Enter Your Password'
-          />
+          <div className='relative'>
+            <Input
+              id='password'
+              className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+              placeholder='Enter Your Password'
+            />
+            <div className='absolute right-4 top-2 cursor-pointer lg:top-3'>
+              <EyeOff />
+            </div>
+          </div>
           <div className='absolute right-7 top-9 cursor-pointer lg:top-11'>
             <EyeOff className='h-5 w-5' />
           </div>
