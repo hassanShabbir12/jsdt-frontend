@@ -36,13 +36,13 @@ export const AdminLogin: FC = () => (
           placeholder='Enter Your Password'
           className='flex h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
         />
-        <div className='absolute right-7 top-3'>
+        <div className='absolute right-7 top-3 cursor-pointer'>
           <EyeOff />
         </div>
       </div>
     </div>
     <div className='mb-6 flex items-center justify-between'>
-      <div className='flex items-center gap-x-1'>
+      <div className='flex items-center gap-x-1.5 md:gap-x-2.5'>
         <Checkbox />
         <h3>Keep me logged in</h3>
       </div>

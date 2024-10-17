@@ -33,14 +33,14 @@ export const BasicEducation: FC = () => (
         <Input
           type='text'
           placeholder='National Senior Certificate'
-          className='h-12 w-full bg-black text-base font-semibold !text-white placeholder:text-white'
+          className='h-12 w-full bg-black text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'
         />
       </div>
       <div className='mb-5 sm:mb-10'>
         <Input
           type='text'
           placeholder='Grade:'
-          className='h-12 w-full bg-blue-500 text-base font-semibold !text-white placeholder:text-white'
+          className='h-12 w-full bg-blue-500 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'
         />
       </div>
       <div className='mb-5 rounded-xl border border-dashed border-blue-400 bg-yellow-200 pb-4 pt-3 sm:mb-8'>
