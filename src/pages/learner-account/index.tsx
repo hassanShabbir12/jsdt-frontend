@@ -416,7 +416,7 @@ export const LearnerAccount: FC = () => {
               <PaginationItem>
                 <PaginationPrevious href='#' />
               </PaginationItem>
-              <PaginationItem className='bg-blue-500'>
+              <PaginationItem className='bg-blue-500 text-white'>
                 <PaginationLink href='#'>1</PaginationLink>
               </PaginationItem>
               <PaginationItem>

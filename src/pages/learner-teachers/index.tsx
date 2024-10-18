@@ -211,8 +211,17 @@ export const LearnerTeacher: FC = () => {
                   </DialogTrigger>
                   <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                     <DialogHeader>
-                      <div className='mb-6 text-left'>
-                        <DialogTitle>Following are the questions</DialogTitle>
+                      <div className='flex'>
+                        <div className='mb-6 text-left'>
+                          <DialogTitle>Following are the questions</DialogTitle>
+                        </div>
+                        <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
+                          <img
+                            src={assetUrl('assets/img/home/attach-download.svg')}
+                            alt='Generate-2'
+                            className='-mb-11 block h-auto'
+                          />
+                        </div>
                       </div>
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
@@ -411,10 +420,8 @@ export const LearnerTeacher: FC = () => {
               <PaginationItem>
                 <PaginationPrevious href='#' />
               </PaginationItem>
-              <PaginationItem className='bg-blue-500'>
-                <PaginationLink className='text-white' href='#'>
-                  1
-                </PaginationLink>
+              <PaginationItem className='bg-blue-500 text-white'>
+                <PaginationLink href='#'>1</PaginationLink>
               </PaginationItem>
               <PaginationItem>
                 <PaginationLink href='#'>2</PaginationLink>
