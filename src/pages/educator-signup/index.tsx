@@ -1,8 +1,18 @@
 import { FC } from 'react';
 
+import { EyeOff } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export const EducatorSignUp: FC = () => (
   <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 sm:w-1/2 lg:p-6 xl:p-10'>
@@ -10,6 +20,19 @@ export const EducatorSignUp: FC = () => (
       <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
         <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Sign up for educators</h1>
         <p className='mb-1 text-black'>Let’s get started with 5 days free trial</p>
+      </div>
+      <div className='mb-4 w-full md:mb-5 lg:mb-6'>
+        <Label
+          htmlFor='name'
+          className='mb-2 block font-normal leading-none text-black lg:text-base'
+        >
+          Username
+        </Label>
+        <Input
+          id='name'
+          className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+          placeholder='Username'
+        />
       </div>
       <div className='-mx-2 flex flex-wrap lg:-mx-3'>
         <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
@@ -110,11 +133,20 @@ export const EducatorSignUp: FC = () => (
           >
             Gender
           </Label>
-          <Input
-            id='gender'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='Male/Female'
-          />
+          <div className='w-full'>
+            <Select>
+              <SelectTrigger className='w-full'>
+                <SelectValue placeholder='Male/Female' />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value='male'>Male</SelectItem>
+                  <SelectItem value='female'>Female</SelectItem>
+                  <SelectItem value='other'>Other</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className='mb-4 w-full px-2 md:mb-5 lg:mb-7 lg:px-3'>
           <Label
@@ -123,14 +155,56 @@ export const EducatorSignUp: FC = () => (
           >
             IEB/NSC
           </Label>
+          <div className='w-full'>
+            <Select>
+              <SelectTrigger className='w-full'>
+                <SelectValue placeholder='IEB/NSC' />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value='01'>01</SelectItem>
+                  <SelectItem value='02'>02</SelectItem>
+                  <SelectItem value='03'>03</SelectItem>
+                  <SelectItem value='04'>04</SelectItem>
+                  <SelectItem value='05'>05</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
+          <Label
+            htmlFor='iem'
+            className='mb-2 block font-normal leading-none text-black lg:text-base'
+          >
+            Email
+          </Label>
           <Input
             id='iem'
             className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='IEB or NSC'
+            placeholder='example@gmail.com'
           />
         </div>
+        <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
+          <Label
+            htmlFor='iem'
+            className='mb-2 block font-normal leading-none text-black lg:text-base'
+          >
+            Password
+          </Label>
+          <div className='relative'>
+            <Input
+              id='iem'
+              className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+              placeholder='.........................'
+            />
+            <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
+              <EyeOff />
+            </div>
+          </div>
+        </div>
         <div className='flex w-full justify-center px-3'>
-          <Button className='min-w-48 lg:min-w-80'>Sign up</Button>
+          <Button className='h-12 min-w-48 lg:min-w-80'>Sign up</Button>
         </div>
       </div>
     </div>
