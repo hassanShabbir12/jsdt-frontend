@@ -137,7 +137,7 @@ export const Grades: FC = () => (
           <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className='w-[93%]'>Grades</TableHead>
+              <TableHead className='w-[86%]'>Grades</TableHead>
               <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
             </TableRow>
           </TableHeader>

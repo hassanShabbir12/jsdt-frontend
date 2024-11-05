@@ -58,7 +58,7 @@ export const Logo: FC = () => {
           </div>
         </div>
         <div className='mx-auto flex max-w-80 justify-center'>
-          <Button className='h-12 w-80 text-base font-semibold'>Upload</Button>
+          <Button className='h-12 w-52 text-base font-semibold md:w-80'>Upload</Button>
         </div>
       </div>
     </div>
