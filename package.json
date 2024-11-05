@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "update-api": "npx swagger-typescript-api -p http://localhost:3000/api-json --patch --extract-enums --axios --api-class-name JsdtAPI -o ./src/lib/sdk/jsdt"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -23,6 +24,7 @@
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.3.0",
