@@ -1,12 +1,13 @@
 import { ReactElement } from 'react';
-import { Toaster } from 'react-hot-toast';
 
 import { AppRoutes } from '@/routes';
+
+import { Toaster } from './components/ui/toaster';
 
 function App(): ReactElement {
   return (
     <>
-      <Toaster position='top-center' reverseOrder={true} />
+      <Toaster />
       <AppRoutes />;
     </>
   );

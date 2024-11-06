@@ -3,11 +3,15 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios, { AxiosResponse } from 'axios';
 import { z } from 'zod';
 
-import { loginAdmin } from '@/api/services/auth';
+import { apiClient } from '@/api/clients/apiClient';
 import { useAuth } from '@/context/AuthContext';
-import { LoginResponse, UseAdminLoginReturn } from '@/interface/auth';
+import { LoginResponseData, UseAdminLoginReturn } from '@/interface/auth';
+import { ApiResponse } from '@/interface/generic';
+
+import { useToast } from '../use-toast';
 
 // Define validation schema using zod
 const adminLoginSchema = z.object({
@@ -21,6 +25,8 @@ export const useAdminLogin = (): UseAdminLoginReturn => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
+
   const { login } = useAuth();
   const {
     register,
@@ -30,18 +36,38 @@ export const useAdminLogin = (): UseAdminLoginReturn => {
     resolver: zodResolver(adminLoginSchema),
   });
 
-  const onSubmit = async (data: AdminLoginFormInputs): Promise<void> => {
+  type LoginResponse = ApiResponse<LoginResponseData>;
+
+  const onSubmit = async (userData: AdminLoginFormInputs): Promise<void> => {
     setLoading(true);
     try {
-      const response: LoginResponse = await loginAdmin(data);
+      const response = (await apiClient.auth.usersControllerLogin(
+        userData,
+      )) as unknown as AxiosResponse<LoginResponse>;
+      const { data } = response;
 
-      if (response.success) {
-        const { user, access_token } = response.data;
+      toast({
+        title: 'Login success',
+        description: 'You are now logged in!',
+      });
+      if (data.success) {
+        const { user, access_token } = data.data;
 
         login(user, access_token);
         navigate('/admin');
       }
-    } catch {
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast({
+          title: 'Error',
+          description: error.response.data.message,
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'An unexpected error occurred',
+        });
+      }
     } finally {
       setLoading(false);
     }

@@ -7,7 +7,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { useAdminLogin } from '@/hooks/useAdminLogin';
+import { useAdminLogin } from '@/hooks/admin/useLogin';
 
 export const AdminLogin: FC = () => {
   const { register, handleSubmit, onSubmit, errors, showPassword, setShowPassword, loading } =

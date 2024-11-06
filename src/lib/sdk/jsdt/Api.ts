@@ -1,5 +1,7 @@
 /* eslint-disable */
+
 /* tslint:disable */
+
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -8,7 +10,6 @@
  * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
  * ---------------------------------------------------------------
  */
-
 import type {
   AxiosInstance,
   AxiosRequestConfig,
@@ -170,7 +171,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'http://localhost:3000',
+      baseURL: axiosConfig.baseURL || 'http://34.56.32.71',
     });
     this.secure = secure;
     this.format = format;
@@ -268,7 +269,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Jsdt Backend
  * @version 1.0.0
- * @baseUrl http://localhost:3000
+ * @baseUrl http://34.56.32.71
  * @contact
  *
  * JSDT is an examination management platform.
