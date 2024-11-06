@@ -1,12 +1,24 @@
+import axios from 'axios';
+
 import { apiClient } from '@/api/clients/apiClient';
-import { CreateUserDto } from '@/lib/sdk/jsdt/Api';
+import { LoginResponse } from '@/interface/auth';
+import { SigninUserDto } from '@/lib/sdk/jsdt/Api';
+import { showErrorToast, showSuccessToast } from '@/utils/toastNotifications';
 
-export const registerUser = async (userData: CreateUserDto) => {
+export const loginAdmin = async (userData: SigninUserDto): Promise<LoginResponse> => {
   try {
-    const response = await apiClient.stripe.stripeControllerCreate({});
+    const response = await apiClient.auth.usersControllerLogin(userData);
 
-    return response.data;
+    showSuccessToast('Login successful');
+
+    return response.data as unknown as LoginResponse;
   } catch (error) {
+    // Check if error is an AxiosError and contains response data
+    if (axios.isAxiosError(error) && error.response) {
+      showErrorToast(error.response.data.message);
+    } else {
+      showErrorToast('An unexpected error occurred');
+    }
     throw error;
   }
 };
