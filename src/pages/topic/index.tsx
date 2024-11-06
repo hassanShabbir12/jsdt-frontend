@@ -146,9 +146,30 @@ export const Topic: FC = () => (
               <TableRow key={invoice.invoice}>
                 <TableCell className='font-base text-zinc-800'>{invoice.invoice}</TableCell>
                 <TableCell className='border-l border-solid border-zinc-300'>
-                  <i className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'>
-                    {invoice.icon}
-                  </i>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <i className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'>
+                        {invoice.icon}
+                      </i>
+                    </DialogTrigger>
+                    <DialogContent className='max-w-[620px]'>
+                      <DialogHeader>
+                        <DialogTitle className='mb-6 text-center'>
+                          Do you want to delete?
+                        </DialogTitle>
+                      </DialogHeader>
+                      <DialogFooter>
+                        <div className='w-1/2'>
+                          <Button variant='outline' className='h-12 w-full text-base font-semibold'>
+                            Cancel
+                          </Button>
+                        </div>
+                        <div className='w-1/2'>
+                          <Button className='h-12 w-full text-base font-semibold'>Save</Button>
+                        </div>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </TableCell>
               </TableRow>
             ))}
