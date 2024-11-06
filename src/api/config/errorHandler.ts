@@ -1,25 +1,26 @@
 import { AxiosError } from 'axios';
 
-export const handleError = (error: AxiosError) => {
+import { showErrorToast } from '@/utils/toastNotifications';
+
+export const handleError = (error: AxiosError): Promise<never> => {
   if (error.response) {
     switch (error.response.status) {
       case 401:
-        console.error('Unauthorized: Redirecting to login.');
-        // Add logic to refresh tokens if applicable
+        showErrorToast('Unauthorized: Redirecting to login.');
         break;
       case 403:
-        console.error('Forbidden: Access denied.');
+        showErrorToast('Forbidden: Access denied.');
         break;
       case 500:
-        console.error('Server error. Please try again later.');
+        showErrorToast('Server error. Please try again later.');
         break;
       default:
-        console.error(`Unexpected error: ${error.message}`);
+        showErrorToast(`Unexpected error: ${error.message}`);
     }
   } else if (error.request) {
-    console.error('Network error. Check your connection.');
+    showErrorToast('Network error. Check your connection.');
   } else {
-    console.error(`Error: ${error.message}`);
+    showErrorToast(`Error: ${error.message}`);
   }
 
   return Promise.reject(error);

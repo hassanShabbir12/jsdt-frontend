@@ -13,7 +13,6 @@ export const loginAdmin = async (userData: SigninUserDto): Promise<LoginResponse
 
     return response.data as unknown as LoginResponse;
   } catch (error) {
-    // Check if error is an AxiosError and contains response data
     if (axios.isAxiosError(error) && error.response) {
       showErrorToast(error.response.data.message);
     } else {
