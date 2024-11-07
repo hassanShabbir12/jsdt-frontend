@@ -39,10 +39,10 @@ export const EducatorLogin: FC = () => (
           <div className='relative'>
             <Input
               id='Enter your password'
-              className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+              className='h-10 rounded-lg border-neutral-200 px-4 py-2 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
               placeholder='Enter Your Password'
             />
-            <div className='absolute right-4 top-2 cursor-pointer lg:top-3'>
+            <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
               <EyeOff />
             </div>
           </div>
@@ -58,8 +58,8 @@ export const EducatorLogin: FC = () => (
             </Label>
           </div>
           <Link
-            to='/'
-            className='text-xs font-semibold text-primary underline hover:no-underline md:text-sm'
+            to='/forgot-password'
+            className='text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'
           >
             Forgot Password?
           </Link>
