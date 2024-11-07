@@ -9,7 +9,7 @@ export const Banner: FC = () => {
   const navigate = useNavigate();
 
   const onHandleClick = (): void => {
-    navigate('/signup');
+    navigate('/pricing-plan');
   };
 
   return (
