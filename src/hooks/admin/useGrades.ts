@@ -1,48 +1,21 @@
 // hooks/useGradeForm.ts
 import { useEffect, useState } from 'react';
-import { FieldErrors, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
-import { z } from 'zod';
 
 import { apiClient } from '@/api/clients/apiClient';
-import { ApiResponse } from '@/interface/generic';
+import {
+  ExtendedCreateGradeDto,
+  GradeFormValues,
+  GradeResponse,
+  gradeSchema,
+  UseGradeFormReturn,
+} from '@/interface/grads';
 import { CreateGradeDto } from '@/lib/sdk/jsdt/Api';
 
 import { toast } from '../use-toast';
-
-const gradeSchema = z.object({
-  title: z.string().min(1, 'Grade is required'),
-});
-
-type GradeFormValues = z.infer<typeof gradeSchema>;
-
-interface UseGradeFormReturn {
-  register: UseFormRegister<GradeFormValues>;
-  handleSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  errors: FieldErrors<GradeFormValues>;
-  loading: boolean;
-  setOpen: (open: boolean) => void;
-  open: boolean;
-  grades: ExtendedCreateGradeDto[];
-  deleteGrade: () => Promise<void>;
-  selectedGrade: ExtendedCreateGradeDto | null;
-  handleEdit: (grade: ExtendedCreateGradeDto) => void;
-  setSelectedGrade: (grade: ExtendedCreateGradeDto | null) => void;
-  setValue: UseFormSetValue<GradeFormValues>;
-  handleDeleteClick: (grade: ExtendedCreateGradeDto) => void;
-  deleteModalOpen: boolean;
-  setDeleteModalOpen: (open: boolean) => void;
-  gradeToDelete: ExtendedCreateGradeDto | null;
-  setGradeToDelete: (grade: ExtendedCreateGradeDto | null) => void;
-}
-
-interface ExtendedCreateGradeDto extends CreateGradeDto {
-  id: string;
-}
-
-type gradeResponse = ApiResponse<ExtendedCreateGradeDto[]>;
 
 export function useGradeForm(): UseGradeFormReturn {
   const [loading, setLoading] = useState(false);
@@ -76,7 +49,7 @@ export function useGradeForm(): UseGradeFormReturn {
     try {
       const response =
         // eslint-disable-next-line max-len
-        (await apiClient.grades.gradesControllerFindAll()) as unknown as AxiosResponse<gradeResponse>;
+        (await apiClient.grades.gradesControllerFindAll()) as unknown as AxiosResponse<GradeResponse>;
       const { data } = response;
       const extendedGrades = data.data.map((grade) => ({
         ...grade,
@@ -147,7 +120,7 @@ export function useGradeForm(): UseGradeFormReturn {
       } else {
         const response = (await apiClient.grades.gradesControllerCreate(
           grade,
-        )) as unknown as AxiosResponse<gradeResponse>;
+        )) as unknown as AxiosResponse<GradeResponse>;
         const { data } = response;
 
         if (data.success) {
