@@ -32,7 +32,7 @@ export const AdminLogin: FC = () => {
             type='text'
             placeholder='Username'
             {...register('email')}
-            className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6'
+            className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             error={errors.email?.message}
           />
         </div>
@@ -49,11 +49,11 @@ export const AdminLogin: FC = () => {
               type={showPassword ? 'text' : 'password'}
               placeholder='Enter Your Password'
               {...register('password')}
-              className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6'
+              className='flex h-12 rounded-lg border border-solid border-neutral-200 py-2 pl-4 pr-12 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
               error={errors.password?.message}
             />
             <div
-              className='absolute right-7 top-3 cursor-pointer'
+              className='absolute right-4 top-3 cursor-pointer text-stone-300'
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <Eye /> : <EyeOff />}

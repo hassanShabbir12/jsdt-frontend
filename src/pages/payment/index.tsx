@@ -3,7 +3,10 @@ import { FC } from 'react';
 import { Label } from '@radix-ui/react-label';
 import { MoveLeft } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { assetUrl } from '@/lib/asset-url';
 
 export const Payment: FC = () => (
   <section className='pb-20 pt-16'>
@@ -61,6 +64,32 @@ export const Payment: FC = () => (
               type='email'
               className='h-12 rounded-lg border border-solid border-neutral-200 bg-gray-50 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             />
+          </div>
+          <div className='w-full'>
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className='w-full'>
+                  <Button className='h-12 w-full text-base font-semibold'>Pay Now</Button>
+                </div>
+              </DialogTrigger>
+              <DialogContent showCloseIcon={false} className='max-w-[620px]  rounded-3xl'>
+                <div className='py-9'>
+                  <div className='mb-12 w-full'>
+                    <img
+                      className='mx-auto w-72'
+                      src={assetUrl('/assets/img/home/successfull-mark.svg')}
+                      alt='Image Description'
+                    />
+                  </div>
+                  <div className='text-center'>
+                    <strong className='mb-2 block text-center text-2xl font-bold text-primary'>
+                      Thank you!
+                    </strong>
+                    <span className='text-base text-zinc-800'>Payment Successful</span>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

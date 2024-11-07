@@ -26,7 +26,7 @@ export const Settings: FC = () => (
             className='h-10 rounded-lg border-neutral-200 px-4 pr-14 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:py-2 lg:pl-3'
             placeholder='Enter Your Password'
           />
-          <div className='absolute right-4 top-2 cursor-pointer lg:top-3'>
+          <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
             <EyeOff />
           </div>
         </div>
@@ -44,7 +44,7 @@ export const Settings: FC = () => (
             className='h-10 rounded-lg border-neutral-200 px-4 pr-14 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:py-2 lg:pl-3'
             placeholder='Enter Your Password'
           />
-          <div className='absolute right-4 top-2 cursor-pointer lg:top-3'>
+          <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
             <EyeOff />
           </div>
         </div>
@@ -62,7 +62,7 @@ export const Settings: FC = () => (
             className='h-10 rounded-lg border-neutral-200 px-4 pr-14 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:py-2 lg:pl-3'
             placeholder='Enter Your Password'
           />
-          <div className='absolute right-4 top-2 cursor-pointer lg:top-3'>
+          <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
             <EyeOff />
           </div>
         </div>

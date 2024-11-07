@@ -103,7 +103,9 @@ export const Subjects: FC = () => (
           </DialogTrigger>
           <DialogContent className='max-w-[620px]'>
             <DialogHeader>
-              <DialogTitle className='text-center'>Add New Subject</DialogTitle>
+              <DialogTitle className='text-center text-lg md:text-xl lg:text-2xl'>
+                Add New Subject
+              </DialogTitle>
             </DialogHeader>
             <div className='grid py-4'>
               <Label className='mb-2 block text-sm font-normal leading-none text-zinc-800'>
@@ -165,7 +167,7 @@ export const Subjects: FC = () => (
                           </Button>
                         </div>
                         <div className='w-1/2'>
-                          <Button className='h-12 w-full text-base font-semibold'>Save</Button>
+                          <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
                         </div>
                       </DialogFooter>
                     </DialogContent>

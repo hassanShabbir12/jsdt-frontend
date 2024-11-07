@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { EyeOff } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -177,11 +179,16 @@ export const LearnerSignUp: FC = () => (
           >
             Password
           </Label>
-          <Input
-            id='iem'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-            placeholder='.....................'
-          />
+          <div className='relative'>
+            <Input
+              id='iem'
+              className='h-10 rounded-lg border-neutral-200 py-2 pl-3 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
+              placeholder='.....................'
+            />
+            <i className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3 '>
+              <EyeOff />
+            </i>
+          </div>
         </div>
         <div className='flex w-full justify-center px-3'>
           <Button className='h-12 min-w-48 text-base lg:min-w-80'>Sign up</Button>

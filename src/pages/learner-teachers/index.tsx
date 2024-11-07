@@ -42,7 +42,7 @@ export const LearnerTeacher: FC = () => {
   return (
     <section className='pb-10 pt-14'>
       <div className='mx-auto max-w-[1340px] px-3'>
-        <div className='mb-5 flex items-center rounded-xl bg-red-100 px-2.5 py-1'>
+        <div className='mb-5 flex items-center rounded-xl bg-red-100 px-2.5 py-1 text-sm md:text-base'>
           <span className='mr-2 inline-block text-red-700'>
             <TriangleAlert />
           </span>
@@ -59,7 +59,7 @@ export const LearnerTeacher: FC = () => {
             </Link>
           </p>
         </div>
-        <h2 className='mb-12 text-xl font-semibold leading-7 text-zinc-800 sm:text-2xl'>
+        <h2 className='mb-8 text-base font-semibold leading-7 text-zinc-800 sm:mb-10 sm:text-2xl md:mb-12 md:text-xl'>
           Investigation/Exam (Educator&rsquo;s account)
         </h2>
         <div className='-mx-4 mb-8 flex flex-wrap'>
@@ -73,7 +73,7 @@ export const LearnerTeacher: FC = () => {
             <div className='w-full'>
               <Select>
                 <SelectTrigger className='w-full'>
-                  <SelectValue placeholder='Select' />
+                  <SelectValue className='text-stone-300' placeholder='Select' />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -536,7 +536,7 @@ export const LearnerTeacher: FC = () => {
                               className='h-autsso ml-2 block'
                             />
                           </div>
-                          <div className='mb-5 flex w-full justify-center py-3 text-sm font-semibold'>
+                          <div className='flex w-full justify-center py-3 text-sm font-semibold md:mb-5'>
                             Drop your image her or
                             <Link
                               to=''
@@ -685,7 +685,7 @@ export const LearnerTeacher: FC = () => {
                               id='iem'
                               type='number'
                               placeholder='01-01-2024'
-                              className='h-12 rounded-lg border border-solid border-neutral-200 py-2 pl-4 pr-12 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                              className='h-12 rounded-lg border border-solid border-neutral-200 py-2 pl-4 pr-12 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                             />
                             <i className='absolute right-5 top-2.5 cursor-pointer text-stone-300'>
                               <Calendar />
@@ -738,7 +738,7 @@ export const LearnerTeacher: FC = () => {
             <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
             <CarouselContent>
               <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                   <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
                   <p className='m-0'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -748,7 +748,7 @@ export const LearnerTeacher: FC = () => {
                 </div>
               </CarouselItem>
               <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                   <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 2</h3>
                   <p className='m-0'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -758,7 +758,7 @@ export const LearnerTeacher: FC = () => {
                 </div>
               </CarouselItem>
               <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                   <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                   <p className='m-0'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -773,7 +773,7 @@ export const LearnerTeacher: FC = () => {
         </div>
         <Button className='mx-auto flex w-80 px-20 py-6 text-base'>Add</Button>
         <div className='pt-12'>
-          <div className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-2xl'>
+          <div className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'>
             <div className='mb-5 flex justify-between'>
               <span className='inline-block text-2xl font-semibold'>Question No. 1</span>
               <Dialog>
@@ -784,7 +784,9 @@ export const LearnerTeacher: FC = () => {
                 </DialogTrigger>
                 <DialogContent className='max-w-[620px]'>
                   <DialogHeader>
-                    <DialogTitle className='mb-6 text-center'>Do you want to delete?</DialogTitle>
+                    <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
+                      Do you want to delete that question?
+                    </DialogTitle>
                   </DialogHeader>
                   <DialogFooter>
                     <div className='w-1/2'>
@@ -793,7 +795,7 @@ export const LearnerTeacher: FC = () => {
                       </Button>
                     </div>
                     <div className='w-1/2'>
-                      <Button className='h-12 w-full text-base font-semibold'>Save</Button>
+                      <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
                     </div>
                   </DialogFooter>
                 </DialogContent>
@@ -804,7 +806,7 @@ export const LearnerTeacher: FC = () => {
               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.
             </p>
           </div>
-          <div className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-2xl'>
+          <div className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'>
             <div className='mb-5 flex justify-between'>
               <span className='inline-block text-2xl font-semibold'>Question No. 2</span>
               <Dialog>
@@ -815,7 +817,9 @@ export const LearnerTeacher: FC = () => {
                 </DialogTrigger>
                 <DialogContent className='max-w-[620px]'>
                   <DialogHeader>
-                    <DialogTitle className='mb-6 text-center'>Do you want to delete?</DialogTitle>
+                    <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
+                      Do you want to delete that question?
+                    </DialogTitle>
                   </DialogHeader>
                   <DialogFooter>
                     <div className='w-1/2'>
@@ -824,7 +828,7 @@ export const LearnerTeacher: FC = () => {
                       </Button>
                     </div>
                     <div className='w-1/2'>
-                      <Button className='h-12 w-full text-base font-semibold'>Save</Button>
+                      <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
                     </div>
                   </DialogFooter>
                 </DialogContent>
