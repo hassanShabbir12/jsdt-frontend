@@ -16,7 +16,6 @@ import { LearnerAccount } from '@/pages/learner-account';
 import { LearnerLogin } from '@/pages/learner-login';
 import { LearnerTeacher } from '@/pages/learner-teachers';
 import { LearnerSignUp } from '@/pages/learners-signup';
-import { Logo } from '@/pages/logo';
 import { Payment } from '@/pages/payment';
 import { PricingPlan } from '@/pages/pricing-plan';
 import { Question } from '@/pages/question';
@@ -71,7 +70,6 @@ const routes: RouteObject[] = [
       { path: 'subjects', element: <Subjects /> },
       { path: 'topics', element: <Topic /> },
       { path: 'questions', element: <Question /> },
-      { path: 'logo', element: <Logo /> },
       { path: 'settings', element: <Settings /> },
     ],
   },

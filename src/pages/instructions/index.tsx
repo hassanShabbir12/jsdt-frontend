@@ -64,127 +64,6 @@ export const Instructions: FC = () => (
                 Use the table below as a guide for mark and lime allocation when answering each
                 question.
               </p>
-              <div className='overflow-auto'>
-                <table className='mb-3 w-[680px] border-collapse border border-black'>
-                  <thead>
-                    <tr>
-                      <th className='border-2 border-black px-3 py-3 text-center font-normal'>
-                        Section
-                      </th>
-                      <th className='w-1/5 border-2 border-black px-3 py-3 text-center font-normal'>
-                        Questions
-                      </th>
-                      <th className='w-1/5 border-2 border-black px-3 py-3 text-center font-normal'>
-                        Marks
-                      </th>
-                      <th className='w-1/5 border-2 border-black px-3 py-3 text-center font-normal'>
-                        Time (minutes)
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className='border-2 border-black px-4 py-3 font-semibold'>
-                        A: Objective-type questions COMPULSORY
-                      </td>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'>
-                        1
-                      </td>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'>
-                        30
-                      </td>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'>
-                        20
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='border-2 border-black px-4 py-2 font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'></td>
-                      <td className='border-2 border-b-0 border-black px-4 py-2 text-center font-semibold'></td>
-                    </tr>
-                    <tr>
-                      <td className='relative border-2 border-b-0 border-black px-4 py-3 font-semibold'>
-                        <div className='absolute left-4 top-3'>
-                          <div>B: THREE direct/indirect-type questions</div>
-                          <div>CHOICE:</div> Answer any TWO.
-                        </div>
-                      </td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        2
-                      </td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        40
-                      </td>
-                      <td className='border-2 border-b-0 border-t-0 border-black px-4 py-2 text-center font-semibold'></td>
-                    </tr>
-                    <tr>
-                      <td className='relative border-2 border-b-0 border-t-0 border-black px-4 py-3 font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        3
-                      </td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        40
-                      </td>
-                      <td className='border-2 border-b-0 border-t-0 border-black px-4 py-2 text-center font-semibold'>
-                        70
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='relative border-2 border-b-0 border-t-0 border-black px-4 py-3 font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        40
-                      </td>
-                      <td className='border-2 border-b-0 border-t-0 border-black px-4 py-2 text-center font-semibold'></td>
-                    </tr>
-                    <tr>
-                      <td className='border-2 border-black px-4 py-2 font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'></td>
-                      <td className='border-2 border-t-0 border-black px-4 py-2 text-center font-semibold'></td>
-                    </tr>
-                    <tr>
-                      <td className='relative border-2 border-b-0 border-black px-4 py-3 font-semibold'>
-                        <div className='absolute left-4 top-1'>
-                          <div>C: TWO essay-type questions</div> <div>CHOICE:</div> Answer any ONE.
-                        </div>
-                      </td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        5
-                      </td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        40
-                      </td>
-                      <td className='relative border-2 border-b-0 border-t-0 border-black px-4 py-2 text-center font-semibold'>
-                        <div className='absolute left-0 right-0 top-6 text-center'>40</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className='relative border-2 border-b-0 border-t-0 border-black px-4 py-3 font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        6
-                      </td>
-                      <td className='border-2 border-black px-4 py-2 text-center font-semibold'>
-                        40
-                      </td>
-                      <td className='border-2 border-b-0 border-t-0 border-black px-4 py-2 text-center font-semibold'></td>
-                    </tr>
-                    <tr>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'>
-                        Total
-                      </td>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'></td>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'>
-                        150
-                      </td>
-                      <td className='border-2 border-black px-4 py-3 text-center font-semibold'>
-                        120
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </li>
             <li className='mb-2'>
               <p className='mb-0'>
@@ -200,7 +79,7 @@ export const Instructions: FC = () => (
             </li>
           </ol>
         </div>
-        <div className='py-6'>
+        <div className='py-14'>
           <Dialog>
             <DialogTrigger className='mx-auto flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 '>
               Add more instructions

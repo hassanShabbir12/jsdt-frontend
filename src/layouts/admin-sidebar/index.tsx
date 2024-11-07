@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Grades } from '@/components/icon/grades';
 import { Logout } from '@/components/icon/logout';
-import { Polaroid } from '@/components/icon/polaroid';
 import { Question } from '@/components/icon/question';
 import { Settings } from '@/components/icon/settings';
 import { Subject } from '@/components/icon/subject';
@@ -35,10 +34,8 @@ export const Sidebar: FC = () => {
         return 2;
       case '/admin/questions':
         return 3;
-      case '/admin/logo':
-        return 4;
       case '/admin/settings':
-        return 5;
+        return 4;
       default:
         return 0;
     }
@@ -154,34 +151,17 @@ export const Sidebar: FC = () => {
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
               onClick={() => setActiveIndex(4)}
             >
-              <Link to='/admin/logo' className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
-                <div
-                  className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
-                >
-                  <Polaroid />
-                </div>
-                <h2
-                  className={`text-base font-semibold ${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
-                >
-                  Logo
-                </h2>
-              </Link>
-            </li>
-            <li
-              className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 5 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(5)}
-            >
               <Link
                 to='/admin/settings'
                 className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
               >
                 <div
-                  className={`${activeIndex === 5 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
+                  className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
                   <Settings />
                 </div>
                 <h2
-                  className={`text-base font-semibold ${activeIndex === 5 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
+                  className={`text-base font-semibold ${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
                   Settings
                 </h2>
