@@ -20,8 +20,8 @@ export const Question: FC = (props: Props) => {
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M13 7C14.1046 7 15 7.89543 15 9V21L10 18L5 21V9C5 7.89543 5.89543 7 7 7H13Z'
         stroke={stroke}
         strokeWidth='1.75'
