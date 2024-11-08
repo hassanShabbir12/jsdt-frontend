@@ -92,7 +92,7 @@ export const Question: FC = () => {
                 <div className='-mx-2.5 block flex-wrap sm:flex'>
                   <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                     <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                      Certificate Type
+                      IEB/NSC
                     </Label>
                     <div className='w-full'>
                       <Controller

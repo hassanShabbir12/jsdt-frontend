@@ -4,6 +4,8 @@ import { z } from 'zod';
 
 import { CreateQuestionDto } from '@/lib/sdk/jsdt/Api';
 
+import { ApiResponse } from './generic';
+
 export const QuestionSchema = z.object({
   question: z.string().min(1, 'Question is required'),
   answer: z.string().min(1, 'Answer is required'),
@@ -39,3 +41,5 @@ export interface UseQuestionReturn {
   handleEditClick: (question: ExtendedCreateQuestionDto) => void;
   resetFormFields: () => void;
 }
+
+export type QuestionResponse = ApiResponse<ExtendedCreateQuestionDto[]>;

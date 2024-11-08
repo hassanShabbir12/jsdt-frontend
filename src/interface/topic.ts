@@ -8,7 +8,7 @@ import { ApiResponse } from './generic';
 
 // Schema
 export const topicSchema = z.object({
-  title: z.string().min(1, 'Topic is required'),
+  title: z.string().min(1, 'Topic is required').max(20, 'Topic cannot exceed 20 characters'),
 });
 
 // Types

@@ -9,6 +9,7 @@ import { ApiResponse } from '@/interface/generic';
 import {
   ExtendedCreateQuestionDto,
   QuestionFormValues,
+  QuestionResponse,
   QuestionSchema,
   UseQuestionReturn,
 } from '@/interface/question';
@@ -71,14 +72,14 @@ export function useQuestion(): UseQuestionReturn {
     }
   };
 
-  const onSubmit = async (data: QuestionFormValues): Promise<void> => {
+  const onSubmit = async (questiondata: QuestionFormValues): Promise<void> => {
     setLoading(true);
     try {
       if (isEditing && questionToDelete?.id) {
-        await apiClient.questions.questionsControllerUpdate(questionToDelete.id, data);
+        await apiClient.questions.questionsControllerUpdate(questionToDelete.id, questiondata);
         setQuestions(
           questions.map((question) =>
-            question.id === questionToDelete.id ? { ...question, ...data } : question,
+            question.id === questionToDelete.id ? { ...question, ...questiondata } : question,
           ),
         );
         toast({
@@ -86,8 +87,13 @@ export function useQuestion(): UseQuestionReturn {
           description: 'Question updated successfully',
         });
       } else {
-        // Create new question
-        await apiClient.questions.questionsControllerCreate(data);
+        const response = (await apiClient.questions.questionsControllerCreate(
+          questiondata,
+        )) as unknown as AxiosResponse<QuestionResponse>;
+        const { data } = response;
+        const newquestion = Array.isArray(data.data) ? data.data : [data.data];
+
+        setQuestions([...questions, ...newquestion]);
         toast({
           title: 'Success',
           description: 'Question created successfully',

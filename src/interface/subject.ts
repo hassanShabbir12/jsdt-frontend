@@ -8,7 +8,7 @@ import { ApiResponse } from './generic';
 
 // Schema
 export const SubjectSchema = z.object({
-  title: z.string().min(1, 'Subject is required'),
+  title: z.string().min(1, 'Subject is required').max(20, 'subject cannot exceed 20 characters'),
 });
 
 // Types

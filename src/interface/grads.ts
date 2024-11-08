@@ -7,9 +7,8 @@ import { CreateGradeDto } from '@/lib/sdk/jsdt/Api';
 import { ApiResponse } from './generic';
 
 export const gradeSchema = z.object({
-  title: z.string().min(1, 'Grade is required'),
+  title: z.string().min(1, 'Grade is required').max(20, 'Grade cannot exceed 20 characters'),
 });
-
 export type GradeFormValues = z.infer<typeof gradeSchema>;
 
 export interface UseGradeFormReturn {
