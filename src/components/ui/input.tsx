@@ -16,6 +16,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className,
         )}
         ref={ref}
+        tabIndex={-1}
         {...props}
       />
       {error && <p className='mt-1 text-sm text-red-500'>{error}</p>}
