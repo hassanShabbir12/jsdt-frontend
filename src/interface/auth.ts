@@ -7,12 +7,6 @@ export interface LoginResponseData {
   access_token: string;
 }
 
-// export interface LoginResponse {
-//   success: boolean;
-//   message: string;
-//   data: LoginResponseData;
-// }
-
 export interface UseAdminLoginReturn {
   register: UseFormRegister<SigninUserDto>;
   handleSubmit: UseFormHandleSubmit<SigninUserDto>;
