@@ -5,7 +5,7 @@ import { JsdtAPI } from '@/lib/sdk/jsdt/Api';
 import { setupInterceptors } from '../config/interceptors';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://34.56.32.71/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://34.56.32.71/api',
   timeout: 10000,
 });
 
