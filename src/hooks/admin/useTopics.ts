@@ -167,5 +167,6 @@ export function useTopicForm(): UseTopicFormReturn {
     setDeleteModalOpen,
     topicToDelete,
     setTopicToDelete,
+    fetchTopics,
   };
 }

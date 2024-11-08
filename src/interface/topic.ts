@@ -33,6 +33,7 @@ export interface UseTopicFormReturn {
   setDeleteModalOpen: (open: boolean) => void;
   topicToDelete: ExtendedCreateTopicDto | null;
   setTopicToDelete: (topic: ExtendedCreateTopicDto | null) => void;
+  fetchTopics: () => Promise<void>;
 }
 
 export interface ExtendedCreateTopicDto extends CreateTopicDto {

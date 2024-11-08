@@ -109,12 +109,6 @@ export interface UpdateQuestionDto {
   totalMarks?: string;
 }
 
-export interface CreateSubscriptionDto {
-  email: string;
-  paymentMethodId: string;
-  subscriptionType: string;
-}
-
 export enum CreateUserDtoRoleEnum {
   Learner = 'learner',
   Teacher = 'teacher',
@@ -689,14 +683,14 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * @secure
      */
     questionsControllerGetQuestion: (
-      query: {
-        certificateType: string;
-        grade: string;
-        subject: string;
-        assessmentType: string;
-        topic: string;
-        difficultyLevel: string;
-        totalMarks: string;
+      query?: {
+        certificateType?: string;
+        grade?: string;
+        subject?: string;
+        assessmentType?: string;
+        topic?: string;
+        difficultyLevel?: string;
+        totalMarks?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -755,44 +749,6 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         path: `/questions/${id}`,
         method: 'DELETE',
         secure: true,
-        ...params,
-      }),
-  };
-  stripe = {
-    /**
-     * No description
-     *
-     * @name StripeControllerCreate
-     * @request POST:/stripe
-     */
-    stripeControllerCreate: (data: CreateSubscriptionDto, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/stripe`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
-  upload = {
-    /**
-     * No description
-     *
-     * @name UploadControllerUploadMedia
-     * @request POST:/upload/upload
-     */
-    uploadControllerUploadMedia: (
-      data: {
-        /** @format binary */
-        file?: File;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<void, any>({
-        path: `/upload/upload`,
-        method: 'POST',
-        body: data,
-        type: ContentType.FormData,
         ...params,
       }),
   };
