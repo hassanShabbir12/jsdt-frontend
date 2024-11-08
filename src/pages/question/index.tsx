@@ -115,7 +115,9 @@ export const Question: FC = () => (
           </DialogTrigger>
           <DialogContent className='!container max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden'>
             <DialogHeader>
-              <DialogTitle className='mb-4 text-center text-2xl'>Add New Question</DialogTitle>
+              <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
+                Add New Question
+              </DialogTitle>
             </DialogHeader>
             <div className='-mx-2.5 block flex-wrap sm:flex'>
               <div className='mb-4 w-full px-2.5 sm:w-1/2'>
@@ -338,7 +340,7 @@ export const Question: FC = () => (
                             </Button>
                           </div>
                           <div className='w-1/2'>
-                            <Button className='h-12 w-full text-base font-semibold'>Save</Button>
+                            <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
                           </div>
                         </DialogFooter>
                       </DialogContent>

@@ -31,8 +31,8 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { showCloseIcon?: boolean }
+>(({ className, children, showCloseIcon = true, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <div>
@@ -45,10 +45,12 @@ const DialogContent = React.forwardRef<
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className='absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-md bg-gray-200 opacity-70 !shadow-none !outline-none ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'>
-          <Cross2Icon className='h-4 w-4 ' />
-          <span className='sr-only'>Close</span>
-        </DialogPrimitive.Close>
+        {showCloseIcon && (
+          <DialogPrimitive.Close className='absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-md bg-gray-200 opacity-70 !shadow-none !outline-none ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'>
+            <Cross2Icon className='h-4 w-4 ' />
+            <span className='sr-only'>Close</span>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </div>
   </DialogPortal>
@@ -80,7 +82,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn(' text-xl font-semibold leading-7 text-zinc-800 sm:text-2xl', className)}
+    className={cn('font-semibold leading-7 text-zinc-800', className)}
     {...props}
   />
 ));

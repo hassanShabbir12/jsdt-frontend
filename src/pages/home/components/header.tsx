@@ -8,7 +8,7 @@ export const Header: FC = () => {
   const navigate = useNavigate();
 
   const onHandleClick = (): void => {
-    navigate('/signup');
+    navigate('/pricing-plan');
   };
 
   return (

@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Grades } from '@/components/icon/grades';
 import { Logout } from '@/components/icon/logout';
@@ -9,6 +9,12 @@ import { Subject } from '@/components/icon/subject';
 import { Topics } from '@/components/icon/topics';
 
 export const Sidebar: FC = () => {
+  const navigate = useNavigate();
+
+  const onHandleClick = (): void => {
+    navigate('/admin-login');
+  };
+
   const location = useLocation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isToggled, setIsToggled] = useState(false);
@@ -170,11 +176,18 @@ export const Sidebar: FC = () => {
           </ul>
         </div>
         <div className='absolute bottom-0 left-0 right-0 z-30 bg-white'>
-          <div className='flex cursor-pointer items-center gap-3 p-5'>
-            <div className='h-6 w-6 text-blue-500'>
-              <Logout />
+          <div className='p-5'>
+            <div
+              onClick={onHandleClick}
+              className='group inline-flex cursor-pointer items-center gap-x-3'
+            >
+              <div className='h-6 w-6 text-blue-500 transition-all duration-300 group-hover:text-blue-700'>
+                <Logout />
+              </div>
+              <h2 className='text-base font-semibold text-blue-500 transition-all duration-300 group-hover:text-blue-700'>
+                Logout
+              </h2>
             </div>
-            <h2 className='text-base font-semibold text-blue-500'>Logout</h2>
           </div>
         </div>
       </div>
