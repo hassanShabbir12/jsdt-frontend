@@ -33,7 +33,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-import { useGradeForm } from '@/hooks/admin/useGrades';
+import { useGradeList } from '@/hooks/admin/useGradeList';
+// import { useGradeForm } from '@/hooks/admin/useGrades';
 import { useQuestion } from '@/hooks/admin/useQuestion';
 import { useSubjectForm } from '@/hooks/admin/useSubject';
 import { useTopicForm } from '@/hooks/admin/useTopics';
@@ -59,7 +60,7 @@ export const Question: FC = () => {
     handleEditClick,
     resetFormFields,
   } = useQuestion();
-  const { grades } = useGradeForm();
+  const { grades } = useGradeList();
   const { subjects } = useSubjectForm();
   const { topics } = useTopicForm();
 
