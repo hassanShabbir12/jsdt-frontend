@@ -22,28 +22,34 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useSubjectForm } from '@/hooks/admin/useSubject';
+import { useSubjectForm } from '@/hooks/admin/useSubjectForm';
+import { useSubjectList } from '@/hooks/admin/useSubjectList';
 
 export const Subjects: FC = () => {
   const {
-    register,
-    handleSubmit,
-    errors,
-    loading,
-    open,
-    setOpen,
+    loading: listLoading,
     subjects,
+    setSubjects,
     deleteSubject,
-    handleEdit,
-    selectedSubject,
-    setSelectedSubject,
-    setValue,
     handleDeleteClick,
     deleteModalOpen,
     setDeleteModalOpen,
     subjectToDelete,
     setSubjectToDelete,
-  } = useSubjectForm();
+  } = useSubjectList();
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    loading: formLoading,
+    open,
+    setOpen,
+    selectedSubject,
+    handleEdit,
+    setSelectedSubject,
+    setValue,
+  } = useSubjectForm(subjects, setSubjects);
 
   return (
     <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
@@ -111,7 +117,7 @@ export const Subjects: FC = () => {
                   </div>
                   <div className='w-1/2'>
                     <Button
-                      loading={loading}
+                      loading={formLoading}
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
@@ -188,7 +194,7 @@ export const Subjects: FC = () => {
               </div>
               <div className='w-1/2'>
                 <Button
-                  loading={loading}
+                  loading={listLoading}
                   className='h-12 w-full text-base font-semibold'
                   onClick={deleteSubject}
                 >

@@ -34,9 +34,8 @@ import {
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
 import { useGradeList } from '@/hooks/admin/useGradeList';
-// import { useGradeForm } from '@/hooks/admin/useGrades';
 import { useQuestion } from '@/hooks/admin/useQuestion';
-import { useSubjectForm } from '@/hooks/admin/useSubject';
+import { useSubjectList } from '@/hooks/admin/useSubjectList';
 import { useTopicForm } from '@/hooks/admin/useTopics';
 
 export const Question: FC = () => {
@@ -61,7 +60,7 @@ export const Question: FC = () => {
     resetFormFields,
   } = useQuestion();
   const { grades } = useGradeList();
-  const { subjects } = useSubjectForm();
+  const { subjects } = useSubjectList();
   const { topics } = useTopicForm();
 
   return (
