@@ -36,7 +36,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useGradeList } from '@/hooks/admin/useGradeList';
 import { useQuestion } from '@/hooks/admin/useQuestion';
 import { useSubjectList } from '@/hooks/admin/useSubjectList';
-import { useTopicForm } from '@/hooks/admin/useTopics';
+import { useTopicList } from '@/hooks/admin/useTopicList';
 
 export const Question: FC = () => {
   const {
@@ -61,7 +61,7 @@ export const Question: FC = () => {
   } = useQuestion();
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
-  const { topics } = useTopicForm();
+  const { topics } = useTopicList();
 
   return (
     <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
