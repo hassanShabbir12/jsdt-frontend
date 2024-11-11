@@ -23,10 +23,12 @@ interface UseQuestionFormReturn {
   processingText: boolean;
   handleProcessText: (fieldType: 'question' | 'answer') => Promise<void>;
   resetFormFields: () => void;
+  processingTextAnswer: boolean;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
   const [processingText, setProcessingText] = useState(false);
+  const [processingTextAnswer, setProcessingTextAnswer] = useState(false);
 
   const form = useForm<QuestionFormValues>({
     resolver: zodResolver(QuestionSchema),
@@ -56,7 +58,11 @@ export function useQuestionForm(): UseQuestionFormReturn {
       return;
     }
 
-    setProcessingText(true);
+    if (fieldType === 'question') {
+      setProcessingText(true);
+    } else {
+      setProcessingTextAnswer(true);
+    }
     try {
       const type =
         fieldType === 'question'
@@ -86,7 +92,11 @@ export function useQuestionForm(): UseQuestionFormReturn {
         });
       }
     } finally {
-      setProcessingText(false);
+      if (fieldType === 'question') {
+        setProcessingText(false);
+      } else {
+        setProcessingTextAnswer(false);
+      }
     }
   };
 
@@ -109,5 +119,6 @@ export function useQuestionForm(): UseQuestionFormReturn {
     processingText,
     handleProcessText,
     resetFormFields,
+    processingTextAnswer,
   };
 }

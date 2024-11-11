@@ -38,9 +38,11 @@ import { useQuestionForm } from '@/hooks/admin/question/useQuestionForm';
 import { useQuestionOperations } from '@/hooks/admin/question/useQuestionOperations';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
+import { cn } from '@/lib/utils';
 
 export const Question: FC = () => {
-  const { form, processingText, handleProcessText, resetFormFields } = useQuestionForm();
+  const { form, processingText, handleProcessText, resetFormFields, processingTextAnswer } =
+    useQuestionForm();
 
   const {
     loading,
@@ -313,17 +315,23 @@ export const Question: FC = () => {
                     {errors.question && (
                       <span className='text-sm text-red-500'>{errors.question.message}</span>
                     )}
-                  </div>
-                  <div className='mt-2'>
-                    <Button
-                      type='button'
-                      onClick={() => handleProcessText('question')}
-                      loading={processingText}
-                      variant='outline'
-                      className='h-10 w-full max-w-[200px] text-sm font-semibold'
-                    >
-                      Process Question
-                    </Button>
+                    <div className='absolute bottom-0 mt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('question')}
+                        loading={processingText}
+                        variant='outline'
+                        className={cn(
+                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingText,
+                          },
+                        )}
+                      >
+                        Write question with AI
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <div className='w-full'>
@@ -340,29 +348,26 @@ export const Question: FC = () => {
                     {errors.answer && (
                       <span className='text-sm text-red-500'>{errors.answer.message}</span>
                     )}
-                  </div>
-                  <div className='mt-2'>
-                    <Button
-                      type='button'
-                      onClick={() => handleProcessText('answer')}
-                      loading={processingText}
-                      variant='outline'
-                      className='h-10 w-full max-w-[200px] text-sm font-semibold'
-                    >
-                      Process Answer
-                    </Button>
+                    <div className='absolute bottom-0 mt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('answer')}
+                        loading={processingTextAnswer}
+                        variant='outline'
+                        className={cn(
+                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingTextAnswer,
+                          },
+                        )}
+                      >
+                        Write answer with AI
+                      </Button>
+                    </div>
                   </div>
                 </div>
-                {/* <div className='mt-4 flex justify-center'>
-                  <Button
-                    type='button'
-                    onClick={() => handleProcessText()}
-                    loading={processingText}
-                    className='h-12 w-full max-w-md text-base font-semibold'
-                  >
-                    Process Text
-                  </Button>
-                </div> */}
+
                 <DialogFooter>
                   <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
                     <div className='w-32 sm:w-40 md:w-64'>
