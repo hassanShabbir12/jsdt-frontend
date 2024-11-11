@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from 'axios';
 import { apiClient } from '@/api/clients/apiClient';
 import { ExtendedCreateTopicDto, TopicListReturn, TopicResponse } from '@/interface/topic';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
 
 export function useTopicList(): TopicListReturn {
   const [loading, setLoading] = useState(false);

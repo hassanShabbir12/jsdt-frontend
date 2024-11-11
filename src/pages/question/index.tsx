@@ -33,10 +33,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-import { useGradeList } from '@/hooks/admin/useGradeList';
-import { useQuestion } from '@/hooks/admin/useQuestion';
-import { useSubjectList } from '@/hooks/admin/useSubjectList';
-import { useTopicList } from '@/hooks/admin/useTopicList';
+import { useGradeList } from '@/hooks/admin/grade/useGradeList';
+import { useQuestion } from '@/hooks/admin/question/useQuestion';
+import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
+import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 
 export const Question: FC = () => {
   const {
@@ -58,6 +58,8 @@ export const Question: FC = () => {
     setModalOpen,
     handleEditClick,
     resetFormFields,
+    handleProcessText,
+    processingText,
   } = useQuestion();
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
@@ -310,6 +312,17 @@ export const Question: FC = () => {
                       <span className='text-sm text-red-500'>{errors.question.message}</span>
                     )}
                   </div>
+                  <div className='mt-2'>
+                    <Button
+                      type='button'
+                      onClick={() => handleProcessText('question')}
+                      loading={processingText}
+                      variant='outline'
+                      className='h-10 w-full max-w-[200px] text-sm font-semibold'
+                    >
+                      Process Question
+                    </Button>
+                  </div>
                 </div>
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
@@ -326,7 +339,28 @@ export const Question: FC = () => {
                       <span className='text-sm text-red-500'>{errors.answer.message}</span>
                     )}
                   </div>
+                  <div className='mt-2'>
+                    <Button
+                      type='button'
+                      onClick={() => handleProcessText('answer')}
+                      loading={processingText}
+                      variant='outline'
+                      className='h-10 w-full max-w-[200px] text-sm font-semibold'
+                    >
+                      Process Answer
+                    </Button>
+                  </div>
                 </div>
+                {/* <div className='mt-4 flex justify-center'>
+                  <Button
+                    type='button'
+                    onClick={() => handleProcessText()}
+                    loading={processingText}
+                    className='h-12 w-full max-w-md text-base font-semibold'
+                  >
+                    Process Text
+                  </Button>
+                </div> */}
                 <DialogFooter>
                   <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
                     <div className='w-32 sm:w-40 md:w-64'>

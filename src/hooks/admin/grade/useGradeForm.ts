@@ -14,7 +14,7 @@ import {
 } from '@/interface/grads';
 import { CreateGradeDto } from '@/lib/sdk/jsdt/Api';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
 
 export function useGradeForm(
   grades: ExtendedCreateGradeDto[],

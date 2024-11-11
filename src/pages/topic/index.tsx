@@ -22,8 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useTopicForm } from '@/hooks/admin/useTopicForm';
-import { useTopicList } from '@/hooks/admin/useTopicList';
+import { useTopicForm } from '@/hooks/admin/topic/useTopicForm';
+import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 
 export const Topic: FC = () => {
   const {

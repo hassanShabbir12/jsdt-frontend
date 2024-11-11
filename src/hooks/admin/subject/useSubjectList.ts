@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from 'axios';
 import { apiClient } from '@/api/clients/apiClient';
 import { ExtendedCreateSubjectDto, SubjectListReturn, SubjectResponse } from '@/interface/subject';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
 
 export function useSubjectList(): SubjectListReturn {
   const [loading, setLoading] = useState(false);

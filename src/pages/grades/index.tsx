@@ -22,8 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useGradeForm } from '@/hooks/admin/useGradeForm';
-import { useGradeList } from '@/hooks/admin/useGradeList';
+import { useGradeForm } from '@/hooks/admin/grade/useGradeForm';
+import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 
 export const Grades: FC = () => {
   const {

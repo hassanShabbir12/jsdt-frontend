@@ -14,7 +14,7 @@ import {
 } from '@/interface/topic';
 import { CreateTopicDto } from '@/lib/sdk/jsdt/Api';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
 
 export function useTopicForm(
   topics: ExtendedCreateTopicDto[],

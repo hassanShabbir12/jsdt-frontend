@@ -14,7 +14,7 @@ import {
 } from '@/interface/subject';
 import { CreateSubjectDto } from '@/lib/sdk/jsdt/Api';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
 
 export function useSubjectForm(
   subjects: ExtendedCreateSubjectDto[],

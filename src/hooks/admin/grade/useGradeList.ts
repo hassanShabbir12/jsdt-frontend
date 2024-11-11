@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from 'axios';
 import { apiClient } from '@/api/clients/apiClient';
 import { ExtendedCreateGradeDto, GradeListReturn, GradeResponse } from '@/interface/grads';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
 
 export function useGradeList(): GradeListReturn {
   const [loading, setLoading] = useState(false);

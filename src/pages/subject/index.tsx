@@ -22,8 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useSubjectForm } from '@/hooks/admin/useSubjectForm';
-import { useSubjectList } from '@/hooks/admin/useSubjectList';
+import { useSubjectForm } from '@/hooks/admin/subject/useSubjectForm';
+import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 
 export const Subjects: FC = () => {
   const {

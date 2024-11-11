@@ -13,8 +13,17 @@ import {
   QuestionSchema,
   UseQuestionReturn,
 } from '@/interface/question';
+import { GenerateDescriptionDtoTypeEnum } from '@/lib/sdk/jsdt/Api';
 
-import { toast } from '../use-toast';
+import { toast } from '../../use-toast';
+
+interface GenerateDescriptionResponse {
+  data: {
+    description: string;
+  };
+  message: string;
+  success: boolean;
+}
 
 export function useQuestion(): UseQuestionReturn {
   const [loading, setLoading] = useState(false);
@@ -23,6 +32,7 @@ export function useQuestion(): UseQuestionReturn {
   const [questionToDelete, setQuestionToDelete] = useState<ExtendedCreateQuestionDto | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [processingText, setProcessingText] = useState(false);
 
   const form = useForm<QuestionFormValues>({
     resolver: zodResolver(QuestionSchema),
@@ -151,6 +161,56 @@ export function useQuestion(): UseQuestionReturn {
     }
   };
 
+  const handleProcessText = async (fieldType: 'question' | 'answer'): Promise<void> => {
+    const text = form.getValues(fieldType);
+
+    if (!text) {
+      toast({
+        title: 'Error',
+        description: `Please enter ${fieldType} text first`,
+        variant: 'destructive',
+      });
+
+      return;
+    }
+
+    setProcessingText(true);
+    try {
+      const type =
+        fieldType === 'question'
+          ? GenerateDescriptionDtoTypeEnum.Question
+          : GenerateDescriptionDtoTypeEnum.Answer;
+
+      const response = (await apiClient.questions.questionsControllerGenerateDescription({
+        text,
+        type,
+      })) as unknown as AxiosResponse<GenerateDescriptionResponse>;
+
+      form.setValue(fieldType, response.data.data.description);
+
+      toast({
+        title: 'Success',
+        description: `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} processed successfully`,
+      });
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast({
+          title: 'Error',
+          description: error.response.data.message,
+          variant: 'destructive',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: `Failed to process ${fieldType}`,
+          variant: 'destructive',
+        });
+      }
+    } finally {
+      setProcessingText(false);
+    }
+  };
+
   useEffect(() => {
     fetchQuestions();
   }, []);
@@ -204,5 +264,7 @@ export function useQuestion(): UseQuestionReturn {
     setModalOpen,
     handleEditClick,
     resetFormFields,
+    handleProcessText,
+    processingText,
   };
 }

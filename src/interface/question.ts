@@ -40,6 +40,8 @@ export interface UseQuestionReturn {
   setModalOpen: (open: boolean) => void;
   handleEditClick: (question: ExtendedCreateQuestionDto) => void;
   resetFormFields: () => void;
+  handleProcessText: (fieldType: 'question' | 'answer') => Promise<void>;
+  processingText: boolean;
 }
 
 export type QuestionResponse = ApiResponse<ExtendedCreateQuestionDto[]>;
