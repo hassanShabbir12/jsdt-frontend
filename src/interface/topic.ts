@@ -8,31 +8,36 @@ import { ApiResponse } from './generic';
 
 // Schema
 export const topicSchema = z.object({
-  title: z.string().min(1, 'Topic is required'),
+  title: z.string().min(1, 'Topic is required').max(20, 'Topic cannot exceed 20 characters'),
 });
 
 // Types
 export type TopicFormValues = z.infer<typeof topicSchema>;
 
 // Interfaces
-export interface UseTopicFormReturn {
-  register: UseFormRegister<TopicFormValues>;
-  handleSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  errors: FieldErrors<TopicFormValues>;
+export interface TopicListReturn {
   loading: boolean;
-  setOpen: (open: boolean) => void;
-  open: boolean;
   topics: ExtendedCreateTopicDto[];
+  setTopics: (topics: ExtendedCreateTopicDto[]) => void;
   deleteTopic: () => Promise<void>;
-  selectedTopic: ExtendedCreateTopicDto | null;
-  handleEdit: (topic: ExtendedCreateTopicDto) => void;
-  setSelectedTopic: (topic: ExtendedCreateTopicDto | null) => void;
-  setValue: UseFormSetValue<TopicFormValues>;
   handleDeleteClick: (topic: ExtendedCreateTopicDto) => void;
   deleteModalOpen: boolean;
   setDeleteModalOpen: (open: boolean) => void;
   topicToDelete: ExtendedCreateTopicDto | null;
   setTopicToDelete: (topic: ExtendedCreateTopicDto | null) => void;
+}
+
+export interface TopicFormReturn {
+  register: UseFormRegister<TopicFormValues>;
+  handleSubmit: (e: React.BaseSyntheticEvent) => Promise<void>;
+  errors: FieldErrors<TopicFormValues>;
+  loading: boolean;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selectedTopic: ExtendedCreateTopicDto | null;
+  handleEdit: (topic: ExtendedCreateTopicDto) => void;
+  setSelectedTopic: (topic: ExtendedCreateTopicDto | null) => void;
+  setValue: UseFormSetValue<TopicFormValues>;
 }
 
 export interface ExtendedCreateTopicDto extends CreateTopicDto {

@@ -109,15 +109,31 @@ export interface UpdateQuestionDto {
   totalMarks?: string;
 }
 
-export interface CreateSubscriptionDto {
-  email: string;
-  paymentMethodId: string;
-  subscriptionType: string;
+export interface GenerateDescriptionDto {
+  /**
+   * Text to generate description from
+   * @example "Create a math question about quadratic equations for grade 10 students"
+   */
+  text: string;
+  /**
+   * Type of generation (question or answer)
+   * @example "question"
+   */
+  type: GenerateDescriptionDtoTypeEnum;
 }
 
 export enum CreateUserDtoRoleEnum {
   Learner = 'learner',
   Teacher = 'teacher',
+}
+
+/**
+ * Type of generation (question or answer)
+ * @example "question"
+ */
+export enum GenerateDescriptionDtoTypeEnum {
+  Question = 'question',
+  Answer = 'answer',
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -171,7 +187,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'https://34.56.32.71',
+      baseURL: axiosConfig.baseURL || 'https://34.56.32.71/',
     });
     this.secure = secure;
     this.format = format;
@@ -689,14 +705,14 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * @secure
      */
     questionsControllerGetQuestion: (
-      query: {
-        certificateType: string;
-        grade: string;
-        subject: string;
-        assessmentType: string;
-        topic: string;
-        difficultyLevel: string;
-        totalMarks: string;
+      query?: {
+        certificateType?: string;
+        grade?: string;
+        subject?: string;
+        assessmentType?: string;
+        topic?: string;
+        difficultyLevel?: string;
+        totalMarks?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -757,42 +773,25 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         secure: true,
         ...params,
       }),
-  };
-  stripe = {
+
     /**
      * No description
      *
-     * @name StripeControllerCreate
-     * @request POST:/stripe
+     * @tags Questions
+     * @name QuestionsControllerGenerateDescription
+     * @request POST:/questions/generate-description
+     * @secure
      */
-    stripeControllerCreate: (data: CreateSubscriptionDto, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/stripe`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
-  upload = {
-    /**
-     * No description
-     *
-     * @name UploadControllerUploadMedia
-     * @request POST:/upload/upload
-     */
-    uploadControllerUploadMedia: (
-      data: {
-        /** @format binary */
-        file?: File;
-      },
+    questionsControllerGenerateDescription: (
+      data: GenerateDescriptionDto,
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/upload/upload`,
+        path: `/questions/generate-description`,
         method: 'POST',
         body: data,
-        type: ContentType.FormData,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
   };
