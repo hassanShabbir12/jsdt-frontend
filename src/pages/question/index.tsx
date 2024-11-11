@@ -34,21 +34,17 @@ import {
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
-import { useQuestion } from '@/hooks/admin/question/useQuestion';
+import { useQuestionForm } from '@/hooks/admin/question/useQuestionForm';
+import { useQuestionOperations } from '@/hooks/admin/question/useQuestionOperations';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 
 export const Question: FC = () => {
+  const { form, processingText, handleProcessText, resetFormFields } = useQuestionForm();
+
   const {
     loading,
     questions,
-    form: {
-      control,
-      register,
-      formState: { errors },
-    },
-    onSubmit,
-    deleteQuestion,
     deleteModalOpen,
     setDeleteModalOpen,
     questionToDelete,
@@ -57,10 +53,16 @@ export const Question: FC = () => {
     modalOpen,
     setModalOpen,
     handleEditClick,
-    resetFormFields,
-    handleProcessText,
-    processingText,
-  } = useQuestion();
+    deleteQuestion,
+    onSubmit,
+  } = useQuestionOperations(form);
+
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = form;
+
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
@@ -85,7 +87,7 @@ export const Question: FC = () => {
               </Button>
             </DialogTrigger>
             <DialogContent className='!container max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden'>
-              <form onSubmit={onSubmit}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
                 <DialogHeader>
                   <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
                     {isEditing ? 'Edit Question' : 'Add New Question'}
