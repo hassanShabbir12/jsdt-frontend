@@ -4,6 +4,7 @@ import { UseFormReturn } from 'react-hook-form';
 import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { toast } from '@/hooks/use-toast';
 import { ApiResponse } from '@/interface/generic';
 import {
   ExtendedCreateQuestionDto,
@@ -11,8 +12,6 @@ import {
   QuestionResponse,
   UseQuestionOperationsReturn,
 } from '@/interface/question';
-
-import { toast } from '../../use-toast';
 
 export function useQuestionOperations(
   form: UseFormReturn<QuestionFormValues>,
@@ -34,7 +33,7 @@ export function useQuestionOperations(
 
       const extendedquestion = response.data.data.map((question) => ({
         ...question,
-        id: question.id || '',
+        id: question.id as string,
       }));
 
       setQuestions(extendedquestion);

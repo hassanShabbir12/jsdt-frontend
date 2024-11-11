@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { toast } from '@/hooks/use-toast';
 import {
   ExtendedCreateGradeDto,
   GradeFormReturn,
@@ -13,8 +14,6 @@ import {
   gradeSchema,
 } from '@/interface/grads';
 import { CreateGradeDto } from '@/lib/sdk/jsdt/Api';
-
-import { toast } from '../../use-toast';
 
 export function useGradeForm(
   grades: ExtendedCreateGradeDto[],

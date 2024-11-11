@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { toast } from '@/hooks/use-toast';
 import { ExtendedCreateGradeDto, GradeListReturn, GradeResponse } from '@/interface/grads';
-
-import { toast } from '../../use-toast';
 
 export function useGradeList(): GradeListReturn {
   const [loading, setLoading] = useState(false);

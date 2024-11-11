@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { toast } from '@/hooks/use-toast';
 import {
   ExtendedCreateTopicDto,
   TopicFormReturn,
@@ -13,8 +14,6 @@ import {
   topicSchema,
 } from '@/interface/topic';
 import { CreateTopicDto } from '@/lib/sdk/jsdt/Api';
-
-import { toast } from '../../use-toast';
 
 export function useTopicForm(
   topics: ExtendedCreateTopicDto[],

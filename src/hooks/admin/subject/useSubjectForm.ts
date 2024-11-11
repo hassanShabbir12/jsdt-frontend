@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { toast } from '@/hooks/use-toast';
 import {
   ExtendedCreateSubjectDto,
   SubjectFormReturn,
@@ -13,8 +14,6 @@ import {
   SubjectSchema,
 } from '@/interface/subject';
 import { CreateSubjectDto } from '@/lib/sdk/jsdt/Api';
-
-import { toast } from '../../use-toast';
 
 export function useSubjectForm(
   subjects: ExtendedCreateSubjectDto[],

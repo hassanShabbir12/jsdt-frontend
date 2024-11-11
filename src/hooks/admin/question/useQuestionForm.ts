@@ -5,10 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { toast } from '@/hooks/use-toast';
 import { QuestionFormValues, QuestionSchema } from '@/interface/question';
 import { GenerateDescriptionDtoTypeEnum } from '@/lib/sdk/jsdt/Api';
-
-import { toast } from '../../use-toast';
 
 interface GenerateDescriptionResponse {
   data: {
