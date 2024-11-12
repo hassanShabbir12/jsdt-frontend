@@ -77,3 +77,18 @@ export interface UseSignupReturn {
   onSubmit: () => void;
   isTeacher: boolean;
 }
+
+export const loginSchema = z.object({
+  email: z.string().min(1, 'Email is required'),
+  password: z.string().min(1, 'Password is required'),
+});
+
+export type LoginFormData = z.infer<typeof loginSchema>;
+
+export interface UseLoginReturn {
+  form: UseFormReturn<LoginFormData>;
+  isLoading: boolean;
+  onSubmit: () => void;
+  showPassword: boolean;
+  togglePassword: () => void;
+}

@@ -10,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 import { SignupFormData, signupSchema, UseSignupReturn } from '@/interface/auth';
 import { CreateUserDto, CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
-import { toast } from './use-toast';
+import { toast } from '../use-toast';
 
 export const useSignup = (): UseSignupReturn => {
   const { userRole } = useAuth();

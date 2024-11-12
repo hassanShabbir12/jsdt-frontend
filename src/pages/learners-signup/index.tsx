@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useSignup } from '@/hooks/useSignup';
+import { useSignup } from '@/hooks/client/useSignup';
 import { Gender, NSCType } from '@/interface/auth';
 
 export const LearnerSignUp: FC = () => {
@@ -299,6 +299,7 @@ export const LearnerSignUp: FC = () => {
                 type='submit'
                 className='h-12 min-w-48 text-base lg:min-w-80'
                 disabled={isLoading}
+                loading={isLoading}
               >
                 {isLoading ? 'Signing up...' : 'Sign up'}
               </Button>
