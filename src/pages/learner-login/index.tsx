@@ -25,7 +25,7 @@ export const LearnerLogin: FC = () => {
                 htmlFor='userName'
                 className='mb-2 block font-normal leading-none text-black lg:text-base'
               >
-                Username
+                Email
               </Label>
               <Input
                 {...form.register('email')}
