@@ -8,10 +8,9 @@ import { z } from 'zod';
 
 import { apiClient } from '@/api/clients/apiClient';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 import { LoginResponseData, UseAdminLoginReturn } from '@/interface/auth';
 import { ApiResponse } from '@/interface/generic';
-
-import { useToast } from '../use-toast';
 
 // Define validation schema using zod
 const adminLoginSchema = z.object({

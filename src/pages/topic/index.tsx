@@ -22,28 +22,34 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useTopicForm } from '@/hooks/admin/useTopics';
+import { useTopicForm } from '@/hooks/admin/topic/useTopicForm';
+import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 
 export const Topic: FC = () => {
   const {
-    register,
-    handleSubmit,
-    errors,
-    loading,
-    open,
-    setOpen,
+    loading: listLoading,
     topics,
+    setTopics,
     deleteTopic,
-    handleEdit,
-    selectedTopic,
-    setSelectedTopic,
-    setValue,
     handleDeleteClick,
     deleteModalOpen,
     setDeleteModalOpen,
     topicToDelete,
     setTopicToDelete,
-  } = useTopicForm();
+  } = useTopicList();
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    loading: formLoading,
+    open,
+    setOpen,
+    selectedTopic,
+    handleEdit,
+    setSelectedTopic,
+    setValue,
+  } = useTopicForm(topics, setTopics);
 
   return (
     <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
@@ -111,7 +117,7 @@ export const Topic: FC = () => {
                   </div>
                   <div className='w-1/2'>
                     <Button
-                      loading={loading}
+                      loading={formLoading}
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
@@ -188,7 +194,7 @@ export const Topic: FC = () => {
               </div>
               <div className='w-1/2'>
                 <Button
-                  loading={loading}
+                  loading={listLoading}
                   className='h-12 w-full text-base font-semibold'
                   onClick={deleteTopic}
                 >
