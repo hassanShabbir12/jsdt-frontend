@@ -7,11 +7,10 @@ import axios from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
 import { useAuth } from '@/context/AuthContext';
+import { toast } from '@/hooks/use-toast';
 import { LoginFormData, LoginResponseData, loginSchema, UseLoginReturn } from '@/interface/auth';
 import { ApiResponse } from '@/interface/generic';
 import { SigninUserDto } from '@/lib/sdk/jsdt/Api';
-
-import { toast } from '../use-toast';
 
 export const useLogin = (): UseLoginReturn => {
   const [isLoading, setIsLoading] = useState(false);
