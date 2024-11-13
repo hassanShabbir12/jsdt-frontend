@@ -301,7 +301,7 @@ export const Question: FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className='w-full'>
+                <div className='mb-4 w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
@@ -414,12 +414,18 @@ export const Question: FC = () => {
                     <TableCell className='font-base text-zinc-800'>{item.question}</TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
                       <div className='flex gap-2'>
-                        <Button variant='ghost' size='icon' onClick={() => handleEditClick(item)}>
-                          <Edit className='h-4 w-4' />
-                        </Button>
-                        <Button variant='ghost' size='icon' onClick={() => handleDeleteClick(item)}>
-                          <Trash2 className='h-4 w-4' />
-                        </Button>
+                        <i
+                          onClick={() => handleEditClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Edit />
+                        </i>
+                        <i
+                          onClick={() => handleDeleteClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Trash2 />
+                        </i>
                       </div>
                     </TableCell>
                   </TableRow>
