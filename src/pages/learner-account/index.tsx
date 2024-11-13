@@ -404,7 +404,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselNext className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-200 disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
+          <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-200 disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
         </Carousel>
       </div>
       <Button className='mx-auto flex px-20 py-6 text-base'>Add more questions</Button>

@@ -204,7 +204,7 @@ export const LearnerTeacher: FC = () => {
           </div>
         </div>
         <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-          <div className='mb-10 block items-center justify-between md:flex'>
+          <div className='block items-center justify-between md:flex'>
             <div className='mb-5 block sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
               <div className='px-2'>
                 <Dialog>
@@ -738,7 +738,7 @@ export const LearnerTeacher: FC = () => {
             <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
             <CarouselContent>
               <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                   <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
                   <p className='m-0'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -758,7 +758,7 @@ export const LearnerTeacher: FC = () => {
                 </div>
               </CarouselItem>
               <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                   <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                   <p className='m-0'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -768,7 +768,7 @@ export const LearnerTeacher: FC = () => {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselNext className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
+            <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
           </Carousel>
         </div>
         <Button className='mx-auto flex w-80 px-20 py-6 text-base'>Add</Button>
