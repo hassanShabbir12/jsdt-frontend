@@ -63,6 +63,11 @@ export const Sidebar: FC = () => {
     };
   }, [isToggled]);
 
+  const handleSidebar = (type: number): void => {
+    setActiveIndex(type);
+    handleToggle();
+  };
+
   return (
     <>
       <div className='relative' onClick={handleToggle}>
@@ -81,7 +86,7 @@ export const Sidebar: FC = () => {
           <ul className='m-0 list-none px-2 pb-16'>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 0 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(0)}
+              onClick={() => handleSidebar(0)}
             >
               <Link to='/admin' className='ml-1 flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
@@ -98,7 +103,7 @@ export const Sidebar: FC = () => {
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 1 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(1)}
+              onClick={() => handleSidebar(1)}
             >
               <Link
                 to='/admin/subjects'
@@ -118,7 +123,7 @@ export const Sidebar: FC = () => {
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 2 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(2)}
+              onClick={() => handleSidebar(2)}
             >
               <Link to='/admin/topics' className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
@@ -135,7 +140,7 @@ export const Sidebar: FC = () => {
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 3 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(3)}
+              onClick={() => handleSidebar(3)}
             >
               <Link
                 to='/admin/questions'
@@ -155,7 +160,7 @@ export const Sidebar: FC = () => {
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
-              onClick={() => setActiveIndex(4)}
+              onClick={() => handleSidebar(4)}
             >
               <Link
                 to='/admin/settings'
