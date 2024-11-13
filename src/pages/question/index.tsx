@@ -33,22 +33,20 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-import { useGradeForm } from '@/hooks/admin/useGrades';
-import { useQuestion } from '@/hooks/admin/useQuestion';
-import { useSubjectForm } from '@/hooks/admin/useSubject';
-import { useTopicForm } from '@/hooks/admin/useTopics';
+import { useGradeList } from '@/hooks/admin/grade/useGradeList';
+import { useQuestionForm } from '@/hooks/admin/question/useQuestionForm';
+import { useQuestionOperations } from '@/hooks/admin/question/useQuestionOperations';
+import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
+import { useTopicList } from '@/hooks/admin/topic/useTopicList';
+import { cn } from '@/lib/utils';
 
 export const Question: FC = () => {
+  const { form, processingText, handleProcessText, resetFormFields, processingTextAnswer } =
+    useQuestionForm();
+
   const {
     loading,
     questions,
-    form: {
-      control,
-      register,
-      formState: { errors },
-    },
-    onSubmit,
-    deleteQuestion,
     deleteModalOpen,
     setDeleteModalOpen,
     questionToDelete,
@@ -57,11 +55,19 @@ export const Question: FC = () => {
     modalOpen,
     setModalOpen,
     handleEditClick,
-    resetFormFields,
-  } = useQuestion();
-  const { grades } = useGradeForm();
-  const { subjects } = useSubjectForm();
-  const { topics } = useTopicForm();
+    deleteQuestion,
+    onSubmit,
+  } = useQuestionOperations(form);
+
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = form;
+
+  const { grades } = useGradeList();
+  const { subjects } = useSubjectList();
+  const { topics } = useTopicList();
 
   return (
     <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
@@ -83,7 +89,7 @@ export const Question: FC = () => {
               </Button>
             </DialogTrigger>
             <DialogContent className='!container max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden'>
-              <form onSubmit={onSubmit}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
                 <DialogHeader>
                   <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
                     {isEditing ? 'Edit Question' : 'Add New Question'}
@@ -295,7 +301,7 @@ export const Question: FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className='w-full'>
+                <div className='mb-4 w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
@@ -309,6 +315,23 @@ export const Question: FC = () => {
                     {errors.question && (
                       <span className='text-sm text-red-500'>{errors.question.message}</span>
                     )}
+                    <div className='absolute bottom-0 mt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('question')}
+                        loading={processingText}
+                        variant='outline'
+                        className={cn(
+                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingText,
+                          },
+                        )}
+                      >
+                        Write question with AI
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <div className='w-full'>
@@ -325,8 +348,26 @@ export const Question: FC = () => {
                     {errors.answer && (
                       <span className='text-sm text-red-500'>{errors.answer.message}</span>
                     )}
+                    <div className='absolute bottom-0 mt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('answer')}
+                        loading={processingTextAnswer}
+                        variant='outline'
+                        className={cn(
+                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingTextAnswer,
+                          },
+                        )}
+                      >
+                        Write answer with AI
+                      </Button>
+                    </div>
                   </div>
                 </div>
+
                 <DialogFooter>
                   <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
                     <div className='w-32 sm:w-40 md:w-64'>
@@ -373,12 +414,18 @@ export const Question: FC = () => {
                     <TableCell className='font-base text-zinc-800'>{item.question}</TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
                       <div className='flex gap-2'>
-                        <Button variant='ghost' size='icon' onClick={() => handleEditClick(item)}>
-                          <Edit className='h-4 w-4' />
-                        </Button>
-                        <Button variant='ghost' size='icon' onClick={() => handleDeleteClick(item)}>
-                          <Trash2 className='h-4 w-4' />
-                        </Button>
+                        <i
+                          onClick={() => handleEditClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Edit />
+                        </i>
+                        <i
+                          onClick={() => handleDeleteClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Trash2 />
+                        </i>
                       </div>
                     </TableCell>
                   </TableRow>

@@ -31,6 +31,31 @@ export interface UseGradeFormReturn {
   setGradeToDelete: (grade: ExtendedCreateGradeDto | null) => void;
 }
 
+export interface GradeListReturn {
+  loading: boolean;
+  grades: ExtendedCreateGradeDto[];
+  setGrades: (grades: ExtendedCreateGradeDto[]) => void;
+  deleteGrade: () => Promise<void>;
+  handleDeleteClick: (grade: ExtendedCreateGradeDto) => void;
+  deleteModalOpen: boolean;
+  setDeleteModalOpen: (open: boolean) => void;
+  gradeToDelete: ExtendedCreateGradeDto | null;
+  setGradeToDelete: (grade: ExtendedCreateGradeDto | null) => void;
+}
+
+export interface GradeFormReturn {
+  register: UseFormRegister<GradeFormValues>;
+  handleSubmit: (e: React.BaseSyntheticEvent) => Promise<void>;
+  errors: FieldErrors<GradeFormValues>;
+  loading: boolean;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selectedGrade: ExtendedCreateGradeDto | null;
+  handleEdit: (grade: ExtendedCreateGradeDto) => void;
+  setSelectedGrade: (grade: ExtendedCreateGradeDto | null) => void;
+  setValue: UseFormSetValue<GradeFormValues>;
+}
+
 export interface ExtendedCreateGradeDto extends CreateGradeDto {
   id: string;
 }

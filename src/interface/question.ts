@@ -1,5 +1,3 @@
-import { UseFormReturn } from 'react-hook-form';
-
 import { z } from 'zod';
 
 import { CreateQuestionDto } from '@/lib/sdk/jsdt/Api';
@@ -25,21 +23,25 @@ export interface ExtendedCreateQuestionDto extends CreateQuestionDto {
 }
 
 export interface UseQuestionReturn {
+  UseQuestionOperationsReturn: UseQuestionOperationsReturn;
+  handleProcessText: (fieldType: 'question' | 'answer') => Promise<void>;
+  processingText: boolean;
+}
+
+export interface UseQuestionOperationsReturn {
   loading: boolean;
-  form: UseFormReturn<QuestionFormValues>;
-  onSubmit: (e: React.BaseSyntheticEvent) => Promise<void>;
   questions: ExtendedCreateQuestionDto[];
-  deleteQuestion: (id: string) => Promise<void>;
   deleteModalOpen: boolean;
-  setDeleteModalOpen: (open: boolean) => void;
   questionToDelete: ExtendedCreateQuestionDto | null;
-  handleDeleteClick: (question: ExtendedCreateQuestionDto) => void;
   isEditing: boolean;
-  setIsEditing: (editing: boolean) => void;
   modalOpen: boolean;
+  onSubmit: (data: QuestionFormValues) => Promise<void>;
+  handleDeleteClick: (question: ExtendedCreateQuestionDto) => void;
+  deleteQuestion: (id: string) => Promise<void>;
+  setDeleteModalOpen: (open: boolean) => void;
+  setIsEditing: (editing: boolean) => void;
   setModalOpen: (open: boolean) => void;
   handleEditClick: (question: ExtendedCreateQuestionDto) => void;
-  resetFormFields: () => void;
 }
 
 export type QuestionResponse = ApiResponse<ExtendedCreateQuestionDto[]>;

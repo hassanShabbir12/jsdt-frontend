@@ -15,24 +15,29 @@ export const SubjectSchema = z.object({
 export type SubjectFormValues = z.infer<typeof SubjectSchema>;
 
 // Interfaces
-export interface UseSubjectFormReturn {
-  register: UseFormRegister<SubjectFormValues>;
-  handleSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  errors: FieldErrors<SubjectFormValues>;
+export interface SubjectListReturn {
   loading: boolean;
-  setOpen: (open: boolean) => void;
-  open: boolean;
   subjects: ExtendedCreateSubjectDto[];
+  setSubjects: (subjects: ExtendedCreateSubjectDto[]) => void;
   deleteSubject: () => Promise<void>;
-  selectedSubject: ExtendedCreateSubjectDto | null;
-  handleEdit: (subject: ExtendedCreateSubjectDto) => void;
-  setSelectedSubject: (subject: ExtendedCreateSubjectDto | null) => void;
-  setValue: UseFormSetValue<SubjectFormValues>;
   handleDeleteClick: (subject: ExtendedCreateSubjectDto) => void;
   deleteModalOpen: boolean;
   setDeleteModalOpen: (open: boolean) => void;
   subjectToDelete: ExtendedCreateSubjectDto | null;
   setSubjectToDelete: (subject: ExtendedCreateSubjectDto | null) => void;
+}
+
+export interface SubjectFormReturn {
+  register: UseFormRegister<SubjectFormValues>;
+  handleSubmit: (e: React.BaseSyntheticEvent) => Promise<void>;
+  errors: FieldErrors<SubjectFormValues>;
+  loading: boolean;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selectedSubject: ExtendedCreateSubjectDto | null;
+  handleEdit: (subject: ExtendedCreateSubjectDto) => void;
+  setSelectedSubject: (subject: ExtendedCreateSubjectDto | null) => void;
+  setValue: UseFormSetValue<SubjectFormValues>;
 }
 
 export interface ExtendedCreateSubjectDto extends CreateSubjectDto {
