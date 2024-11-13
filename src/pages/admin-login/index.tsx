@@ -25,12 +25,12 @@ export const AdminLogin: FC = () => {
             htmlFor='username'
             className='mb-1 block font-normal leading-none text-black lg:text-base'
           >
-            Username
+            Email
           </Label>
           <Input
             id='email'
             type='text'
-            placeholder='Username'
+            placeholder='Email'
             {...register('email')}
             className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-6 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             error={errors.email?.message}
