@@ -37,19 +37,16 @@ const baseInvestigationSchema = {
     .max(1000, 'Total marks cannot exceed 1000'),
 };
 
-// Create discriminated union based on role
 export const investigationSchema = z.discriminatedUnion('role', [
-  // Teacher schema (without difficulty level)
   z.object({
     ...baseInvestigationSchema,
     role: z.literal(CreateUserDtoRoleEnum.Teacher),
     difficultyLevel: z.undefined(),
   }),
-  // Learner schema (with required difficulty level)
   z.object({
     ...baseInvestigationSchema,
     role: z.literal(CreateUserDtoRoleEnum.Learner),
-    difficultyLevel: z.enum(['easy', 'medium', 'hard'], {
+    difficultyLevel: z.enum(['Easy', 'Intermediate', 'Difficult'], {
       required_error: 'Please select difficulty level',
     }),
   }),
@@ -64,4 +61,7 @@ export interface UseInvestigationReturn {
   isLearner: boolean;
   handleAddQuestion: () => void;
   questions: ExtendedCreateQuestionDto[];
+  handleDeleteQuestion: (questionId: string) => void;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 }

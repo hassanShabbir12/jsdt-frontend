@@ -18,6 +18,7 @@ import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
 export const useInvestigation = (): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const { user } = useAuth();
@@ -35,7 +36,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
       difficultyLevel: isLearner ? undefined : undefined,
       totalMarks: undefined,
     },
-    mode: 'onTouched', // This will validate on blur
+    mode: 'onTouched',
   });
 
   const onSubmit: SubmitHandler<InvestigationFormData> = async (data): Promise<void> => {
@@ -51,11 +52,26 @@ export const useInvestigation = (): UseInvestigationReturn => {
         totalMarks: String(data.totalMarks),
         certificateType: data.nsc,
       })) as unknown as AxiosResponse<ApiResponse<ExtendedCreateQuestionDto[]>>;
+      const newQuestions = response.data.data.filter(
+        (newQuestion) =>
+          !clonedQuestions.some((existingQuestion) => existingQuestion.id === newQuestion.id),
+      );
 
-      setClonedQuestions(response.data.data);
+      if (newQuestions.length === 0) {
+        toast({
+          title: 'No New Questions',
+          description: 'All questions from this selection already exist in your list.',
+        });
+
+        return;
+      }
+
+      setClonedQuestions((prevQuestions) => [...prevQuestions, ...newQuestions]);
       setQuestions([response.data.data[0]]);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
+        setClonedQuestions([]);
+        setQuestions([]);
         toast({
           title: 'Error',
           description: error.response.data.message,
@@ -92,6 +108,20 @@ export const useInvestigation = (): UseInvestigationReturn => {
     setQuestions((prev) => [...prev, newQuestion]);
   };
 
+  const handleDeleteQuestion = (questionId: string): void => {
+    // Remove from questions array
+    setQuestions((prevQuestions) => prevQuestions.filter((q) => q.id !== questionId));
+
+    // Remove from clonedQuestions array
+    setClonedQuestions((prevCloned) => prevCloned.filter((q) => q.id !== questionId));
+
+    toast({
+      title: 'Question Deleted',
+      description: 'The question has been removed successfully.',
+      // variant: 'success',
+    });
+  };
+
   return {
     form,
     isLoading,
@@ -99,5 +129,8 @@ export const useInvestigation = (): UseInvestigationReturn => {
     isLearner,
     questions,
     handleAddQuestion,
+    handleDeleteQuestion,
+    isOpen,
+    setIsOpen,
   };
 };

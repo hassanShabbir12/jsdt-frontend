@@ -42,7 +42,17 @@ export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
-  const { form, isLoading, onSubmit, isLearner, questions, handleAddQuestion } = useInvestigation();
+  const {
+    form,
+    isLoading,
+    onSubmit,
+    isLearner,
+    questions,
+    handleAddQuestion,
+    handleDeleteQuestion,
+    isOpen,
+    setIsOpen,
+  } = useInvestigation();
 
   const onHandleClick = (): void => {
     navigate('/instructions');
@@ -71,209 +81,221 @@ export const LearnerTeacher: FC = () => {
         <h2 className='mb-8 text-base font-semibold leading-7 text-zinc-800 sm:mb-10 sm:text-2xl md:mb-12 md:text-xl'>
           Investigation/Exam (Educator&rsquo;s account)
         </h2>
-        <form onSubmit={onSubmit} className='-mx-4 mb-8 flex flex-wrap'>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='nsc'>IEB/NSC</Label>
-            <div className='w-full'>
-              <Controller
-                name='nsc'
-                control={form.control}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue className='text-stone-300' placeholder='Select' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Type</SelectLabel>
-                        <SelectItem value='IEB'>IEB</SelectItem>
-                        <SelectItem value='NSC'>NSC</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {form.formState.errors.nsc && (
-                <span className='text-sm text-red-500'>{form.formState.errors.nsc.message}</span>
-              )}
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='grade'>Choose Grade</Label>
-            <div className='w-full'>
-              <Controller
-                name='grade'
-                control={form.control}
-                rules={{ required: 'Grade is required' }}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue placeholder='Select' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Grades</SelectLabel>
-                        {grades.map((grade) => (
-                          <SelectItem key={grade.id} value={grade.title}>
-                            {grade.title}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {form.formState.errors.grade && (
-                <span className='text-sm text-red-500'>{form.formState.errors.grade.message}</span>
-              )}
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='subject'>Choose Subject</Label>
-            <div className='w-full'>
-              <Controller
-                name='subject'
-                control={form.control}
-                rules={{ required: 'Subject is required' }}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue placeholder='Select' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Subjects</SelectLabel>
-                        {subjects.map((subject) => (
-                          <SelectItem key={subject.id} value={subject.title}>
-                            {subject.title}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {form.formState.errors.subject && (
-                <span className='text-sm text-red-500'>
-                  {form.formState.errors.subject.message}
-                </span>
-              )}
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='assessmentType'>Choose Assessment Type</Label>
-            <div className='w-full'>
-              <Controller
-                name='assessmentType'
-                control={form.control}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue placeholder='Select' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Types</SelectLabel>
-                        <SelectItem value='Formative'>Formative</SelectItem>
-                        <SelectItem value='Summative'>Summative</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {form.formState.errors.assessmentType && (
-                <span className='text-sm text-red-500'>
-                  {form.formState.errors.assessmentType.message}
-                </span>
-              )}
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='topic'>Choose Topic</Label>
-            <div className='w-full'>
-              <Controller
-                name='topic'
-                control={form.control}
-                rules={{ required: 'Topic is required' }}
-                render={({ field }) => (
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue placeholder='Select' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Topics</SelectLabel>
-                        {topics.map((topic) => (
-                          <SelectItem key={topic.id} value={topic.title}>
-                            {topic.title}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {form.formState.errors.topic && (
-                <span className='text-sm text-red-500'>{form.formState.errors.topic.message}</span>
-              )}
-            </div>
-          </div>
-          {isLearner && (
+        <form onSubmit={onSubmit}>
+          <div className='-mx-4 mb-8 flex flex-wrap'>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='difficultyLevel'>Difficulty Level</Label>
+              <Label htmlFor='nsc'>IEB/NSC</Label>
               <div className='w-full'>
                 <Controller
-                  name='difficultyLevel'
+                  name='nsc'
                   control={form.control}
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Select Difficulty' />
+                        <SelectValue className='text-stone-300' placeholder='Select' />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectLabel>Difficulty</SelectLabel>
-                          <SelectItem value='easy'>Easy</SelectItem>
-                          <SelectItem value='medium'>Medium</SelectItem>
-                          <SelectItem value='hard'>Hard</SelectItem>
+                          <SelectLabel>Type</SelectLabel>
+                          <SelectItem value='IEB'>IEB</SelectItem>
+                          <SelectItem value='NSC'>NSC</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
                   )}
                 />
-                {form.formState.errors.difficultyLevel && (
+                {form.formState.errors.nsc && (
+                  <span className='text-sm text-red-500'>{form.formState.errors.nsc.message}</span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='grade'>Choose Grade</Label>
+              <div className='w-full'>
+                <Controller
+                  name='grade'
+                  control={form.control}
+                  rules={{ required: 'Grade is required' }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Grades</SelectLabel>
+                          {grades.map((grade) => (
+                            <SelectItem key={grade.id} value={grade.title}>
+                              {grade.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.grade && (
                   <span className='text-sm text-red-500'>
-                    {form.formState.errors.difficultyLevel.message}
+                    {form.formState.errors.grade.message}
                   </span>
                 )}
               </div>
             </div>
-          )}
-
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='totalMarks'>Total Marks</Label>
-            <Controller
-              name='totalMarks'
-              control={form.control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  type='number'
-                  value={value || ''}
-                  onChange={(e) => onChange(Number(e.target.value))}
-                  placeholder='Enter total marks (e.g., 500, 1000)'
-                  className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2'
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='subject'>Choose Subject</Label>
+              <div className='w-full'>
+                <Controller
+                  name='subject'
+                  control={form.control}
+                  rules={{ required: 'Subject is required' }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Subjects</SelectLabel>
+                          {subjects.map((subject) => (
+                            <SelectItem key={subject.id} value={subject.title}>
+                              {subject.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
-              )}
-            />
-            {form.formState.errors.totalMarks && (
-              <span className='text-sm text-red-500'>
-                {form.formState.errors.totalMarks.message}
-              </span>
+                {form.formState.errors.subject && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.subject.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='assessmentType'>Choose Assessment Type</Label>
+              <div className='w-full'>
+                <Controller
+                  name='assessmentType'
+                  control={form.control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Types</SelectLabel>
+                          <SelectItem value='Formative'>Formative</SelectItem>
+                          <SelectItem value='Summative'>Summative</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.assessmentType && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.assessmentType.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='topic'>Choose Topic</Label>
+              <div className='w-full'>
+                <Controller
+                  name='topic'
+                  control={form.control}
+                  rules={{ required: 'Topic is required' }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Topics</SelectLabel>
+                          {topics.map((topic) => (
+                            <SelectItem key={topic.id} value={topic.title}>
+                              {topic.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.topic && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.topic.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            {isLearner && (
+              <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+                <Label htmlFor='difficultyLevel'>Difficulty Level</Label>
+                <div className='w-full'>
+                  <Controller
+                    name='difficultyLevel'
+                    control={form.control}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger className='w-full'>
+                          <SelectValue placeholder='Select Difficulty' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>Difficulty</SelectLabel>
+                            <SelectItem value='Easy'>Easy</SelectItem>
+                            <SelectItem value='Intermediate'>Intermediate</SelectItem>
+                            <SelectItem value='Difficult'>Difficult</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  {form.formState.errors.difficultyLevel && (
+                    <span className='text-sm text-red-500'>
+                      {form.formState.errors.difficultyLevel.message}
+                    </span>
+                  )}
+                </div>
+              </div>
             )}
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='totalMarks'>Total Marks</Label>
+              <Controller
+                name='totalMarks'
+                control={form.control}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    type='number'
+                    value={value || ''}
+                    onChange={(e) => onChange(Number(e.target.value))}
+                    placeholder='Enter total marks (e.g., 500, 1000)'
+                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2'
+                  />
+                )}
+              />
+              {form.formState.errors.totalMarks && (
+                <span className='text-sm text-red-500'>
+                  {form.formState.errors.totalMarks.message}
+                </span>
+              )}
+            </div>
           </div>
-          <Button type='submit' disabled={isLoading} className='w-full md:w-auto'>
-            {isLoading ? 'Generating...' : 'Generate'}
-          </Button>
+          <div className='mb-8 inline-flex w-full justify-end md:w-full'>
+            <Button
+              type='submit'
+              disabled={isLoading}
+              loading={isLoading}
+              className='w-full md:w-28'
+            >
+              {isLoading ? 'Generating...' : 'Generate'}
+            </Button>
+          </div>
         </form>
         <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='mb-10 block items-center justify-between md:flex'>
@@ -304,46 +326,14 @@ export const LearnerTeacher: FC = () => {
                       </div>
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 1
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 2
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 3
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 4
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
+                      {questions.map((item, index) => (
+                        <div className='mb-5 md:mb-10'>
+                          <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                            Question No. {index + 1}
+                          </h2>
+                          <p className='m-0'>{item.question}</p>
+                        </div>
+                      ))}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -372,52 +362,22 @@ export const LearnerTeacher: FC = () => {
                       </div>
                     </DialogHeader>
                     <div className='relative'>
-                      <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Question No. 1
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis.
-                          </p>
+                      {questions.map((item, index) => (
+                        <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
+                          <div className='mb-4 md:mb-7'>
+                            <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                              Question No. {index + 1}
+                            </h2>
+                            <p className='m-0'>{item.question}</p>
+                          </div>
+                          <div className='mb-4 md:mb-7'>
+                            <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                              Answer :
+                            </h2>
+                            <p className='m-0'>{item.answer}</p>
+                          </div>
                         </div>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Answer :
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat?
-                          </p>
-                        </div>
-                      </div>
-                      <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Question No. 2
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis.
-                          </p>
-                        </div>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Answer :
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat?
-                          </p>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -447,86 +407,39 @@ export const LearnerTeacher: FC = () => {
                                   <tr>
                                     <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'></th>
                                     <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Level 1
+                                      Easy
                                     </th>
                                     <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Level 2
+                                      Intermediate
                                     </th>
                                     <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Level 3
-                                    </th>
-                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Level 4
+                                      Difficult
                                     </th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      1.1
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Marks (2)
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                  </tr>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      1.2
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Marks (3)
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                  </tr>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      2.1
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Marks (1)
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                  </tr>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      2.2
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Marks (4)
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                  </tr>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      3.1
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Marks (2)
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      3.2
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Marks (2)
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                  </tr>
+                                  {questions.map((item, index) => (
+                                    <tr key={item.id}>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {index + 1}
+                                      </td>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {item.difficultyLevel === 'Easy'
+                                          ? `Marks (${item.totalMarks})`
+                                          : ''}
+                                      </td>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {item.difficultyLevel === 'Intermediate'
+                                          ? `Marks (${item.totalMarks})`
+                                          : ''}
+                                      </td>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {item.difficultyLevel === 'Difficult'
+                                          ? `Marks (${item.totalMarks})`
+                                          : ''}
+                                      </td>
+                                    </tr>
+                                  ))}
                                   <tr>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
                                       Total Marks
@@ -539,9 +452,6 @@ export const LearnerTeacher: FC = () => {
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
                                       6
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      2
                                     </td>
                                   </tr>
                                   <tr>
@@ -556,9 +466,6 @@ export const LearnerTeacher: FC = () => {
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
                                       43%
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      15
                                     </td>
                                   </tr>
                                 </tbody>
@@ -841,9 +748,12 @@ export const LearnerTeacher: FC = () => {
                 <span className='inline-block text-2xl font-semibold'>
                   Question No. {index + 1}
                 </span>
-                <Dialog>
+                <Dialog open={isOpen} onOpenChange={setIsOpen}>
                   <DialogTrigger asChild>
-                    <i className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'>
+                    <i
+                      onClick={() => setIsOpen(true)}
+                      className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'
+                    >
                       <Trash2 />
                     </i>
                   </DialogTrigger>
@@ -855,11 +765,21 @@ export const LearnerTeacher: FC = () => {
                     </DialogHeader>
                     <DialogFooter>
                       <div className='w-1/2'>
-                        <Button variant='outline' className='h-12 w-full text-base font-semibold'>
+                        <Button
+                          variant='outline'
+                          onClick={() => setIsOpen(false)}
+                          className='h-12 w-full text-base font-semibold'
+                        >
                           Cancel
                         </Button>
                       </div>
-                      <div className='w-1/2'>
+                      <div
+                        onClick={() => {
+                          handleDeleteQuestion(item.id);
+                          setIsOpen(false);
+                        }}
+                        className='w-1/2'
+                      >
                         <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
                       </div>
                     </DialogFooter>
