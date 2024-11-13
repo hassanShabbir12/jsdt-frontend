@@ -52,6 +52,7 @@ export const useAdminLogin = (): UseAdminLoginReturn => {
       if (data.success) {
         const { user, access_token } = data.data;
 
+        localStorage.setItem('access_token', access_token);
         login(user, access_token);
         navigate('/admin');
       }

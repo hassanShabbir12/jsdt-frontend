@@ -33,7 +33,7 @@ const routes: RouteObject[] = [
       { index: true, element: <Home /> },
       { path: 'pricing-plan', element: <PricingPlan /> },
       { path: 'payment', element: <Payment /> },
-      { path: 'admin-login', element: <AdminLogin /> },
+      { path: 'admin/login', element: <AdminLogin /> },
       { path: 'learner-account', element: <LearnerAccount /> },
       { path: 'learner-teacher', element: <LearnerTeacher /> },
       { path: 'basic-education', element: <BasicEducation /> },
