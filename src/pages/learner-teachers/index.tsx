@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
@@ -30,10 +31,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useGradeList } from '@/hooks/admin/grade/useGradeList';
+import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
+import { useTopicList } from '@/hooks/admin/topic/useTopicList';
+import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
 
 export const LearnerTeacher: FC = () => {
   const navigate = useNavigate();
+  const { grades } = useGradeList();
+  const { subjects } = useSubjectList();
+  const { topics } = useTopicList();
+  const {
+    form,
+    isLoading,
+    onSubmit,
+    isLearner,
+    questions,
+    handleAddQuestion,
+    handleDeleteQuestion,
+    isOpen,
+    setIsOpen,
+  } = useInvestigation();
 
   const onHandleClick = (): void => {
     navigate('/instructions');
@@ -60,149 +79,224 @@ export const LearnerTeacher: FC = () => {
           </p>
         </div>
         <h2 className='mb-8 text-base font-semibold leading-7 text-zinc-800 sm:mb-10 sm:text-2xl md:mb-12 md:text-xl'>
-          Investigation/Exam (Educator&rsquo;s account)
+          Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
         </h2>
-        <div className='-mx-4 mb-8 flex flex-wrap'>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
-            >
-              IEB/NSC
-            </Label>
-            <div className='w-full'>
-              <Select>
-                <SelectTrigger className='w-full'>
-                  <SelectValue className='text-stone-300' placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Fruits</SelectLabel>
-                    <SelectItem value='apple'>Apple</SelectItem>
-                    <SelectItem value='banana'>Banana</SelectItem>
-                    <SelectItem value='blueberry'>Blueberry</SelectItem>
-                    <SelectItem value='grapes'>Grapes</SelectItem>
-                    <SelectItem value='pineapple'>Pineapple</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+        <form onSubmit={onSubmit}>
+          <div className='-mx-4 mb-8 flex flex-wrap'>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='nsc'>IEB/NSC</Label>
+              <div className='w-full'>
+                <Controller
+                  name='nsc'
+                  control={form.control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue className='text-stone-300' placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Type</SelectLabel>
+                          <SelectItem value='IEB'>IEB</SelectItem>
+                          <SelectItem value='NSC'>NSC</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.nsc && (
+                  <span className='text-sm text-red-500'>{form.formState.errors.nsc.message}</span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='grade'>Choose Grade</Label>
+              <div className='w-full'>
+                <Controller
+                  name='grade'
+                  control={form.control}
+                  rules={{ required: 'Grade is required' }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Grades</SelectLabel>
+                          {grades.map((grade) => (
+                            <SelectItem key={grade.id} value={grade.title}>
+                              {grade.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.grade && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.grade.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='subject'>Choose Subject</Label>
+              <div className='w-full'>
+                <Controller
+                  name='subject'
+                  control={form.control}
+                  rules={{ required: 'Subject is required' }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Subjects</SelectLabel>
+                          {subjects.map((subject) => (
+                            <SelectItem key={subject.id} value={subject.title}>
+                              {subject.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.subject && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.subject.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='assessmentType'>Choose Assessment Type</Label>
+              <div className='w-full'>
+                <Controller
+                  name='assessmentType'
+                  control={form.control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Types</SelectLabel>
+                          <SelectItem value='Formative'>Formative</SelectItem>
+                          <SelectItem value='Summative'>Summative</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.assessmentType && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.assessmentType.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='topic'>Choose Topic</Label>
+              <div className='w-full'>
+                <Controller
+                  name='topic'
+                  control={form.control}
+                  rules={{ required: 'Topic is required' }}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Topics</SelectLabel>
+                          {topics.map((topic) => (
+                            <SelectItem key={topic.id} value={topic.title}>
+                              {topic.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {form.formState.errors.topic && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.topic.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            {isLearner && (
+              <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+                <Label htmlFor='difficultyLevel'>Difficulty Level</Label>
+                <div className='w-full'>
+                  <Controller
+                    name='difficultyLevel'
+                    control={form.control}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger className='w-full'>
+                          <SelectValue placeholder='Select Difficulty' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>Difficulty</SelectLabel>
+                            <SelectItem value='Easy'>Easy</SelectItem>
+                            <SelectItem value='Intermediate'>Intermediate</SelectItem>
+                            <SelectItem value='Difficult'>Difficult</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  {form.formState.errors.difficultyLevel && (
+                    <span className='text-sm text-red-500'>
+                      {form.formState.errors.difficultyLevel.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+              <Label htmlFor='totalMarks'>Total Marks</Label>
+              <Controller
+                name='totalMarks'
+                control={form.control}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    type='number'
+                    value={value || ''}
+                    onChange={(e) => onChange(Number(e.target.value))}
+                    placeholder='Enter total marks (e.g., 500, 1000)'
+                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2'
+                  />
+                )}
+              />
+              {form.formState.errors.totalMarks && (
+                <span className='text-sm text-red-500'>
+                  {form.formState.errors.totalMarks.message}
+                </span>
+              )}
             </div>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
+          <div className='mb-8 inline-flex w-full justify-end md:w-full'>
+            <Button
+              type='submit'
+              disabled={isLoading}
+              loading={isLoading}
+              className='w-full md:w-28'
             >
-              Choose Grade
-            </Label>
-            <div className='w-full'>
-              <Select>
-                <SelectTrigger className='w-full'>
-                  <SelectValue placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Grades</SelectLabel>
-                    <SelectItem value='apple'>Grade A</SelectItem>
-                    <SelectItem value='banana'>Grade B</SelectItem>
-                    <SelectItem value='blueberry'>Grade C</SelectItem>
-                    <SelectItem value='grapes'>Grade D</SelectItem>
-                    <SelectItem value='pineapple'>Grade E</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
+              {isLoading ? 'Generating...' : 'Generate'}
+            </Button>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
-            >
-              Choose Subject
-            </Label>
-            <div className='w-full'>
-              <Select>
-                <SelectTrigger className='w-full'>
-                  <SelectValue placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Subjects</SelectLabel>
-                    <SelectItem value='apple'>Subject 01</SelectItem>
-                    <SelectItem value='banana'>Subject 02</SelectItem>
-                    <SelectItem value='blueberry'>Subject 03</SelectItem>
-                    <SelectItem value='grapes'>Subject 04</SelectItem>
-                    <SelectItem value='pineapple'>Subject 05</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
-            >
-              Choose Assessment Type
-            </Label>
-            <div className='w-full'>
-              <Select>
-                <SelectTrigger className='w-full'>
-                  <SelectValue placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Types</SelectLabel>
-                    <SelectItem value='apple'>Type 01</SelectItem>
-                    <SelectItem value='banana'>Type 02</SelectItem>
-                    <SelectItem value='blueberry'>Type 03</SelectItem>
-                    <SelectItem value='grapes'>Type 04</SelectItem>
-                    <SelectItem value='pineapple'>Type 05</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
-            >
-              Choose Topic
-            </Label>
-            <div className='w-full'>
-              <Select>
-                <SelectTrigger className='w-full'>
-                  <SelectValue placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Topics</SelectLabel>
-                    <SelectItem value='apple'>Topic 01</SelectItem>
-                    <SelectItem value='banana'>Topic 02</SelectItem>
-                    <SelectItem value='blueberry'>Topic 03</SelectItem>
-                    <SelectItem value='grapes'>Topic 04</SelectItem>
-                    <SelectItem value='pineapple'>Topic 05</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
-            >
-              Total Marks
-            </Label>
-            <Input
-              id='iem'
-              type='number'
-              placeholder='Enter total marks (e.g., 500, 1000)'
-              className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-            />
-          </div>
-        </div>
+        </form>
         <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between md:flex'>
             <div className='mb-5 block sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
@@ -232,46 +326,14 @@ export const LearnerTeacher: FC = () => {
                       </div>
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 1
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 2
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 3
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
-                      <div className='mb-5 md:mb-10'>
-                        <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                          Question No. 4
-                        </h2>
-                        <p className='m-0'>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                          veniam, quis.
-                        </p>
-                      </div>
+                      {questions.map((item, index) => (
+                        <div className='mb-5 md:mb-10'>
+                          <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                            Question No. {index + 1}
+                          </h2>
+                          <p className='m-0'>{item.question}</p>
+                        </div>
+                      ))}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -300,209 +362,131 @@ export const LearnerTeacher: FC = () => {
                       </div>
                     </DialogHeader>
                     <div className='relative'>
-                      <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Question No. 1
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis.
-                          </p>
+                      {questions.map((item, index) => (
+                        <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
+                          <div className='mb-4 md:mb-7'>
+                            <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                              Question No. {index + 1}
+                            </h2>
+                            <p className='m-0'>{item.question}</p>
+                          </div>
+                          <div className='mb-4 md:mb-7'>
+                            <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                              Answer :
+                            </h2>
+                            <p className='m-0'>{item.answer}</p>
+                          </div>
                         </div>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Answer :
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat?
-                          </p>
-                        </div>
-                      </div>
-                      <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Question No. 2
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis.
-                          </p>
-                        </div>
-                        <div className='mb-4 md:mb-7'>
-                          <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Answer :
-                          </h2>
-                          <p className='m-0'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat?
-                          </p>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='px-2'>
-                <Dialog>
-                  <DialogTrigger asChild>
+
+              {!isLearner && (
+                <>
+                  <div className='px-2'>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant='destructive'
+                          className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                        >
+                          Tax. Grid
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                        <div className='md:px-2'>
+                          <div className='mx-auto max-w-[1340px] md:py-8 lg:pb-24 lg:pt-16'>
+                            <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
+                              Taxonomy Grid
+                            </h1>
+                            <div className='overflow-auto'>
+                              <table className='mx-auto mb-3 w-[625px] border-collapse border border-black lg:w-[825px]'>
+                                <thead>
+                                  <tr>
+                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'></th>
+                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                      Easy
+                                    </th>
+                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                      Intermediate
+                                    </th>
+                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                      Difficult
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {questions.map((item, index) => (
+                                    <tr key={item.id}>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {index + 1}
+                                      </td>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {item.difficultyLevel === 'Easy'
+                                          ? `Marks (${item.totalMarks})`
+                                          : ''}
+                                      </td>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {item.difficultyLevel === 'Intermediate'
+                                          ? `Marks (${item.totalMarks})`
+                                          : ''}
+                                      </td>
+                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                        {item.difficultyLevel === 'Difficult'
+                                          ? `Marks (${item.totalMarks})`
+                                          : ''}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                  <tr>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      Total Marks
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      3
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      3
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      6
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      Percentage
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      21%
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      21%
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      43%
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                  <div className='px-2'>
                     <Button
                       variant='destructive'
+                      onClick={onHandleClick}
                       className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
                     >
-                      Tax. Grid
+                      Instructions
                     </Button>
-                  </DialogTrigger>
-                  <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                    <div className='md:px-2'>
-                      <div className='mx-auto max-w-[1340px] md:py-8 lg:pb-24 lg:pt-16'>
-                        <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
-                          Taxonomy Grid
-                        </h1>
-                        <div className='overflow-auto'>
-                          <table className='mx-auto mb-3 w-[625px] border-collapse border border-black lg:w-[825px]'>
-                            <thead>
-                              <tr>
-                                <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'></th>
-                                <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                  Level 1
-                                </th>
-                                <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                  Level 2
-                                </th>
-                                <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                  Level 3
-                                </th>
-                                <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                  Level 4
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  1.1
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Marks (2)
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  1.2
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Marks (3)
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  2.1
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Marks (1)
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  2.2
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Marks (4)
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  3.1
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Marks (2)
-                                </td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  3.2
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Marks (2)
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'></td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Total Marks
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  3
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  3
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  6
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  2
-                                </td>
-                              </tr>
-                              <tr>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  Percentage
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  21%
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  21%
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  43%
-                                </td>
-                                <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                  15
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <div className='px-2'>
-                <Button
-                  variant='destructive'
-                  onClick={onHandleClick}
-                  className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                >
-                  Instructions
-                </Button>
-              </div>
+                  </div>
+                </>
+              )}
               <div className='px-2'>
                 <Dialog>
                   <DialogTrigger asChild>
@@ -737,108 +721,74 @@ export const LearnerTeacher: FC = () => {
           <Carousel className='relative w-full'>
             <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
             <CarouselContent>
-              <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                  <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
-                  <p className='m-0'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat?
-                  </p>
-                </div>
-              </CarouselItem>
-              <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                  <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 2</h3>
-                  <p className='m-0'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat?
-                  </p>
-                </div>
-              </CarouselItem>
-              <CarouselItem className='carousel-item'>
-                <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                  <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
-                  <p className='m-0'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat?
-                  </p>
-                </div>
-              </CarouselItem>
+              {questions.map((item, index) => (
+                <CarouselItem className='carousel-item' key={index}>
+                  <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                    <h3 className='mb-5 text-2xl font-semibold leading-7'>
+                      Question No. {index + 1}
+                    </h3>
+                    <p className='m-0'>{item.question}</p>
+                  </div>
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
           </Carousel>
         </div>
-        <Button className='mx-auto flex w-80 px-20 py-6 text-base'>Add</Button>
+        <Button onClick={handleAddQuestion} className='mx-auto flex w-80 px-20 py-6 text-base'>
+          Add
+        </Button>
         <div className='pt-12'>
-          <div className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'>
-            <div className='mb-5 flex justify-between'>
-              <span className='inline-block text-2xl font-semibold'>Question No. 1</span>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <i className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'>
-                    <Trash2 />
-                  </i>
-                </DialogTrigger>
-                <DialogContent className='max-w-[620px]'>
-                  <DialogHeader>
-                    <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
-                      Do you want to delete that question?
-                    </DialogTitle>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <div className='w-1/2'>
-                      <Button variant='outline' className='h-12 w-full text-base font-semibold'>
-                        Cancel
-                      </Button>
-                    </div>
-                    <div className='w-1/2'>
-                      <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
-                    </div>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+          {questions.map((item, index) => (
+            <div
+              key={item.id}
+              className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
+            >
+              <div className='mb-5 flex justify-between'>
+                <span className='inline-block text-2xl font-semibold'>
+                  Question No. {index + 1}
+                </span>
+                <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                  <DialogTrigger asChild>
+                    <i
+                      onClick={() => setIsOpen(true)}
+                      className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'
+                    >
+                      <Trash2 />
+                    </i>
+                  </DialogTrigger>
+                  <DialogContent className='max-w-[620px]'>
+                    <DialogHeader>
+                      <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
+                        Do you want to delete that question?
+                      </DialogTitle>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <div className='w-1/2'>
+                        <Button
+                          variant='outline'
+                          onClick={() => setIsOpen(false)}
+                          className='h-12 w-full text-base font-semibold'
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                      <div
+                        onClick={() => {
+                          handleDeleteQuestion(item.id);
+                          setIsOpen(false);
+                        }}
+                        className='w-1/2'
+                      >
+                        <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
+                      </div>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
+              <p className='block text-black'>{item.question}</p>
             </div>
-            <p className='block text-black'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.
-            </p>
-          </div>
-          <div className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'>
-            <div className='mb-5 flex justify-between'>
-              <span className='inline-block text-2xl font-semibold'>Question No. 2</span>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <i className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'>
-                    <Trash2 />
-                  </i>
-                </DialogTrigger>
-                <DialogContent className='max-w-[620px]'>
-                  <DialogHeader>
-                    <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
-                      Do you want to delete that question?
-                    </DialogTitle>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <div className='w-1/2'>
-                      <Button variant='outline' className='h-12 w-full text-base font-semibold'>
-                        Cancel
-                      </Button>
-                    </div>
-                    <div className='w-1/2'>
-                      <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
-                    </div>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <p className='block text-black'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -12,6 +12,7 @@ import { LoginFormData, LoginResponseData, loginSchema, UseLoginReturn } from '@
 import { ApiResponse } from '@/interface/generic';
 import { SigninUserDto } from '@/lib/sdk/jsdt/Api';
 
+type LoginResponse = ApiResponse<LoginResponseData>;
 export const useLogin = (): UseLoginReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -27,20 +28,21 @@ export const useLogin = (): UseLoginReturn => {
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<LoginFormData> = async (data: SigninUserDto) => {
+  const onSubmit: SubmitHandler<LoginFormData> = async (loginData: SigninUserDto) => {
     try {
       setIsLoading(true);
       const response = (await apiClient.auth.usersControllerLogin(
-        data,
-      )) as unknown as ApiResponse<LoginResponseData>;
+        loginData,
+      )) as unknown as ApiResponse<LoginResponse>;
+      const { data } = response;
 
-      localStorage.setItem('client_token', response.data.access_token);
+      localStorage.setItem('client_token', data.data.access_token);
 
       toast({
         title: 'Login success',
         description: 'You are now logged in!',
       });
-      const { user, access_token } = response.data;
+      const { user, access_token } = data.data;
 
       login(user, access_token);
       navigate('/learner-teacher');
