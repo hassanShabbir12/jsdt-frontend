@@ -5,10 +5,12 @@ import { Check, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useAuth } from '@/context/AuthContext';
 import { assetUrl } from '@/lib/asset-url';
 
 export const PricingPlan: FC = () => {
   const navigate = useNavigate();
+  const { setUserRole } = useAuth();
 
   const onHandleClick = (): void => {
     navigate('/payment');
@@ -38,12 +40,14 @@ export const PricingPlan: FC = () => {
           <div className='px-4 text-center'>
             <TabsList className='mb-5 h-12 rounded-4xl border-0 bg-zinc-100 p-0 md:mb-7 md:h-14 lg:mb-10 xl:mb-14'>
               <TabsTrigger
+                onClick={() => setUserRole('learner')}
                 value='learners'
                 className='sm:text-md h-12 rounded-4xl px-5 py-2 text-base font-semibold text-zinc-800 shadow-none data-[state=active]:bg-primary data-[state=active]:text-white md:h-14 md:min-w-52 md:text-xl'
               >
                 Learners
               </TabsTrigger>
               <TabsTrigger
+                onClick={() => setUserRole('teacher')}
                 value='educators'
                 className='sm:text-md h-12 rounded-4xl px-5 py-2 text-base font-semibold text-zinc-800 shadow-none data-[state=active]:bg-primary data-[state=active]:text-white md:h-14 md:min-w-52 md:text-xl'
               >

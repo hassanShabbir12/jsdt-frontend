@@ -73,3 +73,7 @@
     /* @apply font-montserrat; */
   }
 }
+
+button[data-placeholder] {
+  color: #d6d3d1;
+}

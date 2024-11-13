@@ -22,28 +22,34 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useGradeForm } from '@/hooks/admin/useGrades';
+import { useGradeForm } from '@/hooks/admin/grade/useGradeForm';
+import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 
 export const Grades: FC = () => {
   const {
-    register,
-    handleSubmit,
-    errors,
-    loading,
-    open,
-    setOpen,
+    loading: listLoading,
     grades,
+    setGrades,
     deleteGrade,
-    handleEdit,
-    selectedGrade,
-    setSelectedGrade,
-    setValue,
     handleDeleteClick,
     deleteModalOpen,
     setDeleteModalOpen,
     gradeToDelete,
     setGradeToDelete,
-  } = useGradeForm();
+  } = useGradeList();
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    loading: formLoading,
+    open,
+    setOpen,
+    selectedGrade,
+    handleEdit,
+    setSelectedGrade,
+    setValue,
+  } = useGradeForm(grades, setGrades);
 
   return (
     <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
@@ -111,7 +117,7 @@ export const Grades: FC = () => {
                   </div>
                   <div className='w-1/2'>
                     <Button
-                      loading={loading}
+                      loading={formLoading}
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
@@ -188,7 +194,7 @@ export const Grades: FC = () => {
               </div>
               <div className='w-1/2'>
                 <Button
-                  loading={loading}
+                  loading={listLoading}
                   className='h-12 w-full text-base font-semibold'
                   onClick={deleteGrade}
                 >
