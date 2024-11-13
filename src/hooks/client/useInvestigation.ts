@@ -119,7 +119,6 @@ export const useInvestigation = (): UseInvestigationReturn => {
     toast({
       title: 'Question Deleted',
       description: 'The question has been removed successfully.',
-      // variant: 'success',
     });
   };
 
