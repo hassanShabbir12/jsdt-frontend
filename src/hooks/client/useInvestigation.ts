@@ -22,6 +22,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const { user } = useAuth();
+
   const isLearner = user?.role === CreateUserDtoRoleEnum.Learner;
 
   const form = useForm<InvestigationFormData>({

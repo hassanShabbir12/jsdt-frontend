@@ -79,7 +79,7 @@ export const LearnerTeacher: FC = () => {
           </p>
         </div>
         <h2 className='mb-8 text-base font-semibold leading-7 text-zinc-800 sm:mb-10 sm:text-2xl md:mb-12 md:text-xl'>
-          Investigation/Exam (Educator&rsquo;s account)
+          Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
         </h2>
         <form onSubmit={onSubmit}>
           <div className='-mx-4 mb-8 flex flex-wrap'>
