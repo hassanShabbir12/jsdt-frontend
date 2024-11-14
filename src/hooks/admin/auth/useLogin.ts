@@ -40,7 +40,7 @@ export const useAdminLogin = (): UseAdminLoginReturn => {
   const onSubmit = async (userData: AdminLoginFormInputs): Promise<void> => {
     setLoading(true);
     try {
-      const response = (await apiClient.auth.usersControllerLogin(
+      const response = (await apiClient.auth.usersControllerAdminLogin(
         userData,
       )) as unknown as AxiosResponse<LoginResponse>;
       const { data } = response;

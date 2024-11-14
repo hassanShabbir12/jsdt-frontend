@@ -16,7 +16,7 @@ export const LearnerLogin: FC = () => {
       <form onSubmit={onSubmit} noValidate>
         <div className='w-full py-4 sm:py-8 md:py-14'>
           <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
-            <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Login for Learners</h1>
+            <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Login</h1>
             <p className='mb-1 text-black'>Let&apos;s get started</p>
           </div>
           <div className='-mx-2 flex flex-wrap lg:-mx-3'>
