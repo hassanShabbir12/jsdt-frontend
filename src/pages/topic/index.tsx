@@ -108,7 +108,7 @@ export const Topic: FC = () => {
                   <div className='w-1/2'>
                     <Button
                       variant='outline'
-                      className='h-12 w-full text-base font-semibold'
+                      className='h-12 w-full text-base font-semibold hover:!bg-primary'
                       type='button'
                       onClick={() => setOpen(false)}
                     >
@@ -187,7 +187,7 @@ export const Topic: FC = () => {
               <div className='w-1/2'>
                 <Button
                   variant='outline'
-                  className='h-12 w-full text-base font-semibold'
+                  className='h-12 w-full text-base font-semibold hover:!bg-primary'
                   type='button'
                   onClick={() => setDeleteModalOpen(false)}
                 >

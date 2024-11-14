@@ -119,12 +119,10 @@ export const Question: FC = () => {
                           </Select>
                         )}
                       />
-                      {errors.certificateType && (
-                        <span className='text-sm text-red-500'>
-                          {errors.certificateType.message}
-                        </span>
-                      )}
                     </div>
+                    {errors.certificateType && (
+                      <span className='text-sm text-red-500'>{errors.certificateType.message}</span>
+                    )}
                   </div>
                   <div className='mb-4 w-full px-2.5 sm:w-1/2'>
                     <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
@@ -322,7 +320,7 @@ export const Question: FC = () => {
                         loading={processingText}
                         variant='outline'
                         className={cn(
-                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'absolute bottom-10 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
                           'bg-gray-200',
                           {
                             'bg-primary': processingText,
@@ -355,7 +353,7 @@ export const Question: FC = () => {
                         loading={processingTextAnswer}
                         variant='outline'
                         className={cn(
-                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'absolute bottom-10 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
                           'bg-gray-200',
                           {
                             'bg-primary': processingTextAnswer,
@@ -374,7 +372,7 @@ export const Question: FC = () => {
                       <Button
                         type='button'
                         variant='outline'
-                        className='h-12 w-full text-base font-semibold hover:bg-primary hover:text-white'
+                        className='h-12 w-full text-base font-semibold hover:!bg-primary hover:text-white'
                         onClick={() => {
                           setModalOpen(false);
                           resetFormFields();
@@ -447,7 +445,7 @@ export const Question: FC = () => {
                 <div className='w-1/2'>
                   <Button
                     variant='outline'
-                    className='h-12 w-full text-base font-semibold'
+                    className='h-12 w-full text-base font-semibold hover:!bg-primary'
                     onClick={() => setDeleteModalOpen(false)}
                   >
                     Cancel
