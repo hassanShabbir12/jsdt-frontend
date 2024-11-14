@@ -1,19 +1,18 @@
-import axios from 'axios';
-
 import { JsdtAPI } from '@/lib/sdk/jsdt/Api';
 
 import { setupInterceptors } from '../config/interceptors';
 
-const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://34.56.32.71/api',
-  timeout: 10000,
-});
+export class ExtendedJsdtAPI extends JsdtAPI<unknown> {
+  constructor() {
+    super({
+      baseURL: import.meta.env.VITE_API_BASE_URL || 'https://34.56.32.71/',
+      timeout: 10000,
+    });
 
-// Attach interceptors for request deduplication, error handling, and retry logic
-setupInterceptors(axiosInstance);
+    // Set up interceptors on the instance after creation
+    setupInterceptors(this.instance);
+  }
+}
 
-// Initialize the JsdtAPI client with the configured axios instance
-axios.defaults = axiosInstance.defaults;
-
-// Create JsdtAPI client without directly passing axios instance
-export const apiClient = new JsdtAPI();
+// Export a single instance
+export const apiClient = new ExtendedJsdtAPI();

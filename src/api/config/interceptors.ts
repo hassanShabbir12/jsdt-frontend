@@ -8,7 +8,7 @@ export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
   axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     addPendingRequest(config);
     // Set the Authorization token, if available
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('access_token');
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

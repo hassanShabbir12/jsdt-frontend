@@ -285,7 +285,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Jsdt Backend
  * @version 1.0.0
- * @baseUrl https://34.56.32.71
+ * @baseUrl https://34.56.32.71/
  * @contact
  *
  * JSDT is an examination management platform.
@@ -320,6 +320,23 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
     usersControllerLogin: (data: SigninUserDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/auth`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Auth
+     * @name UsersControllerAdminLogin
+     * @summary Admin Log In
+     * @request POST:/auth/admin-login
+     */
+    usersControllerAdminLogin: (data: SigninUserDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/auth/admin-login`,
         method: 'POST',
         body: data,
         type: ContentType.Json,
@@ -682,24 +699,6 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * No description
      *
      * @tags Questions
-     * @name QuestionsControllerCreate
-     * @request POST:/questions
-     * @secure
-     */
-    questionsControllerCreate: (data: CreateQuestionDto, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/questions`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Questions
      * @name QuestionsControllerGetQuestion
      * @request GET:/questions
      * @secure
@@ -721,6 +720,24 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         method: 'GET',
         query: query,
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Questions
+     * @name QuestionsControllerCreate
+     * @request POST:/questions
+     * @secure
+     */
+    questionsControllerCreate: (data: CreateQuestionDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/questions`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 

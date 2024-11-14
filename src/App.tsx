@@ -8,7 +8,7 @@ function App(): ReactElement {
   return (
     <>
       <Toaster />
-      <AppRoutes />;
+      <AppRoutes />
     </>
   );
 }
