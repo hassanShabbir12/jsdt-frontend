@@ -27,7 +27,9 @@ export const LearnerSignUp: FC = () => {
       <form onSubmit={onSubmit} noValidate>
         <div className='w-full py-4 sm:py-8 md:py-16'>
           <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
-            <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Sign up for Learners</h1>
+            <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>
+              Sign up for {userRole === 'teacher' ? 'Educators' : 'Learners'}
+            </h1>
             <p className='mb-1 text-black'>Let’s get started with 5 days free trial</p>
           </div>
           <div className='mb-4 w-full md:mb-5'>
