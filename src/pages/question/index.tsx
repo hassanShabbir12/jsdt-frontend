@@ -143,7 +143,7 @@ export const Question: FC = () => {
                               <SelectGroup>
                                 <SelectLabel>Grades</SelectLabel>
                                 {grades.map((grade) => (
-                                  <SelectItem key={grade.id} value={grade.id}>
+                                  <SelectItem key={grade.id} value={grade.title}>
                                     {grade.title}
                                   </SelectItem>
                                 ))}
@@ -204,7 +204,7 @@ export const Question: FC = () => {
                               <SelectGroup>
                                 <SelectLabel>Topics</SelectLabel>
                                 {topics.map((topic) => (
-                                  <SelectItem key={topic.id} value={topic.id}>
+                                  <SelectItem key={topic.id} value={topic.title}>
                                     {topic.title}
                                   </SelectItem>
                                 ))}
@@ -235,7 +235,7 @@ export const Question: FC = () => {
                               <SelectGroup>
                                 <SelectLabel>Subjects</SelectLabel>
                                 {subjects.map((subject) => (
-                                  <SelectItem key={subject.id} value={subject.id}>
+                                  <SelectItem key={subject.id} value={subject.title}>
                                     {subject.title}
                                   </SelectItem>
                                 ))}
