@@ -187,7 +187,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'https://34.56.32.71/',
+      baseURL: axiosConfig.baseURL || 'http://localhost:3000',
     });
     this.secure = secure;
     this.format = format;
@@ -285,7 +285,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Jsdt Backend
  * @version 1.0.0
- * @baseUrl https://34.56.32.71
+ * @baseUrl http://localhost:3000
  * @contact
  *
  * JSDT is an examination management platform.
@@ -699,14 +699,26 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * No description
      *
      * @tags Questions
-     * @name QuestionsControllerFindAll
+     * @name QuestionsControllerGetQuestion
      * @request GET:/questions
      * @secure
      */
-    questionsControllerFindAll: (params: RequestParams = {}) =>
+    questionsControllerGetQuestion: (
+      query?: {
+        certificateType?: string;
+        grade?: string;
+        subject?: string;
+        assessmentType?: string;
+        topic?: string;
+        difficultyLevel?: string;
+        totalMarks?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/questions`,
         method: 'GET',
+        query: query,
         secure: true,
         ...params,
       }),
