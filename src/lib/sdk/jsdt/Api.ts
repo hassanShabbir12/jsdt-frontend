@@ -285,7 +285,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Jsdt Backend
  * @version 1.0.0
- * @baseUrl http://localhost:3000
+ * @baseUrl https://34.56.32.71
  * @contact
  *
  * JSDT is an examination management platform.
