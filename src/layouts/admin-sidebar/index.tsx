@@ -12,7 +12,8 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
 
   const onHandleClick = (): void => {
-    navigate('/admin-login');
+    localStorage.clear();
+    navigate('/admin/login');
   };
 
   const location = useLocation();

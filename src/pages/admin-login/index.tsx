@@ -5,7 +5,6 @@ import { Label } from '@radix-ui/react-label';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { useAdminLogin } from '@/hooks/admin/auth/useLogin';
 
@@ -63,10 +62,7 @@ export const AdminLogin: FC = () => {
 
         {/* Checkbox & Link */}
         <div className='mb-6 flex items-center justify-between'>
-          <div className='flex items-center gap-x-1.5 md:gap-x-2.5'>
-            <Checkbox />
-            <h3>Keep me logged in</h3>
-          </div>
+          <div className='flex items-center gap-x-1.5 md:gap-x-2.5'></div>
           <Link
             to='/forgot-password'
             className='text-sm font-semibold text-blue-500 underline hover:text-blue-700'
