@@ -309,20 +309,20 @@ export const Question: FC = () => {
                     <Textarea
                       {...register('question')}
                       className='h-44 w-full resize-none rounded-xl border border-solid
-                        border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
+                        border-neutral-200 p-4 pb-16 text-sm text-zinc-800 placeholder:text-stone-300'
                       placeholder='Type here...'
                     />
                     {errors.question && (
                       <span className='text-sm text-red-500'>{errors.question.message}</span>
                     )}
-                    <div className='absolute bottom-0 mt-2'>
+                    <div className='absolute bottom-0.5 left-0.5 right-5 z-10 p-4'>
                       <Button
                         type='button'
                         onClick={() => handleProcessText('question')}
                         loading={processingText}
                         variant='outline'
                         className={cn(
-                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
                           'bg-gray-200',
                           {
                             'bg-primary': processingText,
@@ -348,14 +348,14 @@ export const Question: FC = () => {
                     {errors.answer && (
                       <span className='text-sm text-red-500'>{errors.answer.message}</span>
                     )}
-                    <div className='absolute bottom-0 mt-2'>
+                    <div className='absolute bottom-0.5 left-0.5 right-5 z-10 p-4'>
                       <Button
                         type='button'
                         onClick={() => handleProcessText('answer')}
                         loading={processingTextAnswer}
                         variant='outline'
                         className={cn(
-                          'absolute bottom-5 left-4 cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
                           'bg-gray-200',
                           {
                             'bg-primary': processingTextAnswer,
