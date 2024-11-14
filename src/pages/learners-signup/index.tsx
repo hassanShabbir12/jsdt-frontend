@@ -238,7 +238,7 @@ export const LearnerSignUp: FC = () => {
                 <Input
                   {...form.register('password')}
                   id='iem'
-                  className='h-10 rounded-lg border-neutral-200 py-2 pl-3 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
+                  className='h-10 rounded-lg border-neutral-200 py-2 pl-3 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-3'
                   placeholder='.....................'
                 />
                 <i className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3 '>

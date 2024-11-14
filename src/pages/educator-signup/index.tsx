@@ -18,7 +18,7 @@ export const EducatorSignUp: FC = () => (
   <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 sm:w-1/2 lg:p-6 xl:p-10'>
     <div className='w-full py-4 sm:py-8 md:py-16'>
       <div className='mb-8 overflow-hidden pt-1 md:mb-10'>
-        <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Sign up for educators</h1>
+        <h1 className='mb-2 text-2xl font-semibold text-zinc-800'>Sign up for Educators</h1>
         <p className='mb-1 text-black'>Let’s get started with 5 days free trial</p>
       </div>
       <div className='mb-4 w-full md:mb-5 lg:mb-6'>
@@ -195,7 +195,7 @@ export const EducatorSignUp: FC = () => (
           <div className='relative'>
             <Input
               id='iem'
-              className='h-10 rounded-lg border-neutral-200 py-2 pl-4 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
+              className='placeholder-styled h-10 rounded-lg border-neutral-200 py-2 pl-4 pr-12 text-sm text-black shadow-none lg:h-12 lg:pl-5'
               placeholder='.........................'
             />
             <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>

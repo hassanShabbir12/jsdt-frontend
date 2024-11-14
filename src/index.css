@@ -77,3 +77,10 @@
 button[data-placeholder] {
   color: #d6d3d1;
 }
+
+.placeholder-styled::placeholder {
+  font-weight: bold;
+  color: #a8a29e;
+  font-size: 30px;
+  line-height: 1;
+}

@@ -47,7 +47,7 @@ export const LearnerTeacher: FC = () => {
             <TriangleAlert />
           </span>
           <p className='text-red-700'>
-            This account is currently deactivated due to failed payment.
+            This account is currently deactivated due to failed payment.{' '}
             <Link
               className='group inline-flex items-center gap-x-1 font-bold text-red-700 underline transition-all duration-300 hover:text-red-500'
               to='/payment'
@@ -199,7 +199,7 @@ export const LearnerTeacher: FC = () => {
               id='iem'
               type='number'
               placeholder='Enter total marks (e.g., 500, 1000)'
-              className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+              className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             />
           </div>
         </div>
@@ -547,7 +547,7 @@ export const LearnerTeacher: FC = () => {
                           </div>
                         </div>
                         <div className='mx-auto flex max-w-80 justify-center'>
-                          <Button className='h-12 w-52 text-base font-semibold md:w-80'>
+                          <Button className='h-12 w-52 bg-blue-500 text-base font-semibold text-white transition duration-300 hover:bg-opacity-80 md:w-80'>
                             Upload
                           </Button>
                         </div>
@@ -708,7 +708,7 @@ export const LearnerTeacher: FC = () => {
                         </div>
                       </div>
                       <div className='mx-auto mb-8 flex max-w-80 justify-center'>
-                        <Button className='h-12 w-52 text-base font-semibold md:w-80'>
+                        <Button className='h-12 w-52 bg-blue-500 text-base font-semibold text-white transition duration-300 hover:bg-opacity-80 md:w-80'>
                           Upload
                         </Button>
                       </div>
