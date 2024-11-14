@@ -291,7 +291,7 @@ export const Question: FC = () => {
                         className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm 
           text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm 
           placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 
-          lg:px-6 [&::-webkit-inner-spin-button]:appearance-none 
+          lg:px-3 [&::-webkit-inner-spin-button]:appearance-none 
           [&::-webkit-outer-spin-button]:appearance-none'
                         placeholder='Enter total marks'
                       />

@@ -66,7 +66,10 @@ export const Sidebar: FC = () => {
 
   const handleSidebar = (type: number): void => {
     setActiveIndex(type);
-    handleToggle();
+
+    if (window.innerWidth <= 768) {
+      handleToggle();
+    }
   };
 
   return (
