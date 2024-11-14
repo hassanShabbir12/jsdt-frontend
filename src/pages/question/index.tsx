@@ -305,17 +305,17 @@ export const Question: FC = () => {
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
-                  <div className='relative'>
+                  <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
                     <Textarea
                       {...register('question')}
-                      className='h-44 w-full resize-none rounded-xl border border-solid
-                        border-neutral-200 p-4 pb-16 text-sm text-zinc-800 placeholder:text-stone-300'
+                      className='h-32 w-full resize-none rounded-xl border border-solid
+                        border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
                       placeholder='Type here...'
                     />
                     {errors.question && (
                       <span className='text-sm text-red-500'>{errors.question.message}</span>
                     )}
-                    <div className='absolute bottom-0.5 left-0.5 right-5 z-10 p-4'>
+                    <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
                         onClick={() => handleProcessText('question')}
@@ -338,17 +338,17 @@ export const Question: FC = () => {
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Answer
                   </Label>
-                  <div className='relative'>
+                  <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
                     <Textarea
                       {...register('answer')}
-                      className='h-44 w-full resize-none rounded-xl border border-solid
+                      className='h-32 w-full resize-none rounded-xl border border-solid
                         border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
                       placeholder='Type here...'
                     />
                     {errors.answer && (
                       <span className='text-sm text-red-500'>{errors.answer.message}</span>
                     )}
-                    <div className='absolute bottom-0.5 left-0.5 right-5 z-10 p-4'>
+                    <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
                         onClick={() => handleProcessText('answer')}
