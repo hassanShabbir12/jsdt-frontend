@@ -13,11 +13,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useAuth } from '@/context/AuthContext';
 import { useSignup } from '@/hooks/client/useSignup';
 import { Gender, NSCType } from '@/interface/auth';
+import { cn } from '@/lib/utils';
 
 export const LearnerSignUp: FC = () => {
   const { form, isLoading, onSubmit, isTeacher } = useSignup();
+  const { userRole } = useAuth();
 
   return (
     <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 sm:w-1/2 lg:p-6 xl:p-10'>
@@ -119,6 +122,49 @@ export const LearnerSignUp: FC = () => {
                 )}
               </div>
             )}
+            {isTeacher && (
+              <>
+                <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
+                  <Label
+                    htmlFor='subjectTeaching'
+                    className='mb-2 block font-normal leading-none text-black lg:text-base'
+                  >
+                    Subject Teaching
+                  </Label>
+                  <Input
+                    {...form.register('subjectTeaching')}
+                    id='subjectTeaching'
+                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                    placeholder='Enter subject you teach'
+                  />
+                  {form.formState.errors.subjectTeaching && (
+                    <span className='text-sm text-red-500'>
+                      {form.formState.errors.subjectTeaching.message}
+                    </span>
+                  )}
+                </div>
+
+                <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
+                  <Label
+                    htmlFor='gradeTeaching'
+                    className='mb-2 block font-normal leading-none text-black lg:text-base'
+                  >
+                    Grade Teaching
+                  </Label>
+                  <Input
+                    {...form.register('gradeTeaching')}
+                    id='gradeTeaching'
+                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                    placeholder='Enter grade you teach'
+                  />
+                  {form.formState.errors.gradeTeaching && (
+                    <span className='text-sm text-red-500'>
+                      {form.formState.errors.gradeTeaching.message}
+                    </span>
+                  )}
+                </div>
+              </>
+            )}
             <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
               <Label
                 htmlFor='province'
@@ -184,7 +230,12 @@ export const LearnerSignUp: FC = () => {
                 <span className='text-sm text-red-500'>{form.formState.errors.gender.message}</span>
               )}
             </div>
-            <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
+            <div
+              className={cn(
+                'mb-4 w-full px-2 md:mb-5 lg:mb-6',
+                userRole === 'teacher' ? 'lg:w-full' : 'lg:w-1/2 lg:px-3',
+              )}
+            >
               <Label
                 htmlFor='nsc'
                 className='mb-2 block font-normal leading-none text-black lg:text-base'
@@ -251,49 +302,6 @@ export const LearnerSignUp: FC = () => {
                 </span>
               )}
             </div>
-            {isTeacher && (
-              <>
-                <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
-                  <Label
-                    htmlFor='subjectTeaching'
-                    className='mb-2 block font-normal leading-none text-black lg:text-base'
-                  >
-                    Subject Teaching
-                  </Label>
-                  <Input
-                    {...form.register('subjectTeaching')}
-                    id='subjectTeaching'
-                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-                    placeholder='Enter subject you teach'
-                  />
-                  {form.formState.errors.subjectTeaching && (
-                    <span className='text-sm text-red-500'>
-                      {form.formState.errors.subjectTeaching.message}
-                    </span>
-                  )}
-                </div>
-
-                <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
-                  <Label
-                    htmlFor='gradeTeaching'
-                    className='mb-2 block font-normal leading-none text-black lg:text-base'
-                  >
-                    Grade Teaching
-                  </Label>
-                  <Input
-                    {...form.register('gradeTeaching')}
-                    id='gradeTeaching'
-                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-                    placeholder='Enter grade you teach'
-                  />
-                  {form.formState.errors.gradeTeaching && (
-                    <span className='text-sm text-red-500'>
-                      {form.formState.errors.gradeTeaching.message}
-                    </span>
-                  )}
-                </div>
-              </>
-            )}
             <div className='flex w-full justify-center px-3'>
               <Button
                 type='submit'
