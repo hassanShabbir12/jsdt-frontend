@@ -17,7 +17,9 @@ export const Sidebar: FC = () => {
   };
 
   const location = useLocation();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(() =>
+    Number.parseInt(localStorage.getItem('activeIndex') || '0', 10),
+  );
   const [isToggled, setIsToggled] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +51,10 @@ export const Sidebar: FC = () => {
   };
 
   useEffect(() => {
-    setActiveIndex(determineActiveIndex);
+    const newIndex = determineActiveIndex();
+
+    setActiveIndex(newIndex);
+    localStorage.setItem('activeIndex', newIndex.toString());
   }, [location]);
 
   useEffect(() => {
@@ -66,6 +71,7 @@ export const Sidebar: FC = () => {
 
   const handleSidebar = (type: number): void => {
     setActiveIndex(type);
+    localStorage.setItem('activeIndex', type.toString());
 
     if (window.innerWidth <= 768) {
       handleToggle();

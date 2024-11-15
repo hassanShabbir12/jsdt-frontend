@@ -30,7 +30,7 @@ export const EducatorSignUp: FC = () => (
         </Label>
         <Input
           id='name'
-          className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+          className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
           placeholder='Username'
         />
       </div>
@@ -44,7 +44,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='name'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Enter your name'
           />
         </div>
@@ -57,7 +57,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='f-name'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Enter your family name'
           />
         </div>
@@ -70,7 +70,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='age'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Enter your age'
           />
         </div>
@@ -83,7 +83,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='subject-teaching'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Subject (e.g., Science, History)'
           />
         </div>
@@ -96,7 +96,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='grade'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Enter your teaching grade'
           />
         </div>
@@ -109,7 +109,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='province'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Enter your province'
           />
         </div>
@@ -122,7 +122,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='school-name'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='Enter your School name'
           />
         </div>
@@ -181,7 +181,7 @@ export const EducatorSignUp: FC = () => (
           </Label>
           <Input
             id='iem'
-            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+            className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
             placeholder='example@gmail.com'
           />
         </div>
@@ -195,7 +195,7 @@ export const EducatorSignUp: FC = () => (
           <div className='relative'>
             <Input
               id='iem'
-              className='h-10 rounded-lg border-neutral-200 py-2 pl-4 pr-12 text-sm text-black shadow-none lg:h-12 lg:pl-5'
+              className='h-10 rounded-lg border-neutral-200 py-2 pl-4 pr-12 text-sm text-black shadow-none lg:h-12 lg:pl-3'
               placeholder='.........................'
             />
             <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
