@@ -724,7 +724,7 @@ export const LearnerTeacher: FC = () => {
               <CarouselContent>
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
-                    <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                    <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <h3 className='mb-5 text-2xl font-semibold leading-7'>
                         Question No. {index + 1}
                       </h3>
