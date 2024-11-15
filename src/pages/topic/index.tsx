@@ -49,6 +49,7 @@ export const Topic: FC = () => {
     handleEdit,
     setSelectedTopic,
     setValue,
+    reset,
   } = useTopicForm(topics, setTopics);
 
   return (
@@ -62,6 +63,7 @@ export const Topic: FC = () => {
               setOpen(open);
               if (!open) {
                 setSelectedTopic(null);
+                reset();
               }
             }}
           >
@@ -110,7 +112,10 @@ export const Topic: FC = () => {
                       variant='outline'
                       className='h-12 w-full text-base font-semibold hover:!bg-primary'
                       type='button'
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        reset();
+                      }}
                     >
                       Cancel
                     </Button>

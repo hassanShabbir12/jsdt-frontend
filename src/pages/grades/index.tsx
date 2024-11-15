@@ -49,6 +49,7 @@ export const Grades: FC = () => {
     handleEdit,
     setSelectedGrade,
     setValue,
+    reset,
   } = useGradeForm(grades, setGrades);
 
   return (
@@ -62,6 +63,7 @@ export const Grades: FC = () => {
               setOpen(open);
               if (!open) {
                 setSelectedGrade(null);
+                reset();
               }
             }}
           >
@@ -110,7 +112,10 @@ export const Grades: FC = () => {
                       variant='outline'
                       className='h-12 w-full text-base font-semibold hover:!bg-primary'
                       type='button'
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        reset();
+                      }}
                     >
                       Cancel
                     </Button>

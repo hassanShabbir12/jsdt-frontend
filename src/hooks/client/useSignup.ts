@@ -15,6 +15,7 @@ export const useSignup = (): UseSignupReturn => {
   const { userRole } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const validRole = userRole === 'teacher' ? 'TEACHER' : 'LEARNER';
 
@@ -90,5 +91,7 @@ export const useSignup = (): UseSignupReturn => {
     isLoading,
     onSubmit: form.handleSubmit(onSubmit),
     isTeacher: validRole === 'TEACHER',
+    showPassword,
+    setShowPassword,
   };
 };
