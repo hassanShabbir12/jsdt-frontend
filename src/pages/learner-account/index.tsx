@@ -32,14 +32,14 @@ import {
 import { assetUrl } from '@/lib/asset-url';
 
 export const LearnerAccount: FC = () => (
-  <section className='pb-10 pt-14'>
+  <section className='pb-10 pt-5'>
     <div className='mx-auto max-w-[1340px] px-3'>
       <div className='mb-5 flex items-center rounded-xl bg-red-100 px-2.5 py-1 text-sm md:text-base'>
         <span className='mr-2 inline-block text-red-700'>
           <TriangleAlert />
         </span>
         <p className='text-red-700'>
-          This account is currently deactivated due to failed payment.
+          This account is currently deactivated due to failed payment.{' '}
           <Link
             className='group inline-flex items-center gap-x-1 font-bold text-red-700 underline transition-all duration-300 hover:text-red-500'
             to='/payment'
@@ -210,12 +210,12 @@ export const LearnerAccount: FC = () => (
             id='iem'
             type='number'
             placeholder='Enter total marks (e.g., 500, 1000)'
-            className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+            className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
           />
         </div>
       </div>
       <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-        <div className='mb-10 block items-center justify-between md:flex'>
+        <div className='mb-10 block items-center justify-between lg:flex'>
           <div className='mb-5 block sm:mb-0 sm:justify-start sm:gap-x-3 md:flex'>
             <div className='px-2'>
               <Dialog>
@@ -353,7 +353,7 @@ export const LearnerAccount: FC = () => (
               </Dialog>
             </div>
           </div>
-          <div className='flex gap-x-2 sm:gap-x-4'>
+          <div className='flex gap-x-2 pt-4 sm:gap-x-4'>
             <div className='h-6 w-6 cursor-pointer'>
               <img
                 src={assetUrl('assets/img/home/attachment.svg')}

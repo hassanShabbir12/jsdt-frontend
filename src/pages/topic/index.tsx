@@ -108,7 +108,7 @@ export const Topic: FC = () => {
                   <div className='w-1/2'>
                     <Button
                       variant='outline'
-                      className='h-12 w-full text-base font-semibold'
+                      className='h-12 w-full text-base font-semibold hover:!bg-primary'
                       type='button'
                       onClick={() => setOpen(false)}
                     >
@@ -143,21 +143,23 @@ export const Topic: FC = () => {
                 <TableRow key={index}>
                   <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
                   <TableCell className='border-l border-solid border-zinc-300'>
-                    <i
-                      onClick={() => handleDeleteClick(item)}
-                      className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                    >
-                      <Trash2 />
-                    </i>
-                    <i
-                      onClick={() => {
-                        handleEdit(item);
-                        setValue('title', item.title);
-                      }}
-                      className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                    >
-                      <Edit />
-                    </i>
+                    <div className='flex gap-2'>
+                      <i
+                        onClick={() => {
+                          handleEdit(item);
+                          setValue('title', item.title);
+                        }}
+                        className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                      >
+                        <Edit />
+                      </i>
+                      <i
+                        onClick={() => handleDeleteClick(item)}
+                        className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                      >
+                        <Trash2 />
+                      </i>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -185,7 +187,7 @@ export const Topic: FC = () => {
               <div className='w-1/2'>
                 <Button
                   variant='outline'
-                  className='h-12 w-full text-base font-semibold'
+                  className='h-12 w-full text-base font-semibold hover:!bg-primary'
                   type='button'
                   onClick={() => setDeleteModalOpen(false)}
                 >

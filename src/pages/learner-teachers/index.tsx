@@ -59,14 +59,14 @@ export const LearnerTeacher: FC = () => {
   };
 
   return (
-    <section className='pb-10 pt-14'>
+    <section className='pb-10 pt-5'>
       <div className='mx-auto max-w-[1340px] px-3'>
         <div className='mb-5 flex items-center rounded-xl bg-red-100 px-2.5 py-1 text-sm md:text-base'>
           <span className='mr-2 inline-block text-red-700'>
             <TriangleAlert />
           </span>
           <p className='text-red-700'>
-            This account is currently deactivated due to failed payment.
+            This account is currently deactivated due to failed payment.{' '}
             <Link
               className='group inline-flex items-center gap-x-1 font-bold text-red-700 underline transition-all duration-300 hover:text-red-500'
               to='/payment'
@@ -297,10 +297,10 @@ export const LearnerTeacher: FC = () => {
             </Button>
           </div>
         </form>
-        <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-          <div className='block items-center justify-between md:flex'>
-            <div className='mb-5 block sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
-              <div className='px-2'>
+        <div className='relative mb-10 min-h-72 rounded-xl border border-solid border-neutral-200 p-3'>
+          <div className='block items-center justify-between lg:flex'>
+            <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
+              <div className='mb-1 px-2'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -338,7 +338,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='px-2'>
+              <div className='mb-1 px-2'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -385,7 +385,7 @@ export const LearnerTeacher: FC = () => {
 
               {!isLearner && (
                 <>
-                  <div className='px-2'>
+                  <div className='mb-1 px-2'>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button
@@ -476,7 +476,7 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className='px-2'>
+                  <div className='mb-1 px-2'>
                     <Button
                       variant='destructive'
                       onClick={onHandleClick}
@@ -487,7 +487,7 @@ export const LearnerTeacher: FC = () => {
                   </div>
                 </>
               )}
-              <div className='px-2'>
+              <div className='mb-1 px-2'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -718,22 +718,24 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
           </div>
-          <Carousel className='relative w-full'>
-            <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
-            <CarouselContent>
-              {questions.map((item, index) => (
-                <CarouselItem className='carousel-item' key={index}>
-                  <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                    <h3 className='mb-5 text-2xl font-semibold leading-7'>
-                      Question No. {index + 1}
-                    </h3>
-                    <p className='m-0'>{item.question}</p>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
-          </Carousel>
+          {questions.length !== 0 ? (
+            <Carousel className='relative w-full'>
+              <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
+              <CarouselContent>
+                {questions.map((item, index) => (
+                  <CarouselItem className='carousel-item' key={index}>
+                    <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                      <h3 className='mb-5 text-2xl font-semibold leading-7'>
+                        Question No. {index + 1}
+                      </h3>
+                      <p className='m-0'>{item.question}</p>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
+            </Carousel>
+          ) : null}
         </div>
         <Button onClick={handleAddQuestion} className='mx-auto flex w-80 px-20 py-6 text-base'>
           Add

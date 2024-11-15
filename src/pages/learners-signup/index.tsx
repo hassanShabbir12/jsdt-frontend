@@ -42,7 +42,7 @@ export const LearnerSignUp: FC = () => {
             <Input
               {...form.register('userName')}
               id='userName'
-              className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+              className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
               placeholder='Username'
             />
             {form.formState.errors.userName && (
@@ -60,7 +60,7 @@ export const LearnerSignUp: FC = () => {
               <Input
                 {...form.register('name')}
                 id='name'
-                className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                 placeholder='Enter your name'
               />
               {form.formState.errors.name && (
@@ -77,7 +77,7 @@ export const LearnerSignUp: FC = () => {
               <Input
                 {...form.register('familyName')}
                 id='f-name'
-                className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                 placeholder='Enter your family name'
               />
               {form.formState.errors.familyName && (
@@ -96,13 +96,34 @@ export const LearnerSignUp: FC = () => {
               <Input
                 {...form.register('age')}
                 id='age'
-                className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                 placeholder='Enter your age'
               />
               {form.formState.errors.age && (
                 <span className='text-sm text-red-500'>{form.formState.errors.age.message}</span>
               )}
             </div>
+            {!isTeacher && (
+              <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
+                <Label
+                  htmlFor='grade'
+                  className='mb-2 block font-normal leading-none text-black lg:text-base'
+                >
+                  Grade
+                </Label>
+                <Input
+                  {...form.register('grade')}
+                  id='grade'
+                  className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
+                  placeholder='Your current grade'
+                />
+                {form.formState.errors.grade && (
+                  <span className='text-sm text-red-500'>
+                    {form.formState.errors.grade.message}
+                  </span>
+                )}
+              </div>
+            )}
             {isTeacher && (
               <>
                 <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
@@ -146,27 +167,6 @@ export const LearnerSignUp: FC = () => {
                 </div>
               </>
             )}
-            {!isTeacher && (
-              <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
-                <Label
-                  htmlFor='grade'
-                  className='mb-2 block font-normal leading-none text-black lg:text-base'
-                >
-                  Grade
-                </Label>
-                <Input
-                  {...form.register('grade')}
-                  id='grade'
-                  className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-                  placeholder='Your current grade'
-                />
-                {form.formState.errors.grade && (
-                  <span className='text-sm text-red-500'>
-                    {form.formState.errors.grade.message}
-                  </span>
-                )}
-              </div>
-            )}
             <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
               <Label
                 htmlFor='province'
@@ -177,7 +177,7 @@ export const LearnerSignUp: FC = () => {
               <Input
                 {...form.register('province')}
                 id='province'
-                className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                 placeholder='Enter your province'
               />
               {form.formState.errors.province && (
@@ -196,7 +196,7 @@ export const LearnerSignUp: FC = () => {
               <Input
                 {...form.register('schoolName')}
                 id='school-name'
-                className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                 placeholder='Enter your School name'
               />
               {form.formState.errors.schoolName && (
@@ -273,7 +273,7 @@ export const LearnerSignUp: FC = () => {
               <Input
                 {...form.register('email')}
                 id='iem'
-                className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                 placeholder='example@gmail.com'
               />
               {form.formState.errors.email && (
@@ -291,7 +291,7 @@ export const LearnerSignUp: FC = () => {
                 <Input
                   {...form.register('password')}
                   id='iem'
-                  className='h-10 rounded-lg border-neutral-200 py-2 pl-3 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
+                  className='h-10 rounded-lg border-neutral-200 py-2 pl-3 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-3'
                   placeholder='.....................'
                 />
                 <i className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3 '>
