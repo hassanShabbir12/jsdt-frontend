@@ -310,9 +310,6 @@ export const Question: FC = () => {
                         border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
                       placeholder='Type here...'
                     />
-                    {errors.question && (
-                      <span className='text-sm text-red-500'>{errors.question.message}</span>
-                    )}
                     <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
@@ -331,6 +328,9 @@ export const Question: FC = () => {
                       </Button>
                     </div>
                   </div>
+                  {errors.question && (
+                    <span className='text-sm text-red-500'>{errors.question.message}</span>
+                  )}
                 </div>
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
@@ -343,9 +343,6 @@ export const Question: FC = () => {
                         border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
                       placeholder='Type here...'
                     />
-                    {errors.answer && (
-                      <span className='text-sm text-red-500'>{errors.answer.message}</span>
-                    )}
                     <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
@@ -364,6 +361,9 @@ export const Question: FC = () => {
                       </Button>
                     </div>
                   </div>
+                  {errors.answer && (
+                    <span className='text-sm text-red-500'>{errors.answer.message}</span>
+                  )}
                 </div>
 
                 <DialogFooter>
