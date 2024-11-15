@@ -49,6 +49,7 @@ export const Subjects: FC = () => {
     handleEdit,
     setSelectedSubject,
     setValue,
+    reset,
   } = useSubjectForm(subjects, setSubjects);
 
   return (
@@ -62,6 +63,7 @@ export const Subjects: FC = () => {
               setOpen(open);
               if (!open) {
                 setSelectedSubject(null);
+                reset();
               }
             }}
           >
@@ -110,7 +112,10 @@ export const Subjects: FC = () => {
                       variant='outline'
                       className='h-12 w-full text-base font-semibold hover:!bg-primary'
                       type='button'
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        reset();
+                      }}
                     >
                       Cancel
                     </Button>
