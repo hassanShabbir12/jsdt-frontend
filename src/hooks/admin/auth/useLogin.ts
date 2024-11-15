@@ -14,8 +14,19 @@ import { ApiResponse } from '@/interface/generic';
 
 // Define validation schema using zod
 const adminLoginSchema = z.object({
-  email: z.string().min(1, 'Email is required'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Please enter a valid email address')
+    .trim()
+    .toLowerCase(),
+  password: z
+    .string()
+    .min(1, 'Password is required')
+    .min(6, 'Password must be at least 6 characters')
+    .trim()
+    .refine((value) => value.trim().length > 0, 'Password cannot be empty or just spaces')
+    .transform((value) => value.trim()),
 });
 
 type AdminLoginFormInputs = z.infer<typeof adminLoginSchema>;

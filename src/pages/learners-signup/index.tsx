@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,7 +19,7 @@ import { Gender, NSCType } from '@/interface/auth';
 import { cn } from '@/lib/utils';
 
 export const LearnerSignUp: FC = () => {
-  const { form, isLoading, onSubmit, isTeacher } = useSignup();
+  const { form, isLoading, onSubmit, isTeacher, showPassword, setShowPassword } = useSignup();
   const { userRole } = useAuth();
 
   return (
@@ -282,7 +282,7 @@ export const LearnerSignUp: FC = () => {
             </div>
             <div className='mb-4 w-full px-2 md:mb-5 lg:mb-6 lg:w-1/2 lg:px-3'>
               <Label
-                htmlFor='iem'
+                htmlFor='password'
                 className='mb-2 block font-normal leading-none text-black lg:text-base'
               >
                 Password
@@ -290,13 +290,19 @@ export const LearnerSignUp: FC = () => {
               <div className='relative'>
                 <Input
                   {...form.register('password')}
-                  id='iem'
+                  id='password'
+                  type={showPassword ? 'text' : 'password'}
                   className='h-10 rounded-lg border-neutral-200 py-2 pl-3 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-3'
-                  placeholder='.....................'
+                  placeholder='Enter your password'
                 />
-                <i className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3 '>
-                  <EyeOff />
-                </i>
+                <button
+                  type='button'
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3'
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <Eye /> : <EyeOff />}
+                </button>
               </div>
               {form.formState.errors.password && (
                 <span className='text-sm text-red-500'>

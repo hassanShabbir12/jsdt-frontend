@@ -8,7 +8,12 @@ import { ApiResponse } from './generic';
 
 // Schema
 export const SubjectSchema = z.object({
-  title: z.string().min(1, 'Subject is required').max(20, 'subject cannot exceed 20 characters'),
+  title: z
+    .string()
+    .min(1, 'Subject is required')
+    .max(20, 'subject cannot exceed 20 characters')
+    .refine((value) => value.trim().length > 0, 'Subject cannot be empty or just spaces')
+    .transform((value) => value.trim()),
 });
 
 // Types
@@ -38,6 +43,7 @@ export interface SubjectFormReturn {
   handleEdit: (subject: ExtendedCreateSubjectDto) => void;
   setSelectedSubject: (subject: ExtendedCreateSubjectDto | null) => void;
   setValue: UseFormSetValue<SubjectFormValues>;
+  reset: () => void;
 }
 
 export interface ExtendedCreateSubjectDto extends CreateSubjectDto {

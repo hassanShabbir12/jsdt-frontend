@@ -8,7 +8,12 @@ import { ApiResponse } from './generic';
 
 // Schema
 export const topicSchema = z.object({
-  title: z.string().min(1, 'Topic is required').max(20, 'Topic cannot exceed 20 characters'),
+  title: z
+    .string()
+    .min(1, 'Topic is required')
+    .max(20, 'Topic cannot exceed 20 characters')
+    .refine((value) => value.trim().length > 0, 'Topic cannot be empty or just spaces')
+    .transform((value) => value.trim()),
 });
 
 // Types
@@ -38,6 +43,7 @@ export interface TopicFormReturn {
   handleEdit: (topic: ExtendedCreateTopicDto) => void;
   setSelectedTopic: (topic: ExtendedCreateTopicDto | null) => void;
   setValue: UseFormSetValue<TopicFormValues>;
+  reset: () => void;
 }
 
 export interface ExtendedCreateTopicDto extends CreateTopicDto {

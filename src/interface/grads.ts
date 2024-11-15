@@ -7,7 +7,12 @@ import { CreateGradeDto } from '@/lib/sdk/jsdt/Api';
 import { ApiResponse } from './generic';
 
 export const gradeSchema = z.object({
-  title: z.string().min(1, 'Grade is required').max(20, 'Grade cannot exceed 20 characters'),
+  title: z
+    .string()
+    .min(1, 'Grade is required')
+    .max(20, 'Grade cannot exceed 20 characters')
+    .refine((value) => value.trim().length > 0, 'Grade cannot be empty or just spaces')
+    .transform((value) => value.trim()),
 });
 export type GradeFormValues = z.infer<typeof gradeSchema>;
 
@@ -54,6 +59,7 @@ export interface GradeFormReturn {
   handleEdit: (grade: ExtendedCreateGradeDto) => void;
   setSelectedGrade: (grade: ExtendedCreateGradeDto | null) => void;
   setValue: UseFormSetValue<GradeFormValues>;
+  reset: () => void;
 }
 
 export interface ExtendedCreateGradeDto extends CreateGradeDto {
