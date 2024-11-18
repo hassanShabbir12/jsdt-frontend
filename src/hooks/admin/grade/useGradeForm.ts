@@ -57,7 +57,7 @@ export function useGradeForm(
         if (data.success) {
           const newGrades = Array.isArray(data.data) ? data.data : [data.data];
 
-          setGrades([...grades, ...newGrades]);
+          setGrades([...newGrades, ...grades]);
           toast({
             title: 'Grade',
             description: 'Grade created successfully',
