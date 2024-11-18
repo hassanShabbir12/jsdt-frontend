@@ -215,7 +215,7 @@ export const LearnerAccount: FC = () => (
         </div>
       </div>
       <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-        <div className='mb-10 block items-center justify-between lg:flex'>
+        <div className='block items-center justify-between lg:flex'>
           <div className='mb-5 block sm:mb-0 sm:justify-start sm:gap-x-3 md:flex'>
             <div className='px-2'>
               <Dialog>
@@ -353,7 +353,7 @@ export const LearnerAccount: FC = () => (
               </Dialog>
             </div>
           </div>
-          <div className='flex gap-x-2 pt-4 sm:gap-x-4'>
+          <div className='flex gap-x-2 pt-4 sm:gap-x-4 sm:pt-0'>
             <div className='h-6 w-6 cursor-pointer'>
               <img
                 src={assetUrl('assets/img/home/attachment.svg')}

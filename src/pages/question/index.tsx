@@ -84,7 +84,7 @@ export const Question: FC = () => {
             }}
           >
             <DialogTrigger asChild>
-              <Button className='h-10 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
+              <Button className='w-34 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
                 Add New Question
               </Button>
             </DialogTrigger>

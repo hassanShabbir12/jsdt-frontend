@@ -75,5 +75,5 @@
 }
 
 button[data-placeholder] {
-  color: #d6d3d1;
+  color: #d6d3d1 !important;
 }
