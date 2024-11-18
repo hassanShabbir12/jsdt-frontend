@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import axios from 'axios';
@@ -8,46 +8,37 @@ import { apiClient } from '@/api/clients/apiClient';
 import { toast } from '../use-toast';
 
 interface UseResetPasswordTokenReturn {
-  isVerifying: boolean;
   token: string | null;
+  resetPassword: (password: string) => Promise<void>;
+  loading: boolean;
+  showPassword: boolean;
+  setShowPassword: Dispatch<SetStateAction<boolean>>;
+  showConfirmPassword: boolean;
+  setShowConfirmPassword: Dispatch<SetStateAction<boolean>>;
 }
 
 export const useResetPasswordToken = (): UseResetPasswordTokenReturn => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [isVerifying, setIsVerifying] = useState(true);
   const token = searchParams.get('token');
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const verifyToken = async (code: string): Promise<void> => {
-    if (!code) {
-      toast({
-        title: 'Error',
-        description: 'Reset token is missing',
-      });
-      navigate('/forgot-password');
-
-      return;
-    }
+  const resetPassword = async (password: string): Promise<void> => {
     try {
-      toast({
-        title: 'Loading',
-        description: 'Verifying reset token...',
+      setLoading(true);
+      await apiClient.auth.usersControllerHandlePasswordReset({
+        code: token,
+        password,
       });
-      const isValid = (await apiClient.auth.usersControllerVerifyPin({
-        code,
-      })) as unknown as boolean;
 
-      if (!isValid) {
-        toast({
-          title: 'Error',
-          description: 'Invalid or expired reset token',
-        });
-        navigate('/forgot-password');
-
-        return;
-      }
-
-      setIsVerifying(false);
+      toast({
+        title: 'Success',
+        description: 'Password has been reset successfully.',
+      });
+      setLoading(false);
+      navigate('/login');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast({
@@ -57,19 +48,20 @@ export const useResetPasswordToken = (): UseResetPasswordTokenReturn => {
       } else {
         toast({
           title: 'Error',
-          description: 'Failed to verify reset token',
+          description: 'An unexpected error occurred while resetting your password.',
         });
       }
-
-      navigate('/forgot-password');
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      verifyToken(token);
-    }
-  }, [token]);
-
-  return { isVerifying, token };
+  return {
+    token,
+    resetPassword,
+    loading,
+    showPassword,
+    setShowPassword,
+    showConfirmPassword,
+    setShowConfirmPassword,
+  };
 };
