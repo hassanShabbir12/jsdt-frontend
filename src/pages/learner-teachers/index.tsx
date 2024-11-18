@@ -791,7 +791,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <p className='block text-black'>{item.question}</p>
+              <p className='mb-10 mt-6 block text-black'>{item.question}</p>
             </div>
           ))}
         </div>
