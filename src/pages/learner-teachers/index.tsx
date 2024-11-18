@@ -314,7 +314,7 @@ export const LearnerTeacher: FC = () => {
         <div className='relative mb-10 min-h-72 rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
-              <div className='mb-1 px-2'>
+              <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -341,7 +341,7 @@ export const LearnerTeacher: FC = () => {
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
-                        <div className='mb-5 md:mb-10'>
+                        <div className='font-regular mb-5 md:mb-10'>
                           <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
                             Question No. {index + 1}
                           </h2>
@@ -352,7 +352,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='mb-1 px-2'>
+              <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -399,7 +399,7 @@ export const LearnerTeacher: FC = () => {
 
               {!isLearner && (
                 <>
-                  <div className='mb-1 px-2'>
+                  <div className='mb-1 px-2 sm:mb-0'>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button
@@ -490,7 +490,7 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className='mb-1 px-2'>
+                  <div className='mb-1 px-2 sm:mb-0'>
                     <Button
                       variant='destructive'
                       onClick={onHandleClick}
@@ -501,7 +501,7 @@ export const LearnerTeacher: FC = () => {
                   </div>
                 </>
               )}
-              <div className='mb-1 px-2'>
+              <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
