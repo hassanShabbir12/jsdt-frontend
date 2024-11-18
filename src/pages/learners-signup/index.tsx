@@ -299,7 +299,7 @@ export const LearnerSignUp: FC = () => {
                 <button
                   type='button'
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3'
+                  className='absolute right-2.5 top-2 cursor-pointer text-zinc-500 lg:top-3'
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <Eye /> : <EyeOff />}

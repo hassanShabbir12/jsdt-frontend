@@ -45,7 +45,7 @@ export const Settings: FC = () => {
                 placeholder='Enter Your Password'
               />
               <div
-                className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'
+                className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'
                 onClick={() => setShowOldPassword(!showOldPassword)}
               >
                 {showOldPassword ? <Eye /> : <EyeOff />}
@@ -72,7 +72,7 @@ export const Settings: FC = () => {
                 placeholder='Enter New Password'
               />
               <div
-                className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'
+                className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'
                 onClick={() => setShowNewPassword(!showNewPassword)}
               >
                 {showNewPassword ? <Eye /> : <EyeOff />}
@@ -99,7 +99,7 @@ export const Settings: FC = () => {
                 placeholder='Confirm New Password'
               />
               <div
-                className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'
+                className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? <Eye /> : <EyeOff />}

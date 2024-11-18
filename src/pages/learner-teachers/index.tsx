@@ -326,11 +326,11 @@ export const LearnerTeacher: FC = () => {
                   </DialogTrigger>
                   <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                     <DialogHeader>
-                      <div className='flex'>
+                      <div className='flex pt-8'>
                         <div className='mb-6 text-left'>
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
-                        <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
                           <img
                             src={assetUrl('assets/img/home/attach-download.svg')}
                             alt='Generate-2'
@@ -364,9 +364,9 @@ export const LearnerTeacher: FC = () => {
                   </DialogTrigger>
                   <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                     <DialogHeader>
-                      <div className='mb-8 flex justify-between pt-8 sm:items-center sm:justify-start'>
+                      <div className='mb-8 flex pt-8 sm:items-center'>
                         <DialogTitle>Answer of the following questions</DialogTitle>
-                        <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
                           <img
                             src={assetUrl('assets/img/home/attach-download.svg')}
                             alt='Generate-2'
@@ -704,7 +704,7 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
             </div>
-            <div className='flex gap-x-2 sm:gap-x-4'>
+            <div className='mb-14 flex gap-x-2 sm:m-0 sm:gap-x-4'>
               <div className='h-6 w-6 cursor-pointer'>
                 <img
                   src={assetUrl('assets/img/home/attachment.svg')}
@@ -727,7 +727,7 @@ export const LearnerTeacher: FC = () => {
               <CarouselContent>
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
-                    <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                    <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <h3 className='mb-5 text-2xl font-semibold leading-7'>
                         Question No. {index + 1}
                       </h3>
@@ -791,7 +791,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <p className='block text-black'>{item.question}</p>
+              <p className='mb-10 mt-6 block text-black'>{item.question}</p>
             </div>
           ))}
         </div>
