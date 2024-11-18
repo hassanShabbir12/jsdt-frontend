@@ -68,11 +68,19 @@ export const useInvestigation = (): UseInvestigationReturn => {
       }
 
       setClonedQuestions((prevQuestions) => [...prevQuestions, ...newQuestions]);
-      setQuestions([response.data.data[0]]);
+      if (questions.length > 0) {
+        if (newQuestions.length > 0 && questions.length > 0) {
+          toast({
+            title: 'Questions Added',
+            description: 'Questions have been added to your list.',
+          });
+        }
+        setQuestions(questions);
+      } else {
+        setQuestions([response.data.data[0]]);
+      }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        setClonedQuestions([]);
-        setQuestions([]);
         toast({
           title: 'Error',
           description: error.response.data.message,

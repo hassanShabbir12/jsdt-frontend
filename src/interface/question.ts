@@ -5,8 +5,16 @@ import { CreateQuestionDto } from '@/lib/sdk/jsdt/Api';
 import { ApiResponse } from './generic';
 
 export const QuestionSchema = z.object({
-  question: z.string().min(1, 'Question is required'),
-  answer: z.string().min(1, 'Answer is required'),
+  question: z
+    .string()
+    .min(1, 'Question is required')
+    .refine((value) => value.trim().length > 0, 'Question cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+  answer: z
+    .string()
+    .min(1, 'Answer is required')
+    .refine((value) => value.trim().length > 0, 'Answer cannot be empty or just spaces')
+    .transform((value) => value.trim()),
   certificateType: z.string().min(1, 'Certificate type is required'),
   grade: z.string().min(1, 'Grade is required'),
   subject: z.string().min(1, 'Subject is required'),

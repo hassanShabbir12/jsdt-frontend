@@ -27,6 +27,7 @@ export function useGradeForm(
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<GradeFormValues>({
     resolver: zodResolver(gradeSchema),
@@ -56,7 +57,7 @@ export function useGradeForm(
         if (data.success) {
           const newGrades = Array.isArray(data.data) ? data.data : [data.data];
 
-          setGrades([...grades, ...newGrades]);
+          setGrades([...newGrades, ...grades]);
           toast({
             title: 'Grade',
             description: 'Grade created successfully',
@@ -65,6 +66,7 @@ export function useGradeForm(
       }
       setOpen(false);
       setSelectedGrade(null);
+      reset();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast({
@@ -92,6 +94,7 @@ export function useGradeForm(
     selectedGrade,
     handleEdit,
     setSelectedGrade,
+    reset,
     setValue,
   };
 }

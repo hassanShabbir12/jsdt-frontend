@@ -27,6 +27,7 @@ export function useTopicForm(
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<TopicFormValues>({
     resolver: zodResolver(topicSchema),
@@ -56,7 +57,7 @@ export function useTopicForm(
         if (data.success) {
           const newTopics = Array.isArray(data.data) ? data.data : [data.data];
 
-          setTopics([...topics, ...newTopics]);
+          setTopics([...newTopics, ...topics]);
           toast({
             title: 'Topic',
             description: 'Topic created successfully',
@@ -65,6 +66,7 @@ export function useTopicForm(
       }
       setOpen(false);
       setSelectedTopic(null);
+      reset();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast({
@@ -93,5 +95,6 @@ export function useTopicForm(
     handleEdit,
     setSelectedTopic,
     setValue,
+    reset,
   };
 }

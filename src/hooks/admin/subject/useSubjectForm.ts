@@ -27,6 +27,7 @@ export function useSubjectForm(
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<SubjectFormValues>({
     resolver: zodResolver(SubjectSchema),
@@ -56,7 +57,7 @@ export function useSubjectForm(
         if (data.success) {
           const newSubjects = Array.isArray(data.data) ? data.data : [data.data];
 
-          setSubjects([...subjects, ...newSubjects]);
+          setSubjects([...newSubjects, ...subjects]);
           toast({
             title: 'Subject',
             description: 'Subject created successfully',
@@ -65,6 +66,7 @@ export function useSubjectForm(
       }
       setOpen(false);
       setSelectedSubject(null);
+      reset();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast({
@@ -93,5 +95,6 @@ export function useSubjectForm(
     handleEdit,
     setSelectedSubject,
     setValue,
+    reset,
   };
 }

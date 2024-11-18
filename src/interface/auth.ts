@@ -29,26 +29,58 @@ export const UserRole = {
 
 // Split the base schema into common fields and role-specific fields
 const commonFields = {
-  userName: z.string().min(1, 'Username is required'),
-  name: z.string().min(1, 'Name is required'),
-  familyName: z.string().min(1, 'Family name is required'),
-  age: z.string().min(1, 'Age is required'),
-  province: z.string().min(1, 'Province is required'),
-  schoolName: z.string().min(1, 'School name is required'),
+  userName: z
+    .string()
+    .min(1, 'Username is required')
+    .refine((value) => value.trim().length > 0, 'Username cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+
+  name: z
+    .string()
+    .min(1, 'Name is required')
+    .refine((value) => value.trim().length > 0, 'Name cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+
+  familyName: z
+    .string()
+    .min(1, 'Family name is required')
+    .refine((value) => value.trim().length > 0, 'Family name cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+
+  age: z
+    .string()
+    .min(1, 'Age is required')
+    .refine((value) => value.trim().length > 0, 'Age cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+
+  province: z
+    .string()
+    .min(1, 'Province is required')
+    .refine((value) => value.trim().length > 0, 'Province cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+
+  schoolName: z
+    .string()
+    .min(1, 'School name is required')
+    .refine((value) => value.trim().length > 0, 'School name cannot be empty or just spaces')
+    .transform((value) => value.trim()),
+
   gender: z.enum(['male', 'female', 'other'], {
     required_error: 'Please select a gender',
   }),
   nsc: z.enum(['IEB', 'NSC'], {
     required_error: 'Please select IEB or NSC',
   }),
-  email: z.string().email('Invalid email address'),
+  email: z.string().min(1, 'Email is required').trim().toLowerCase().email('Invalid email address'),
   password: z
     .string()
+    .min(1, 'Password is required')
     .min(8, 'Password must be at least 8 characters long')
     .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/\d/, 'Password must contain at least one number')
-    .regex(/[!#$%&*?@]/, 'Password must contain at least one special character'),
+    .regex(/[!#$%&*?@]/, 'Password must contain at least one special character')
+    .trim(),
 };
 
 export const signupSchema = z.discriminatedUnion('role', [
@@ -56,14 +88,26 @@ export const signupSchema = z.discriminatedUnion('role', [
     ...commonFields,
     role: z.literal(UserRole.TEACHER),
     grade: z.string().optional(),
-    subjectTeaching: z.string().min(1, 'Subject teaching is required'),
-    gradeTeaching: z.string().min(1, 'Grade teaching is required'),
+    subjectTeaching: z
+      .string()
+      .min(1, 'Subject teaching is required')
+      .refine((value) => value.trim().length > 0, 'Subject teaching cannot be empty or just spaces')
+      .transform((value) => value.trim()),
+    gradeTeaching: z
+      .string()
+      .min(1, 'Grade teaching is required')
+      .refine((value) => value.trim().length > 0, 'Grade teaching cannot be empty or just spaces')
+      .transform((value) => value.trim()),
   }),
 
   z.object({
     ...commonFields,
     role: z.literal(UserRole.LEARNER),
-    grade: z.string().min(1, 'Grade is required'),
+    grade: z
+      .string()
+      .min(1, 'Grade is required')
+      .refine((value) => value.trim().length > 0, 'Grade cannot be empty or just spaces')
+      .transform((value) => value.trim()),
     subjectTeaching: z.string().optional(),
     gradeTeaching: z.string().optional(),
   }),
@@ -76,11 +120,25 @@ export interface UseSignupReturn {
   isLoading: boolean;
   onSubmit: () => void;
   isTeacher: boolean;
+  showPassword: boolean;
+  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const loginSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Invalid email address'),
-  password: z.string().min(1, 'Password is required'),
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Invalid email address')
+    .refine((value) => value.trim().length > 0, 'Email cannot be empty or just spaces')
+    .transform((value) => value.trim().toLowerCase()),
+
+  password: z
+    .string()
+    .min(1, 'Password is required')
+    .min(6, 'Password must be at least 6 characters long')
+    .trim()
+    .refine((value) => value.trim().length > 0, 'Password cannot be empty or just spaces')
+    .transform((value) => value.trim()),
 });
 
 export type LoginFormData = z.infer<typeof loginSchema>;
