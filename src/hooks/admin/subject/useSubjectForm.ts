@@ -57,7 +57,7 @@ export function useSubjectForm(
         if (data.success) {
           const newSubjects = Array.isArray(data.data) ? data.data : [data.data];
 
-          setSubjects([...subjects, ...newSubjects]);
+          setSubjects([...newSubjects, ...subjects]);
           toast({
             title: 'Subject',
             description: 'Subject created successfully',

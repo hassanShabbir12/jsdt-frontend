@@ -94,6 +94,7 @@ export const LearnerSignUp: FC = () => {
                 Age
               </Label>
               <Input
+                type='number'
                 {...form.register('age')}
                 id='age'
                 className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'

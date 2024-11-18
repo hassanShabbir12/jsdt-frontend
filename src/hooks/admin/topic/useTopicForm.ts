@@ -57,7 +57,7 @@ export function useTopicForm(
         if (data.success) {
           const newTopics = Array.isArray(data.data) ? data.data : [data.data];
 
-          setTopics([...topics, ...newTopics]);
+          setTopics([...newTopics, ...topics]);
           toast({
             title: 'Topic',
             description: 'Topic created successfully',
