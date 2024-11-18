@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { Calendar, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+import { MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -84,7 +84,9 @@ export const LearnerTeacher: FC = () => {
         <form onSubmit={onSubmit}>
           <div className='-mx-4 mb-8 flex flex-wrap'>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='nsc'>IEB/NSC</Label>
+              <Label htmlFor='nsc' className='mb-0.5 block'>
+                IEB/NSC
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='nsc'
@@ -110,7 +112,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='grade'>Choose Grade</Label>
+              <Label htmlFor='grade' className='mb-0.5 block'>
+                Choose Grade
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='grade'
@@ -142,7 +146,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='subject'>Choose Subject</Label>
+              <Label htmlFor='subject' className='mb-0.5 block'>
+                Choose Subject
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='subject'
@@ -174,7 +180,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='assessmentType'>Choose Assessment Type</Label>
+              <Label htmlFor='assessmentType' className='mb-0.5 block'>
+                Choose Assessment Type
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='assessmentType'
@@ -202,7 +210,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='topic'>Choose Topic</Label>
+              <Label htmlFor='topic' className='mb-0.5 block'>
+                Choose Topic
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='topic'
@@ -235,7 +245,9 @@ export const LearnerTeacher: FC = () => {
             </div>
             {isLearner && (
               <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-                <Label htmlFor='difficultyLevel'>Difficulty Level</Label>
+                <Label htmlFor='difficultyLevel' className='mb-0.5 block'>
+                  Difficulty Level
+                </Label>
                 <div className='w-full'>
                   <Controller
                     name='difficultyLevel'
@@ -265,7 +277,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             )}
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='totalMarks'>Total Marks</Label>
+              <Label htmlFor='totalMarks' className='mb-0.5 block'>
+                Total Marks
+              </Label>
               <Controller
                 name='totalMarks'
                 control={form.control}
@@ -275,7 +289,7 @@ export const LearnerTeacher: FC = () => {
                     value={value || ''}
                     onChange={(e) => onChange(Number(e.target.value))}
                     placeholder='Enter total marks (e.g., 500, 1000)'
-                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2'
+                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 placeholder:text-stone-300'
                   />
                 )}
               />
@@ -664,17 +678,6 @@ export const LearnerTeacher: FC = () => {
                           >
                             Date
                           </Label>
-                          <div className='relative'>
-                            <Input
-                              id='iem'
-                              type='number'
-                              placeholder='01-01-2024'
-                              className='h-12 rounded-lg border border-solid border-neutral-200 py-2 pl-4 pr-12 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-                            />
-                            <i className='absolute right-5 top-2.5 cursor-pointer text-stone-300'>
-                              <Calendar />
-                            </i>
-                          </div>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
                           <Label
