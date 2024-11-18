@@ -55,7 +55,7 @@ export const LearnerLogin: FC = () => {
                 <button
                   type='button'
                   onClick={togglePassword}
-                  className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'
+                  className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'
                 >
                   {showPassword ? <Eye /> : <EyeOff />}
                 </button>
