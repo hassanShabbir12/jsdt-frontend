@@ -317,7 +317,7 @@ export const Question: FC = () => {
                         loading={processingText}
                         variant='outline'
                         className={cn(
-                          'cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
                           'bg-gray-200',
                           {
                             'bg-primary': processingText,
@@ -350,7 +350,7 @@ export const Question: FC = () => {
                         loading={processingTextAnswer}
                         variant='outline'
                         className={cn(
-                          'cursor-pointer rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
                           'bg-gray-200',
                           {
                             'bg-primary': processingTextAnswer,
