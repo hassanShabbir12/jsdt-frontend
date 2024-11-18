@@ -75,5 +75,10 @@
 }
 
 button[data-placeholder] {
-  color: #d6d3d1;
+  color: #d6d3d1 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }

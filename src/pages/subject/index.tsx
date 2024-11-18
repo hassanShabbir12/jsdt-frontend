@@ -135,41 +135,45 @@ export const Subjects: FC = () => {
           </Dialog>
         </div>
         <div className='px-6'>
-          <Table>
-            <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className='w-[86%]'>Subject</TableHead>
-                <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {subjects.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                  <TableCell className='border-l border-solid border-zinc-300'>
-                    <div className='flex gap-2'>
-                      <i
-                        onClick={() => {
-                          handleEdit(item);
-                          setValue('title', item.title);
-                        }}
-                        className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                      >
-                        <Edit />
-                      </i>
-                      <i
-                        onClick={() => handleDeleteClick(item)}
-                        className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                      >
-                        <Trash2 />
-                      </i>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <div className='overflow-auto'>
+            <div>
+              <Table className='w-[800px] sm:w-full'>
+                <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className='w-[86%]'>Subject</TableHead>
+                    <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {subjects.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        <div className='flex gap-2'>
+                          <i
+                            onClick={() => {
+                              handleEdit(item);
+                              setValue('title', item.title);
+                            }}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Edit />
+                          </i>
+                          <i
+                            onClick={() => handleDeleteClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Trash2 />
+                          </i>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
         </div>
         <Dialog
           open={deleteModalOpen}

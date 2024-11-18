@@ -215,7 +215,7 @@ export const LearnerAccount: FC = () => (
         </div>
       </div>
       <div className='relative mb-10 rounded-xl border border-solid border-neutral-200 p-3'>
-        <div className='mb-10 block items-center justify-between lg:flex'>
+        <div className='block items-center justify-between lg:flex'>
           <div className='mb-5 block sm:mb-0 sm:justify-start sm:gap-x-3 md:flex'>
             <div className='px-2'>
               <Dialog>
@@ -353,7 +353,7 @@ export const LearnerAccount: FC = () => (
               </Dialog>
             </div>
           </div>
-          <div className='flex gap-x-2 pt-4 sm:gap-x-4'>
+          <div className='mb-10 flex gap-x-2 pt-4 sm:mb-0 sm:gap-x-4 sm:pt-0'>
             <div className='h-6 w-6 cursor-pointer'>
               <img
                 src={assetUrl('assets/img/home/attachment.svg')}
@@ -374,7 +374,7 @@ export const LearnerAccount: FC = () => (
           <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white hover:bg-blue-200 disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
           <CarouselContent>
             <CarouselItem className='carousel-item'>
-              <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 1</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -384,7 +384,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 2</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -394,7 +394,7 @@ export const LearnerAccount: FC = () => (
               </div>
             </CarouselItem>
             <CarouselItem className='carousel-item'>
-              <div className='mb-20 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+              <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                 <h3 className='mb-5 text-2xl font-semibold leading-7'>Question No. 3</h3>
                 <p className='m-0'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

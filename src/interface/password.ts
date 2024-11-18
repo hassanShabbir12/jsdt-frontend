@@ -5,14 +5,16 @@ export const ChangePasswordSchema = z
     oldPassword: z
       .string()
       .min(1, 'Current password is required')
-      .min(8, 'Password must be at least 8 characters'),
+      .min(8, 'Password must be at least 8 characters')
+      .refine((value) => value.trim().length > 0, 'Current password cannot be empty or just spaces')
+      .transform((value) => value.trim()),
     newPassword: z
       .string()
       .min(1, 'New password is required')
       .min(8, 'Password must be at least 8 characters')
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!$%&*?@])[\d!$%&*?@A-Za-z]{8,}$/,
-        'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
+        'Password must have an uppercase, lowercase, number, and special character.',
       ),
     confirmPassword: z.string().min(1, 'Please confirm your password'),
   })

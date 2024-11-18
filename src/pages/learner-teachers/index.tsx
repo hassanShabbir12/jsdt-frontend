@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { Calendar, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+import { MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -84,7 +84,9 @@ export const LearnerTeacher: FC = () => {
         <form onSubmit={onSubmit}>
           <div className='-mx-4 mb-8 flex flex-wrap'>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='nsc'>IEB/NSC</Label>
+              <Label htmlFor='nsc' className='mb-0.5 block'>
+                IEB/NSC
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='nsc'
@@ -110,7 +112,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='grade'>Choose Grade</Label>
+              <Label htmlFor='grade' className='mb-0.5 block'>
+                Choose Grade
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='grade'
@@ -142,7 +146,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='subject'>Choose Subject</Label>
+              <Label htmlFor='subject' className='mb-0.5 block'>
+                Choose Subject
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='subject'
@@ -174,7 +180,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='assessmentType'>Choose Assessment Type</Label>
+              <Label htmlFor='assessmentType' className='mb-0.5 block'>
+                Choose Assessment Type
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='assessmentType'
@@ -202,7 +210,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             </div>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='topic'>Choose Topic</Label>
+              <Label htmlFor='topic' className='mb-0.5 block'>
+                Choose Topic
+              </Label>
               <div className='w-full'>
                 <Controller
                   name='topic'
@@ -235,7 +245,9 @@ export const LearnerTeacher: FC = () => {
             </div>
             {isLearner && (
               <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-                <Label htmlFor='difficultyLevel'>Difficulty Level</Label>
+                <Label htmlFor='difficultyLevel' className='mb-0.5 block'>
+                  Difficulty Level
+                </Label>
                 <div className='w-full'>
                   <Controller
                     name='difficultyLevel'
@@ -265,7 +277,9 @@ export const LearnerTeacher: FC = () => {
               </div>
             )}
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='totalMarks'>Total Marks</Label>
+              <Label htmlFor='totalMarks' className='mb-0.5 block'>
+                Total Marks
+              </Label>
               <Controller
                 name='totalMarks'
                 control={form.control}
@@ -275,7 +289,7 @@ export const LearnerTeacher: FC = () => {
                     value={value || ''}
                     onChange={(e) => onChange(Number(e.target.value))}
                     placeholder='Enter total marks (e.g., 500, 1000)'
-                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2'
+                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 placeholder:text-stone-300'
                   />
                 )}
               />
@@ -300,7 +314,7 @@ export const LearnerTeacher: FC = () => {
         <div className='relative mb-10 min-h-72 rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
-              <div className='mb-1 px-2'>
+              <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -312,11 +326,11 @@ export const LearnerTeacher: FC = () => {
                   </DialogTrigger>
                   <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                     <DialogHeader>
-                      <div className='flex'>
+                      <div className='flex pt-8'>
                         <div className='mb-6 text-left'>
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
-                        <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
                           <img
                             src={assetUrl('assets/img/home/attach-download.svg')}
                             alt='Generate-2'
@@ -327,7 +341,7 @@ export const LearnerTeacher: FC = () => {
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
-                        <div className='mb-5 md:mb-10'>
+                        <div className='font-regular mb-5 md:mb-10'>
                           <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
                             Question No. {index + 1}
                           </h2>
@@ -338,7 +352,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='mb-1 px-2'>
+              <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -350,9 +364,9 @@ export const LearnerTeacher: FC = () => {
                   </DialogTrigger>
                   <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                     <DialogHeader>
-                      <div className='mb-8 flex justify-between pt-8 sm:items-center sm:justify-start'>
+                      <div className='mb-8 flex pt-8 sm:items-center'>
                         <DialogTitle>Answer of the following questions</DialogTitle>
-                        <div className='ml-0 h-6 w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
                           <img
                             src={assetUrl('assets/img/home/attach-download.svg')}
                             alt='Generate-2'
@@ -385,7 +399,7 @@ export const LearnerTeacher: FC = () => {
 
               {!isLearner && (
                 <>
-                  <div className='mb-1 px-2'>
+                  <div className='mb-1 px-2 sm:mb-0'>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button
@@ -476,7 +490,7 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className='mb-1 px-2'>
+                  <div className='mb-1 px-2 sm:mb-0'>
                     <Button
                       variant='destructive'
                       onClick={onHandleClick}
@@ -487,7 +501,7 @@ export const LearnerTeacher: FC = () => {
                   </div>
                 </>
               )}
-              <div className='mb-1 px-2'>
+              <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -664,17 +678,6 @@ export const LearnerTeacher: FC = () => {
                           >
                             Date
                           </Label>
-                          <div className='relative'>
-                            <Input
-                              id='iem'
-                              type='number'
-                              placeholder='01-01-2024'
-                              className='h-12 rounded-lg border border-solid border-neutral-200 py-2 pl-4 pr-12 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-                            />
-                            <i className='absolute right-5 top-2.5 cursor-pointer text-stone-300'>
-                              <Calendar />
-                            </i>
-                          </div>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
                           <Label
@@ -701,7 +704,7 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
             </div>
-            <div className='flex gap-x-2 sm:gap-x-4'>
+            <div className='mb-14 flex gap-x-2 sm:m-0 sm:gap-x-4'>
               <div className='h-6 w-6 cursor-pointer'>
                 <img
                   src={assetUrl('assets/img/home/attachment.svg')}
@@ -724,7 +727,7 @@ export const LearnerTeacher: FC = () => {
               <CarouselContent>
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
-                    <div className='mb-20 text-sm font-semibold text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                    <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <h3 className='mb-5 text-2xl font-semibold leading-7'>
                         Question No. {index + 1}
                       </h3>
@@ -788,7 +791,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <p className='block text-black'>{item.question}</p>
+              <p className='mb-10 mt-6 block text-black'>{item.question}</p>
             </div>
           ))}
         </div>

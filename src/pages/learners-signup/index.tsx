@@ -94,6 +94,7 @@ export const LearnerSignUp: FC = () => {
                 Age
               </Label>
               <Input
+                type='number'
                 {...form.register('age')}
                 id='age'
                 className='h-10 rounded-lg border-neutral-200 px-3 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
@@ -136,7 +137,7 @@ export const LearnerSignUp: FC = () => {
                   <Input
                     {...form.register('subjectTeaching')}
                     id='subjectTeaching'
-                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                     placeholder='Enter subject you teach'
                   />
                   {form.formState.errors.subjectTeaching && (
@@ -156,7 +157,7 @@ export const LearnerSignUp: FC = () => {
                   <Input
                     {...form.register('gradeTeaching')}
                     id='gradeTeaching'
-                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
+                    className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3'
                     placeholder='Enter grade you teach'
                   />
                   {form.formState.errors.gradeTeaching && (
@@ -298,7 +299,7 @@ export const LearnerSignUp: FC = () => {
                 <button
                   type='button'
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-2.5 top-2 cursor-pointer text-stone-300 lg:top-3'
+                  className='absolute right-2.5 top-2 cursor-pointer text-zinc-500 lg:top-3'
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <Eye /> : <EyeOff />}

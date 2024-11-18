@@ -10,7 +10,7 @@ import { assetUrl } from '@/lib/asset-url';
 
 export const PricingPlan: FC = () => {
   const navigate = useNavigate();
-  const { setUserRole } = useAuth();
+  const { setUserRole, userRole } = useAuth();
 
   const onHandleClick = (): void => {
     navigate('/payment');
@@ -24,7 +24,7 @@ export const PricingPlan: FC = () => {
             <span className='relative px-0 before:absolute before:bottom-2 before:left-0 before:right-0 before:top-6 before:bg-yellow lg:before:bottom-3 lg:before:top-8 xl:py-2 xl:before:bottom-5 xl:before:top-12'>
               <span className='relative'>PRICING</span>
             </span>{' '}
-            FOR EDUCATORS
+            FOR {userRole === 'teacher' ? 'EDUCATORS' : 'LEARNERS'}
           </h2>
           <div className='mb-4 text-xl font-medium md:mb-6 md:text-2xl xl:mb-8'>
             Choose the Perfect Plan for Your Learning Journey
