@@ -91,11 +91,13 @@ export const signupSchema = z.discriminatedUnion('role', [
     subjectTeaching: z
       .string()
       .min(1, 'Subject teaching is required')
+      .regex(/^[\d\sA-Za-z]*$/, 'Subject teaching must be alphanumeric')
       .refine((value) => value.trim().length > 0, 'Subject teaching cannot be empty or just spaces')
       .transform((value) => value.trim()),
     gradeTeaching: z
       .string()
       .min(1, 'Grade teaching is required')
+      .regex(/^[\d\sA-Za-z]*$/, 'Grade teaching must be alphanumeric')
       .refine((value) => value.trim().length > 0, 'Grade teaching cannot be empty or just spaces')
       .transform((value) => value.trim()),
   }),
