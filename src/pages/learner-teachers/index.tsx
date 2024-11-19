@@ -21,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -57,6 +58,8 @@ export const LearnerTeacher: FC = () => {
   const onHandleClick = (): void => {
     navigate('/instructions');
   };
+
+  // const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   return (
     <section className='pb-10 pt-5'>
@@ -672,12 +675,64 @@ export const LearnerTeacher: FC = () => {
                           </div>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-                          <Label
-                            htmlFor='name'
-                            className='mb-1 block font-normal leading-none text-black lg:text-base'
-                          >
-                            Date
-                          </Label>
+                          <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+                              {/* <FormField
+                                control={form.control}
+                                name='nsc'
+                                render={({ field }) => (
+                                  <FormItem className='flex flex-col'>
+                                    <FormLabel>
+                                      <p 
+                                      className='mb-1 block font-normal leading-none text-black 
+                                      lg:text-base'
+                                      >
+                                        Date
+                                      </p>
+                                    </FormLabel>
+                                    <Popover open={isPopoverOpen} onOpenChange={setPopoverOpen}>
+                                      <PopoverTrigger asChild>
+                                        <FormControl>
+                                          <Button
+                                            className={cn(
+                                              '!m-0 w-full bg-transparent h-12
+                                               rounded-lg border border-solid
+                                               border-neutral-200 text-stone-300 px-4 py-2 text-sm 
+                                               shadow-none transition duration-300 
+                                               hover:bg-blue-50',
+                                              !field.value && 'text-muted-foreground',
+                                            )}
+                                          >
+                                            {field.value ? (
+                                              format(field.value, 'PPP')
+                                            ) : (
+                                              <span className='text-stone-300'>01-01-2024</span>
+                                            )}
+                                            <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
+                                          </Button>
+                                        </FormControl>
+                                      </PopoverTrigger>
+                                      <PopoverContent className='w-auto p-0' align='start'>
+                                        <Calendar
+                                          mode='single'
+                                          selected={field.value}
+                                          onSelect={(date) => {
+                                            field.onChange(date);
+                                            setPopoverOpen(false);
+                                          }}
+                                          disabled={(date) =>
+                                            date > new Date() || date < new Date('1900-01-01')
+                                          }
+                                          initialFocus
+                                        />
+                                      </PopoverContent>
+                                    </Popover>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              /> */}
+                            </form>
+                          </Form>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
                           <Label

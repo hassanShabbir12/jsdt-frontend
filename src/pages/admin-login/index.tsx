@@ -52,15 +52,13 @@ export const AdminLogin: FC = () => {
               error={errors.password?.message}
             />
             <div
-              className='absolute right-4 top-3 cursor-pointer text-stone-300'
+              className='absolute right-4 top-3 cursor-pointer text-zinc-500'
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <Eye /> : <EyeOff />}
             </div>
           </div>
         </div>
-
-        {/* Checkbox & Link */}
         <div className='mb-6 flex items-center justify-between'>
           <div className='flex items-center gap-x-1.5 md:gap-x-2.5'></div>
           <Link
@@ -70,8 +68,6 @@ export const AdminLogin: FC = () => {
             Forgot Password?
           </Link>
         </div>
-
-        {/* Submit Button */}
         <Button loading={loading} type='submit' className='mx-auto flex h-12 w-80'>
           Log In
         </Button>

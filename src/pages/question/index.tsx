@@ -88,7 +88,7 @@ export const Question: FC = () => {
                 Add New Question
               </Button>
             </DialogTrigger>
-            <DialogContent className='!container max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden'>
+            <DialogContent className='!container max-h-[80%] max-w-[96%] overflow-y-auto overflow-x-hidden'>
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <DialogHeader>
                   <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
