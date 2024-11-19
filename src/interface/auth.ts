@@ -142,3 +142,13 @@ export const loginSchema = z.object({
     .refine((value) => value.trim().length > 0, 'Password cannot be empty or just spaces')
     .transform((value) => value.trim()),
 });
+
+export type LoginFormData = z.infer<typeof loginSchema>;
+
+export interface UseLoginReturn {
+  form: UseFormReturn<LoginFormData>;
+  isLoading: boolean;
+  onSubmit: () => void;
+  showPassword: boolean;
+  togglePassword: () => void;
+}
