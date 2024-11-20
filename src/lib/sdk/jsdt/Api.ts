@@ -61,6 +61,8 @@ export interface NewPasswordDto {
   password: string;
 }
 
+export type VerifyAndResetPasswordDto = object;
+
 export interface CreateGradeDto {
   title: string;
 }
@@ -187,7 +189,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'https://34.56.32.71/',
+      baseURL: axiosConfig.baseURL || 'http://localhost:3000',
     });
     this.secure = secure;
     this.format = format;
@@ -285,7 +287,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Jsdt Backend
  * @version 1.0.0
- * @baseUrl https://34.56.32.71/
+ * @baseUrl http://localhost:3000
  * @contact
  *
  * JSDT is an examination management platform.
@@ -407,6 +409,25 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         method: 'POST',
         body: data,
         secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Auth
+     * @name UsersControllerHandlePasswordReset
+     * @request POST:/auth/verify-and-reset
+     */
+    usersControllerHandlePasswordReset: (
+      data: VerifyAndResetPasswordDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/auth/verify-and-reset`,
+        method: 'POST',
+        body: data,
         type: ContentType.Json,
         ...params,
       }),

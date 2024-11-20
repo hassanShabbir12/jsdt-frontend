@@ -109,7 +109,7 @@ export function useQuestionOperations(
           ? response.data.data
           : [response.data.data];
 
-        setQuestions([...questions, ...newquestion]);
+        setQuestions([...newquestion, ...questions]);
         toast({
           title: 'Success',
           description: 'Question created successfully',
