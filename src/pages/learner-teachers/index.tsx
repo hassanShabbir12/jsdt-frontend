@@ -1,11 +1,12 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+import { CalendarIcon, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Carousel,
   CarouselContent,
@@ -23,6 +24,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -53,6 +55,14 @@ export const LearnerTeacher: FC = () => {
     isOpen,
     setIsOpen,
   } = useInvestigation();
+
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [isCalenderOpen, setIsCalenderOpen] = useState(false);
+
+  const handleDateSelect = (selectedDate: Date | undefined): void => {
+    setDate(selectedDate);
+    setIsCalenderOpen(false);
+  };
 
   return (
     <section className='pb-10 pt-5'>
@@ -486,15 +496,6 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  {/* <div className='mb-1 px-2 sm:mb-0'>
-                    <Button
-                      variant='destructive'
-                      onClick={onHandleClick}
-                      className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                    >
-                      Instructions
-                    </Button>
-                  </div> */}
                   <div className='mb-1 px-2 sm:mb-0'>
                     <Dialog>
                       <DialogTrigger asChild>
@@ -793,12 +794,35 @@ export const LearnerTeacher: FC = () => {
                           </div>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-                          <Label
-                            htmlFor='name'
+                          <label
+                            htmlFor='date-of-birth'
                             className='mb-1 block font-normal leading-none text-black lg:text-base'
                           >
                             Date
-                          </Label>
+                          </label>
+                          <Popover open={isCalenderOpen} onOpenChange={setIsCalenderOpen}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant='outline'
+                                className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 text-stone-300 shadow-none hover:bg-transparent'
+                              >
+                                <span className='text-stone-300 group-hover:text-stone-300'>
+                                  {date ? date.toDateString() : 'Pick a date'}
+                                </span>
+                                <span className='text-stone-300 group-hover:text-stone-300'>
+                                  <CalendarIcon />
+                                </span>
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                              <Calendar
+                                mode='single'
+                                selected={date}
+                                onSelect={handleDateSelect}
+                                className='rounded-md border'
+                              />
+                            </PopoverContent>
+                          </Popover>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
                           <Label
