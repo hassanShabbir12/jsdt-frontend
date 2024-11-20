@@ -22,7 +22,7 @@ export const ResetPassword: FC = () => (
           className='h-10 rounded-lg border-neutral-200 py-2 pl-4 pr-12 text-base text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
           placeholder='Enter Your Password'
         />
-        <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
+        <div className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'>
           <EyeOff />
         </div>
       </div>
@@ -37,7 +37,7 @@ export const ResetPassword: FC = () => (
           className='h-10 rounded-lg border-neutral-200 py-2 pl-4 pr-12 text-base text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
           placeholder='Enter Your Password'
         />
-        <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
+        <div className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'>
           <EyeOff />
         </div>
       </div>

@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+import { CalendarIcon, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -22,7 +22,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
@@ -684,69 +683,9 @@ export const LearnerTeacher: FC = () => {
                           </div>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-                          <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-                              {/* <FormField
-                                control={form.control}
-                                name='nsc'
-                                render={({ field }) => (
-                                  <FormItem className='flex flex-col'>
-                                    <FormLabel>
-                                      <p 
-                                      className='mb-1 block font-normal leading-none text-black 
-                                      lg:text-base'
-                                      >
-                                        Date
-                                      </p>
-                                    </FormLabel>
-                                    <Popover open={isPopoverOpen} onOpenChange={setPopoverOpen}>
-                                      <PopoverTrigger asChild>
-                                        <FormControl>
-                                          <Button
-                                            className={cn(
-                                              '!m-0 w-full bg-transparent h-12
-                                               rounded-lg border border-solid
-                                               border-neutral-200 text-stone-300 px-4 py-2 text-sm 
-                                               shadow-none transition duration-300 
-                                               hover:bg-blue-50',
-                                              !field.value && 'text-muted-foreground',
-                                            )}
-                                          >
-                                            {field.value ? (
-                                              format(field.value, 'PPP')
-                                            ) : (
-                                              <span className='text-stone-300'>01-01-2024</span>
-                                            )}
-                                            <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
-                                          </Button>
-                                        </FormControl>
-                                      </PopoverTrigger>
-                                      <PopoverContent className='w-auto p-0' align='start'>
-                                        <Calendar
-                                          mode='single'
-                                          selected={field.value}
-                                          onSelect={(date) => {
-                                            field.onChange(date);
-                                            setPopoverOpen(false);
-                                          }}
-                                          disabled={(date) =>
-                                            date > new Date() || date < new Date('1900-01-01')
-                                          }
-                                          initialFocus
-                                        />
-                                      </PopoverContent>
-                                    </Popover>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              /> */}
-                            </form>
-                          </Form>
-                        </div>
-                        <div className='space-y-4'>
                           <label
                             htmlFor='date-of-birth'
-                            className='text-sm font-medium text-gray-900'
+                            className='mb-1 block font-normal leading-none text-black lg:text-base'
                           >
                             Date
                           </label>
@@ -754,23 +693,14 @@ export const LearnerTeacher: FC = () => {
                             <PopoverTrigger asChild>
                               <Button
                                 variant='outline'
-                                className='flex w-full items-center justify-between'
+                                className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 text-stone-300 shadow-none hover:bg-transparent'
                               >
-                                {date ? date.toDateString() : 'Pick a date'}
-                                <svg
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  className='ml-2 h-5 w-5'
-                                  fill='none'
-                                  viewBox='0 0 24 24'
-                                  stroke='currentColor'
-                                >
-                                  <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    strokeWidth={2}
-                                    d='M8 7V3m8 0v4m-9 4h10m2 5a9 9 0 11-18 0 9 9 0 0118 0z'
-                                  />
-                                </svg>
+                                <span className='text-stone-300 group-hover:text-stone-300'>
+                                  {date ? date.toDateString() : 'Pick a date'}
+                                </span>
+                                <span className='text-stone-300 group-hover:text-stone-300'>
+                                  <CalendarIcon />
+                                </span>
                               </Button>
                             </PopoverTrigger>
                             <PopoverContent>
