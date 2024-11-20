@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Controller,
   ControllerProps,
+  FieldError,
   FieldPath,
   FieldValues,
   FormProvider,
@@ -19,7 +20,7 @@ interface FormTypes {
   isDirty: boolean;
   isTouched: boolean;
   isValidating: boolean;
-  error?: Error;
+  error?: FieldError;
   id: string;
   name: string;
   formItemId: string;
