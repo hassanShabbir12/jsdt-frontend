@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import { Label } from '@radix-ui/react-label';
 import { MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Carousel,
   CarouselContent,
@@ -22,6 +23,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -56,6 +58,13 @@ export const LearnerTeacher: FC = () => {
 
   const onHandleClick = (): void => {
     navigate('/instructions');
+  };
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [isCalenderOpen, setIsCalenderOpen] = useState(false);
+
+  const handleDateSelect = (selectedDate: Date | undefined): void => {
+    setDate(selectedDate);
+    setIsCalenderOpen(false);
   };
 
   return (
@@ -678,6 +687,46 @@ export const LearnerTeacher: FC = () => {
                           >
                             Date
                           </Label>
+                        </div>
+                        <div className='space-y-4'>
+                          <label
+                            htmlFor='date-of-birth'
+                            className='text-sm font-medium text-gray-900'
+                          >
+                            Date
+                          </label>
+                          <Popover open={isCalenderOpen} onOpenChange={setIsCalenderOpen}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant='outline'
+                                className='flex w-full items-center justify-between'
+                              >
+                                {date ? date.toDateString() : 'Pick a date'}
+                                <svg
+                                  xmlns='http://www.w3.org/2000/svg'
+                                  className='ml-2 h-5 w-5'
+                                  fill='none'
+                                  viewBox='0 0 24 24'
+                                  stroke='currentColor'
+                                >
+                                  <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    strokeWidth={2}
+                                    d='M8 7V3m8 0v4m-9 4h10m2 5a9 9 0 11-18 0 9 9 0 0118 0z'
+                                  />
+                                </svg>
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                              <Calendar
+                                mode='single'
+                                selected={date}
+                                onSelect={handleDateSelect}
+                                className='rounded-md border'
+                              />
+                            </PopoverContent>
+                          </Popover>
                         </div>
                         <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
                           <Label
