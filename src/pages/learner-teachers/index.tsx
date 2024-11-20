@@ -804,9 +804,9 @@ export const LearnerTeacher: FC = () => {
                             <PopoverTrigger asChild>
                               <Button
                                 variant='outline'
-                                className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 text-stone-300 shadow-none hover:bg-transparent'
+                                className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                               >
-                                <span className='text-stone-300 group-hover:text-stone-300'>
+                                <span className='text-zinc-800 group-hover:text-zinc-800'>
                                   {date ? date.toDateString() : 'Pick a date'}
                                 </span>
                                 <span className='text-stone-300 group-hover:text-stone-300'>
