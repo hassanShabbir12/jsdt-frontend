@@ -31,7 +31,7 @@ export const LearnerLogin: FC = () => {
                 {...form.register('email')}
                 id='email'
                 className='h-10 rounded-lg border-neutral-200 px-4 py-2 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:px-5'
-                placeholder='email'
+                placeholder='Email'
               />
               {form.formState.errors.email && (
                 <span className='text-sm text-red-500'>{form.formState.errors.email.message}</span>

@@ -42,7 +42,7 @@ export const EducatorLogin: FC = () => (
               className='h-10 rounded-lg border-neutral-200 px-4 py-2 pr-12 text-sm text-black shadow-none placeholder:text-stone-300 lg:h-12 lg:pl-5'
               placeholder='Enter Your Password'
             />
-            <div className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'>
+            <div className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'>
               <EyeOff />
             </div>
           </div>

@@ -56,7 +56,7 @@ export const ResetPassword: FC = () => {
             />
             <div
               onClick={() => setShowPassword(!showPassword)}
-              className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'
+              className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'
             >
               {showPassword ? <Eye /> : <EyeOff />}
             </div>
@@ -80,7 +80,7 @@ export const ResetPassword: FC = () => {
             />
             <div
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className='absolute right-4 top-2 cursor-pointer text-stone-300 lg:top-3'
+              className='absolute right-4 top-2 cursor-pointer text-zinc-500 lg:top-3'
             >
               {showConfirmPassword ? <Eye /> : <EyeOff />}
             </div>
