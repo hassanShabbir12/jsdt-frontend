@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+import { Loader, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -35,6 +35,7 @@ import {
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
+import { useDownloadQuestions } from '@/hooks/client/useDownloadPDF';
 import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
 
@@ -56,6 +57,7 @@ export const LearnerTeacher: FC = () => {
     isOpen,
     setIsOpen,
   } = useInvestigation();
+  const { downloadQuestions, loading } = useDownloadQuestions();
 
   return (
     <section className='pb-10 pt-5'>
@@ -330,11 +332,16 @@ export const LearnerTeacher: FC = () => {
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
                         <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
-                          <img
-                            src={assetUrl('assets/img/home/attach-download.svg')}
-                            alt='Generate-2'
-                            className='-mb-11 block h-auto'
-                          />
+                          {loading ? (
+                            <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
+                          ) : (
+                            <img
+                              onClick={() => downloadQuestions(questions, 'question')}
+                              src={assetUrl('assets/img/home/attach-download.svg')}
+                              alt='Generate-2'
+                              className='-mb-11 block h-auto'
+                            />
+                          )}
                         </div>
                       </div>
                     </DialogHeader>
@@ -366,11 +373,16 @@ export const LearnerTeacher: FC = () => {
                       <div className='mb-8 flex pt-8 sm:items-center'>
                         <DialogTitle>Answer of the following questions</DialogTitle>
                         <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
-                          <img
-                            src={assetUrl('assets/img/home/attach-download.svg')}
-                            alt='Generate-2'
-                            className='-mb-11 block h-auto'
-                          />
+                          {loading ? (
+                            <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
+                          ) : (
+                            <img
+                              onClick={() => downloadQuestions(questions, 'answer')}
+                              src={assetUrl('assets/img/home/attach-download.svg')}
+                              alt='Generate-2'
+                              className='-mb-11 block h-auto'
+                            />
+                          )}
                         </div>
                       </div>
                     </DialogHeader>
