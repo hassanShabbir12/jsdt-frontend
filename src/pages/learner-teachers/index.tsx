@@ -40,6 +40,7 @@ import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { useDownloadQuestions } from '@/hooks/client/useDownloadPDF';
 import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
+import { cn } from '@/lib/utils';
 import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
 export const LearnerTeacher: FC = () => {
@@ -837,9 +838,9 @@ export const LearnerTeacher: FC = () => {
                             <PopoverTrigger asChild>
                               <Button
                                 variant='outline'
-                                className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-3 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
+                                className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                               >
-                                <span className={`text-stone-300 ${!date ? '' : 'text-zinc-800'}`}>
+                                <span className={cn('text-stone-300', { 'text-zinc-800': date })}>
                                   {date ? formatDate(date) : 'DD-MM-YYYY'}
                                 </span>
                                 <span className='text-stone-300 group-hover:text-stone-300'>
