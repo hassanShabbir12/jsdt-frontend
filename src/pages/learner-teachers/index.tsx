@@ -2,8 +2,10 @@ import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import { DialogDescription } from '@radix-ui/react-dialog';
 import { Label } from '@radix-ui/react-label';
 import { Loader, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+
 
 import { Button } from '@/components/ui/button';
 import {
@@ -37,6 +39,8 @@ import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { useDownloadQuestions } from '@/hooks/client/useDownloadPDF';
 import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
+import { cn } from '@/lib/utils';
+import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
 import { Cover } from './components/cover';
 import { InstructionsList } from './components/instructions';
@@ -58,6 +62,7 @@ export const LearnerTeacher: FC = () => {
     setIsOpen,
   } = useInvestigation();
   const { downloadQuestions, loading } = useDownloadQuestions();
+
 
   return (
     <section className='pb-10 pt-5'>
@@ -407,7 +412,6 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-
               {!isLearner && (
                 <>
                   <div className='mb-1 px-2 sm:mb-0'>
@@ -470,13 +474,13 @@ export const LearnerTeacher: FC = () => {
                                       Total Marks
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      3
+                                      {calculateTotalMarks(questions, 'Easy')}
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      3
+                                      {calculateTotalMarks(questions, 'Intermediate')}
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      6
+                                      {calculateTotalMarks(questions, 'Difficult')}
                                     </td>
                                   </tr>
                                   <tr>
@@ -484,13 +488,13 @@ export const LearnerTeacher: FC = () => {
                                       Percentage
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      21%
+                                      {calculatePercentage(questions, 'Easy')}%
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      21%
+                                      {calculatePercentage(questions, 'Intermediate')}%
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      43%
+                                      {calculatePercentage(questions, 'Difficult')}%
                                     </td>
                                   </tr>
                                 </tbody>
