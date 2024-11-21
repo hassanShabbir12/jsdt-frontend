@@ -28,13 +28,14 @@ export const useDownloadQuestions = (): UseDownloadQuestionsReturn => {
       }
       setLoading(true);
       const idArray = questions.map((item) => item.id);
-      const response = await apiClient.instance.post(
-        `/pdf/question?type=${type}`,
-        { items: idArray },
-        {
-          responseType: 'blob',
-        },
-      );
+      const queryParams = { type };
+      const body = {
+        items: idArray,
+      };
+      const response = (await apiClient.pdf.pdfControllerQuestionAnswerPdf(
+        queryParams,
+        body,
+      )) as unknown as { data: Blob };
       const pdfUrl = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
 
