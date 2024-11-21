@@ -841,10 +841,7 @@ export const LearnerTeacher: FC = () => {
                                 className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                               >
                                 <span
-                                  className={cn(
-                                    'text-stone-300',
-                                    !date ? 'pick-date' : 'text-zinc-800',
-                                  )}
+                                  className={cn('text-stone-300', !date ? '' : 'text-zinc-800')}
                                 >
                                   {date ? formatDate(date) : 'DD-MM-YYYY'}
                                 </span>
