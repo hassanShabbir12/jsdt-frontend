@@ -5,7 +5,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 
 import { cn } from '@/lib/utils';
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
+  onSelectDate?: ((date: Date | undefined) => void) | undefined;
+};
 
 function Calendar({
   className,
