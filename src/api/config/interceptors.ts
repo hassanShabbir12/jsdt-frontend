@@ -6,8 +6,10 @@ import { retryRequest } from './retryHandler';
 
 export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
   axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    if (config.url?.includes('/pdf/question')) {
+      config.responseType = 'blob';
+    }
     addPendingRequest(config);
-    // Set the Authorization token, if available
     const token = localStorage.getItem('access_token');
 
     if (token) {

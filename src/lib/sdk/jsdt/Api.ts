@@ -124,6 +124,8 @@ export interface GenerateDescriptionDto {
   type: GenerateDescriptionDtoTypeEnum;
 }
 
+export type QuestionDto = object;
+
 export enum CreateUserDtoRoleEnum {
   Learner = 'learner',
   Teacher = 'teacher',
@@ -830,6 +832,64 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+  };
+  pdf = {
+    /**
+     * No description
+     *
+     * @name PdfControllerDownloadPdf
+     * @request GET:/pdf/download
+     */
+    pdfControllerDownloadPdf: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/pdf/download`,
+        method: 'GET',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @name PdfControllerQuestionAnswerPdf
+     * @request POST:/pdf/question
+     */
+    pdfControllerQuestionAnswerPdf: (
+      query: {
+        type: string;
+      },
+      data: QuestionDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/pdf/question`,
+        method: 'POST',
+        query: query,
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+  };
+  upload = {
+    /**
+     * No description
+     *
+     * @name UploadControllerUploadMedia
+     * @request POST:/upload/upload
+     */
+    uploadControllerUploadMedia: (
+      data: {
+        /** @format binary */
+        file?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/upload/upload`,
+        method: 'POST',
+        body: data,
+        type: ContentType.FormData,
         ...params,
       }),
   };
