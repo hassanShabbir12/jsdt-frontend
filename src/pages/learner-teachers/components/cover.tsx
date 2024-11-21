@@ -3,9 +3,13 @@ import { Controller } from 'react-hook-form';
 
 import { Label } from '@radix-ui/react-label';
 import { SelectLabel } from '@radix-ui/react-select';
+import { CalendarIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -33,7 +37,12 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     handleButtonClick,
     fileInputRef,
     image,
-    isLoading,
+    isCalenderOpen,
+    setIsCalenderOpen,
+    handleDateSelect,
+    date,
+    storedData,
+    saveToLocalStorage,
   } = useCover();
 
   return (
@@ -86,6 +95,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
           </div>
           <div className='mx-auto flex max-w-80 justify-center'>
             <Button
+              type='button'
               className='h-12 w-52 text-base font-semibold md:w-80'
               onClick={handleButtonClick}
             >
@@ -103,7 +113,10 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                 name='nsc'
                 control={form.control}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value ? field.value : undefined}
+                  >
                     <SelectTrigger className='w-full'>
                       <SelectValue className='text-stone-300' placeholder='Select' />
                     </SelectTrigger>
@@ -254,19 +267,59 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
             )}
           </div>
           <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='name'
+            <label
+              htmlFor='date'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
             >
               Date
-            </Label>
+            </label>
+            <div className='h-12 w-full'>
+              <Controller
+                name='date'
+                control={form.control}
+                rules={{ required: 'Date is required' }}
+                render={({ field }) => (
+                  <Popover open={isCalenderOpen} onOpenChange={setIsCalenderOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant='outline'
+                        className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
+                      >
+                        <span className='text-zinc-800 group-hover:text-zinc-800'>
+                          {field.value ? new Date(field.value).toDateString() : 'Pick a date'}
+                        </span>
+                        <span className='text-stone-300 group-hover:text-stone-300'>
+                          <CalendarIcon />
+                        </span>
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <Calendar
+                        mode='single'
+                        selected={field.value ? new Date(field.value) : undefined}
+                        onSelect={(selectedDate) => {
+                          field.onChange(selectedDate ?? date);
+
+                          handleDateSelect(selectedDate as Date);
+                        }}
+                        className='rounded-md border'
+                      />
+                    </PopoverContent>
+                  </Popover>
+                )}
+              />
+              {form.formState.errors.date && (
+                <span className='text-sm text-red-500'>{form.formState.errors.date.message}</span>
+              )}
+            </div>
           </div>
+
           <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
-              htmlFor='time'
+              htmlFor='page'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
             >
-              Time
+              Pages
             </Label>
 
             <Controller
@@ -288,14 +341,125 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
           </div>
         </div>
         <div className='mx-auto mb-8 flex max-w-80 justify-center'>
-          <Button
-            className='h-12 w-52 text-base font-semibold md:w-80'
-            type='submit'
-            disabled={isLoading}
-            loading={isLoading}
-          >
-            {isLoading ? 'Uploading...' : 'Preview'}
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                className='h-12 w-52 text-base font-semibold md:w-80'
+                onClick={() => saveToLocalStorage()}
+              >
+                Preview
+              </Button>
+            </DialogTrigger>
+            <DialogContent className='!container block max-h-[92vh] max-w-[80%] overflow-y-auto overflow-x-hidden lg:px-8'>
+              <section className='mx-auto max-w-[850px] px-4 pb-5 pt-10'>
+                <div className='gap-x-4 sm:flex'>
+                  <div className='relative'>
+                    <Label
+                      htmlFor='file-upload'
+                      className='mb-2.5 flex h-28 w-28  items-center justify-center rounded-full border border-solid border-zinc-800 text-center text-base text-zinc-800 hover:opacity-90'
+                    >
+                      {image ? (
+                        <img
+                          src={URL.createObjectURL(image.file)}
+                          alt='Uploaded Image'
+                          className='h-full w-full rounded-full object-cover'
+                        />
+                      ) : (
+                        'Logo Here'
+                      )}
+                    </Label>
+                  </div>
+                  <div className='mb-1.5 w-full'>
+                    <div className='border-b-2 border-solid border-neutral-200'>
+                      <h1 className='text-basefont-semibold pb-3 pl-3 text-zinc-900'>
+                        Basic Information
+                      </h1>
+                    </div>
+                    <div className='mb-8 pl-3 text-base text-zinc-800'>
+                      <p className='mb-1'>{storedData.nsc || 'National Senior Certificate'}</p>
+                      <p className='mb-1'>{storedData.grade || 'Grade'}</p>
+                      <p className='mb-1'>{storedData.subject || 'Subject'}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className='sm:pl-32'>
+                  <div className='mb-5 sm:mb-10'>
+                    <p className='!focus-visible:ring-0 h-12 w-full bg-black text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'>
+                      {storedData.nsc || ''}
+                    </p>
+                  </div>
+                  <div className='mb-5 sm:mb-10'>
+                    <p className='h-12 w-full bg-blue-500 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'>
+                      Grade: {storedData.grade || ''}
+                    </p>
+                  </div>
+                  <div className='mb-5 rounded-xl border border-dashed border-blue-400 bg-yellow-200 pb-4 pt-3 sm:mb-8'>
+                    <div className='items-center p-2 sm:flex'>
+                      <Label
+                        htmlFor='subject'
+                        className='text-sm font-semibold text-zinc-800 sm:text-base'
+                      >
+                        Subject name & paper no. :
+                      </Label>
+                      <div className='h-4 w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
+                        <p>{storedData.subject || ''}</p>
+                      </div>
+                    </div>
+                    <div className='items-center p-2 sm:flex'>
+                      <Label
+                        htmlFor='subject'
+                        className='text-sm font-semibold text-zinc-800 sm:text-base'
+                      >
+                        Date:
+                      </Label>
+                      <div>
+                        <div className='h-4 w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
+                          <p>{new Date(storedData.date as Date).toLocaleDateString()}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='mb-5 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat nunc ac a
+                    magna at elementum. Cras. Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit. Consequat nunc ac a magna at elementum. Cras.
+                  </div>
+                  <div className='mb-14 items-center justify-between sm:mb-28 sm:flex'>
+                    <div className='mb-5 w-full sm:mb-0 sm:flex sm:w-52'>
+                      <Label htmlFor='subject' className='text-base text-zinc-800'>
+                        Marks:
+                      </Label>
+                      <div className='h-[18px] w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
+                        <p>{storedData.totalMarks}</p>
+                      </div>
+                    </div>
+                    <div className='w-full sm:flex sm:w-52'>
+                      <Label htmlFor='subject' className='text-base text-zinc-800'>
+                        Total:
+                      </Label>
+                      <div className='h-[18px] w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
+                        <p>{storedData.totalMarks}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='mb-8 text-base text-zinc-800 sm:mb-14'>
+                    This question paper contains of ____ {storedData.time}pages.
+                  </div>
+                  <div className='flex items-center justify-between'>
+                    <h3 className='text-base text-zinc-800'>Copyrights reserved</h3>
+                    <div className='flex items-center'>
+                      <h3 className='m-0 text-base text-zinc-800'>Please turnover</h3>
+                      <img
+                        src={assetUrl('assets/img/home/arrow-right-around.svg')}
+                        alt='round-arrow'
+                        className='ml-2 block h-auto'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </form>

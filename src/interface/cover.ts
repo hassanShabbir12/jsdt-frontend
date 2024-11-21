@@ -2,11 +2,12 @@ import { UseFormReturn } from 'react-hook-form';
 
 import { z } from 'zod';
 
-// Base schema without difficulty level
 const baseCoverSchema = {
-  nsc: z.enum(['IEB', 'NSC'], {
-    required_error: 'Please select IEB or NSC',
-  }),
+  nsc: z
+    .enum(['IEB', 'NSC'], {
+      required_error: 'Please select IEB or NSC',
+    })
+    .nullable(),
   grade: z
     .string({
       required_error: 'Please select a grade',
@@ -28,10 +29,18 @@ const baseCoverSchema = {
       required_error: 'Total marks is required',
     })
     .min(1, 'Total marks must be greater than 0')
-    .max(1000, 'Total marks cannot exceed 1000'),
-  time: z.number({
-    required_error: 'Time is required',
-  }),
+    .max(1000, 'Total marks cannot exceed 1000')
+    .nullable(),
+  time: z
+    .number({
+      required_error: 'Page is required',
+    })
+    .nullable(),
+  date: z
+    .date({
+      required_error: 'Date is required',
+    })
+    .nullable(),
 };
 
 export const CoverSchema = z.object({
@@ -57,4 +66,10 @@ export interface UseCoverReturn {
   handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
   handleButtonClick: () => void;
+  handleDateSelect: (date: Date) => void;
+  isCalenderOpen: boolean;
+  setIsCalenderOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  date: Date | null;
+  storedData: CoverFormData;
+  saveToLocalStorage: () => void;
 }
