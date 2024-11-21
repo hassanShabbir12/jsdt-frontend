@@ -40,6 +40,7 @@ import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { useDownloadQuestions } from '@/hooks/client/useDownloadPDF';
 import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
+import { cn } from '@/lib/utils';
 import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
 export const LearnerTeacher: FC = () => {
@@ -59,12 +60,33 @@ export const LearnerTeacher: FC = () => {
   } = useInvestigation();
   const { downloadQuestions, loading } = useDownloadQuestions();
 
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const formatDate = (date: Date | undefined): string => {
+    if (!date) {
+      return '';
+    }
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
+  const [date, setDate] = useState<Date | undefined>();
   const [isCalenderOpen, setIsCalenderOpen] = useState(false);
 
   const handleDateSelect = (selectedDate: Date | undefined): void => {
-    setDate(selectedDate);
-    setIsCalenderOpen(false);
+    if (selectedDate) {
+      setDate(selectedDate);
+      setIsCalenderOpen(false);
+
+      if (selectedDate?.getTime() === date?.getTime()) {
+        setIsCalenderOpen(false);
+      } else {
+        setDate(selectedDate);
+      }
+    } else {
+      setIsCalenderOpen(false);
+    }
   };
 
   return (
@@ -818,8 +840,8 @@ export const LearnerTeacher: FC = () => {
                                 variant='outline'
                                 className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                               >
-                                <span className='text-zinc-800 group-hover:text-zinc-800'>
-                                  {date ? date.toDateString() : 'Pick a date'}
+                                <span className={cn('text-stone-300', { 'text-zinc-800': date })}>
+                                  {date ? formatDate(date) : 'DD-MM-YYYY'}
                                 </span>
                                 <span className='text-stone-300 group-hover:text-stone-300'>
                                   <CalendarIcon />
