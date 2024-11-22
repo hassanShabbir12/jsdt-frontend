@@ -78,10 +78,6 @@ export const useInvestigation = (): UseInvestigationReturn => {
         setQuestions(questions);
       } else {
         setQuestions([response.data.data[0]]);
-        apiClient.pdf.pdfControllerCreatePaper({
-          questionId: response.data.data[0].id,
-          serialNo: '1',
-        });
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -134,6 +130,17 @@ export const useInvestigation = (): UseInvestigationReturn => {
     });
   };
 
+  const handleCheckQuestions = (): void => {
+    if (questions.length === 0) {
+      toast({
+        title: 'No Questions',
+        description: 'Please add questions before proceeding.',
+      });
+
+      return;
+    }
+  };
+
   return {
     form,
     isLoading,
@@ -144,5 +151,6 @@ export const useInvestigation = (): UseInvestigationReturn => {
     handleDeleteQuestion,
     isOpen,
     setIsOpen,
+    handleCheckQuestions,
   };
 };
