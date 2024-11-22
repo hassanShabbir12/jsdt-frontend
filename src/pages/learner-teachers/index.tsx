@@ -583,44 +583,42 @@ export const LearnerTeacher: FC = () => {
                 <span className='inline-block text-2xl font-semibold'>
                   Question No. {index + 1}
                 </span>
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                  <DialogTrigger asChild>
-                    <i
-                      onClick={() => setIsOpen(true)}
-                      className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'
-                    >
-                      <Trash2 />
-                    </i>
-                  </DialogTrigger>
-                  <DialogContent className='max-w-[620px]'>
-                    <DialogHeader>
-                      <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
-                        Do you want to delete that question?
-                      </DialogTitle>
-                    </DialogHeader>
-                    <DialogFooter>
-                      <div className='w-1/2'>
-                        <Button
-                          variant='outline'
-                          onClick={() => setIsOpen(false)}
-                          className='h-12 w-full text-base font-semibold'
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                      <div
-                        onClick={() => {
-                          handleDeleteQuestion(item.id);
-                          setIsOpen(false);
-                        }}
-                        className='w-1/2'
-                      >
-                        <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
-                      </div>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+                <i
+                  onClick={() => setIsOpen(item.id)} // Open the modal for this question
+                  className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'
+                >
+                  <Trash2 />
+                </i>
               </div>
+              <Dialog open={isOpen === item.id} onOpenChange={() => setIsOpen('')}>
+                <DialogContent className='max-w-[620px]'>
+                  <DialogHeader>
+                    <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
+                      Do you want to delete this question?
+                    </DialogTitle>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <div className='w-1/2'>
+                      <Button
+                        variant='outline'
+                        onClick={() => setIsOpen('')} // Close the modal
+                        className='h-12 w-full text-base font-semibold'
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                    <div
+                      onClick={() => {
+                        handleDeleteQuestion(item.id); // Call delete function
+                        setIsOpen(''); // Close the modal
+                      }}
+                      className='w-1/2'
+                    >
+                      <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
+                    </div>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
               <p className='mb-10 mt-6 block text-black'>{item.question}</p>
             </div>
           ))}
