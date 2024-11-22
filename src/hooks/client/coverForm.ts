@@ -12,18 +12,19 @@ export const useCoverForm = (): UseCoverForm => {
     return savedData
       ? JSON.parse(savedData)
       : {
-          nsc: null,
+          nsc: '',
           grade: '',
           subject: '',
           topic: '',
-          totalMarks: null,
-          time: null,
-          date: null,
-          description: null,
+          totalMarks: '',
+          page: '',
+          date: '',
+          description: '',
         };
   };
 
   const [storedData, setStoredData] = useState<CoverFormData>(loadLocalStorageData());
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem('coverFormData', JSON.stringify(storedData));
@@ -43,6 +44,7 @@ export const useCoverForm = (): UseCoverForm => {
   };
 
   const onSubmit: SubmitHandler<CoverFormData> = (data): void => {
+    setOpen(true);
     setStoredData(data);
   };
 
@@ -51,5 +53,7 @@ export const useCoverForm = (): UseCoverForm => {
     storedData,
     saveToLocalStorage,
     onSubmit: form.handleSubmit(onSubmit),
+    isOpen,
+    setOpen,
   };
 };

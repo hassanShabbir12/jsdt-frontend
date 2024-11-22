@@ -31,7 +31,7 @@ const baseCoverSchema = {
     .min(1, 'Total marks must be greater than 0')
     .max(1000, 'Total marks cannot exceed 1000')
     .nullable(),
-  time: z
+  page: z
     .number({
       required_error: 'Page is required',
     })
@@ -66,6 +66,8 @@ export interface UseCoverForm {
   storedData: CoverFormData;
   saveToLocalStorage: () => void;
   onSubmit: () => void;
+  isOpen: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface UseCoverReturn {

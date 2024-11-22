@@ -7,7 +7,7 @@ import { CalendarIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
@@ -42,7 +42,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     date,
   } = useCover();
 
-  const { form, onSubmit, storedData, saveToLocalStorage } = useCoverForm();
+  const { form, storedData, onSubmit, saveToLocalStorage, isOpen, setOpen } = useCoverForm();
 
   return (
     <form onSubmit={onSubmit}>
@@ -322,20 +322,20 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
             </Label>
 
             <Controller
-              name='time'
+              name='page'
               control={form.control}
               render={({ field: { onChange, value } }) => (
                 <Input
                   type='number'
                   value={value || ''}
                   onChange={(e) => onChange(Number(e.target.value))}
-                  placeholder='e.g., 2 Hours'
+                  placeholder='No. of Pages'
                   className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                 />
               )}
             />
-            {form.formState.errors.time && (
-              <span className='text-sm text-red-500'>{form.formState.errors.time.message}</span>
+            {form.formState.errors.page && (
+              <span className='text-sm text-red-500'>{form.formState.errors.page.message}</span>
             )}
           </div>
           <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
@@ -353,6 +353,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                 <textarea
                   value={value || ''}
                   onChange={(e) => onChange(e.target.value)}
+                  placeholder='Enter Description'
                   className='h-44 w-full resize-none rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                 ></textarea>
               )}
@@ -364,15 +365,14 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
           </div>
         </div>
         <div className='mx-auto mb-8 flex max-w-80 justify-center'>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                className='h-12 w-52 text-base font-semibold md:w-80'
-                onClick={() => saveToLocalStorage()}
-              >
-                Preview
-              </Button>
-            </DialogTrigger>
+          <Button
+            className='h-12 w-52 text-base font-semibold md:w-80'
+            onClick={() => saveToLocalStorage()}
+            type='submit'
+          >
+            Preview
+          </Button>
+          <Dialog open={isOpen} onOpenChange={() => setOpen(false)}>
             <DialogContent className='!container block max-h-[92vh] max-w-[80%] overflow-y-auto overflow-x-hidden lg:px-8'>
               <section className='mx-auto max-w-[850px] px-4 pb-5 pt-10'>
                 <div className='gap-x-4 sm:flex'>
@@ -447,7 +447,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                   </div>
                   <div className='mb-14 items-center justify-between sm:mb-28 sm:flex'>
                     <div className='mb-8 text-base text-zinc-800 sm:mb-14'>
-                      This question paper contains of ____ {storedData.time}pages.
+                      This question paper contains of ____ {storedData.page}pages.
                     </div>
                     <div className='w-full sm:flex sm:w-52'>
                       <Label htmlFor='subject' className='text-base text-zinc-800'>
