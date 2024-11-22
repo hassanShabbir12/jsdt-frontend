@@ -100,6 +100,17 @@ export const useInvestigation = (): UseInvestigationReturn => {
     }
   };
 
+  const handleCheckQuestions = (): void => {
+    if (questions.length === 0) {
+      toast({
+        title: 'No Questions',
+        description: 'Please add questions before proceeding.',
+      });
+
+      return;
+    }
+  };
+
   const handleAddQuestion = async (): Promise<void> => {
     const remainingQuestions = clonedQuestions.filter(
       (availableQ) => !questions.some((selectedQ) => selectedQ.id === availableQ.id),
@@ -148,6 +159,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
     questions,
     handleAddQuestion,
     handleDeleteQuestion,
+    handleCheckQuestions,
     isOpen,
     setIsOpen,
   };
