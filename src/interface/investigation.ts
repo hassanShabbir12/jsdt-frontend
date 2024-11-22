@@ -62,6 +62,6 @@ export interface UseInvestigationReturn {
   handleAddQuestion: () => void;
   questions: ExtendedCreateQuestionDto[];
   handleDeleteQuestion: (questionId: string) => void;
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
+  isOpen: string;
+  setIsOpen: (id: string) => void;
 }

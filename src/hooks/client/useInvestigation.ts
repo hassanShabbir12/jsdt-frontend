@@ -18,7 +18,7 @@ import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
 export const useInvestigation = (): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<string>('');
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const { user } = useAuth();
@@ -78,6 +78,10 @@ export const useInvestigation = (): UseInvestigationReturn => {
         setQuestions(questions);
       } else {
         setQuestions([response.data.data[0]]);
+        apiClient.pdf.pdfControllerCreatePaper({
+          questionId: response.data.data[0].id,
+          serialNo: '1',
+        });
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -96,7 +100,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
     }
   };
 
-  const handleAddQuestion = (): void => {
+  const handleAddQuestion = async (): Promise<void> => {
     const remainingQuestions = clonedQuestions.filter(
       (availableQ) => !questions.some((selectedQ) => selectedQ.id === availableQ.id),
     );
@@ -114,15 +118,21 @@ export const useInvestigation = (): UseInvestigationReturn => {
     const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
     const newQuestion = remainingQuestions[randomIndex];
 
+    await apiClient.pdf.pdfControllerCreatePaper({
+      questionId: newQuestion.id,
+      serialNo: String(questions.length + 1),
+    });
     setQuestions((prev) => [...prev, newQuestion]);
   };
 
-  const handleDeleteQuestion = (questionId: string): void => {
+  const handleDeleteQuestion = async (questionId: string): Promise<void> => {
     // Remove from questions array
     setQuestions((prevQuestions) => prevQuestions.filter((q) => q.id !== questionId));
 
     // Remove from clonedQuestions array
     setClonedQuestions((prevCloned) => prevCloned.filter((q) => q.id !== questionId));
+
+    await apiClient.pdf.pdfControllerDeletePaper(questionId);
 
     toast({
       title: 'Question Deleted',

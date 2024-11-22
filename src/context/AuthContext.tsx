@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 import { CreateUserDto } from '@/lib/sdk/jsdt/Api';
 
@@ -24,15 +24,28 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setUser(user);
     setToken(token);
     setIsAuthenticated(true);
-    // Optional: Save to localStorage/sessionStorage
     localStorage.setItem('authToken', token);
+    localStorage.setItem('user', JSON.stringify(user));
   };
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    const storedUser = localStorage.getItem('user');
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const logout = (): void => {
     setUser(null);
     setToken(null);
     setIsAuthenticated(false);
-    localStorage.removeItem('authToken');
+    localStorage.clear();
   };
 
   return (

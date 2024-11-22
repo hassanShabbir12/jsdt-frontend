@@ -124,7 +124,50 @@ export interface GenerateDescriptionDto {
   type: GenerateDescriptionDtoTypeEnum;
 }
 
-export type QuestionDto = object;
+export interface CreatePaperDto {
+  /** Question ID associated with the paper */
+  questionId: string;
+  /** Serial number for the paper */
+  serialNo: string;
+}
+
+export interface CoverDataDto {
+  /** URL of the image */
+  imageURL?: string;
+  /** Department name */
+  department: string;
+  /** Grade */
+  grade: string;
+  /** Subject name */
+  subject: string;
+  /** Date in the format DD/MM/YYYY */
+  date: string;
+  /** Marks obtained */
+  marks: string;
+  /** Time allocated */
+  time: string;
+}
+
+export interface InstructionsDataDto {
+  /** Instruction title */
+  title: string;
+}
+
+export interface IGeneratePdfDto {
+  /** Cover data */
+  coverData: CoverDataDto;
+  /** Instructions data */
+  instructionsData: InstructionsDataDto;
+  /**
+   * List of item IDs, at least one non-empty string required
+   * @minItems 1
+   */
+  items: string[];
+}
+
+export interface QuestionDto {
+  items: string[];
+}
 
 export enum CreateUserDtoRoleEnum {
   Learner = 'learner',
@@ -839,12 +882,31 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
     /**
      * No description
      *
-     * @name PdfControllerDownloadPdf
-     * @request GET:/pdf/download
+     * @tags PDF
+     * @name PdfControllerCreatePaper
+     * @request POST:/pdf/paper
+     * @secure
      */
-    pdfControllerDownloadPdf: (params: RequestParams = {}) =>
+    pdfControllerCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/pdf/download`,
+        path: `/pdf/paper`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PDF
+     * @name PdfControllerGetAllPapers
+     * @request GET:/pdf/paper
+     */
+    pdfControllerGetAllPapers: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/pdf/paper`,
         method: 'GET',
         ...params,
       }),
@@ -852,8 +914,42 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
     /**
      * No description
      *
+     * @tags PDF
+     * @name PdfControllerDeletePaper
+     * @request DELETE:/pdf/paper{id}
+     */
+    pdfControllerDeletePaper: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/pdf/paper${id}`,
+        method: 'DELETE',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PDF
+     * @name PdfControllerDownloadPdf
+     * @request POST:/pdf/download
+     * @secure
+     */
+    pdfControllerDownloadPdf: (data: IGeneratePdfDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/pdf/download`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PDF
      * @name PdfControllerQuestionAnswerPdf
      * @request POST:/pdf/question
+     * @secure
      */
     pdfControllerQuestionAnswerPdf: (
       query: {
@@ -867,6 +963,7 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         method: 'POST',
         query: query,
         body: data,
+        secure: true,
         type: ContentType.Json,
         ...params,
       }),
