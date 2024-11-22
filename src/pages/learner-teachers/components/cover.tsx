@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useCoverForm } from '@/hooks/client/coverForm';
 import { useCover } from '@/hooks/client/useCover';
 import { assetUrl } from '@/lib/asset-url';
 
@@ -29,8 +30,6 @@ interface CoverProps {
 
 export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
   const {
-    form,
-    onSubmit,
     handleImageUpload,
     handleDrop,
     handleDragOver,
@@ -41,9 +40,9 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     setIsCalenderOpen,
     handleDateSelect,
     date,
-    storedData,
-    saveToLocalStorage,
   } = useCover();
+
+  const { form, onSubmit, storedData, saveToLocalStorage } = useCoverForm();
 
   return (
     <form onSubmit={onSubmit}>
@@ -339,6 +338,30 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               <span className='text-sm text-red-500'>{form.formState.errors.time.message}</span>
             )}
           </div>
+          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+            <Label
+              htmlFor='des'
+              className='mb-1 block font-normal leading-none text-black lg:text-base'
+            >
+              Description
+            </Label>
+
+            <Controller
+              name='des'
+              control={form.control}
+              render={({ field: { onChange, value } }) => (
+                <textarea
+                  value={value || ''}
+                  onChange={(e) => onChange(e.target.value)}
+                  className='h-44 w-full resize-none rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                ></textarea>
+              )}
+            />
+
+            {form.formState.errors.des && (
+              <span className='text-sm text-red-500'>{form.formState.errors.des.message}</span>
+            )}
+          </div>
         </div>
         <div className='mx-auto mb-8 flex max-w-80 justify-center'>
           <Dialog>
@@ -420,31 +443,22 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </div>
                   </div>
                   <div className='mb-5 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat nunc ac a
-                    magna at elementum. Cras. Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Consequat nunc ac a magna at elementum. Cras.
+                    {storedData.des}
                   </div>
                   <div className='mb-14 items-center justify-between sm:mb-28 sm:flex'>
-                    <div className='mb-5 w-full sm:mb-0 sm:flex sm:w-52'>
-                      <Label htmlFor='subject' className='text-base text-zinc-800'>
-                        Marks:
-                      </Label>
-                      <div className='h-[18px] w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
-                        <p>{storedData.totalMarks}</p>
-                      </div>
+                    <div className='mb-8 text-base text-zinc-800 sm:mb-14'>
+                      This question paper contains of ____ {storedData.time}pages.
                     </div>
                     <div className='w-full sm:flex sm:w-52'>
                       <Label htmlFor='subject' className='text-base text-zinc-800'>
-                        Total:
+                        Total Marks:
                       </Label>
                       <div className='h-[18px] w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
                         <p>{storedData.totalMarks}</p>
                       </div>
                     </div>
                   </div>
-                  <div className='mb-8 text-base text-zinc-800 sm:mb-14'>
-                    This question paper contains of ____ {storedData.time}pages.
-                  </div>
+
                   <div className='flex items-center justify-between'>
                     <h3 className='text-base text-zinc-800'>Copyrights reserved</h3>
                     <div className='flex items-center'>

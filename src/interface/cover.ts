@@ -41,6 +41,11 @@ const baseCoverSchema = {
       required_error: 'Date is required',
     })
     .nullable(),
+  des: z
+    .string({
+      required_error: 'Please select a description',
+    })
+    .nullable(),
 };
 
 export const CoverSchema = z.object({
@@ -56,11 +61,15 @@ export interface ImageFile {
   file: File;
 }
 
-export interface UseCoverReturn {
+export interface UseCoverForm {
   form: UseFormReturn<CoverFormData>;
-  isLoading: boolean;
+  storedData: CoverFormData;
+  saveToLocalStorage: () => void;
   onSubmit: () => void;
-  image: ImageFile | '';
+}
+
+export interface UseCoverReturn {
+  image: ImageFile | null;
   handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
@@ -70,6 +79,5 @@ export interface UseCoverReturn {
   isCalenderOpen: boolean;
   setIsCalenderOpen: React.Dispatch<React.SetStateAction<boolean>>;
   date: Date | null;
-  storedData: CoverFormData;
-  saveToLocalStorage: () => void;
+  setImage: React.Dispatch<React.SetStateAction<ImageFile | null>>;
 }
