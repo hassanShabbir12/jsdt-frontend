@@ -18,7 +18,7 @@ import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
 export const useInvestigation = (): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState<string>('');
+  const [isOpen, setIsOpen] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const { user } = useAuth();
@@ -96,6 +96,17 @@ export const useInvestigation = (): UseInvestigationReturn => {
     }
   };
 
+  const handleCheckQuestions = (): void => {
+    if (questions.length === 0) {
+      toast({
+        title: 'No Questions',
+        description: 'Please add questions before proceeding.',
+      });
+
+      return;
+    }
+  };
+
   const handleAddQuestion = (): void => {
     const remainingQuestions = clonedQuestions.filter(
       (availableQ) => !questions.some((selectedQ) => selectedQ.id === availableQ.id),
@@ -130,17 +141,6 @@ export const useInvestigation = (): UseInvestigationReturn => {
     });
   };
 
-  const handleCheckQuestions = (): void => {
-    if (questions.length === 0) {
-      toast({
-        title: 'No Questions',
-        description: 'Please add questions before proceeding.',
-      });
-
-      return;
-    }
-  };
-
   return {
     form,
     isLoading,
@@ -149,8 +149,8 @@ export const useInvestigation = (): UseInvestigationReturn => {
     questions,
     handleAddQuestion,
     handleDeleteQuestion,
+    handleCheckQuestions,
     isOpen,
     setIsOpen,
-    handleCheckQuestions,
   };
 };

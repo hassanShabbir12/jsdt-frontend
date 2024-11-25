@@ -20,6 +20,7 @@ export const InstructionsList: React.FC = () => {
     handleCancel,
     handleDialogChange,
     setNewInstruction,
+    loading: listLoading,
   } = useInstructions();
 
   return (
@@ -77,6 +78,7 @@ export const InstructionsList: React.FC = () => {
                     </Button>
                     <Button
                       onClick={handleSave}
+                      loading={listLoading}
                       className='flex w-1/2 border border-primary px-10 py-6 text-base font-semibold'
                     >
                       Save
