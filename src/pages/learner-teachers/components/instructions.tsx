@@ -34,11 +34,14 @@ export const InstructionsList: React.FC = () => {
             Read the following instructions carefully before answering the questions.
           </p>
           <ol className='list-decimal pl-4'>
-            {instructions.map((instruction) => (
-              <li key={instruction.id} className='mb-2'>
-                <p className='mb-0'>{instruction.text}</p>
-              </li>
-            ))}
+            {(instructions || '')
+              .split('\n')
+              .slice(1, (instructions || '').split('\n').length)
+              .map((instruction, index) => (
+                <li key={index} className='mb-2'>
+                  <p className='mb-0'>{instruction.trim()}</p>
+                </li>
+              ))}
           </ol>
         </div>
         <div className='py-14'>

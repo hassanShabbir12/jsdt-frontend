@@ -1,34 +1,32 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useLocalStorage } from 'react-use';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
 
 export const useCoverForm = (): UseCoverForm => {
-  const loadLocalStorageData = (): CoverFormData => {
-    const savedData = localStorage.getItem('coverFormData');
-
-    return savedData
-      ? JSON.parse(savedData)
-      : {
-          nsc: '',
-          grade: '',
-          subject: '',
-          topic: '',
-          totalMarks: '',
-          page: '',
-          date: '',
-          description: '',
-        };
+  const defaultValue: CoverFormData = {
+    nsc: '',
+    grade: '',
+    subject: '',
+    topic: '',
+    totalMarks: 0,
+    page: 0,
+    date: '',
+    des: '',
   };
 
-  const [storedData, setStoredData] = useState<CoverFormData>(loadLocalStorageData());
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [value, setValue] = useLocalStorage<CoverFormData>('coverFormData');
+  const [storedData, setStoredData] = useState<CoverFormData>(defaultValue || value);
 
   useEffect(() => {
-    localStorage.setItem('coverFormData', JSON.stringify(storedData));
-  }, [storedData]);
+    setStoredData(defaultValue);
+  }, []);
+
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   const form = useForm<CoverFormData>({
     resolver: zodResolver(CoverSchema),
@@ -39,18 +37,26 @@ export const useCoverForm = (): UseCoverForm => {
   const saveToLocalStorage = (): void => {
     const formData = form.getValues();
 
-    localStorage.setItem('coverFormData', JSON.stringify(formData));
     setStoredData(formData);
   };
 
   const onSubmit: SubmitHandler<CoverFormData> = (data): void => {
     setOpen(true);
-    setStoredData(data);
+    setValue(data);
   };
 
   return {
     form,
-    storedData,
+    storedData: storedData || {
+      nsc: '',
+      grade: '',
+      subject: '',
+      topic: '',
+      totalMarks: 0,
+      page: 0,
+      date: null,
+      des: '',
+    },
     saveToLocalStorage,
     onSubmit: form.handleSubmit(onSubmit),
     isOpen,

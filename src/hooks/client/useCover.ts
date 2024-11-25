@@ -8,9 +8,28 @@ export const useCover = (): UseCoverReturn => {
   const [isCalenderOpen, setIsCalenderOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleDateSelect = (selectedDate: Date): void => {
-    if (selectedDate instanceof Date && !Number.isNaN(selectedDate.getTime())) {
+  const formatDate = (date: Date): string => {
+    if (!date) {
+      return '';
+    }
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
+  const handleDateSelect = (selectedDate: Date | undefined): void => {
+    if (selectedDate) {
       setDate(selectedDate);
+      setIsCalenderOpen(false);
+
+      if (selectedDate?.getTime() === date?.getTime()) {
+        setIsCalenderOpen(false);
+      } else {
+        setDate(selectedDate);
+      }
+    } else {
       setIsCalenderOpen(false);
     }
   };
@@ -65,6 +84,7 @@ export const useCover = (): UseCoverReturn => {
     date,
     handleDateSelect,
     isCalenderOpen,
+    formatDate,
     setIsCalenderOpen,
   };
 };

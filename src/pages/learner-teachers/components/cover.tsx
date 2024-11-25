@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Label } from '@radix-ui/react-label';
@@ -39,37 +39,11 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     image,
     isCalenderOpen,
     setIsCalenderOpen,
-    // handleDateSelect,
-    // date,
+    handleDateSelect,
+    date,
+    formatDate,
   } = useCover();
-
   const { form, storedData, onSubmit, saveToLocalStorage, isOpen, setOpen } = useCoverForm();
-  const formatDate = (date: Date | undefined): string => {
-    if (!date) {
-      return '';
-    }
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}-${month}-${year}`;
-  };
-
-  const [date, setDate] = useState<Date | undefined>();
-  const handleDateSelect = (selectedDate: Date | undefined): void => {
-    if (selectedDate) {
-      setDate(selectedDate);
-      setIsCalenderOpen(false);
-
-      if (selectedDate?.getTime() === date?.getTime()) {
-        setIsCalenderOpen(false);
-      } else {
-        setDate(selectedDate);
-      }
-    } else {
-      setIsCalenderOpen(false);
-    }
-  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -328,7 +302,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         mode='single'
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(selectedDate) => {
-                          field.onChange(selectedDate ?? date);
+                          field.onChange(String(selectedDate) ?? date);
 
                           handleDateSelect(selectedDate as Date);
                         }}
@@ -468,7 +442,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       </Label>
                       <div>
                         <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
-                          <p>{new Date(storedData.date as Date).toLocaleDateString()}</p>
+                          <p>{new Date(storedData.date as string).toLocaleDateString()}</p>
                         </div>
                       </div>
                     </div>
