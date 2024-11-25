@@ -229,7 +229,7 @@ export const LearnerAccount: FC = () => (
                 </DialogTrigger>
                 <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
                   <DialogHeader>
-                    <div className='mb-6 text-left'>
+                    <div className='mb-6 text-left text-2xl'>
                       <DialogTitle>Following are the questions</DialogTitle>
                     </div>
                   </DialogHeader>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -96,17 +96,6 @@ export const useInvestigation = (): UseInvestigationReturn => {
     }
   };
 
-  const handleCheckQuestions = (): void => {
-    if (questions.length === 0) {
-      toast({
-        title: 'No Questions',
-        description: 'Please add questions before proceeding.',
-      });
-
-      return;
-    }
-  };
-
   const handleAddQuestion = (): void => {
     const remainingQuestions = clonedQuestions.filter(
       (availableQ) => !questions.some((selectedQ) => selectedQ.id === availableQ.id),
@@ -140,6 +129,34 @@ export const useInvestigation = (): UseInvestigationReturn => {
       description: 'The question has been removed successfully.',
     });
   };
+
+  const handleCheckQuestions = (): void => {
+    if (questions.length === 0) {
+      toast({
+        title: 'No Questions',
+        description: 'Please add questions before proceeding.',
+      });
+
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      const isLearner = user.role === CreateUserDtoRoleEnum.Learner;
+
+      form.reset({
+        nsc: undefined,
+        grade: '',
+        subject: '',
+        assessmentType: undefined,
+        topic: '',
+        role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
+        difficultyLevel: isLearner ? undefined : undefined,
+        totalMarks: undefined,
+      });
+    }
+  }, [user, form]);
 
   return {
     form,
