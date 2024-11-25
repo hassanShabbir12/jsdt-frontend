@@ -561,7 +561,7 @@ export const LearnerTeacher: FC = () => {
                       <h3 className='mb-5 text-2xl font-semibold leading-7'>
                         Question No. {index + 1}
                       </h3>
-                      <p className='m-0'>{item.question}</p>
+                      <p className='line-clamp-3'>{item.question}</p>
                     </div>
                   </CarouselItem>
                 ))}
