@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -140,6 +140,23 @@ export const useInvestigation = (): UseInvestigationReturn => {
       return;
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      const isLearner = user.role === CreateUserDtoRoleEnum.Learner;
+
+      form.reset({
+        nsc: undefined,
+        grade: '',
+        subject: '',
+        assessmentType: undefined,
+        topic: '',
+        role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
+        difficultyLevel: isLearner ? undefined : undefined,
+        totalMarks: undefined,
+      });
+    }
+  }, [user, form]);
 
   return {
     form,
