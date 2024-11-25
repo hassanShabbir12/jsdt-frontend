@@ -42,6 +42,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     handleDateSelect,
     date,
     formatDate,
+    handleImageRemove,
   } = useCover();
   const { form, storedData, onSubmit, saveToLocalStorage, isOpen, setOpen } = useCoverForm();
 
@@ -72,7 +73,10 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     alt='Uploaded'
                     className='block h-28 w-28 rounded-full object-cover'
                   />
-                  <span className='absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-neutral-600 bg-gray-200'>
+                  <span
+                    className='absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-neutral-600 bg-gray-200'
+                    onClick={handleImageRemove}
+                  >
                     <X className='h-3 w-3 text-neutral-600' />
                   </span>
                 </div>

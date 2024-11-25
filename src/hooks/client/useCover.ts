@@ -73,6 +73,14 @@ export const useCover = (): UseCoverReturn => {
     fileInputRef.current?.click();
   };
 
+  const handleImageRemove = (): void => {
+    setImage(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   return {
     image,
     setImage,
@@ -86,5 +94,6 @@ export const useCover = (): UseCoverReturn => {
     isCalenderOpen,
     formatDate,
     setIsCalenderOpen,
+    handleImageRemove,
   };
 };

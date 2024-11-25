@@ -82,4 +82,5 @@ export interface UseCoverReturn {
   date: Date | null;
   setImage: React.Dispatch<React.SetStateAction<ImageFile | null>>;
   formatDate: (date: Date) => string;
+  handleImageRemove: () => void;
 }
