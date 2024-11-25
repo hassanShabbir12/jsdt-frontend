@@ -56,6 +56,10 @@ export const useCover = (): UseCoverReturn => {
 
   const handleImageRemove = (): void => {
     setImage(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return {
