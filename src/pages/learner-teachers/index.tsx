@@ -332,7 +332,7 @@ export const LearnerTeacher: FC = () => {
                         <div className='mb-6 text-left'>
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
-                        <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 pt-1 h-6 w-6 cursor-pointer sm:ml-3'>
                           {loading ? (
                             <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
                           ) : (

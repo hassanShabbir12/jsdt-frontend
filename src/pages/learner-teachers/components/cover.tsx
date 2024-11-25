@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Label } from '@radix-ui/react-label';
 import { SelectLabel } from '@radix-ui/react-select';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -21,6 +21,7 @@ import {
 import { useCoverForm } from '@/hooks/client/coverForm';
 import { useCover } from '@/hooks/client/useCover';
 import { assetUrl } from '@/lib/asset-url';
+import { cn } from '@/lib/utils';
 
 interface CoverProps {
   topics: { id: string; title: string }[];
@@ -38,11 +39,37 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     image,
     isCalenderOpen,
     setIsCalenderOpen,
-    handleDateSelect,
-    date,
+    // handleDateSelect,
+    // date,
   } = useCover();
 
   const { form, storedData, onSubmit, saveToLocalStorage, isOpen, setOpen } = useCoverForm();
+  const formatDate = (date: Date | undefined): string => {
+    if (!date) {
+      return '';
+    }
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
+  const [date, setDate] = useState<Date | undefined>();
+  const handleDateSelect = (selectedDate: Date | undefined): void => {
+    if (selectedDate) {
+      setDate(selectedDate);
+      setIsCalenderOpen(false);
+
+      if (selectedDate?.getTime() === date?.getTime()) {
+        setIsCalenderOpen(false);
+      } else {
+        setDate(selectedDate);
+      }
+    } else {
+      setIsCalenderOpen(false);
+    }
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -65,16 +92,21 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               onDrop={handleDrop}
             >
               {image ? (
-                <img
-                  src={URL.createObjectURL(image.file)}
-                  alt='Uploaded'
-                  className='ml-2 block h-24'
-                />
+                <div className='relative'>
+                  <img
+                    src={URL.createObjectURL(image.file)}
+                    alt='Uploaded'
+                    className='block h-28 w-28 rounded-full object-cover'
+                  />
+                  <span className='absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-neutral-600 bg-gray-200'>
+                    <X className='h-3 w-3 text-neutral-600' />
+                  </span>
+                </div>
               ) : (
                 <img
                   src={assetUrl('assets/img/home/upload-logo.png')}
                   alt='Upload Placeholder'
-                  className='ml-2 block h-auto'
+                  className='block h-auto'
                 />
               )}
             </div>
@@ -169,7 +201,6 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-
           <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='subject'
@@ -284,8 +315,8 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         variant='outline'
                         className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                       >
-                        <span className='text-zinc-800 group-hover:text-zinc-800'>
-                          {field.value ? new Date(field.value).toDateString() : 'Pick a date'}
+                        <span className={cn('text-stone-300', { 'text-zinc-800': date })}>
+                          {date ? formatDate(date) : 'DD-MM-YYYY'}
                         </span>
                         <span className='text-stone-300 group-hover:text-stone-300'>
                           <CalendarIcon />
@@ -312,7 +343,29 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-
+          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+            <Label
+              htmlFor='des'
+              className='mb-1 block font-normal leading-none text-black lg:text-base'
+            >
+              Description
+            </Label>
+            <Controller
+              name='des'
+              control={form.control}
+              render={({ field: { onChange, value } }) => (
+                <textarea
+                  value={value || ''}
+                  onChange={(e) => onChange(e.target.value)}
+                  placeholder='Enter Description'
+                  className='h-28 w-full resize-none rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                ></textarea>
+              )}
+            />
+            {form.formState.errors.des && (
+              <span className='text-sm text-red-500'>{form.formState.errors.des.message}</span>
+            )}
+          </div>
           <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='page'
@@ -320,7 +373,6 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
             >
               Pages
             </Label>
-
             <Controller
               name='page'
               control={form.control}
@@ -336,31 +388,6 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
             />
             {form.formState.errors.page && (
               <span className='text-sm text-red-500'>{form.formState.errors.page.message}</span>
-            )}
-          </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label
-              htmlFor='des'
-              className='mb-1 block font-normal leading-none text-black lg:text-base'
-            >
-              Description
-            </Label>
-
-            <Controller
-              name='des'
-              control={form.control}
-              render={({ field: { onChange, value } }) => (
-                <textarea
-                  value={value || ''}
-                  onChange={(e) => onChange(e.target.value)}
-                  placeholder='Enter Description'
-                  className='h-44 w-full resize-none rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-                ></textarea>
-              )}
-            />
-
-            {form.formState.errors.des && (
-              <span className='text-sm text-red-500'>{form.formState.errors.des.message}</span>
             )}
           </div>
         </div>
@@ -388,7 +415,11 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                           className='h-full w-full rounded-full object-cover'
                         />
                       ) : (
-                        'Logo Here'
+                        <img
+                          className='w-full rounded-full'
+                          src={assetUrl('/assets/img/home/user.png')}
+                          alt='Image Description'
+                        />
                       )}
                     </Label>
                   </div>
@@ -407,12 +438,12 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                 </div>
                 <div className='sm:pl-32'>
                   <div className='mb-5 sm:mb-10'>
-                    <p className='!focus-visible:ring-0 h-12 w-full bg-black text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'>
+                    <p className='!focus-visible:ring-0 flex items-center rounded-xl px-3 h-12 w-full bg-black text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'>
                       {storedData.nsc || ''}
                     </p>
                   </div>
                   <div className='mb-5 sm:mb-10'>
-                    <p className='h-12 w-full bg-blue-500 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'>
+                    <p className='h-12 w-full bg-blue-500 flex items-center rounded-xl px-3 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'>
                       Grade: {storedData.grade || ''}
                     </p>
                   </div>
@@ -424,7 +455,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       >
                         Subject name & paper no. :
                       </Label>
-                      <div className='h-4 w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
+                      <div className='h-4 w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none flex items-center justify-center outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
                         <p>{storedData.subject || ''}</p>
                       </div>
                     </div>
@@ -436,29 +467,30 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         Date:
                       </Label>
                       <div>
-                        <div className='h-4 w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
+                        <div className='h-4 w-full rounded-none flex items-center justify-center border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
                           <p>{new Date(storedData.date as Date).toLocaleDateString()}</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className='mb-5 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
-                    {storedData.des}
+                  <div className='mb-5 rounded-xl bg-blue-500 h-24 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
+                    <p className='line-clamp-3'>{storedData.des}</p>
                   </div>
-                  <div className='mb-14 items-center justify-between sm:mb-28 sm:flex'>
-                    <div className='mb-8 text-base text-zinc-800 sm:mb-14'>
-                      This question paper contains of ____ {storedData.page}pages.
-                    </div>
-                    <div className='w-full sm:flex sm:w-52'>
-                      <Label htmlFor='subject' className='text-base text-zinc-800'>
-                        Total Marks:
-                      </Label>
-                      <div className='h-[18px] w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-xs shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
-                        <p>{storedData.totalMarks}</p>
-                      </div>
+                  <div className='mb-8 text-base text-zinc-800'>
+                    This question paper contains of{' '}
+                    <span className='inline-flex w-6 items-center justify-center border-0 border-b border-black text-sm'>
+                      {storedData.page}
+                    </span>{' '}
+                    pages.
+                  </div>
+                  <div className='w-full sm:flex sm:w-52 mb-10'>
+                    <Label htmlFor='subject' className='w-36 text-base text-zinc-800'>
+                      Total Marks:
+                    </Label>
+                    <div className='h-[18px] w-full rounded-none flex items-center justify-center border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
+                      <p>{storedData.totalMarks}</p>
                     </div>
                   </div>
-
                   <div className='flex items-center justify-between'>
                     <h3 className='text-base text-zinc-800'>Copyrights reserved</h3>
                     <div className='flex items-center'>
