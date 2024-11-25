@@ -331,7 +331,6 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(selectedDate) => {
                           field.onChange(selectedDate ?? date);
-
                           handleDateSelect(selectedDate as Date);
                         }}
                         className='rounded-md border'
