@@ -82,4 +82,5 @@ export interface UseCoverReturn {
   setIsCalenderOpen: React.Dispatch<React.SetStateAction<boolean>>;
   date: Date | null;
   setImage: React.Dispatch<React.SetStateAction<ImageFile | null>>;
+  handleImageRemove: () => void;
 }
