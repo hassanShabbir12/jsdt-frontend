@@ -8,7 +8,6 @@ import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
 import { useLocalStorage } from './useLocalStorage';
 
 export const useCoverForm = (): UseCoverForm => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const defaultValue: CoverFormData = {
     nsc: '',
     grade: '',
