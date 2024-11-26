@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,10 +20,6 @@ export const useCoverForm = (): UseCoverForm => {
 
   const [value, setValue] = useLocalStorage<CoverFormData>('coverFormData');
   const [storedData, setStoredData] = useState<CoverFormData>(defaultValue || value);
-
-  useEffect(() => {
-    setStoredData(defaultValue);
-  }, [defaultValue]);
 
   const [isOpen, setOpen] = useState<boolean>(false);
 
