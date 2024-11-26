@@ -457,7 +457,7 @@ export const Question: FC = () => {
                     loading={loading}
                     onClick={() => questionToDelete && deleteQuestion(questionToDelete.id)}
                   >
-                    Yes, Delete
+                    Yes
                   </Button>
                 </div>
               </div>

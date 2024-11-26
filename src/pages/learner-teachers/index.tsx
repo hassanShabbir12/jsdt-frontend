@@ -315,7 +315,7 @@ export const LearnerTeacher: FC = () => {
         </form>
         <div className='relative mb-10 min-h-72 rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
-            <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start md:mb-0'>
+            <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
               <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
