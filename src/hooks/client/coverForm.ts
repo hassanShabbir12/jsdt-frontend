@@ -3,9 +3,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useLocalStorage } from '@/hooks/client/useLocalStorage';
 import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
-
-import { useLocalStorage } from './useLocalStorage';
 
 export const useCoverForm = (): UseCoverForm => {
   const defaultValue: CoverFormData = {
