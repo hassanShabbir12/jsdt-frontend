@@ -1,8 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-// import { useLocalStorage } from 'react-use';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
@@ -10,6 +8,7 @@ import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
 import { useLocalStorage } from './useLocalStorage';
 
 export const useCoverForm = (): UseCoverForm => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const defaultValue: CoverFormData = {
     nsc: '',
     grade: '',
@@ -26,7 +25,7 @@ export const useCoverForm = (): UseCoverForm => {
 
   useEffect(() => {
     setStoredData(defaultValue);
-  }, []);
+  }, [defaultValue]);
 
   const [isOpen, setOpen] = useState<boolean>(false);
 
