@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 import { apiClient } from '@/api/clients/apiClient';
 import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
+import { CoverFormData } from '@/interface/cover';
 import { ApiResponse } from '@/interface/generic';
 import {
   InvestigationFormData,
@@ -16,14 +17,19 @@ import {
 import { ExtendedCreateQuestionDto } from '@/interface/question';
 import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
+import { useLocalStorage } from './useLocalStorage';
+
 export const useInvestigation = (): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState<string>('');
+  const [isOpen, setIsOpen] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const { user } = useAuth();
 
   const isLearner = user?.role === CreateUserDtoRoleEnum.Learner;
+
+  const [instructions] = useLocalStorage<string>('instructions');
+  const [coverData] = useLocalStorage<CoverFormData>('coverFormData');
 
   const form = useForm<InvestigationFormData>({
     resolver: zodResolver(investigationSchema),
@@ -130,7 +136,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
     });
   };
 
-  const handleCheckQuestions = (): void => {
+  const handleCheckData = (): void => {
     if (questions.length === 0) {
       toast({
         title: 'No Questions',
@@ -139,7 +145,47 @@ export const useInvestigation = (): UseInvestigationReturn => {
 
       return;
     }
+
+    if (instructions?.trim().length === 0) {
+      toast({
+        title: 'No Instructions',
+        description: 'Please add instructions before proceeding.',
+      });
+
+      return;
+    }
+
+    if (!coverData || (coverData && Object.values(coverData).length === 0)) {
+      toast({
+        title: 'No Cover Data',
+        description: 'Please add cover data before proceeding.',
+      });
+
+      return;
+    }
+
+    toast({
+      title: 'Success',
+      description: 'All data is valid. File is downloading...',
+    });
   };
+
+  useEffect(() => {
+    if (user) {
+      const isLearner = user.role === CreateUserDtoRoleEnum.Learner;
+
+      form.reset({
+        nsc: undefined,
+        grade: '',
+        subject: '',
+        assessmentType: undefined,
+        topic: '',
+        role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
+        difficultyLevel: isLearner ? undefined : undefined,
+        totalMarks: undefined,
+      });
+    }
+  }, [user, form]);
 
   return {
     form,
@@ -149,8 +195,8 @@ export const useInvestigation = (): UseInvestigationReturn => {
     questions,
     handleAddQuestion,
     handleDeleteQuestion,
+    handleCheckData,
     isOpen,
     setIsOpen,
-    handleCheckQuestions,
   };
 };
