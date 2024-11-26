@@ -359,11 +359,17 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                   type='number'
                   value={value || ''}
                   onChange={(e) => onChange(Number(e.target.value))}
+                  onKeyDown={(e) => {
+                    if (e.key === '.' || e.key === 'e' || e.key === '-') {
+                      e.preventDefault();
+                    }
+                  }}
                   placeholder='No. of Pages'
                   className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                 />
               )}
             />
+
             {form.formState.errors.page && (
               <span className='text-sm text-red-500'>{form.formState.errors.page.message}</span>
             )}
@@ -466,7 +472,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       Total Marks:
                     </Label>
                     <div className='flex h-[18px] w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
-                      <p>{storedData.totalMarks}</p>
+                      <p>{Math.ceil(Number(storedData.totalMarks) * 1000) / 1000}</p>
                     </div>
                   </div>
                   <div className='flex items-center justify-between'>

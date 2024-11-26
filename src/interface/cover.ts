@@ -34,7 +34,8 @@ const baseCoverSchema = {
     .number({
       required_error: 'Page is required',
     })
-    .min(1, 'Pages must be greater than 0'),
+    .min(1, 'Pages must be greater than 0')
+    .max(999, 'Total Pages cannot exceed 999'),
   date: z
     .string({
       required_error: 'Date must be select',
