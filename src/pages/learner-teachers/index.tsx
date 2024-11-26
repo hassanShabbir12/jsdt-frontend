@@ -54,7 +54,7 @@ export const LearnerTeacher: FC = () => {
     questions,
     handleAddQuestion,
     handleDeleteQuestion,
-    handleCheckQuestions,
+    handleCheckData,
     isOpen,
     setIsOpen,
   } = useInvestigation();
@@ -542,7 +542,7 @@ export const LearnerTeacher: FC = () => {
                   className='-mb-11 block h-auto'
                 />
               </div>
-              <div className='h-6 w-6 cursor-pointer' onClick={handleCheckQuestions}>
+              <div className='h-6 w-6 cursor-pointer' onClick={handleCheckData}>
                 <img
                   src={assetUrl('assets/img/home/attach-download.svg')}
                   alt='Generate-2'

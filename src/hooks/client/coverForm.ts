@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useLocalStorage } from 'react-use';
 
+// import { useLocalStorage } from 'react-use';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
+
+import { useLocalStorage } from './useLocalStorage';
 
 export const useCoverForm = (): UseCoverForm => {
   const defaultValue: CoverFormData = {
