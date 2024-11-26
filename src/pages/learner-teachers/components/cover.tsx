@@ -131,7 +131,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                        <SelectLabel className='px-2 py-1.5 text-sm font-semibold text-stone-300'>
                           Type
                         </SelectLabel>
                         <SelectItem value='IEB'>IEB</SelectItem>
@@ -165,7 +165,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                        <SelectLabel className='px-2 py-1.5 text-sm font-semibold text-stone-300'>
                           Grades
                         </SelectLabel>
                         {grades.map((grade) => (
@@ -202,7 +202,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                        <SelectLabel className='px-2 py-1.5 text-sm font-semibold text-stone-300'>
                           Subjects
                         </SelectLabel>
                         {subjects.map((subject) => (
@@ -241,7 +241,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                        <SelectLabel className='px-2 py-1.5 text-sm font-semibold text-stone-300'>
                           Topics
                         </SelectLabel>
                         {topics.map((topic) => (
@@ -421,31 +421,30 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         Basic Information
                       </h1>
                     </div>
-                    <div className='mb-8 pl-3 text-base text-zinc-800'>
-                      <p className='mb-1'>{storedData.nsc || 'National Senior Certificate'}</p>
-                      <p className='mb-1'>{storedData.grade || 'Grade'}</p>
-                      <p className='mb-1'>{storedData.subject || 'Subject'}</p>
+                    <div className='mb-8 pt-4  text-base text-zinc-800'>
+                      <p className='!focus-visible:ring-0 mb-5 flex h-12 w-full items-center rounded-xl bg-black px-3 text-base font-semibold !text-white'>
+                        {storedData?.nsc || ''}
+                      </p>
+                      <p className='mb-1 flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white  '>
+                        Grade: {storedData.grade || 'Grade'}
+                      </p>
+                      <p className='mb-1 flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white '>
+                        Subject name: {storedData.subject || 'Subject'}
+                      </p>
+                      <p className='flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white '>
+                        Topic: {storedData.topic || ''}
+                      </p>
                     </div>
                   </div>
                 </div>
                 <div className='sm:pl-32'>
-                  <div className='mb-5 sm:mb-10'>
-                    <p className='!focus-visible:ring-0 flex h-12 w-full items-center rounded-xl bg-black px-3 text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'>
-                      {storedData.nsc || ''}
-                    </p>
-                  </div>
-                  <div className='mb-5 sm:mb-10'>
-                    <p className='flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'>
-                      Grade: {storedData.grade || ''}
-                    </p>
-                  </div>
                   <div className='mb-5 rounded-xl border border-dashed border-blue-400 bg-yellow-200 pb-4 pt-3 sm:mb-8'>
                     <div className='items-center p-2 sm:flex'>
                       <Label
                         htmlFor='subject'
                         className='text-sm font-semibold text-zinc-800 sm:text-base'
                       >
-                        Subject name & paper no. :
+                        Subject name:
                       </Label>
                       <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
                         <p>{storedData.subject || ''}</p>
@@ -465,7 +464,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       </div>
                     </div>
                   </div>
-                  <div className='mb-5 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
+                  <div className='mb-5 rounded-xl bg-blue-500 p-2 px-3 py-3 text-sm text-white sm:mb-14 sm:text-base'>
                     <p className='line-clamp-4'>{storedData.des}</p>
                   </div>
                   <div className='mb-8 text-base text-zinc-800'>
