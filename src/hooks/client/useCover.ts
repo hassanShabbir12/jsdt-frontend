@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 
+import { toast } from '@/hooks/use-toast';
 import { ImageFile, UseCoverReturn } from '@/interface/cover';
 
 export const useCover = (): UseCoverReturn => {
@@ -21,13 +22,23 @@ export const useCover = (): UseCoverReturn => {
 
   const handleDateSelect = (selectedDate: Date | undefined): void => {
     if (selectedDate) {
-      setDate(selectedDate);
-      setIsCalenderOpen(false);
+      const currentDate = new Date();
 
-      if (selectedDate?.getTime() === date?.getTime()) {
+      currentDate.setHours(0, 0, 0, 0);
+
+      if (selectedDate.getTime() < currentDate.getTime()) {
+        toast({
+          description: 'You cannot select a past date.',
+        });
+
+        return;
+      }
+
+      if (selectedDate.getTime() === date?.getTime()) {
         setIsCalenderOpen(false);
       } else {
         setDate(selectedDate);
+        setIsCalenderOpen(false);
       }
     } else {
       setIsCalenderOpen(false);
@@ -38,14 +49,20 @@ export const useCover = (): UseCoverReturn => {
     const file = event.target.files?.[0];
 
     if (file) {
-      const imageFile: ImageFile = {
-        name: file.name,
-        type: file.type,
-        size: file.size,
-        file,
-      };
+      if (file.type.startsWith('image/')) {
+        const imageFile: ImageFile = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          file,
+        };
 
-      setImage(imageFile);
+        setImage(imageFile);
+      } else {
+        toast({
+          description: 'Please upload a valid image file.',
+        });
+      }
     }
   };
 
@@ -54,14 +71,20 @@ export const useCover = (): UseCoverReturn => {
     const file = event.dataTransfer.files?.[0];
 
     if (file) {
-      const imageFile: ImageFile = {
-        name: file.name,
-        type: file.type,
-        size: file.size,
-        file,
-      };
+      if (file.type.startsWith('image/')) {
+        const imageFile: ImageFile = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          file,
+        };
 
-      setImage(imageFile);
+        setImage(imageFile);
+      } else {
+        toast({
+          description: 'Please upload a valid image file.',
+        });
+      }
     }
   };
 
