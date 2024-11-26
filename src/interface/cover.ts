@@ -4,10 +4,10 @@ import { z } from 'zod';
 
 const baseCoverSchema = {
   nsc: z
-    .enum(['IEB', 'NSC'], {
+    .string({
       required_error: 'Please select IEB or NSC',
     })
-    .nullable(),
+    .min(1, 'Please select IEB or NSC'),
   grade: z
     .string({
       required_error: 'Please select a grade',
@@ -29,23 +29,22 @@ const baseCoverSchema = {
       required_error: 'Total marks is required',
     })
     .min(1, 'Total marks must be greater than 0')
-    .max(1000, 'Total marks cannot exceed 1000')
-    .nullable(),
+    .max(1000, 'Total marks cannot exceed 1000'),
   page: z
     .number({
       required_error: 'Page is required',
     })
-    .nullable(),
+    .min(1, 'Pages must be greater than 0'),
   date: z
-    .date({
-      required_error: 'Date is required',
+    .string({
+      required_error: 'Date must be select',
     })
-    .nullable(),
+    .min(1, 'Date is required'),
   des: z
     .string({
       required_error: 'Please select a description',
     })
-    .nullable(),
+    .min(1, 'Please add a description'),
 };
 
 export const CoverSchema = z.object({
@@ -82,5 +81,6 @@ export interface UseCoverReturn {
   setIsCalenderOpen: React.Dispatch<React.SetStateAction<boolean>>;
   date: Date | null;
   setImage: React.Dispatch<React.SetStateAction<ImageFile | null>>;
+  formatDate: (date: Date) => string;
   handleImageRemove: () => void;
 }

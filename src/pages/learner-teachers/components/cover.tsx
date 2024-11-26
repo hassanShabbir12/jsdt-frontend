@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Label } from '@radix-ui/react-label';
@@ -39,36 +39,12 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     image,
     isCalenderOpen,
     setIsCalenderOpen,
+    handleDateSelect,
+    date,
+    formatDate,
     handleImageRemove,
   } = useCover();
-
   const { form, storedData, onSubmit, saveToLocalStorage, isOpen, setOpen } = useCoverForm();
-  const formatDate = (date: Date | undefined): string => {
-    if (!date) {
-      return '';
-    }
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}-${month}-${year}`;
-  };
-
-  const [date, setDate] = useState<Date | undefined>();
-  const handleDateSelect = (selectedDate: Date | undefined): void => {
-    if (selectedDate) {
-      setDate(selectedDate);
-      setIsCalenderOpen(false);
-
-      if (selectedDate?.getTime() === date?.getTime()) {
-        setIsCalenderOpen(false);
-      } else {
-        setDate(selectedDate);
-      }
-    } else {
-      setIsCalenderOpen(false);
-    }
-  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -330,7 +306,8 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         mode='single'
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(selectedDate) => {
-                          field.onChange(selectedDate ?? date);
+                          field.onChange(String(selectedDate) ?? date);
+
                           handleDateSelect(selectedDate as Date);
                         }}
                         className='rounded-md border'
@@ -439,12 +416,12 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                 </div>
                 <div className='sm:pl-32'>
                   <div className='mb-5 sm:mb-10'>
-                    <p className='!focus-visible:ring-0 flex items-center rounded-xl px-3 h-12 w-full bg-black text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'>
+                    <p className='!focus-visible:ring-0 flex h-12 w-full items-center rounded-xl bg-black px-3 text-base font-semibold !text-white placeholder:text-white focus:border-none focus:bg-black'>
                       {storedData.nsc || ''}
                     </p>
                   </div>
                   <div className='mb-5 sm:mb-10'>
-                    <p className='h-12 w-full bg-blue-500 flex items-center rounded-xl px-3 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'>
+                    <p className='flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white placeholder:text-white focus:bg-blue-500'>
                       Grade: {storedData.grade || ''}
                     </p>
                   </div>
@@ -456,7 +433,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       >
                         Subject name & paper no. :
                       </Label>
-                      <div className='h-4 w-full rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none flex items-center justify-center outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
+                      <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
                         <p>{storedData.subject || ''}</p>
                       </div>
                     </div>
@@ -468,13 +445,13 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         Date:
                       </Label>
                       <div>
-                        <div className='h-4 w-full rounded-none flex items-center justify-center border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
-                          <p>{new Date(storedData.date as Date).toLocaleDateString()}</p>
+                        <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
+                          <p>{new Date(storedData.date as string).toLocaleDateString()}</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className='mb-5 rounded-xl bg-blue-500 h-24 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
+                  <div className='mb-5 h-24 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
                     <p className='line-clamp-3'>{storedData.des}</p>
                   </div>
                   <div className='mb-8 text-base text-zinc-800'>
@@ -484,11 +461,11 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </span>{' '}
                     pages.
                   </div>
-                  <div className='w-full sm:flex sm:w-52 mb-10'>
+                  <div className='mb-10 w-full sm:flex sm:w-52'>
                     <Label htmlFor='subject' className='w-36 text-base text-zinc-800'>
                       Total Marks:
                     </Label>
-                    <div className='h-[18px] w-full rounded-none flex items-center justify-center border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
+                    <div className='flex h-[18px] w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
                       <p>{storedData.totalMarks}</p>
                     </div>
                   </div>
