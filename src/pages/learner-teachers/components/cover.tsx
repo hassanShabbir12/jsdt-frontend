@@ -131,7 +131,9 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Type</SelectLabel>
+                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                          Type
+                        </SelectLabel>
                         <SelectItem value='IEB'>IEB</SelectItem>
                         <SelectItem value='NSC'>NSC</SelectItem>
                       </SelectGroup>
@@ -163,7 +165,9 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Grades</SelectLabel>
+                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                          Grades
+                        </SelectLabel>
                         {grades.map((grade) => (
                           <SelectItem key={grade.id} value={grade.title}>
                             {grade.title}
@@ -198,7 +202,9 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Subjects</SelectLabel>
+                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                          Subjects
+                        </SelectLabel>
                         {subjects.map((subject) => (
                           <SelectItem key={subject.id} value={subject.title}>
                             {subject.title}
@@ -235,7 +241,9 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Topics</SelectLabel>
+                        <SelectLabel className='px-2 py-1.5 text-stone-300 text-sm font-semibold'>
+                          Topics
+                        </SelectLabel>
                         {topics.map((topic) => (
                           <SelectItem key={topic.id} value={topic.title}>
                             {topic.title}
@@ -264,7 +272,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                   value={value || ''}
                   onChange={(e) => onChange(Number(e.target.value))}
                   placeholder='Enter total marks (e.g., 500, 1000)'
-                  className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 placeholder:text-stone-300'
+                  className='h-12 rounded-lg border border-solid border-neutral-200 px-3 py-2 placeholder:text-stone-300'
                 />
               )}
             />
@@ -291,7 +299,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     <PopoverTrigger asChild>
                       <Button
                         variant='outline'
-                        className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-4 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
+                        className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-3 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                       >
                         <span className={cn('text-stone-300', { 'text-zinc-800': date })}>
                           {date ? formatDate(date) : 'DD-MM-YYYY'}
@@ -457,8 +465,8 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       </div>
                     </div>
                   </div>
-                  <div className='mb-5 h-24 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
-                    <p className='line-clamp-3'>{storedData.des}</p>
+                  <div className='mb-5 rounded-xl bg-blue-500 p-2 py-3 text-center text-sm text-white sm:mb-14 sm:px-9 sm:text-base'>
+                    <p className='line-clamp-4'>{storedData.des}</p>
                   </div>
                   <div className='mb-8 text-base text-zinc-800'>
                     This question paper contains of{' '}
