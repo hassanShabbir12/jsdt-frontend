@@ -417,7 +417,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                   </div>
                   <div className='mb-1.5 w-full'>
                     <div className='border-b-2 border-solid border-neutral-200'>
-                      <h1 className='text-basefont-semibold pb-3 pl-3 text-zinc-900'>
+                      <h1 className='pb-3 pl-3 text-[24px] font-semibold text-zinc-900'>
                         Basic Information
                       </h1>
                     </div>
@@ -428,9 +428,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       <p className='mb-1 flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white  '>
                         Grade: {storedData.grade || 'Grade'}
                       </p>
-                      <p className='mb-1 flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white '>
-                        Subject name: {storedData.subject || 'Subject'}
-                      </p>
+
                       <p className='flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white '>
                         Topic: {storedData.topic || ''}
                       </p>
@@ -444,7 +442,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         htmlFor='subject'
                         className='text-sm font-semibold text-zinc-800 sm:text-base'
                       >
-                        Subject name:
+                        Subject:
                       </Label>
                       <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
                         <p>{storedData.subject || ''}</p>
