@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
+import { useLocalStorage } from '@/hooks/client/useLocalStorage';
 import { toast } from '@/hooks/use-toast';
-
-import { useLocalStorage } from './useLocalStorage';
 
 interface UseInstructionsReturn {
   newInstruction: string;
