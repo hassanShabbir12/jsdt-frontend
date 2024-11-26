@@ -417,7 +417,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                   </div>
                   <div className='mb-1.5 w-full'>
                     <div className='border-b-2 border-solid border-neutral-200'>
-                      <h1 className='text-basefont-semibold pb-3 pl-3 text-zinc-900'>
+                      <h1 className='pb-3 pl-3 text-[24px] font-semibold text-zinc-900'>
                         Basic Information
                       </h1>
                     </div>
