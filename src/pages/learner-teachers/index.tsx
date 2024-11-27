@@ -287,6 +287,7 @@ export const LearnerTeacher: FC = () => {
                 control={form.control}
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    min='0'
                     type='number'
                     value={value || ''}
                     onChange={(e) => onChange(Number(e.target.value))}
