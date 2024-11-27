@@ -66,7 +66,7 @@ export const InstructionsList: React.FC = () => {
                           handleSave();
                         }
                       }}
-                      className='mb-4 block h-48 w-full resize-none rounded-md border-0 px-4 py-4 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-transparent sm:text-sm sm:leading-6'
+                      className='mb-4 block h-48 w-full resize-none rounded-md border-input px-4 py-4 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:border-blue-700 sm:text-sm sm:leading-6'
                     ></textarea>
                   </form>
                   <div className='flex gap-4'>
