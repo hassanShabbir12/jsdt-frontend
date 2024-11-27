@@ -94,5 +94,17 @@ export const useLocalStorage = <T>(
     }
   }, [key]);
 
+  useLayoutEffect(() => {
+    const handleBeforeUnload = (): void => {
+      localStorage.removeItem(key);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return (): void => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [key]);
+
   return [state, set as Dispatch<SetStateAction<T | undefined>>, remove];
 };
