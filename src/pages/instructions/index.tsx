@@ -91,9 +91,6 @@ export const Instructions: FC = () => (
                 </DialogTitle>
                 <DialogDescription>
                   <form>
-                    <label className='mb-4 block font-montserrat text-base text-black'>
-                      New Instruction
-                    </label>
                     <textarea
                       placeholder='Type here'
                       className='mb-4 block h-48 w-full resize-none rounded-md border-0 px-4 py-4 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-transparent sm:text-sm sm:leading-6'

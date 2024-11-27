@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
 
 import axios from 'axios';
 
@@ -9,10 +9,13 @@ import { ExtendedCreateQuestionDto } from '@/interface/question';
 interface UseDownloadQuestionsReturn {
   downloadQuestions: (questions: ExtendedCreateQuestionDto[], type: string) => Promise<void>;
   loading: boolean;
+  containerRef: MutableRefObject<HTMLDivElement | null>;
 }
 
 export const useDownloadQuestions = (): UseDownloadQuestionsReturn => {
   const [loading, setLoading] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const downloadQuestions = async (
     questions: ExtendedCreateQuestionDto[],
     type: string,
@@ -66,5 +69,5 @@ export const useDownloadQuestions = (): UseDownloadQuestionsReturn => {
     }
   };
 
-  return { downloadQuestions, loading };
+  return { downloadQuestions, containerRef, loading };
 };

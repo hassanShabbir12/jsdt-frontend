@@ -37,16 +37,13 @@ export const ResetPasswordSchema = z
       .string()
       .min(1, 'Password is required')
       .min(8, 'Password must be at least 8 characters')
-      .refine((value) => value.trim().length > 0, 'Password cannot be empty or just spaces')
-      .transform((value) => value.trim()),
-    confirmPassword: z
-      .string()
-      .min(1, 'Confirm password is required')
-      .min(8, 'Confirm password must be at least 8 characters')
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!$%&*?@])[\d!$%&*?@A-Za-z]{8,}$/,
         'Password must have an uppercase, lowercase, number, and special character.',
-      ),
+      )
+      .refine((value) => value.trim().length > 0, 'Password cannot be empty or just spaces')
+      .transform((value) => value.trim()),
+    confirmPassword: z.string().min(1, 'Confirm password is required'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',

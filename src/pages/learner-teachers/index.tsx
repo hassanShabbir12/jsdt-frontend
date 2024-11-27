@@ -58,10 +58,10 @@ export const LearnerTeacher: FC = () => {
     isOpen,
     setIsOpen,
   } = useInvestigation();
-  const { downloadQuestions, loading } = useDownloadQuestions();
+  const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
 
   return (
-    <section className='pb-10 pt-5'>
+    <section ref={containerRef} className='pb-10 pt-5'>
       <div className='mx-auto max-w-[1340px] px-3'>
         <div className='mb-5 flex items-center rounded-xl bg-red-100 px-2.5 py-1 text-sm md:text-base'>
           <span className='mr-2 inline-block text-red-700'>
@@ -314,7 +314,7 @@ export const LearnerTeacher: FC = () => {
             </Button>
           </div>
         </form>
-        <div className='relative mb-10 min-h-72 rounded-xl border border-solid border-neutral-200 p-3'>
+        <div className='relative mb-10 min-h-72 overflow-hidden rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
               <div className='mb-1 px-2 sm:mb-0'>
@@ -555,6 +555,9 @@ export const LearnerTeacher: FC = () => {
           {questions.length !== 0 ? (
             <Carousel className='relative w-full'>
               <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
+              <div className='relative'>
+                <span className='absolute left-0 top-0 z-10 min-h-screen w-20 bg-white'></span>
+              </div>
               <CarouselContent>
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
@@ -567,6 +570,9 @@ export const LearnerTeacher: FC = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
+              <div className='relative'>
+                <span className='absolute -top-48 right-0 z-10 min-h-screen w-20 bg-white'></span>
+              </div>
               <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
             </Carousel>
           ) : null}
