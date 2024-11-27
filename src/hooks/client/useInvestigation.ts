@@ -187,6 +187,18 @@ export const useInvestigation = (): UseInvestigationReturn => {
     }
   }, [user, form]);
 
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    window.onload = (): void => {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 150);
+    };
+  }, []);
+
   return {
     form,
     isLoading,
