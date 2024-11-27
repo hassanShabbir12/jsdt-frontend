@@ -152,7 +152,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
       return;
     }
 
-    const coverData = localStorage.getItem('coverFormData') || '';
+    const coverData = localStorage.getItem('coverFormData') as string;
 
     if (!coverData) {
       toast({
