@@ -21,7 +21,12 @@ export const QuestionSchema = z.object({
   assessmentType: z.string().min(1, 'Assessment type is required'),
   topic: z.string().min(1, 'Topic is required'),
   difficultyLevel: z.string().min(1, 'Difficulty level is required'),
-  totalMarks: z.string().min(1, 'Total marks is required'),
+  totalMarks: z
+    .string()
+    .min(1, 'Total marks is required')
+    .refine((val) => Number(val) <= 1000, {
+      message: 'Total marks should not be more than 1000',
+    }),
 });
 
 export type QuestionFormValues = z.infer<typeof QuestionSchema>;

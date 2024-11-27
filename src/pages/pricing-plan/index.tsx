@@ -11,7 +11,6 @@ import { assetUrl } from '@/lib/asset-url';
 export const PricingPlan: FC = () => {
   const navigate = useNavigate();
   const { setUserRole, userRole } = useAuth();
-
   const onHandleClick = (): void => {
     navigate('/payment');
   };
@@ -39,7 +38,7 @@ export const PricingPlan: FC = () => {
         </div>
       </div>
       <div className='relative'>
-        <Tabs defaultValue='learners' className='w-full'>
+        <Tabs value={userRole === 'learner' ? 'learners' : 'educators'} className='w-full'>
           <div className='px-4 text-center'>
             <TabsList className='mb-5 h-12 rounded-4xl border-0 bg-zinc-100 p-0 md:mb-7 md:h-14 lg:mb-10 xl:mb-14'>
               <TabsTrigger
