@@ -49,12 +49,12 @@ export const LearnerTeacher: FC = () => {
   const {
     form,
     isLoading,
-    onSubmit,
     isLearner,
     questions,
     handleAddQuestion,
     handleDeleteQuestion,
     handleCheckData,
+    onSubmit,
     isOpen,
     setIsOpen,
   } = useInvestigation();
@@ -314,7 +314,7 @@ export const LearnerTeacher: FC = () => {
             </Button>
           </div>
         </form>
-        <div className='relative overflow-hidden mb-10 min-h-72 rounded-xl border border-solid border-neutral-200 p-3'>
+        <div className='relative mb-10 min-h-72 overflow-hidden rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
               <div className='mb-1 px-2 sm:mb-0'>
@@ -554,9 +554,9 @@ export const LearnerTeacher: FC = () => {
           </div>
           {questions.length !== 0 ? (
             <Carousel className='relative w-full'>
-              <CarouselPrevious className='z-50 !opacity-100 h-12 w-12 bg-blue-500 text-white hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
+              <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
               <div className='relative'>
-                <span className='absolute z-10 left-0 top-0 min-h-screen w-20 bg-white'></span>
+                <span className='absolute left-0 top-0 z-10 min-h-screen w-20 bg-white'></span>
               </div>
               <CarouselContent>
                 {questions.map((item, index) => (

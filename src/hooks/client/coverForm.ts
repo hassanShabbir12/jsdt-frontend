@@ -19,7 +19,7 @@ export const useCoverForm = (): UseCoverForm => {
   };
 
   const [value, setValue] = useLocalStorage<CoverFormData>('coverFormData');
-  const [storedData, setStoredData] = useState<CoverFormData>(defaultValue || value);
+  const [storedData, setStoredData] = useState<CoverFormData>(value || defaultValue);
 
   const [isOpen, setOpen] = useState<boolean>(false);
 
