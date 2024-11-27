@@ -438,7 +438,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                 </div>
                 <div className='sm:pl-32'>
                   <div className='mb-5 rounded-xl border border-dashed border-blue-400 bg-yellow-200 pb-4 pt-3 sm:mb-8'>
-                    <div className='items-center p-2 sm:flex'>
+                    <div className='items-center p-3 sm:flex'>
                       <Label
                         htmlFor='subject'
                         className='text-sm font-semibold text-zinc-800 sm:text-base'
@@ -449,7 +449,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         <p>{storedData.subject || ''}</p>
                       </div>
                     </div>
-                    <div className='items-center p-2 sm:flex'>
+                    <div className='items-center p-3 sm:flex'>
                       <Label
                         htmlFor='subject'
                         className='text-sm font-semibold text-zinc-800 sm:text-base'

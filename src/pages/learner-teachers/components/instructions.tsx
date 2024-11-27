@@ -56,9 +56,6 @@ export const InstructionsList: React.FC = () => {
                 </DialogTitle>
                 <DialogDescription>
                   <form>
-                    <label className='mb-4 block font-montserrat text-base text-black'>
-                      New Instruction
-                    </label>
                     <textarea
                       placeholder='Type here'
                       value={newInstruction}

@@ -285,15 +285,24 @@ export const Question: FC = () => {
                       Total Marks
                     </Label>
                     <div className='w-full'>
-                      <Input
-                        type='number'
-                        {...register('totalMarks')}
-                        className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 text-sm 
+                      <Controller
+                        name='totalMarks'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                          <Input
+                            min='0'
+                            type='number'
+                            value={value || ''}
+                            onChange={(e) => onChange(Number(e.target.value))}
+                            placeholder='Enter total marks (e.g., 500, 1000)'
+                            className='h-12 rounded-lg border border-solid 
+                        border-neutral-200 px-4 py-2 text-sm 
           text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm 
           placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 
           lg:px-3 [&::-webkit-inner-spin-button]:appearance-none 
           [&::-webkit-outer-spin-button]:appearance-none'
-                        placeholder='Enter total marks'
+                          />
+                        )}
                       />
                       {errors.totalMarks && (
                         <span className='text-sm text-red-500'>{errors.totalMarks.message}</span>
