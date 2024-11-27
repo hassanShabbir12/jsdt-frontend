@@ -293,7 +293,7 @@ export const Question: FC = () => {
                             min='0'
                             type='number'
                             value={value || ''}
-                            onChange={(e) => onChange(Number(e.target.value))}
+                            onChange={(e) => onChange(e.target.value)}
                             placeholder='Enter total marks (e.g., 500, 1000)'
                             className='h-12 rounded-lg border border-solid 
                         border-neutral-200 px-4 py-2 text-sm 
