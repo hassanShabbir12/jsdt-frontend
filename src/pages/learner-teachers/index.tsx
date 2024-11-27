@@ -58,10 +58,10 @@ export const LearnerTeacher: FC = () => {
     isOpen,
     setIsOpen,
   } = useInvestigation();
-  const { downloadQuestions, loading } = useDownloadQuestions();
+  const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
 
   return (
-    <section className='pb-10 pt-5'>
+    <section ref={containerRef} className='pb-10 pt-5'>
       <div className='mx-auto max-w-[1340px] px-3'>
         <div className='mb-5 flex items-center rounded-xl bg-red-100 px-2.5 py-1 text-sm md:text-base'>
           <span className='mr-2 inline-block text-red-700'>

@@ -57,6 +57,7 @@ export const Question: FC = () => {
     handleEditClick,
     deleteQuestion,
     onSubmit,
+    setIsEditing,
   } = useQuestionOperations(form);
 
   const {
@@ -80,6 +81,7 @@ export const Question: FC = () => {
               setModalOpen(open);
               if (!open) {
                 resetFormFields();
+                setIsEditing(false);
               }
             }}
           >
@@ -385,6 +387,7 @@ export const Question: FC = () => {
                         onClick={() => {
                           setModalOpen(false);
                           resetFormFields();
+                          setIsEditing(false);
                         }}
                       >
                         Cancel
