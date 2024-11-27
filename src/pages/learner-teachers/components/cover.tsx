@@ -316,7 +316,6 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(selectedDate) => {
                           field.onChange(String(selectedDate) ?? date);
-
                           handleDateSelect(selectedDate as Date);
                         }}
                         className='rounded-md border'
@@ -458,7 +457,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       </Label>
                       <div>
                         <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-32'>
-                          <p>{new Date(storedData.date as string).toLocaleDateString()}</p>
+                          <p>{new Date(storedData.date as string).toLocaleDateString('es-CL')}</p>
                         </div>
                       </div>
                     </div>
