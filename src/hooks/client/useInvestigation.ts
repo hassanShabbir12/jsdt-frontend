@@ -133,15 +133,15 @@ export const useInvestigation = (): UseInvestigationReturn => {
     });
   };
 
-  const handleCheckData = (): void => {
-    if (questions.length === 0) {
-      toast({
-        title: 'No Questions',
-        description: 'Please add questions before proceeding.',
-      });
+  const handleCheckData = async (): Promise<void> => {
+    // if (questions.length === 0) {
+    //   toast({
+    //     title: 'No Questions',
+    //     description: 'Please add questions before proceeding.',
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
     if (instructions?.trim().length === 0) {
       toast({
@@ -154,18 +154,65 @@ export const useInvestigation = (): UseInvestigationReturn => {
 
     const coverData = localStorage.getItem('coverFormData') as string;
 
-    if (!coverData) {
+    // if (!coverData) {
+    //   toast({
+    //     title: 'No Cover Data',
+    //     description: 'Please add cover data before proceeding.',
+    //   });
+
+    //   return;
+    // }
+    const coverimage = localStorage.getItem('image');
+
+    if (!coverimage) {
       toast({
-        title: 'No Cover Data',
-        description: 'Please add cover data before proceeding.',
+        title: 'No Cover Image',
+        description: 'Please add a cover image before proceeding.',
       });
 
       return;
     }
+    // const file = JSON.parse(coverimage);
+    // const formData = new FormData();
+
+    // formData.append('file', file);
+
+    // // const imageRes = await apiClient.upload.uploadControllerUploadMedia(file);
+    // const imageRes = await apiClient.instance.post('/upload', formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    // });
 
     toast({
       title: 'Success',
       description: 'All data is valid. File is downloading...',
+    });
+    const instructionsObj = {
+      // title: instructions as string,
+      title: 'ddd',
+    };
+    const data = {
+      coverData: { imageURL: 'sdsdsd', ...JSON.parse(coverData) },
+      instructionsData: instructionsObj,
+      items: questions.map((item) => item.id),
+    };
+
+    const response = (await apiClient.pdf.pdfControllerDownloadPdf(data)) as unknown as {
+      data: Blob;
+    };
+    const pdfUrl = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+
+    link.href = pdfUrl;
+    link.setAttribute('download', 'custom-design.pdf');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(pdfUrl);
+    toast({
+      title: 'PDF Download',
+      description: 'Your PDF has been downloaded successfully.',
     });
   };
 

@@ -6,7 +6,7 @@ import { retryRequest } from './retryHandler';
 
 export const setupInterceptors = (axiosInstance: AxiosInstance): void => {
   axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    if (config.url?.includes('/pdf/question')) {
+    if (config.url?.includes('/pdf/question') || config.url?.includes('/pdf/download')) {
       config.responseType = 'blob';
     }
     addPendingRequest(config);
