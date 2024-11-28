@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
-import { Loader, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
+import { Loader, LogOut, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +21,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -80,9 +85,28 @@ export const LearnerTeacher: FC = () => {
             </Link>
           </p>
         </div>
-        <h2 className='mb-8 text-base font-semibold leading-7 text-zinc-800 sm:mb-10 sm:text-2xl md:mb-12 md:text-xl'>
-          Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
-        </h2>
+        <div className='flex mb-8 items-center justify-between sm:mb-10 md:mb-12'>
+          <h2 className='text-base font-semibold leading-7 text-zinc-800 sm:text-2xl md:text-xl'>
+            Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
+          </h2>
+          <div className='relative inline-block'>
+            <DropdownMenu>
+              <DropdownMenuTrigger className='inline-flex outline-none cursor-pointer h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white'>
+                M
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <div className='flex items-center gap-3 justify-center transition-all duration-400 hover:cursor-pointer'>
+                  <span>
+                    <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
+                  </span>
+                  <span className='duration-400 text-lg transition-all group-hover:text-primary'>
+                    Logout
+                  </span>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
         <form onSubmit={onSubmit}>
           <div className='-mx-4 mb-8 flex flex-wrap'>
             <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
