@@ -85,17 +85,17 @@ export const LearnerTeacher: FC = () => {
             </Link>
           </p>
         </div>
-        <div className='flex mb-8 items-center justify-between sm:mb-10 md:mb-12'>
+        <div className='mb-8 flex items-center justify-between sm:mb-10 md:mb-12'>
           <h2 className='text-base font-semibold leading-7 text-zinc-800 sm:text-2xl md:text-xl'>
             Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
           </h2>
           <div className='relative inline-block'>
             <DropdownMenu>
-              <DropdownMenuTrigger className='inline-flex outline-none cursor-pointer h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white'>
+              <DropdownMenuTrigger className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
                 M
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <div className='flex items-center gap-3 justify-center transition-all duration-400 hover:cursor-pointer'>
+                <div className='duration-400 flex items-center justify-center gap-3 transition-all hover:cursor-pointer'>
                   <span>
                     <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
                   </span>
@@ -580,7 +580,7 @@ export const LearnerTeacher: FC = () => {
             <Carousel className='relative w-full'>
               <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
               <div className='relative'>
-                <span className='absolute left-0 top-0 z-10 min-h-screen w-20 bg-white'></span>
+                <span className='absolute left-0 top-0 z-10 min-h-screen w-14 lg:w-20 bg-white hidden sm:block'></span>
               </div>
               <CarouselContent>
                 {questions.map((item, index) => (
@@ -595,7 +595,7 @@ export const LearnerTeacher: FC = () => {
                 ))}
               </CarouselContent>
               <div className='relative'>
-                <span className='absolute -top-48 right-0 z-10 min-h-screen w-20 bg-white'></span>
+                <span className='absolute -top-48 right-0 z-10 min-h-screen w-20 bg-white hidden sm:block'></span>
               </div>
               <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
             </Carousel>
