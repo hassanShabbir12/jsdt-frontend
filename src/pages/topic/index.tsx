@@ -126,7 +126,7 @@ export const Topic: FC = () => {
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
-                      Save
+                      Update
                     </Button>
                   </div>
                 </DialogFooter>

@@ -393,7 +393,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
           </Button>
           <Dialog open={isOpen} onOpenChange={() => setOpen(false)}>
             <DialogContent className='!container block max-h-[92vh] max-w-[80%] overflow-y-auto overflow-x-hidden lg:px-8'>
-              <section className='mx-auto max-w-[850px] px-4 pb-5 pt-10'>
+              <section className='mx-auto max-w-[850px] pb-5 pt-10 sm:px-4'>
                 <div className='gap-x-4 sm:flex'>
                   <div className='relative'>
                     <Label
@@ -425,27 +425,32 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       <p className='!focus-visible:ring-0 mb-5 flex h-12 w-full items-center rounded-xl bg-black px-3 text-base font-semibold !text-white'>
                         {storedData?.nsc || ''}
                       </p>
-                      <p className='mb-1 flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white  '>
-                        Grade: {storedData.grade || 'Grade'}
+                      <p className='mb-1 flex h-12 w-full items-center overflow-hidden rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white'>
+                        Grade:{' '}
+                        <span className='ml-1 line-clamp-1'>{storedData.grade || 'Grade'}</span>
                       </p>
 
-                      <p className='flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white '>
-                        Topic: {storedData.topic || ''}
+                      <p className='mb-1 flex h-12 w-full items-center overflow-hidden rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white'>
+                        Topic: <span className='ml-1 line-clamp-1'>{storedData.topic || ''}</span>
                       </p>
+
+                      <div className='mb-1 flex h-12 w-full items-center overflow-hidden rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white'>
+                        Subject: <p className='ml-1 line-clamp-1'>{storedData.subject || ''}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className='sm:pl-32'>
                   <div className='mb-5 rounded-xl border border-dashed border-blue-400 bg-yellow-200 pb-4 pt-3 sm:mb-8'>
-                    <div className='items-center p-3 sm:flex'>
+                    <div className='w-full p-3 sm:flex sm:w-52'>
                       <Label
                         htmlFor='subject'
-                        className='text-sm font-semibold text-zinc-800 sm:text-base'
+                        className='w-44 text-sm font-semibold text-zinc-800 sm:text-base'
                       >
-                        Subject:
+                        Total Marks:
                       </Label>
-                      <div className='flex h-4 w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 sm:w-48'>
-                        <p>{storedData.subject || ''}</p>
+                      <div className='flex h-[18px] w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
+                        <p>{Math.ceil(Number(storedData.totalMarks) * 1000) / 1000}</p>
                       </div>
                     </div>
                     <div className='items-center p-3 sm:flex'>
@@ -471,14 +476,6 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       {storedData.page}
                     </span>{' '}
                     pages.
-                  </div>
-                  <div className='mb-10 w-full sm:flex sm:w-52'>
-                    <Label htmlFor='subject' className='w-36 text-base text-zinc-800'>
-                      Total Marks:
-                    </Label>
-                    <div className='flex h-[18px] w-full items-center justify-center rounded-none border-0 border-b border-black bg-transparent p-0 text-sm shadow-none outline-none focus:!outline-none focus:!ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'>
-                      <p>{Math.ceil(Number(storedData.totalMarks) * 1000) / 1000}</p>
-                    </div>
                   </div>
                   <div className='flex items-center justify-between'>
                     <h3 className='text-base text-zinc-800'>Copyrights reserved</h3>
