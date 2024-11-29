@@ -585,7 +585,7 @@ export const LearnerTeacher: FC = () => {
             <Carousel className='relative w-full'>
               <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
               <div className='relative'>
-                <span className='absolute left-0 top-0 z-10 min-h-screen w-20 bg-white'></span>
+                <span className='absolute left-0 top-0 z-10 min-h-screen w-14 lg:w-20 bg-white hidden sm:block'></span>
               </div>
               <CarouselContent>
                 {questions.map((item, index) => (
@@ -600,7 +600,7 @@ export const LearnerTeacher: FC = () => {
                 ))}
               </CarouselContent>
               <div className='relative'>
-                <span className='absolute -top-48 right-0 z-10 min-h-screen w-20 bg-white'></span>
+                <span className='absolute -top-48 right-0 z-10 min-h-screen w-20 bg-white hidden sm:block'></span>
               </div>
               <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
             </Carousel>

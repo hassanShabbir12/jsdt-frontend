@@ -161,7 +161,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
 
     const data = {
       coverData: isLearner ? null : { imageURL: 'sdsdsd', ...JSON.parse(coverData) },
-      instructionsData: instructions,
+      instructionsData: typeof instructions === 'object' ? instructions : JSON.parse(instructions),
       items: questions.map((item) => item.id),
     };
 
