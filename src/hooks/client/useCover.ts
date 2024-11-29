@@ -57,7 +57,6 @@ export const useCover = (): UseCoverReturn => {
           file,
         };
 
-        localStorage.setItem('image', JSON.stringify(imageFile));
         setImage(imageFile);
       } else {
         toast({
@@ -79,8 +78,6 @@ export const useCover = (): UseCoverReturn => {
           size: file.size,
           file,
         };
-
-        localStorage.setItem('image', JSON.stringify(imageFile));
 
         setImage(imageFile);
       } else {

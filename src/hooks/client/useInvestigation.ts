@@ -6,7 +6,6 @@ import axios, { AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
 import { useAuth } from '@/context/AuthContext';
-import { useLocalStorage } from '@/hooks/client/useLocalStorage';
 import { toast } from '@/hooks/use-toast';
 import { ApiResponse } from '@/interface/generic';
 import {
@@ -16,17 +15,22 @@ import {
 } from '@/interface/investigation';
 import { ExtendedCreateQuestionDto } from '@/interface/question';
 import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
+import { initialInstructions } from '@/utils/dump';
 
 export const useInvestigation = (): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
+  const [pdfLoading, setPdfLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
+  const [isLearner, setIsLearner] = useState<boolean | null>(null);
   const { user } = useAuth();
 
-  const isLearner = user?.role === CreateUserDtoRoleEnum.Learner;
-
-  const [instructions] = useLocalStorage<string>('instructions');
+  useEffect(() => {
+    if (user) {
+      setIsLearner(user?.role === CreateUserDtoRoleEnum.Learner ? true : false);
+    }
+  }, [user]);
 
   const form = useForm<InvestigationFormData>({
     resolver: zodResolver(investigationSchema),
@@ -134,86 +138,68 @@ export const useInvestigation = (): UseInvestigationReturn => {
   };
 
   const handleCheckData = async (): Promise<void> => {
-    // if (questions.length === 0) {
-    //   toast({
-    //     title: 'No Questions',
-    //     description: 'Please add questions before proceeding.',
-    //   });
-
-    //   return;
-    // }
-
-    if (instructions?.trim().length === 0) {
+    if (questions.length === 0) {
       toast({
-        title: 'No Instructions',
-        description: 'Please add instructions before proceeding.',
+        title: 'No Questions',
+        description: 'Please add questions before proceeding.',
       });
 
       return;
     }
+    const instructions = JSON.parse(localStorage.getItem('instructions') as string);
 
     const coverData = localStorage.getItem('coverFormData') as string;
 
-    // if (!coverData) {
-    //   toast({
-    //     title: 'No Cover Data',
-    //     description: 'Please add cover data before proceeding.',
-    //   });
-
-    //   return;
-    // }
-    const coverimage = localStorage.getItem('image');
-
-    if (!coverimage) {
+    if (!coverData && !isLearner) {
       toast({
-        title: 'No Cover Image',
-        description: 'Please add a cover image before proceeding.',
+        title: 'No Cover Data',
+        description: 'Please add cover data before proceeding.',
       });
 
       return;
     }
-    // const file = JSON.parse(coverimage);
-    // const formData = new FormData();
 
-    // formData.append('file', file);
-
-    // // const imageRes = await apiClient.upload.uploadControllerUploadMedia(file);
-    // const imageRes = await apiClient.instance.post('/upload', formData, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //   },
-    // });
-
-    toast({
-      title: 'Success',
-      description: 'All data is valid. File is downloading...',
-    });
-    const instructionsObj = {
-      // title: instructions as string,
-      title: 'ddd',
-    };
     const data = {
-      coverData: { imageURL: 'sdsdsd', ...JSON.parse(coverData) },
-      instructionsData: instructionsObj,
+      coverData: isLearner ? null : { imageURL: 'sdsdsd', ...JSON.parse(coverData) },
+      instructionsData: instructions,
       items: questions.map((item) => item.id),
     };
 
-    const response = (await apiClient.pdf.pdfControllerDownloadPdf(data)) as unknown as {
-      data: Blob;
-    };
-    const pdfUrl = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement('a');
+    try {
+      setPdfLoading(true);
+      const response = (await apiClient.pdf.pdfControllerDownloadPdf(data)) as unknown as {
+        data: Blob;
+      };
+      const pdfUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
 
-    link.href = pdfUrl;
-    link.setAttribute('download', 'custom-design.pdf');
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(pdfUrl);
-    toast({
-      title: 'PDF Download',
-      description: 'Your PDF has been downloaded successfully.',
-    });
+      link.href = pdfUrl;
+      link.setAttribute('download', 'custom-design.pdf');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(pdfUrl);
+      localStorage.removeItem('coverFormData');
+      localStorage.setItem('instructions', JSON.stringify(initialInstructions));
+      toast({
+        title: 'PDF Download',
+        description: 'Your PDF has been downloaded successfully.',
+      });
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast({
+          title: 'Error',
+          description: error.response.data.message,
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to delete grade',
+        });
+      }
+    } finally {
+      setPdfLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -234,6 +220,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
   }, [user, form]);
 
   useEffect(() => {
+    localStorage.setItem('instructions', JSON.stringify(initialInstructions));
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
@@ -256,5 +243,6 @@ export const useInvestigation = (): UseInvestigationReturn => {
     handleCheckData,
     isOpen,
     setIsOpen,
+    pdfLoading,
   };
 };

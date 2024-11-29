@@ -20,7 +20,8 @@ export const InstructionsList: React.FC = () => {
     handleCancel,
     handleDialogChange,
     setNewInstruction,
-    loading: listLoading,
+    handleDelete,
+    handleUpdate,
   } = useInstructions();
 
   return (
@@ -34,14 +35,15 @@ export const InstructionsList: React.FC = () => {
             Read the following instructions carefully before answering the questions.
           </p>
           <ol className='list-decimal pl-4'>
-            {(instructions || '')
-              .split('\n')
-              .slice(1, (instructions || '').split('\n').length)
-              .map((instruction, index) => (
-                <li key={index} className='mb-2'>
-                  <p className='mb-0'>{instruction.trim()}</p>
-                </li>
-              ))}
+            {instructions.map((instruction, index) => (
+              <li key={index} className='mb-2'>
+                <p className='mb-0'>{instruction.title}</p>
+                <button onClick={() => handleUpdate(index, instruction.title)}>Edit</button>
+                {instructions.length !== 1 ? (
+                  <button onClick={() => handleDelete(index)}>Delete</button>
+                ) : null}
+              </li>
+            ))}
           </ol>
         </div>
         <div className='py-14'>
@@ -78,7 +80,6 @@ export const InstructionsList: React.FC = () => {
                     </Button>
                     <Button
                       onClick={handleSave}
-                      loading={listLoading}
                       className='flex w-1/2 border border-primary px-10 py-6 text-base font-semibold'
                     >
                       Save
