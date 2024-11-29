@@ -74,7 +74,7 @@ export const Faq: FC = () => {
                 How to signup?
               </AccordionTrigger>
               <AccordionContent>
-                <div className='lg:text-3.5xl px-3 pb-1 leading-tight text-zinc-800 md:px-5 md:pb-2 md:text-xl lg:pb-8 lg:px-10'>
+                <div className='lg:text-3.5xl px-3 pb-1 leading-tight text-zinc-800 md:px-5 md:pb-2 md:text-xl lg:px-10 lg:pb-8'>
                   <section className='relative bg-white py-10 text-zinc-800'>
                     <div className='container'>
                       <div className='mb-4 overflow-hidden px-4 pt-2 text-center md:mb-6 xl:mb-8'>
@@ -90,7 +90,7 @@ export const Faq: FC = () => {
                         <div className='mb-4 text-xl font-medium md:mb-6 md:text-2xl xl:mb-8'>
                           Choose the Perfect Plan for Your Learning Journey
                         </div>
-                        <p className='mb-4 text-sm sm:text-xl leading-tight md:px-16 lg:px-40'>
+                        <p className='mb-4 text-sm leading-tight sm:text-xl md:px-16 lg:px-40'>
                           Choose from flexible pricing options tailored for every learner. Access
                           educational resources and tools that match your goals and advance your
                           education with confidence.
@@ -451,7 +451,7 @@ export const Faq: FC = () => {
                 What are the pricing plans?
               </AccordionTrigger>
               <AccordionContent>
-                <div className='lg:text-3.5xl px-3 pb-1 leading-tight text-zinc-800 md:px-5 md:pb-2 md:text-xl lg:pb-8 lg:px-10'>
+                <div className='lg:text-3.5xl px-3 pb-1 leading-tight text-zinc-800 md:px-5 md:pb-2 md:text-xl lg:px-10 lg:pb-8'>
                   <section className='relative bg-white py-10 text-zinc-800'>
                     <div className='container'>
                       <div className='mb-4 overflow-hidden px-4 pt-2 text-center md:mb-6 xl:mb-8'>
@@ -467,7 +467,7 @@ export const Faq: FC = () => {
                         <div className='mb-4 text-xl font-medium md:mb-6 md:text-2xl xl:mb-8'>
                           Choose the Perfect Plan for Your Learning Journey
                         </div>
-                        <p className='mb-4 text-sm sm:text-xl leading-tight md:px-16 lg:px-40'>
+                        <p className='mb-4 text-sm leading-tight sm:text-xl md:px-16 lg:px-40'>
                           Choose from flexible pricing options tailored for every learner. Access
                           educational resources and tools that match your goals and advance your
                           education with confidence.
@@ -830,7 +830,7 @@ export const Faq: FC = () => {
               <AccordionContent>
                 <div className='lg:text-3.5xl px-3 pb-1 leading-tight text-zinc-800 md:px-5 md:pb-2 md:text-xl lg:pb-8 lg:pl-10 lg:pr-10'>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       Privacy Policy for JSDT SOLUTIONS
                     </span>
                     <p className='mb-10'>
@@ -856,14 +856,14 @@ export const Faq: FC = () => {
                     </p>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>Consent</span>
+                    <span className='mb-3 block font-bold text-blue-500'>Consent</span>
                     <p>
                       By using our website, you hereby consent to our Privacy Policy and agree to
                       its terms.
                     </p>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       Information we collect
                     </span>
                     <p className='mb-10'>
@@ -884,7 +884,7 @@ export const Faq: FC = () => {
                     </p>
                   </div>
                   <div className='mb-8'>
-                    <span className='mb-3 block text-blue-500 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       How we use your information
                     </span>
                     <p className='mb-2'>
@@ -954,7 +954,7 @@ export const Faq: FC = () => {
                     </p>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       Advertising Partners Privacy Policies
                     </span>
                     <p>
@@ -978,7 +978,7 @@ export const Faq: FC = () => {
                     </p>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       Third Party Privacy Policies
                     </span>
                     <p className='mb-10'>
@@ -994,7 +994,7 @@ export const Faq: FC = () => {
                     </p>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       CCPA Privacy Rights (Do Not Sell My Personal Information)
                     </span>
                     <p className='m-0'>
@@ -1021,7 +1021,7 @@ export const Faq: FC = () => {
                     </ul>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       GDPR Data Protection Rights
                     </span>
                     <p className='m-0'>
@@ -1062,7 +1062,7 @@ export const Faq: FC = () => {
                     </ul>
                   </div>
                   <div className='mb-8'>
-                    <span className='block text-blue-500 mb-3 font-bold'>
+                    <span className='mb-3 block font-bold text-blue-500'>
                       Children&#39;s Information
                     </span>
                     <p className='mb-2'>
