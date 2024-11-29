@@ -98,8 +98,6 @@ export const useCover = (): UseCoverReturn => {
 
   const handleImageRemove = (): void => {
     setImage(null);
-    localStorage.removeItem('image');
-
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }

@@ -68,7 +68,7 @@ export const useInstructions = (): UseInstructionsReturn => {
 
   // Handle delete instruction
   const handleDelete = (index: number): void => {
-    instructionsArray.splice(index, 1); // Remove the instruction at the given index
+    instructionsArray.splice(index, 1);
 
     // Update the localStorage
     setInstructions(JSON.stringify(instructionsArray));
@@ -83,20 +83,6 @@ export const useInstructions = (): UseInstructionsReturn => {
     setEditIndex(index);
     setNewInstruction(updatedTitle);
     handleDialogChange(true);
-    // if (updatedTitle) {
-    //   instructionsArray[index].title = updatedTitle;
-
-    //   // Update the localStorage
-    //   setInstructions(JSON.stringify(instructionsArray));
-
-    //   toast({
-    //     description: 'Instruction updated successfully.',
-    //   });
-    // } else {
-    //   toast({
-    //     description: 'Please provide a valid instruction to update.',
-    //   });
-    // }
   };
 
   return {
