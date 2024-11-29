@@ -393,7 +393,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
           </Button>
           <Dialog open={isOpen} onOpenChange={() => setOpen(false)}>
             <DialogContent className='!container block max-h-[92vh] max-w-[80%] overflow-y-auto overflow-x-hidden lg:px-8'>
-              <section className='mx-auto max-w-[850px] sm:px-4 pb-5 pt-10'>
+              <section className='mx-auto max-w-[850px] pb-5 pt-10 sm:px-4'>
                 <div className='gap-x-4 sm:flex'>
                   <div className='relative'>
                     <Label
@@ -425,16 +425,16 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                       <p className='!focus-visible:ring-0 mb-5 flex h-12 w-full items-center rounded-xl bg-black px-3 text-base font-semibold !text-white'>
                         {storedData?.nsc || ''}
                       </p>
-                      <p className='mb-1 flex h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white overflow-hidden'>
+                      <p className='mb-1 flex h-12 w-full items-center overflow-hidden rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white'>
                         Grade:{' '}
-                        <span className='line-clamp-1 ml-1'>{storedData.grade || 'Grade'}</span>
+                        <span className='ml-1 line-clamp-1'>{storedData.grade || 'Grade'}</span>
                       </p>
 
-                      <p className='flex mb-1 h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white overflow-hidden'>
-                        Topic: <span className='line-clamp-1 ml-1'>{storedData.topic || ''}</span>
+                      <p className='mb-1 flex h-12 w-full items-center overflow-hidden rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white'>
+                        Topic: <span className='ml-1 line-clamp-1'>{storedData.topic || ''}</span>
                       </p>
 
-                      <div className='flex mb-1 h-12 w-full items-center rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white overflow-hidden'>
+                      <div className='mb-1 flex h-12 w-full items-center overflow-hidden rounded-xl bg-blue-500 px-3 text-base font-semibold !text-white'>
                         Subject: <p className='ml-1 line-clamp-1'>{storedData.subject || ''}</p>
                       </div>
                     </div>
@@ -445,7 +445,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     <div className='w-full p-3 sm:flex sm:w-52'>
                       <Label
                         htmlFor='subject'
-                        className='w-44 text-sm sm:text-base font-semibold text-zinc-800'
+                        className='w-44 text-sm font-semibold text-zinc-800 sm:text-base'
                       >
                         Total Marks:
                       </Label>

@@ -62,6 +62,7 @@ export const LearnerTeacher: FC = () => {
     onSubmit,
     isOpen,
     setIsOpen,
+    pdfLoading,
   } = useInvestigation();
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
 
@@ -434,114 +435,97 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
               {!isLearner && (
-                <>
-                  <div className='mb-1 px-2 sm:mb-0'>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant='destructive'
-                          className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                        >
-                          Tax. Grid
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                        <div className='md:px-2'>
-                          <div className='mx-auto max-w-[1340px] md:py-8 lg:pb-24 lg:pt-16'>
-                            <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
-                              Taxonomy Grid
-                            </h1>
-                            <div className='overflow-auto'>
-                              <table className='mx-auto mb-3 w-[625px] border-collapse border border-black lg:w-[825px]'>
-                                <thead>
-                                  <tr>
-                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'></th>
-                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Easy
-                                    </th>
-                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Intermediate
-                                    </th>
-                                    <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
-                                      Difficult
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {questions.map((item, index) => (
-                                    <tr key={item.id}>
-                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                        {index + 1}
-                                      </td>
-                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                        {item.difficultyLevel === 'Easy'
-                                          ? `Marks (${item.totalMarks})`
-                                          : ''}
-                                      </td>
-                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                        {item.difficultyLevel === 'Intermediate'
-                                          ? `Marks (${item.totalMarks})`
-                                          : ''}
-                                      </td>
-                                      <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                        {item.difficultyLevel === 'Difficult'
-                                          ? `Marks (${item.totalMarks})`
-                                          : ''}
-                                      </td>
-                                    </tr>
-                                  ))}
-                                  <tr>
+                <div className='mb-1 px-2 sm:mb-0'>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant='destructive'
+                        className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                      >
+                        Tax. Grid
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                      <div className='md:px-2'>
+                        <div className='mx-auto max-w-[1340px] md:py-8 lg:pb-24 lg:pt-16'>
+                          <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
+                            Taxonomy Grid
+                          </h1>
+                          <div className='overflow-auto'>
+                            <table className='mx-auto mb-3 w-[625px] border-collapse border border-black lg:w-[825px]'>
+                              <thead>
+                                <tr>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'></th>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                    Easy
+                                  </th>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                    Intermediate
+                                  </th>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                    Difficult
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {questions.map((item, index) => (
+                                  <tr key={item.id}>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Total Marks
+                                      {index + 1}
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      {calculateTotalMarks(questions, 'Easy')}
+                                      {item.difficultyLevel === 'Easy'
+                                        ? `Marks (${item.totalMarks})`
+                                        : ''}
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      {calculateTotalMarks(questions, 'Intermediate')}
+                                      {item.difficultyLevel === 'Intermediate'
+                                        ? `Marks (${item.totalMarks})`
+                                        : ''}
                                     </td>
                                     <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      {calculateTotalMarks(questions, 'Difficult')}
+                                      {item.difficultyLevel === 'Difficult'
+                                        ? `Marks (${item.totalMarks})`
+                                        : ''}
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      Percentage
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      {calculatePercentage(questions, 'Easy')}%
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      {calculatePercentage(questions, 'Intermediate')}%
-                                    </td>
-                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
-                                      {calculatePercentage(questions, 'Difficult')}%
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
+                                ))}
+                                <tr>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    Total Marks
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculateTotalMarks(questions, 'Easy')}
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculateTotalMarks(questions, 'Intermediate')}
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculateTotalMarks(questions, 'Difficult')}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    Percentage
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculatePercentage(questions, 'Easy')}%
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculatePercentage(questions, 'Intermediate')}%
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculatePercentage(questions, 'Difficult')}%
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                  <div className='mb-1 px-2 sm:mb-0'>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant='destructive'
-                          className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                        >
-                          Instructions
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                        <InstructionsList />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               )}
               <div className='mb-1 px-2 sm:mb-0'>
                 <Dialog>
@@ -550,14 +534,31 @@ export const LearnerTeacher: FC = () => {
                       variant='destructive'
                       className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
                     >
-                      Cover Page
+                      Instructions
                     </Button>
                   </DialogTrigger>
                   <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                    <Cover topics={topics} grades={grades} subjects={subjects} />
+                    <InstructionsList />
                   </DialogContent>
                 </Dialog>
               </div>
+              {!isLearner && (
+                <div className='mb-1 px-2 sm:mb-0'>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant='destructive'
+                        className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                      >
+                        Cover Page
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                      <Cover topics={topics} grades={grades} subjects={subjects} />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
             </div>
             <div className='mb-14 flex gap-x-2 sm:m-0 sm:gap-x-4'>
               <div className='h-6 w-6 cursor-pointer'>
@@ -568,11 +569,15 @@ export const LearnerTeacher: FC = () => {
                 />
               </div>
               <div className='h-6 w-6 cursor-pointer' onClick={handleCheckData}>
-                <img
-                  src={assetUrl('assets/img/home/attach-download.svg')}
-                  alt='Generate-2'
-                  className='-mb-11 block h-auto'
-                />
+                {pdfLoading ? (
+                  <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
+                ) : (
+                  <img
+                    src={assetUrl('assets/img/home/attach-download.svg')}
+                    alt='Generate-2'
+                    className='-mb-11 block h-auto'
+                  />
+                )}
               </div>
             </div>
           </div>

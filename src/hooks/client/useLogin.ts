@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -64,6 +64,18 @@ export const useLogin = (): UseLoginReturn => {
   };
 
   const togglePassword = (): void => setShowPassword(!showPassword);
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    window.onload = (): void => {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 150);
+    };
+  }, []);
 
   return {
     form,

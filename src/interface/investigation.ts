@@ -57,8 +57,9 @@ export type InvestigationFormData = z.infer<typeof investigationSchema>;
 export interface UseInvestigationReturn {
   form: UseFormReturn<InvestigationFormData>;
   isLoading: boolean;
+  pdfLoading: boolean;
   onSubmit: () => void;
-  isLearner: boolean;
+  isLearner: boolean | null;
   handleAddQuestion: () => void;
   questions: ExtendedCreateQuestionDto[];
   handleDeleteQuestion: (questionId: string) => void;

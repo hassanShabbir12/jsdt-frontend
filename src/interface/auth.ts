@@ -50,8 +50,16 @@ const commonFields = {
   age: z
     .string()
     .min(1, 'Age is required')
-    .refine((value) => value.trim().length > 0, 'Age cannot be empty or just spaces')
-    .transform((value) => value.trim()),
+    .refine(
+      (value) => {
+        const numValue = Number(value);
+
+        return !Number.isNaN(numValue) && numValue >= 0;
+      },
+      {
+        message: 'Age must be a non-negative number',
+      },
+    ),
 
   province: z
     .string()

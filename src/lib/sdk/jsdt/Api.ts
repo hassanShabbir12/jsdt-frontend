@@ -124,28 +124,25 @@ export interface GenerateDescriptionDto {
   type: GenerateDescriptionDtoTypeEnum;
 }
 
-export interface CreatePaperDto {
-  /** Question ID associated with the paper */
-  questionId: string;
-  /** Serial number for the paper */
-  serialNo: string;
-}
-
 export interface CoverDataDto {
   /** URL of the image */
   imageURL?: string;
-  /** Department name */
-  department: string;
+  /** nsc/ieb name */
+  nsc: string;
   /** Grade */
   grade: string;
   /** Subject name */
   subject: string;
+  /** Time allocated */
+  topic: string;
+  /** Marks obtained */
+  totalMarks: number;
+  /** Page obtained */
+  page: number;
   /** Date in the format DD/MM/YYYY */
   date: string;
-  /** Marks obtained */
-  marks: string;
-  /** Time allocated */
-  time: string;
+  /** Description obtained */
+  des: string;
 }
 
 export interface InstructionsDataDto {
@@ -883,52 +880,6 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * No description
      *
      * @tags PDF
-     * @name PdfControllerCreatePaper
-     * @request POST:/pdf/paper
-     * @secure
-     */
-    pdfControllerCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/pdf/paper`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags PDF
-     * @name PdfControllerGetAllPapers
-     * @request GET:/pdf/paper
-     */
-    pdfControllerGetAllPapers: (params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/pdf/paper`,
-        method: 'GET',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags PDF
-     * @name PdfControllerDeletePaper
-     * @request DELETE:/pdf/paper{id}
-     */
-    pdfControllerDeletePaper: (id: string, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/pdf/paper${id}`,
-        method: 'DELETE',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags PDF
      * @name PdfControllerDownloadPdf
      * @request POST:/pdf/download
      * @secure
@@ -973,7 +924,7 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * No description
      *
      * @name UploadControllerUploadMedia
-     * @request POST:/upload/upload
+     * @request POST:/upload
      */
     uploadControllerUploadMedia: (
       data: {
@@ -983,7 +934,7 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
       params: RequestParams = {},
     ) =>
       this.request<void, any>({
-        path: `/upload/upload`,
+        path: `/upload`,
         method: 'POST',
         body: data,
         type: ContentType.FormData,

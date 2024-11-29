@@ -58,3 +58,7 @@ export interface UseQuestionOperationsReturn {
 }
 
 export type QuestionResponse = ApiResponse<ExtendedCreateQuestionDto[]>;
+
+export interface Instruction {
+  title: string;
+}
