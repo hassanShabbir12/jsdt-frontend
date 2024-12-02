@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -183,6 +183,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
       link.remove();
       window.URL.revokeObjectURL(pdfUrl);
       localStorage.removeItem('coverFormData');
+      localStorage.removeItem('image');
       localStorage.setItem('instructions', JSON.stringify(initialInstructions));
       toast({
         title: 'PDF Download',
@@ -224,6 +225,19 @@ export const useInvestigation = (): UseInvestigationReturn => {
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 150);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const handleBeforeUnload = (): void => {
+      localStorage.removeItem('coverFormData');
+      localStorage.removeItem('image');
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return (): void => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
 

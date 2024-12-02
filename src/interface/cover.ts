@@ -71,7 +71,7 @@ export interface UseCoverForm {
 }
 
 export interface UseCoverReturn {
-  image: ImageFile | null;
+  image: string | null | undefined;
   handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
@@ -81,7 +81,7 @@ export interface UseCoverReturn {
   isCalenderOpen: boolean;
   setIsCalenderOpen: React.Dispatch<React.SetStateAction<boolean>>;
   date: Date | null;
-  setImage: React.Dispatch<React.SetStateAction<ImageFile | null>>;
+  setImage: React.Dispatch<React.SetStateAction<string | null | undefined>>;
   formatDate: (date: Date) => string;
   handleImageRemove: () => void;
 }
