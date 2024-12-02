@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { QuestionFormValues, QuestionSchema } from '@/interface/question';
 import { GenerateDescriptionDtoTypeEnum } from '@/lib/sdk/jsdt/Api';
@@ -28,6 +31,8 @@ interface UseQuestionFormReturn {
 export function useQuestionForm(): UseQuestionFormReturn {
   const [processingText, setProcessingText] = useState(false);
   const [processingTextAnswer, setProcessingTextAnswer] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<QuestionFormValues>({
     resolver: zodResolver(QuestionSchema),
@@ -79,16 +84,8 @@ export function useQuestionForm(): UseQuestionFormReturn {
         description: `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} processed successfully`,
       });
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to create text',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       if (fieldType === 'question') {

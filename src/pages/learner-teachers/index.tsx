@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
 import { Loader, LogOut, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
@@ -36,6 +36,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useAuth } from '@/context/AuthContext';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
@@ -51,6 +52,7 @@ export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
+  const navigate = useNavigate();
   const {
     form,
     isLoading,
@@ -65,6 +67,7 @@ export const LearnerTeacher: FC = () => {
     pdfLoading,
   } = useInvestigation();
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
+  const { logout } = useAuth();
 
   return (
     <section ref={containerRef} className='pb-10 pt-5'>
@@ -96,7 +99,13 @@ export const LearnerTeacher: FC = () => {
                 M
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <div className='duration-400 flex items-center justify-center gap-3 transition-all hover:cursor-pointer'>
+                <div
+                  onClick={() => {
+                    logout();
+                    navigate('/login');
+                  }}
+                  className='duration-400 flex items-center justify-center gap-3 transition-all hover:cursor-pointer'
+                >
                   <span>
                     <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
                   </span>

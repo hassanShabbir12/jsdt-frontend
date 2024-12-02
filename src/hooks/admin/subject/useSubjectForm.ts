@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import {
   ExtendedCreateSubjectDto,
@@ -22,6 +25,8 @@ export function useSubjectForm(
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState<ExtendedCreateSubjectDto | null>(null);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -68,16 +73,8 @@ export function useSubjectForm(
       setSelectedSubject(null);
       reset();
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to create subject',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);
