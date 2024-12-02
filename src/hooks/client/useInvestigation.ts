@@ -180,6 +180,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
       link.remove();
       window.URL.revokeObjectURL(pdfUrl);
       localStorage.removeItem('coverFormData');
+      localStorage.removeItem('image');
       localStorage.setItem('instructions', JSON.stringify(initialInstructions));
       toast({
         title: 'PDF Download',
