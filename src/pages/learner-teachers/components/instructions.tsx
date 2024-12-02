@@ -39,22 +39,24 @@ export const InstructionsList: React.FC = () => {
           <ol className='list-decimal pl-4'>
             {instructions.map((instruction, index) => (
               <div className='group relative bg-white'>
-                {' '}
-                <div className='absolute -left-[71px] -top-1 rounded-md opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:shadow-xl'>
-                  <div className='group flex gap-1.5 bg-white p-1'>
-                    <button onClick={() => handleUpdate(index, instruction.title)}>
-                      <Edit className='w-5 h-5' />
-                    </button>
-                    {instructions.length !== 1 ? (
-                      <button onClick={() => handleDelete(index)}>
-                        <Trash2 className='w-5 h-5' />
+                <div className='group relative bg-white'>
+                  {' '}
+                  <div className='absolute -left-[71px] -top-1 rounded-md opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:shadow-xl'>
+                    <div className='group flex gap-1.5 bg-white p-1'>
+                      <button onClick={() => handleUpdate(index, instruction.title)}>
+                        <Edit className='w-5 h-5' />
                       </button>
-                    ) : null}
+                      {instructions.length !== 1 ? (
+                        <button onClick={() => handleDelete(index)}>
+                          <Trash2 className='w-5 h-5' />
+                        </button>
+                      ) : null}
+                    </div>
                   </div>
+                  <li key={index} className='mb-2'>
+                    <p className='mb-0'>{instruction.title}</p>
+                  </li>
                 </div>
-                <li key={index} className='mb-2'>
-                  <p className='mb-0'>{instruction.title}</p>
-                </li>
               </div>
             ))}
           </ol>
