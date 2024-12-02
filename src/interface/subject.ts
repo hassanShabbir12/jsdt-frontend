@@ -11,7 +11,7 @@ export const SubjectSchema = z.object({
   title: z
     .string()
     .min(1, 'Subject is required')
-    .max(20, 'subject cannot exceed 20 characters')
+    .max(30, 'subject cannot exceed 30 characters')
     .refine((value) => value.trim().length > 0, 'Subject cannot be empty or just spaces')
     .transform((value) => value.trim()),
 });

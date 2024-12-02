@@ -1,8 +1,11 @@
 import { MutableRefObject, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
+import { AxiosError } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { ExtendedCreateQuestionDto } from '@/interface/question';
 
@@ -15,6 +18,8 @@ interface UseDownloadQuestionsReturn {
 export const useDownloadQuestions = (): UseDownloadQuestionsReturn => {
   const [loading, setLoading] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const downloadQuestions = async (
     questions: ExtendedCreateQuestionDto[],
@@ -53,16 +58,8 @@ export const useDownloadQuestions = (): UseDownloadQuestionsReturn => {
         description: 'Your PDF has been downloaded successfully.',
       });
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to change password',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);

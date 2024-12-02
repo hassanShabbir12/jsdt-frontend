@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { ChangePasswordFormValues, ChangePasswordSchema } from '@/interface/password';
 
@@ -16,6 +19,8 @@ interface UseChangePasswordReturn {
 
 export function useChangePassword(): UseChangePasswordReturn {
   const [loading, setLoading] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<ChangePasswordFormValues>({
     resolver: zodResolver(ChangePasswordSchema),
@@ -39,18 +44,12 @@ export function useChangePassword(): UseChangePasswordReturn {
         title: 'Success',
         description: 'Password changed successfully',
       });
+      logout();
+      navigate('/admin/login');
       form.reset();
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to change password',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);

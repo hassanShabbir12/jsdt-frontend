@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import axios, { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { ApiResponse } from '@/interface/generic';
 import {
@@ -22,6 +25,8 @@ export function useQuestionOperations(
   const [questionToDelete, setQuestionToDelete] = useState<ExtendedCreateQuestionDto | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const fetchQuestions = async (): Promise<void> => {
     setLoading(true);
@@ -38,16 +43,8 @@ export function useQuestionOperations(
 
       setQuestions(extendedquestion);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to fetch questions',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);
@@ -71,16 +68,8 @@ export function useQuestionOperations(
       setDeleteModalOpen(false);
       setQuestionToDelete(null);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to delete question',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);
@@ -120,16 +109,8 @@ export function useQuestionOperations(
       setIsEditing(false);
       setQuestionToDelete(null);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to create question',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);

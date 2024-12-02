@@ -36,7 +36,7 @@ export const useLogin = (): UseLoginReturn => {
       )) as unknown as ApiResponse<LoginResponse>;
       const { data } = response;
 
-      localStorage.setItem('client_token', data.data.access_token);
+      localStorage.setItem('access_token', data.data.access_token);
 
       toast({
         title: 'Login success',
