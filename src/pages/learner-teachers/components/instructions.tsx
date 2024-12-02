@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Edit, Trash2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -36,13 +38,24 @@ export const InstructionsList: React.FC = () => {
           </p>
           <ol className='list-decimal pl-4'>
             {instructions.map((instruction, index) => (
-              <li key={index} className='mb-2'>
-                <p className='mb-0'>{instruction.title}</p>
-                <button onClick={() => handleUpdate(index, instruction.title)}>Edit</button>
-                {instructions.length !== 1 ? (
-                  <button onClick={() => handleDelete(index)}>Delete</button>
-                ) : null}
-              </li>
+              <div className='group relative bg-white'>
+                {' '}
+                <div className='absolute -left-[71px] -top-1 rounded-md opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:shadow-xl'>
+                  <div className='group flex gap-1.5 bg-white p-1'>
+                    <button onClick={() => handleUpdate(index, instruction.title)}>
+                      <Edit className='w-5 h-5' />
+                    </button>
+                    {instructions.length !== 1 ? (
+                      <button onClick={() => handleDelete(index)}>
+                        <Trash2 className='w-5 h-5' />
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+                <li key={index} className='mb-2'>
+                  <p className='mb-0'>{instruction.title}</p>
+                </li>
+              </div>
             ))}
           </ol>
         </div>

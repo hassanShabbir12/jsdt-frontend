@@ -25,11 +25,11 @@ export const Faq: FC = () => {
     <section className='relative'>
       <div className='container'>
         <div className='mx-auto px-4 md:w-1/2 md:px-8 lg:px-16 xl:px-0'>
-          <h2 className='relative mb-4 text-center text-3xl font-semibold !leading-tight text-zinc-800 md:px-5 md:text-4xl lg:mb-0 lg:px-6 lg:text-5xl xl:text-6xl'>
-            <span className='relative mr-1 inline-block before:absolute before:left-0 before:right-0 before:top-1/2 before:-z-10 before:h-4 before:bg-yellow md:mr-0 md:before:h-5 lg:before:h-6'>
-              Any Questions?
-            </span>
-            Look here.
+          <h2 className='mb-4 text-3xl text-center font-semibold leading-tight text-zinc-800 md:mb-7 md:text-4xl lg:mb-12 lg:text-5xl xl:mb-8 xl:text-6xl'>
+            <span className='relative px-0 before:absolute before:bottom-2 before:left-0 before:right-0 before:top-6 before:bg-yellow lg:before:bottom-3 lg:before:top-8 xl:py-2 xl:before:bottom-5 xl:before:top-12'>
+              <span className='relative'>Any Questions?</span>
+            </span>{' '}
+            <span className='block'>Look here.</span>
           </h2>
         </div>
         <div className='px-5 pb-10'>
