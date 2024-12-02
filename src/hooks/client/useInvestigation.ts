@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -229,6 +229,19 @@ export const useInvestigation = (): UseInvestigationReturn => {
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 150);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const handleBeforeUnload = (): void => {
+      localStorage.removeItem('coverFormData');
+      localStorage.removeItem('image');
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return (): void => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
 

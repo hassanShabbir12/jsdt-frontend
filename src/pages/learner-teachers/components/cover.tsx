@@ -69,7 +69,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               {image ? (
                 <div className='relative'>
                   <img
-                    src={URL.createObjectURL(image.file)}
+                    src={image}
                     alt='Uploaded'
                     className='block h-28 w-28 rounded-full object-cover'
                   />
@@ -302,8 +302,8 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         variant='outline'
                         className='group flex h-12 w-full items-center justify-between border border-solid border-neutral-200 px-3 py-2 font-normal text-stone-300 shadow-none hover:bg-transparent'
                       >
-                        <span className={cn('text-stone-300', { 'text-zinc-800': date })}>
-                          {date ? formatDate(date) : 'DD-MM-YYYY'}
+                        <span className={cn('text-stone-300', { 'text-zinc-800': field.value })}>
+                          {field.value ? formatDate(new Date(field.value)) : 'DD-MM-YYYY'}
                         </span>
                         <span className='text-stone-300 group-hover:text-stone-300'>
                           <CalendarIcon />
@@ -402,7 +402,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     >
                       {image ? (
                         <img
-                          src={URL.createObjectURL(image.file)}
+                          src={image}
                           alt='Uploaded Image'
                           className='h-full w-full rounded-full object-cover'
                         />
