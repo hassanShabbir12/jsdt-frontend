@@ -86,3 +86,45 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+/* .counter {
+  counter-reset: list-counter;
+}
+.para {
+  position: relative;
+  counter-increment: list-counter;
+}
+.para::before {
+  content: counter(list-counter);
+  position: absolute;
+  left: 0px;
+  top: 0;
+  color: #2405f2;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.counter {
+  counter-increment: service-counter;
+}
+
+.para {
+  position: relative;
+  display: block;
+}
+
+.para::before {
+  content: counter(service-counter) ':';
+  position: absolute;
+  left: 0px;
+  top: 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

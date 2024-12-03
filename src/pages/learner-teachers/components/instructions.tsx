@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Edit, Trash2 } from 'lucide-react';
 
@@ -26,12 +26,6 @@ export const InstructionsList: React.FC = () => {
     handleUpdate,
   } = useInstructions();
 
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    setCounter(instructions.length);
-  }, [instructions]);
-
   return (
     <div className='mx-auto max-w-[1340px] px-5'>
       <div className='pl-0 sm:pl-10'>
@@ -42,15 +36,13 @@ export const InstructionsList: React.FC = () => {
           <p className='mb-3'>
             Read the following instructions carefully before answering the questions.
           </p>
-          <ol className='list-none'>
+          <div className='list-none'>
             {instructions.map((instruction, index) => (
-              <div key={index} className='group relative bg-white'>
+              <div key={index} className='counter text-black group relative bg-white'>
                 <div className='group relative mb-2 flex items-center bg-white'>
-                  <li className='mb-0'>
-                    <p className='mb-0'>
-                      {index + 1}: {instruction.title}
-                    </p>
-                  </li>
+                  <div className='mb-0'>
+                    <p className='para mb-0 pl-5'>{instruction.title}</p>
+                  </div>
                   <div className='rounded-md opacity-0 transition-all ml-2 shadow-md duration-500 group-hover:opacity-100'>
                     <div className='group flex gap-1.5 bg-white'>
                       <button onClick={() => handleUpdate(index, instruction.title)}>
@@ -66,7 +58,7 @@ export const InstructionsList: React.FC = () => {
                 </div>
               </div>
             ))}
-          </ol>
+          </div>
         </div>
         <div className='py-14'>
           <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
