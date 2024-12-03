@@ -87,9 +87,14 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-/* PageNotFound.css */
+.counter {
+  counter-reset: item;
+}
 
-/* Gradient animation for background (blue theme) */
+.counter > .group:before {
+  content: counters(item, '.') ':';
+  counter-increment: item;
+}
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -102,7 +107,6 @@ input[type='number'] {
   }
 }
 
-/* Custom FadeIn animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -112,14 +116,12 @@ input[type='number'] {
   }
 }
 
-/* Custom utility class for gradient background animation (blue theme) */
 @layer utilities {
   .animate-gradient {
     background-size: 200% 200%;
     animation: gradient-animation 6s ease infinite;
   }
 
-  /* Animation for fading in the message */
   .animate-fadeIn {
     animation: fadeIn 1.5s ease forwards 0.5s;
   }
