@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react';
 
+import { useLocalStorage } from '@/hooks/client/useLocalStorage';
 import { toast } from '@/hooks/use-toast';
-import { ImageFile, UseCoverReturn } from '@/interface/cover';
+import { UseCoverReturn } from '@/interface/cover';
 
 export const useCover = (): UseCoverReturn => {
-  const [image, setImage] = useState<ImageFile | null>(null);
+  const [image, setImage] = useLocalStorage<string | null>('image', null);
   const [date, setDate] = useState<Date | null>(null);
   const [isCalenderOpen, setIsCalenderOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -46,18 +47,11 @@ export const useCover = (): UseCoverReturn => {
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const file = event.target.files?.[0];
+    const file: File | undefined = event.target.files?.[0];
 
     if (file) {
       if (file.type.startsWith('image/')) {
-        const imageFile: ImageFile = {
-          name: file.name,
-          type: file.type,
-          size: file.size,
-          file,
-        };
-
-        setImage(imageFile);
+        setImage(URL.createObjectURL(file));
       } else {
         toast({
           description: 'Please upload a valid image file.',
@@ -72,14 +66,7 @@ export const useCover = (): UseCoverReturn => {
 
     if (file) {
       if (file.type.startsWith('image/')) {
-        const imageFile: ImageFile = {
-          name: file.name,
-          type: file.type,
-          size: file.size,
-          file,
-        };
-
-        setImage(imageFile);
+        setImage(URL.createObjectURL(file));
       } else {
         toast({
           description: 'Please upload a valid image file.',

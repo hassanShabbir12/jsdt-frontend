@@ -28,13 +28,22 @@ export const Header: FC = () => {
               />
             </button>
           </div>
-          <Button
-            className='h-10 text-sm text-blue-500 sm:h-12 sm:px-6 md:!h-16 md:!px-9 md:text-base'
-            variant='secondary'
-            onClick={onHandleClick}
-          >
-            Sign Up Now
-          </Button>
+          <div className='flex items-center gap-x-2'>
+            <Button
+              className='h-10 sm:w-40 text-sm text-blue-500 sm:h-12 sm:px-6 md:!h-16 md:!px-9 md:text-base'
+              variant='secondary'
+              onClick={() => navigate('/login')}
+            >
+              Log in
+            </Button>
+            <Button
+              className='h-10 sm:w-40 text-sm text-blue-500 sm:h-12 sm:px-6 md:!h-16 md:!px-9 md:text-base'
+              variant='secondary'
+              onClick={onHandleClick}
+            >
+              Sign Up Now
+            </Button>
+          </div>
         </div>
       </div>
     </header>

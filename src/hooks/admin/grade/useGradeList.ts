@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import axios, { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { ExtendedCreateGradeDto, GradeListReturn, GradeResponse } from '@/interface/grads';
 
@@ -11,6 +14,8 @@ export function useGradeList(): GradeListReturn {
   const [grades, setGrades] = useState<ExtendedCreateGradeDto[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [gradeToDelete, setGradeToDelete] = useState<ExtendedCreateGradeDto | null>(null);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleDeleteClick = (grade: ExtendedCreateGradeDto): void => {
     setGradeToDelete(grade);
@@ -30,16 +35,8 @@ export function useGradeList(): GradeListReturn {
 
       setGrades(extendedGrades);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to fetch grades',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);
@@ -59,16 +56,8 @@ export function useGradeList(): GradeListReturn {
         });
       }
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to delete grade',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);

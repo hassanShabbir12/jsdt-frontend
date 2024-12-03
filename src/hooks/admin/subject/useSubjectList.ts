@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import axios, { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { apiClient } from '@/api/clients/apiClient';
+import { handleError } from '@/api/config/errorHandler';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { ExtendedCreateSubjectDto, SubjectListReturn, SubjectResponse } from '@/interface/subject';
 
@@ -11,7 +14,8 @@ export function useSubjectList(): SubjectListReturn {
   const [subjects, setSubjects] = useState<ExtendedCreateSubjectDto[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [subjectToDelete, setSubjectToDelete] = useState<ExtendedCreateSubjectDto | null>(null);
-
+  const { logout } = useAuth();
+  const navigate = useNavigate();
   const handleDeleteClick = (subject: ExtendedCreateSubjectDto): void => {
     setSubjectToDelete(subject);
     setDeleteModalOpen(true);
@@ -30,16 +34,8 @@ export function useSubjectList(): SubjectListReturn {
 
       setSubjects(extendedSubjects);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to fetch subjects',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);
@@ -59,16 +55,8 @@ export function useSubjectList(): SubjectListReturn {
         });
       }
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast({
-          title: 'Error',
-          description: error.response.data.message,
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'Failed to delete subject',
-        });
+      if (error instanceof AxiosError) {
+        handleError(error, logout, toast, navigate);
       }
     } finally {
       setLoading(false);

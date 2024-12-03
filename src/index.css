@@ -95,3 +95,34 @@ input[type='number'] {
   content: counters(item, '.') ':';
   counter-increment: item;
 }
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-animation 6s ease infinite;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1.5s ease forwards 0.5s;
+  }
+}

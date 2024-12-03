@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
 import { Loader, LogOut, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
@@ -36,6 +36,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useAuth } from '@/context/AuthContext';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
@@ -51,6 +52,7 @@ export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
+  const navigate = useNavigate();
   const {
     form,
     isLoading,
@@ -65,6 +67,11 @@ export const LearnerTeacher: FC = () => {
     pdfLoading,
   } = useInvestigation();
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
+  const { logout } = useAuth();
+
+  if (isLearner === null) {
+    return;
+  }
 
   return (
     <section ref={containerRef} className='pb-10 pt-5'>
@@ -96,7 +103,13 @@ export const LearnerTeacher: FC = () => {
                 M
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <div className='duration-400 flex items-center justify-center gap-3 transition-all hover:cursor-pointer'>
+                <div
+                  onClick={() => {
+                    logout();
+                    navigate('/login');
+                  }}
+                  className='duration-400 flex items-center justify-center gap-3 transition-all hover:cursor-pointer'
+                >
                   <span>
                     <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
                   </span>
@@ -585,7 +598,7 @@ export const LearnerTeacher: FC = () => {
             <Carousel className='relative w-full'>
               <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
               <div className='relative'>
-                <span className='absolute left-0 top-0 z-10 min-h-screen w-14 lg:w-20 bg-white hidden sm:block'></span>
+                <span className='absolute left-0 top-0 z-10 hidden min-h-screen w-14 bg-white sm:block lg:w-20'></span>
               </div>
               <CarouselContent>
                 {questions.map((item, index) => (
@@ -600,7 +613,7 @@ export const LearnerTeacher: FC = () => {
                 ))}
               </CarouselContent>
               <div className='relative'>
-                <span className='absolute -top-48 right-0 z-10 min-h-screen w-20 bg-white hidden sm:block'></span>
+                <span className='absolute -top-48 right-0 z-10 hidden min-h-screen w-20 bg-white sm:block'></span>
               </div>
               <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
             </Carousel>

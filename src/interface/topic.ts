@@ -11,7 +11,7 @@ export const topicSchema = z.object({
   title: z
     .string()
     .min(1, 'Topic is required')
-    .max(20, 'Topic cannot exceed 20 characters')
+    .max(75, 'Topic cannot exceed 75 characters')
     .refine((value) => value.trim().length > 0, 'Topic cannot be empty or just spaces')
     .transform((value) => value.trim()),
 });
