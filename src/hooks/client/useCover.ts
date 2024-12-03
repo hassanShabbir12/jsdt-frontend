@@ -31,14 +31,6 @@ export const useCover = (): UseCoverReturn => {
 
       selectedDateNoTime.setHours(0, 0, 0, 0);
 
-      if (selectedDateNoTime < currentDate) {
-        toast({
-          description: 'You cannot select a past date.',
-        });
-
-        return;
-      }
-
       if (selectedDateNoTime.getTime() === date?.getTime()) {
         setIsCalenderOpen(false);
       } else {
