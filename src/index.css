@@ -94,6 +94,7 @@ input[type='number'] {
 .counter > .group:before {
   content: counters(item, '.') ':';
   counter-increment: item;
+  position: absolute;
 }
 @keyframes gradient-animation {
   0% {
