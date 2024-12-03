@@ -36,21 +36,21 @@ export const InstructionsList: React.FC = () => {
           <p className='mb-3'>
             Read the following instructions carefully before answering the questions.
           </p>
-          <div className='list-none'>
+          <div className='counter'>
             {instructions.map((instruction, index) => (
-              <div key={index} className='counter text-black group relative bg-white'>
-                <div className='group relative mb-2 flex items-center bg-white'>
-                  <div className='mb-0'>
-                    <p className='para mb-0 pl-5'>{instruction.title}</p>
+              <div key={index} className='group relative bg-white flex text-black'>
+                <div className='group relative mb-2 flex sm:items-center'>
+                  <div className='mb-0 pl-2'>
+                    <p className='m-0'>{instruction.title}</p>
                   </div>
-                  <div className='rounded-md opacity-0 transition-all ml-2 shadow-md duration-500 group-hover:opacity-100'>
+                  <div className='ml-2 mt-1.5 sm:mt-0 rounded-md opacity-0 sm:shadow-md transition-all duration-500 group-hover:opacity-100'>
                     <div className='group flex gap-1.5 bg-white'>
                       <button onClick={() => handleUpdate(index, instruction.title)}>
-                        <Edit className='h-3 w-3 sm:h-5 sm:w-5' />
+                        <Edit className='h-4 w-4 sm:h-5 sm:w-5' />
                       </button>
                       {instructions.length !== 1 ? (
                         <button onClick={() => handleDelete(index)}>
-                          <Trash2 className='h-3 w-3 sm:h-5 sm:w-5' />
+                          <Trash2 className='h-4 w-4 sm:h-5 sm:w-5' />
                         </button>
                       ) : null}
                     </div>
