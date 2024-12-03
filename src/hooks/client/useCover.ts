@@ -31,12 +31,8 @@ export const useCover = (): UseCoverReturn => {
 
       selectedDateNoTime.setHours(0, 0, 0, 0);
 
-      if (selectedDateNoTime.getTime() === date?.getTime()) {
-        setIsCalenderOpen(false);
-      } else {
-        setDate(selectedDate);
-        setIsCalenderOpen(false);
-      }
+      setDate(selectedDate);
+      setIsCalenderOpen(false);
     } else {
       setIsCalenderOpen(false);
     }
