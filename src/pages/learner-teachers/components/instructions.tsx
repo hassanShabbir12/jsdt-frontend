@@ -38,12 +38,12 @@ export const InstructionsList: React.FC = () => {
           </p>
           <div className='counter'>
             {instructions.map((instruction, index) => (
-              <div key={index} className='group relative bg-white flex text-black'>
+              <div key={index} className='group relative flex bg-white text-black before:absolute'>
                 <div className='group relative mb-2 flex sm:items-center'>
                   <div className='mb-0 pl-2'>
-                    <p className='m-0'>{instruction.title}</p>
+                    <p className='m-0 pl-4'>{instruction.title}</p>
                   </div>
-                  <div className='ml-2 mt-1.5 sm:mt-0 rounded-md opacity-0 sm:shadow-md transition-all duration-500 group-hover:opacity-100'>
+                  <div className='ml-2 mt-1.5 rounded-md opacity-0 transition-all duration-500 group-hover:opacity-100 sm:mt-0 sm:shadow-md'>
                     <div className='group flex gap-1.5 bg-white'>
                       <button onClick={() => handleUpdate(index, instruction.title)}>
                         <Edit className='h-4 w-4 sm:h-5 sm:w-5' />
