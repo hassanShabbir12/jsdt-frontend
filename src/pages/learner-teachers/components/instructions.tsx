@@ -38,7 +38,7 @@ export const InstructionsList: React.FC = () => {
           </p>
           <div className='counter'>
             {instructions.map((instruction, index) => (
-              <div key={index} className='group relative flex bg-white text-black'>
+              <div key={index} className='group relative flex bg-white text-black before:absolute'>
                 <div className='group relative mb-2 flex sm:items-center'>
                   <div className='mb-0 pl-2'>
                     <p className='m-0 pl-4'>{instruction.title}</p>
