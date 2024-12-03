@@ -27,24 +27,20 @@ export const useCover = (): UseCoverReturn => {
 
       currentDate.setHours(0, 0, 0, 0);
 
-      if (selectedDate.getTime() < currentDate.getTime()) {
-        toast({
-          description: 'You cannot select a past date.',
-        });
+      const selectedDateNoTime = new Date(selectedDate);
 
-        return;
-      }
+      selectedDateNoTime.setHours(0, 0, 0, 0);
 
-      if (selectedDate.getTime() === date?.getTime()) {
-        setIsCalenderOpen(false);
-      } else {
-        setDate(selectedDate);
-        setIsCalenderOpen(false);
-      }
+      setDate(selectedDate);
+      setIsCalenderOpen(false);
     } else {
       setIsCalenderOpen(false);
     }
   };
+
+  const minDate = new Date();
+
+  minDate.setHours(0, 0, 0, 0);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file: File | undefined = event.target.files?.[0];
@@ -91,6 +87,7 @@ export const useCover = (): UseCoverReturn => {
   };
 
   return {
+    minDate,
     image,
     setImage,
     handleImageUpload,

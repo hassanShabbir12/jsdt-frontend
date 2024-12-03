@@ -84,4 +84,5 @@ export interface UseCoverReturn {
   setImage: React.Dispatch<React.SetStateAction<string | null | undefined>>;
   formatDate: (date: Date) => string;
   handleImageRemove: () => void;
+  minDate: Date;
 }

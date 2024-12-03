@@ -41,6 +41,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
     setIsCalenderOpen,
     handleDateSelect,
     date,
+    minDate,
     formatDate,
     handleImageRemove,
   } = useCover();
@@ -313,6 +314,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     <PopoverContent>
                       <Calendar
                         mode='single'
+                        disabled={{ before: minDate }}
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(selectedDate) => {
                           if (typeof selectedDate === 'undefined') {
