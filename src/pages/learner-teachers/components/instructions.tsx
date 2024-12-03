@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Edit, Trash2 } from 'lucide-react';
 
@@ -26,6 +26,12 @@ export const InstructionsList: React.FC = () => {
     handleUpdate,
   } = useInstructions();
 
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    setCounter(instructions.length);
+  }, [instructions]);
+
   return (
     <div className='mx-auto max-w-[1340px] px-5'>
       <div className='pl-0 sm:pl-10'>
@@ -36,26 +42,27 @@ export const InstructionsList: React.FC = () => {
           <p className='mb-3'>
             Read the following instructions carefully before answering the questions.
           </p>
-          <ol className='list-decimal pl-4'>
+          <ol className='list-none'>
             {instructions.map((instruction, index) => (
-              <div className='group relative bg-white'>
-                <div className='group relative bg-white'>
-                  {' '}
-                  <div className='absolute -left-[71px] -top-1 rounded-md opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:shadow-xl'>
-                    <div className='group flex gap-1.5 bg-white p-1'>
+              <div key={index} className='group relative bg-white'>
+                <div className='group relative mb-2 flex items-center bg-white'>
+                  <li className='mb-0'>
+                    <p className='mb-0'>
+                      {index + 1}: {instruction.title}
+                    </p>
+                  </li>
+                  <div className='rounded-md opacity-0 transition-all ml-2 shadow-md duration-500 group-hover:opacity-100'>
+                    <div className='group flex gap-1.5 bg-white'>
                       <button onClick={() => handleUpdate(index, instruction.title)}>
-                        <Edit className='w-5 h-5' />
+                        <Edit className='h-3 w-3 sm:h-5 sm:w-5' />
                       </button>
                       {instructions.length !== 1 ? (
                         <button onClick={() => handleDelete(index)}>
-                          <Trash2 className='w-5 h-5' />
+                          <Trash2 className='h-3 w-3 sm:h-5 sm:w-5' />
                         </button>
                       ) : null}
                     </div>
                   </div>
-                  <li key={index} className='mb-2'>
-                    <p className='mb-0'>{instruction.title}</p>
-                  </li>
                 </div>
               </div>
             ))}
@@ -63,7 +70,7 @@ export const InstructionsList: React.FC = () => {
         </div>
         <div className='py-14'>
           <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
-            <DialogTrigger className='mx-auto flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
+            <DialogTrigger className='mx-auto w-60 sm:w-auto flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
               Add More Instructions
             </DialogTrigger>
             <DialogContent className='max-w-[680px] !rounded-3xl'>
@@ -83,7 +90,7 @@ export const InstructionsList: React.FC = () => {
                           handleSave();
                         }
                       }}
-                      className='mb-4 block h-48 w-full resize-none rounded-md border-input px-4 py-4 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:border-blue-700 sm:text-sm sm:leading-6'
+                      className='mb-4 block h-48 w-full resize-none rounded-md border-input px-4 py-4 text-gray-900 shadow-sm ring-2 ring-gray-300 placeholder:text-gray-400 outline-none focus:ring-blue-500 sm:text-sm sm:leading-6'
                     ></textarea>
                   </form>
                   <div className='flex gap-4'>
