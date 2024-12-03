@@ -315,6 +315,11 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                         mode='single'
                         selected={field.value ? new Date(field.value) : undefined}
                         onSelect={(selectedDate) => {
+                          if (typeof selectedDate === 'undefined') {
+                            setIsCalenderOpen(false);
+
+                            return;
+                          }
                           field.onChange(String(selectedDate) ?? date);
                           handleDateSelect(selectedDate as Date);
                         }}

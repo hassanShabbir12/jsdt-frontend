@@ -69,6 +69,10 @@ export const LearnerTeacher: FC = () => {
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
   const { logout } = useAuth();
 
+  if (isLearner === null) {
+    return;
+  }
+
   return (
     <section ref={containerRef} className='pb-10 pt-5'>
       <div className='mx-auto max-w-[1340px] px-3'>
