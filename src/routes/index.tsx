@@ -16,6 +16,7 @@ import { LearnerAccount } from '@/pages/learner-account';
 import { LearnerLogin } from '@/pages/learner-login';
 import { LearnerTeacher } from '@/pages/learner-teachers';
 import { LearnerSignUp } from '@/pages/learners-signup';
+import PageNotFound from '@/pages/page-not-found/insex';
 import { Payment } from '@/pages/payment';
 import { PricingPlan } from '@/pages/pricing-plan';
 import { Question } from '@/pages/question';
@@ -25,17 +26,23 @@ import { Subjects } from '@/pages/subject';
 import { Taxonomy } from '@/pages/taxonomy';
 import { Topic } from '@/pages/topic';
 
+import PrivateRoute from './private-routes';
+import PublicRoute from './public-routes';
+
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <LandingLayout />,
+    element: (
+      <PublicRoute restricted={true}>
+        <LandingLayout />
+      </PublicRoute>
+    ),
     children: [
       { index: true, element: <Home /> },
       { path: 'pricing-plan', element: <PricingPlan /> },
       { path: 'payment', element: <Payment /> },
       { path: 'admin/login', element: <AdminLogin /> },
       { path: 'learner-account', element: <LearnerAccount /> },
-      { path: 'learner-teacher', element: <LearnerTeacher /> },
       { path: 'basic-education', element: <BasicEducation /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password', element: <ResetPassword /> },
@@ -46,7 +53,11 @@ const routes: RouteObject[] = [
 
   {
     path: '/signup',
-    element: <SignupLayout />,
+    element: (
+      <PublicRoute restricted={true}>
+        <SignupLayout />
+      </PublicRoute>
+    ),
     children: [
       { index: true, element: <LearnerSignUp /> },
       { path: 'educator', element: <EducatorSignUp /> },
@@ -55,23 +66,68 @@ const routes: RouteObject[] = [
 
   {
     path: '/login',
-    element: <SignupLayout />,
+    element: (
+      <PublicRoute restricted={true}>
+        <SignupLayout />
+      </PublicRoute>
+    ),
     children: [
-      { index: true, element: <LearnerLogin /> },
+      {
+        index: true,
+        element: <LearnerLogin />,
+      },
       { path: 'educator', element: <EducatorLogin /> },
     ],
   },
 
   {
-    path: '/admin',
-    element: <AdminLayout />,
+    path: '/learner-teacher',
+    element: (
+      <PrivateRoute allowedRoles={['learner', 'teacher']}>
+        <LandingLayout />
+      </PrivateRoute>
+    ),
     children: [
-      { index: true, element: <Grades /> },
-      { path: 'subjects', element: <Subjects /> },
-      { path: 'topics', element: <Topic /> },
-      { path: 'questions', element: <Question /> },
-      { path: 'settings', element: <Settings /> },
+      {
+        index: true,
+        element: <LearnerTeacher />,
+      },
     ],
+  },
+
+  {
+    path: '/admin',
+    element: (
+      <PrivateRoute allowedRoles={['admin']}>
+        <AdminLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Grades />,
+      },
+      {
+        path: 'subjects',
+        element: <Subjects />,
+      },
+      {
+        path: 'topics',
+        element: <Topic />,
+      },
+      {
+        path: 'questions',
+        element: <Question />,
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <PageNotFound />,
   },
 ];
 
