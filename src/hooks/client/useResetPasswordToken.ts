@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import axios from 'axios';
@@ -24,6 +24,12 @@ export const useResetPasswordToken = (): UseResetPasswordTokenReturn => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate, token]);
 
   const resetPassword = async (password: string): Promise<void> => {
     try {
