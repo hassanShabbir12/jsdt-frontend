@@ -13,6 +13,9 @@ export function calculatePercentage(
   questions: ExtendedCreateQuestionDto[],
   difficultyLevel: string,
 ): number {
+  if (questions.length === 0) {
+    return 0;
+  }
   const filteredQuestions = questions.filter((q) => q.difficultyLevel === difficultyLevel);
   const percentage = (filteredQuestions.length / questions.length) * 100;
 

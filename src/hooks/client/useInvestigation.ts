@@ -17,7 +17,7 @@ import {
 } from '@/interface/investigation';
 import { ExtendedCreateQuestionDto } from '@/interface/question';
 import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
-import { initialInstructions } from '@/utils/dump';
+import { initialInstructions, staticImage } from '@/utils/dump';
 
 export const useInvestigation = (): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,8 +26,13 @@ export const useInvestigation = (): UseInvestigationReturn => {
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [isLearner, setIsLearner] = useState<boolean | null>(null);
+
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  interface IUploadedFileResponse {
+    publicUrl: string;
+  }
 
   useEffect(() => {
     if (user) {
@@ -141,6 +146,9 @@ export const useInvestigation = (): UseInvestigationReturn => {
   };
 
   const handleCheckData = async (): Promise<void> => {
+    const img: string | null = localStorage.getItem('image');
+    let coverimage = null;
+
     if (questions.length === 0) {
       toast({
         title: 'No Questions',
@@ -162,14 +170,40 @@ export const useInvestigation = (): UseInvestigationReturn => {
       return;
     }
 
-    const data = {
-      coverData: isLearner ? null : { imageURL: 'sdsdsd', ...JSON.parse(coverData) },
-      instructionsData: typeof instructions === 'object' ? instructions : JSON.parse(instructions),
-      items: questions.map((item) => item.id),
-    };
-
     try {
       setPdfLoading(true);
+      if (img !== 'null' && img) {
+        const convertImage = JSON.parse(img);
+        const base64Data = convertImage?.split(',')[1];
+        const byteCharacters = atob(base64Data);
+        const byteArray = new Uint8Array(byteCharacters.length);
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArray[i] = byteCharacters.charCodeAt(i);
+        }
+
+        // Create a Blob from the byte array
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+        // Create FormData and append the Blob
+        const formData: FormData = new FormData();
+
+        formData.append('file', blob, 'image.jpg');
+
+        const imageResponse = (await apiClient.upload.uploadControllerUploadMedia({
+          file: formData.get('file') as File,
+        })) as unknown as AxiosResponse<ApiResponse<IUploadedFileResponse>>;
+
+        coverimage = imageResponse?.data?.data?.publicUrl;
+      }
+      const data = {
+        coverData: isLearner
+          ? null
+          : { imageURL: coverimage ? coverimage : staticImage, ...JSON.parse(coverData) },
+        instructionsData:
+          typeof instructions === 'object' ? instructions : JSON.parse(instructions),
+        items: questions.map((item) => item.id),
+      };
       const response = (await apiClient.pdf.pdfControllerDownloadPdf(data)) as unknown as {
         data: Blob;
       };

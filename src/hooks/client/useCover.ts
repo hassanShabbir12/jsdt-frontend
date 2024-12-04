@@ -51,7 +51,15 @@ export const useCover = (): UseCoverReturn => {
 
     if (file) {
       if (file.type.startsWith('image/')) {
-        setImage(URL.createObjectURL(file));
+        const reader = new FileReader();
+
+        reader.onloadend = (): void => {
+          const base64Image = reader.result as string;
+
+          setImage(base64Image);
+        };
+
+        reader.readAsDataURL(file);
       } else {
         toast({
           description: 'Please upload a valid image file.',
@@ -66,7 +74,15 @@ export const useCover = (): UseCoverReturn => {
 
     if (file) {
       if (file.type.startsWith('image/')) {
-        setImage(URL.createObjectURL(file));
+        const reader = new FileReader();
+
+        reader.onloadend = (): void => {
+          const base64Image = reader.result as string;
+
+          setImage(base64Image);
+        };
+
+        reader.readAsDataURL(file);
       } else {
         toast({
           description: 'Please upload a valid image file.',

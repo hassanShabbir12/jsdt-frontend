@@ -21,3 +21,6 @@ export const initialInstructions: Instruction[] = [
   { title: 'You may use a non-programmable calculator.' },
   { title: 'Write neatly and legibly.' },
 ];
+
+export const staticImage =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFUuOtK7W_UNjvXDx3Z9tCD14xTfWPFs3Wbw&s';

@@ -355,7 +355,7 @@ export const LearnerTeacher: FC = () => {
         <div className='relative mb-10 min-h-72 overflow-hidden rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
-              <div className='mb-1 px-2 sm:mb-0'>
+              <div className='mb-2 px-2 md:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -398,7 +398,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='mb-1 px-2 sm:mb-0'>
+              <div className='mb-2 px-2 md:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -448,7 +448,7 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
               {!isLearner && (
-                <div className='mb-1 px-2 sm:mb-0'>
+                <div className='mb-2 px-2 md:mb-0'>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
@@ -540,7 +540,7 @@ export const LearnerTeacher: FC = () => {
                   </Dialog>
                 </div>
               )}
-              <div className='mb-1 px-2 sm:mb-0'>
+              <div className='mb-2 px-2 md:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -556,7 +556,7 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
               {!isLearner && (
-                <div className='mb-1 px-2 sm:mb-0'>
+                <div className='mb-2 px-2 md:mb-0'>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
@@ -574,13 +574,6 @@ export const LearnerTeacher: FC = () => {
               )}
             </div>
             <div className='mb-14 flex gap-x-2 sm:m-0 sm:gap-x-4'>
-              <div className='h-6 w-6 cursor-pointer'>
-                <img
-                  src={assetUrl('assets/img/home/attachment.svg')}
-                  alt='Generate-2'
-                  className='-mb-11 block h-auto'
-                />
-              </div>
               <div className='h-6 w-6 cursor-pointer' onClick={handleCheckData}>
                 {pdfLoading ? (
                   <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
