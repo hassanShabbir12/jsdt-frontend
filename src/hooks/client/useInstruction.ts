@@ -17,68 +17,56 @@ interface UseInstructionsReturn {
 }
 
 export const useInstructions = (): UseInstructionsReturn => {
-  // Using useLocalStorage from react-use
-  const [instructions, setInstructions] = useLocalStorage<string>('instructions');
-  let instructionsArray: Instruction[] = [];
+  const [instructions, setInstructions] = useLocalStorage<string>('instructions', '[]');
+  const instructionsArray: Instruction[] =
+    typeof instructions === 'string' ? JSON.parse(instructions) : instructions;
 
-  instructionsArray = typeof instructions === 'string' ? JSON.parse(instructions) : instructions;
   const [newInstruction, setNewInstruction] = useState('');
-
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
 
   const handleSave = (): void => {
-    if (newInstruction) {
-      if (editIndex === null) {
-        // Add new instruction
-        instructionsArray.push({ title: newInstruction });
-        toast({
-          description: 'Instruction added successfully.',
-        });
-      } else {
-        // Update existing instruction at the given editIndex
-        instructionsArray[editIndex] = { title: newInstruction };
-        toast({
-          description: 'Instruction updated successfully.',
-        });
-      }
+    if (newInstruction.trim()) {
+      const updatedInstructions = [...instructionsArray];
 
-      // Save the updated instructions as a string in localStorage
-      setInstructions(JSON.stringify(instructionsArray));
+      if (editIndex !== null) {
+        updatedInstructions[editIndex] = { title: newInstruction };
+        toast({ description: 'Instruction updated successfully.' });
+      } else {
+        updatedInstructions.push({ title: newInstruction });
+        toast({ description: 'Instruction added successfully.' });
+      }
+      setInstructions(JSON.stringify(updatedInstructions));
       setNewInstruction('');
       setDialogOpen(false);
+      setEditIndex(null);
     } else {
-      toast({
-        description: 'Please add an instruction before saving.',
-      });
+      toast({ description: 'Please add an instruction before saving.' });
     }
   };
 
   const handleCancel = (): void => {
     setNewInstruction('');
     setDialogOpen(false);
+    setEditIndex(null);
   };
 
   const handleDialogChange = (isOpen: boolean): void => {
     if (!isOpen) {
       setNewInstruction('');
+      setEditIndex(null);
     }
     setDialogOpen(isOpen);
   };
 
-  // Handle delete instruction
   const handleDelete = (index: number): void => {
-    instructionsArray.splice(index, 1);
+    const updatedInstructions = instructionsArray.filter((_, i) => i !== index);
 
-    // Update the localStorage
-    setInstructions(JSON.stringify(instructionsArray));
+    setInstructions(JSON.stringify(updatedInstructions));
 
-    toast({
-      description: 'Instruction deleted successfully.',
-    });
+    toast({ description: 'Instruction deleted successfully.' });
   };
 
-  // Handle update instruction
   const handleUpdate = (index: number, updatedTitle: string): void => {
     setEditIndex(index);
     setNewInstruction(updatedTitle);
