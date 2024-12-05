@@ -7,12 +7,16 @@ import { MoveLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { useAuth } from '@/context/AuthContext';
 import { assetUrl } from '@/lib/asset-url';
 
 export const Payment: FC = () => {
   const navigate = useNavigate();
+  const { setIsPayment } = useAuth();
 
   const handlePayment = (): void => {
+    setIsPayment(true);
+
     setTimeout(() => {
       navigate('/signup');
     }, 1000);

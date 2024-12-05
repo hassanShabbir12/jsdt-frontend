@@ -5,7 +5,7 @@ import { setupInterceptors } from '../config/interceptors';
 export class ExtendedJsdtAPI extends JsdtAPI<unknown> {
   constructor() {
     super({
-      baseURL: import.meta.env.VITE_API_BASE_URL || 'https://34.56.32.71/',
+      baseURL: import.meta.env.VITE_API_BASE_URL,
       timeout: 10000,
     });
 
