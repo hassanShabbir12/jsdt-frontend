@@ -10,6 +10,8 @@ type AuthContextType = {
   logout: () => void;
   userRole: string | null;
   setUserRole: (role: string) => void;
+  setIsPayment: (payment: boolean) => void;
+  isPayment: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -19,6 +21,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<CreateUserDto | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>('learner');
+  const [isPayment, setIsPayment] = useState<boolean>(false);
 
   const login = (user: CreateUserDto, token: string): void => {
     setUser(user);
@@ -50,7 +53,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, token, login, logout, userRole, setUserRole }}
+      value={{
+        isAuthenticated,
+        user,
+        token,
+        login,
+        logout,
+        setIsPayment,
+        isPayment,
+        userRole,
+        setUserRole,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -12,7 +12,7 @@ import { SignupFormData, signupSchema, UseSignupReturn } from '@/interface/auth'
 import { CreateUserDto, CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
 export const useSignup = (): UseSignupReturn => {
-  const { userRole } = useAuth();
+  const { userRole, isPayment } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -39,6 +39,12 @@ export const useSignup = (): UseSignupReturn => {
     },
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    if (!isPayment) {
+      navigate('/');
+    }
+  }, [isPayment, navigate]);
 
   const onSubmit: SubmitHandler<SignupFormData> = async (data) => {
     try {
