@@ -99,8 +99,8 @@ export const LearnerTeacher: FC = () => {
           </h2>
           <div className='relative inline-block'>
             <DropdownMenu>
-              <DropdownMenuTrigger className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
-                {user?.email.charAt(0).toUpperCase()}
+              <DropdownMenuTrigger className='inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
+                <p className='-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <div

@@ -93,7 +93,7 @@ export const ResetPassword: FC = () => {
           )}
         </div>
         <div className='flex justify-end pb-4 px-3'>
-          <p onClick={() => navigate("/login")} className='text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'>return to login</p>
+          <p onClick={() => navigate("/login")} className='text-xs mb-5 font-semibold text-blue-500 cursor-pointer underline hover:text-blue-700 md:text-sm'>Return to login</p>
         </div>
         <div className='flex justify-center'>
           <Button loading={loading} type='submit' className='mx-auto h-12 w-52 md:w-80'>
