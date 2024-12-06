@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useResetPasswordToken } from '@/hooks/client/useResetPasswordToken';
 import { ResetPasswordFormValues, ResetPasswordSchema } from '@/interface/password';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const ResetPassword: FC = () => {
   const {
@@ -31,6 +32,8 @@ export const ResetPassword: FC = () => {
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = (data) => {
     resetPassword(data.password);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className='mx-auto max-w-[468px] py-20'>
@@ -63,7 +66,7 @@ export const ResetPassword: FC = () => {
           </div>
           {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
         </div>
-        <div className='mb-4 w-full px-2 md:mb-3 lg:mb-5 lg:px-3'>
+        <div className='w-full px-2 lg:px-3'>
           <Label
             htmlFor='confirmPassword'
             className='mb-2 block font-normal leading-none text-black lg:text-base'
@@ -88,6 +91,9 @@ export const ResetPassword: FC = () => {
           {errors.confirmPassword && (
             <p className='text-sm text-red-500'>{errors.confirmPassword.message}</p>
           )}
+        </div>
+        <div className='flex justify-end pb-4 px-3'>
+          <p onClick={() => navigate("/login")} className='text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'>return to login</p>
         </div>
         <div className='flex justify-center'>
           <Button loading={loading} type='submit' className='mx-auto h-12 w-52 md:w-80'>
