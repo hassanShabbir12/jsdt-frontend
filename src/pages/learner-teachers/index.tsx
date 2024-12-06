@@ -67,7 +67,7 @@ export const LearnerTeacher: FC = () => {
     pdfLoading,
   } = useInvestigation();
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   if (isLearner === null) {
     return;
@@ -100,7 +100,7 @@ export const LearnerTeacher: FC = () => {
           <div className='relative inline-block'>
             <DropdownMenu>
               <DropdownMenuTrigger className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
-                M
+                {user?.email.charAt(0).toUpperCase()}
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <div
