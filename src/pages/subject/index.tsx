@@ -126,7 +126,7 @@ export const Subjects: FC = () => {
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
-                      Update
+                      Save
                     </Button>
                   </div>
                 </DialogFooter>

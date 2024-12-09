@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useResetPasswordToken } from '@/hooks/client/useResetPasswordToken';
 import { ResetPasswordFormValues, ResetPasswordSchema } from '@/interface/password';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const ResetPassword: FC = () => {
   const {
