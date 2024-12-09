@@ -125,7 +125,7 @@ export const Grades: FC = () => {
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
-                      {selectedGrade ? 'Update' : 'Save'} {/* Change button text here */}
+                      Save
                     </Button>
                   </div>
                 </DialogFooter>
