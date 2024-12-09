@@ -13,6 +13,10 @@ interface UseInstructionsReturn {
   handleDialogChange: (isOpen: boolean) => void;
   setNewInstruction: (value: string) => void;
   handleDelete: (index: number) => void;
+  setModalMode: (mode: 'add' | 'edit') => void;
+  editIndex: number | null;
+  modalMode: 'add' | 'edit';
+  handleEdit: (index: number, title: string) => void;
   handleUpdate: (index: number, updatedTitle: string) => void;
 }
 
@@ -24,6 +28,9 @@ export const useInstructions = (): UseInstructionsReturn => {
   const [newInstruction, setNewInstruction] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editIndex, setEditIndex] = useState<number | null>(null);
+
+  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
+  const [currentInstruction, setCurrentInstruction] = useState<string>('');
 
   const handleSave = (): void => {
     if (newInstruction.trim()) {
@@ -59,6 +66,14 @@ export const useInstructions = (): UseInstructionsReturn => {
     setDialogOpen(isOpen);
   };
 
+
+  const handleEdit = (index: number, instructionTitle: string) => {
+    setModalMode('edit');
+    setCurrentInstruction(instructionTitle);
+    setNewInstruction(instructionTitle);
+    handleDialogChange(true);
+  };
+
   const handleDelete = (index: number): void => {
     const updatedInstructions = instructionsArray.filter((_, i) => i !== index);
 
@@ -79,8 +94,12 @@ export const useInstructions = (): UseInstructionsReturn => {
     instructions: instructionsArray,
     handleSave,
     handleCancel,
+    setModalMode,
     handleDialogChange,
+    handleEdit,
+    modalMode,
     setNewInstruction,
+    editIndex,
     handleDelete,
     handleUpdate,
   };
