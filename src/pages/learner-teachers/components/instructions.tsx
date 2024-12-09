@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Edit, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -62,7 +61,9 @@ export const InstructionsList: React.FC = () => {
         </div>
         <div className='py-14'>
           <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
-            <DialogTrigger className='mx-auto w-60 sm:w-auto flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
+            <DialogTrigger
+              className='mx-auto w-60 sm:w-auto flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+            >
               Add More Instructions
             </DialogTrigger>
             <DialogContent className='max-w-[680px] !rounded-3xl'>
@@ -108,3 +109,5 @@ export const InstructionsList: React.FC = () => {
     </div>
   );
 };
+
+
