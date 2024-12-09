@@ -45,6 +45,7 @@ import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
 import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
+import DisplayHtml from '../question/dompurify';
 import { Cover } from './components/cover';
 import { InstructionsList } from './components/instructions';
 
@@ -391,7 +392,9 @@ export const LearnerTeacher: FC = () => {
                           <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
                             Question No. {index + 1}
                           </h2>
-                          <p className='m-0'>{item.question}</p>
+                          <p className='m-0'>
+                            <DisplayHtml htmlContent={item.question} />
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -433,13 +436,17 @@ export const LearnerTeacher: FC = () => {
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Question No. {index + 1}
                             </h2>
-                            <p className='m-0'>{item.question}</p>
+                            <p className='m-0'>
+                              <DisplayHtml htmlContent={item.question} />
+                            </p>
                           </div>
                           <div className='mb-4 md:mb-7'>
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Answer :
                             </h2>
-                            <p className='m-0'>{item.answer}</p>
+                            <p className='m-0'>
+                              <DisplayHtml htmlContent={item.answer} />
+                            </p>
                           </div>
                         </div>
                       ))}
@@ -600,7 +607,9 @@ export const LearnerTeacher: FC = () => {
                       <h3 className='mb-5 text-2xl font-semibold leading-7'>
                         Question No. {index + 1}
                       </h3>
-                      <p className='line-clamp-3'>{item.question}</p>
+                      <p className='line-clamp-3'>
+                        <DisplayHtml htmlContent={item.question} />
+                      </p>
                     </div>
                   </CarouselItem>
                 ))}
@@ -663,7 +672,9 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <p className='mb-10 mt-6 block text-black'>{item.question}</p>
+              <p className='mb-10 mt-6 block text-black'>
+                <DisplayHtml htmlContent={item.question} />
+              </p>
             </div>
           ))}
         </div>

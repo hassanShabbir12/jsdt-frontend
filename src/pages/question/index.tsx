@@ -32,13 +32,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Textarea } from '@/components/ui/textarea';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 import { useQuestionForm } from '@/hooks/admin/question/useQuestionForm';
 import { useQuestionOperations } from '@/hooks/admin/question/useQuestionOperations';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { cn } from '@/lib/utils';
+
+import DisplayHtml from './dompurify';
+import QuillEditor from './quill-editor';
 
 export const Question: FC = () => {
   const { form, processingText, handleProcessText, resetFormFields, processingTextAnswer } =
@@ -62,7 +64,6 @@ export const Question: FC = () => {
 
   const {
     control,
-    register,
     formState: { errors },
   } = form;
 
@@ -315,10 +316,9 @@ export const Question: FC = () => {
                     Question
                   </Label>
                   <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
-                    <Textarea
-                      {...register('question')}
-                      className='h-32 w-full resize-none rounded-xl border border-solid
-                        border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
+                    <QuillEditor
+                      value={form.getValues('question')}
+                      onChange={(content) => form.setValue('question', content)} // Set the value in the form
                       placeholder='Type here...'
                     />
                     <div className='relative p-4 pt-2'>
@@ -343,17 +343,18 @@ export const Question: FC = () => {
                     <span className='text-sm text-red-500'>{errors.question.message}</span>
                   )}
                 </div>
+                <DisplayHtml htmlContent={form.getValues('question')} />
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Answer
                   </Label>
                   <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
-                    <Textarea
-                      {...register('answer')}
-                      className='h-32 w-full resize-none rounded-xl border border-solid
-                        border-neutral-200 p-4 text-sm text-zinc-800 placeholder:text-stone-300'
+                    <QuillEditor
+                      value={form.getValues('answer')}
+                      onChange={(content) => form.setValue('answer', content)} // Set the value in the form
                       placeholder='Type here...'
                     />
+
                     <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
@@ -421,7 +422,9 @@ export const Question: FC = () => {
               <TableBody>
                 {questions.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell className='font-base text-zinc-800'>{item.question}</TableCell>
+                    <TableCell className='font-base text-zinc-800'>
+                      <DisplayHtml htmlContent={item.question} />{' '}
+                    </TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
                       <div className='flex gap-2'>
                         <i
