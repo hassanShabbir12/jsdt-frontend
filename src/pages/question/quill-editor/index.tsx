@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+// eslint-disable-next-line no-restricted-syntax
+import 'react-quill/dist/quill.snow.css';
 
 interface QuillEditorProps {
   onChange: (content: string) => void; // Callback to handle content changes
