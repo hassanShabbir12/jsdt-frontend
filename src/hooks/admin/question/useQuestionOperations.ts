@@ -19,6 +19,7 @@ import {
 export function useQuestionOperations(
   form: UseFormReturn<QuestionFormValues>,
   mode: string,
+  setMode: (newMode: string) => void,
 ): UseQuestionOperationsReturn {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
@@ -137,6 +138,7 @@ export function useQuestionOperations(
     setQuestionToDelete(question);
     setIsEditing(true);
     setModalOpen(true);
+    setMode(question.type);
   };
 
   useEffect(() => {

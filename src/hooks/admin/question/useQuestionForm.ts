@@ -27,7 +27,8 @@ interface UseQuestionFormReturn {
   resetFormFields: () => void;
   processingTextAnswer: boolean;
   mode: string;
-  setMode: (mode: string) => void;
+  handleModeChange: (newMode: string) => void;
+  setMode: (newMode: string) => void;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
@@ -114,6 +115,12 @@ export function useQuestionForm(): UseQuestionFormReturn {
     });
   };
 
+  const handleModeChange = (newMode: string): void => {
+    setMode(newMode);
+    form.setValue('question', '');
+    form.setValue('answer', '');
+  };
+
   return {
     form,
     processingText,
@@ -121,6 +128,7 @@ export function useQuestionForm(): UseQuestionFormReturn {
     resetFormFields,
     processingTextAnswer,
     mode,
+    handleModeChange,
     setMode,
   };
 }

@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Select,
   SelectContent,
@@ -43,7 +44,6 @@ import DisplayHtml from './dompurify';
 import MathFormulaDisplay from './formula';
 import MathLiveInput from './math-live';
 import QuillEditor from './quill-editor';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 export const Question: FC = () => {
   const {
@@ -53,6 +53,7 @@ export const Question: FC = () => {
     resetFormFields,
     processingTextAnswer,
     mode,
+    handleModeChange,
     setMode,
   } = useQuestionForm();
 
@@ -70,7 +71,7 @@ export const Question: FC = () => {
     deleteQuestion,
     onSubmit,
     setIsEditing,
-  } = useQuestionOperations(form, mode);
+  } = useQuestionOperations(form, mode, setMode);
 
   const {
     control,
@@ -328,21 +329,18 @@ export const Question: FC = () => {
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Select Mode
                   </Label>
-                  <RadioGroup
-                    value={mode}
-                    onValueChange={(value) => setMode(value)}
-                  >
-                    <div className="flex gap-x-3">
-                      <label htmlFor="simple">
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="simple" id="simple" />
-                          <span className="block text-base">Simple</span>
+                  <RadioGroup value={mode} onValueChange={(value) => handleModeChange(value)}>
+                    <div className='flex gap-x-3'>
+                      <label htmlFor='simple'>
+                        <div className='flex items-center space-x-2'>
+                          <RadioGroupItem value='simple' id='simple' />
+                          <span className='block text-base'>Simple</span>
                         </div>
                       </label>
-                      <label htmlFor="algebra">
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="algebra" id="algebra" />
-                          <span className="block text-base">Algebra</span>
+                      <label htmlFor='algebra'>
+                        <div className='flex items-center space-x-2'>
+                          <RadioGroupItem value='algebra' id='algebra' />
+                          <span className='block text-base'>Algebra</span>
                         </div>
                       </label>
                     </div>
@@ -352,7 +350,7 @@ export const Question: FC = () => {
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
-                  <div className='w-full relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
+                  <div className='relative w-full overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
                     {mode === 'simple' ? (
                       <>
                         <QuillEditor
@@ -382,9 +380,8 @@ export const Question: FC = () => {
                       <MathLiveInput
                         value={form.getValues('question')}
                         onChange={(value) => {
-                          form.setValue('question', value); // Update the form state
+                          form.setValue('question', value);
                         }}
-                        placeholder='Type your algebraic expression here...'
                       />
                     )}
                   </div>
@@ -392,9 +389,6 @@ export const Question: FC = () => {
                     <span className='text-sm text-red-500'>{errors.question.message}</span>
                   )}
                 </div>
-                {/* <MathFormulaDisplay formula={form.getValues('question')} /> */}
-
-                {/* <DisplayHtml htmlContent={form.getValues('question')} /> */}
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Answer
@@ -429,9 +423,8 @@ export const Question: FC = () => {
                       <MathLiveInput
                         value={form.getValues('answer')}
                         onChange={(value) => {
-                          form.setValue('answer', value); // Update the form state
+                          form.setValue('answer', value);
                         }}
-                        placeholder='Type your algebraic expression here...'
                       />
                     )}
                   </div>
