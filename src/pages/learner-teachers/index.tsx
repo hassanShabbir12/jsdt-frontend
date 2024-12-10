@@ -46,6 +46,7 @@ import { assetUrl } from '@/lib/asset-url';
 import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
 import DisplayHtml from '../question/dompurify';
+import MathFormulaDisplay from '../question/formula';
 import { Cover } from './components/cover';
 import { InstructionsList } from './components/instructions';
 
@@ -393,7 +394,11 @@ export const LearnerTeacher: FC = () => {
                             Question No. {index + 1}
                           </h2>
                           <p className='m-0'>
-                            <DisplayHtml htmlContent={item.question} />
+                            {item.type === 'simple' ? (
+                              <DisplayHtml htmlContent={item.question} />
+                            ) : (
+                              <MathFormulaDisplay formula={item.question} />
+                            )}
                           </p>
                         </div>
                       ))}
@@ -437,7 +442,11 @@ export const LearnerTeacher: FC = () => {
                               Question No. {index + 1}
                             </h2>
                             <p className='m-0'>
-                              <DisplayHtml htmlContent={item.question} />
+                              {item.type === 'simple' ? (
+                                <DisplayHtml htmlContent={item.question} />
+                              ) : (
+                                <MathFormulaDisplay formula={item.question} />
+                              )}
                             </p>
                           </div>
                           <div className='mb-4 md:mb-7'>
@@ -445,7 +454,11 @@ export const LearnerTeacher: FC = () => {
                               Answer :
                             </h2>
                             <p className='m-0'>
-                              <DisplayHtml htmlContent={item.answer} />
+                              {item.type === 'simple' ? (
+                                <DisplayHtml htmlContent={item.answer} />
+                              ) : (
+                                <MathFormulaDisplay formula={item.answer} />
+                              )}
                             </p>
                           </div>
                         </div>
@@ -608,7 +621,11 @@ export const LearnerTeacher: FC = () => {
                         Question No. {index + 1}
                       </h3>
                       <p className='line-clamp-3'>
-                        <DisplayHtml htmlContent={item.question} />
+                        {item.type === 'simple' ? (
+                          <DisplayHtml htmlContent={item.question} />
+                        ) : (
+                          <MathFormulaDisplay formula={item.question} />
+                        )}
                       </p>
                     </div>
                   </CarouselItem>
@@ -673,7 +690,11 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
               <p className='mb-10 mt-6 block text-black'>
-                <DisplayHtml htmlContent={item.question} />
+                {item.type === 'simple' ? (
+                  <DisplayHtml htmlContent={item.question} />
+                ) : (
+                  <MathFormulaDisplay formula={item.question} />
+                )}
               </p>
             </div>
           ))}

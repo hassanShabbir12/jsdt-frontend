@@ -26,11 +26,15 @@ interface UseQuestionFormReturn {
   handleProcessText: (fieldType: 'question' | 'answer') => Promise<void>;
   resetFormFields: () => void;
   processingTextAnswer: boolean;
+  mode: string;
+  setMode: (mode: string) => void;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
   const [processingText, setProcessingText] = useState(false);
   const [processingTextAnswer, setProcessingTextAnswer] = useState(false);
+  const [mode, setMode] = useState<string>('simple');
+
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -116,5 +120,7 @@ export function useQuestionForm(): UseQuestionFormReturn {
     handleProcessText,
     resetFormFields,
     processingTextAnswer,
+    mode,
+    setMode,
   };
 }

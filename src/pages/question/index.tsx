@@ -40,11 +40,21 @@ import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { cn } from '@/lib/utils';
 
 import DisplayHtml from './dompurify';
+import MathFormulaDisplay from './formula';
+import MathLiveInput from './math-live';
 import QuillEditor from './quill-editor';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 export const Question: FC = () => {
-  const { form, processingText, handleProcessText, resetFormFields, processingTextAnswer } =
-    useQuestionForm();
+  const {
+    form,
+    processingText,
+    handleProcessText,
+    resetFormFields,
+    processingTextAnswer,
+    mode,
+    setMode,
+  } = useQuestionForm();
 
   const {
     loading,
@@ -60,7 +70,7 @@ export const Question: FC = () => {
     deleteQuestion,
     onSubmit,
     setIsEditing,
-  } = useQuestionOperations(form);
+  } = useQuestionOperations(form, mode);
 
   const {
     control,
@@ -91,7 +101,10 @@ export const Question: FC = () => {
                 Add New Question
               </Button>
             </DialogTrigger>
-            <DialogContent className='!container max-h-[80%] max-w-[96%] overflow-y-auto overflow-x-hidden'>
+            <DialogContent
+              className='!container max-h-[80%] max-w-[96%] overflow-y-auto overflow-x-hidden'
+              onPointerDownOutside={(e) => e.preventDefault()}
+            >
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <DialogHeader>
                   <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
@@ -311,67 +324,116 @@ export const Question: FC = () => {
                     </div>
                   </div>
                 </div>
+                <div className='w-full'>
+                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                    Select Mode
+                  </Label>
+                  <RadioGroup
+                    value={mode}
+                    onValueChange={(value) => setMode(value)}
+                  >
+                    <div className="flex gap-x-3">
+                      <label htmlFor="simple">
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="simple" id="simple" />
+                          <span className="block text-base">Simple</span>
+                        </div>
+                      </label>
+                      <label htmlFor="algebra">
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="algebra" id="algebra" />
+                          <span className="block text-base">Algebra</span>
+                        </div>
+                      </label>
+                    </div>
+                  </RadioGroup>
+                </div>
                 <div className='mb-4 w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
-                  <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
-                    <QuillEditor
-                      value={form.getValues('question')}
-                      onChange={(content) => form.setValue('question', content)} // Set the value in the form
-                      placeholder='Type here...'
-                    />
-                    <div className='relative p-4 pt-2'>
-                      <Button
-                        type='button'
-                        onClick={() => handleProcessText('question')}
-                        loading={processingText}
-                        variant='outline'
-                        className={cn(
-                          'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
-                          'bg-gray-200',
-                          {
-                            'bg-primary': processingText,
-                          },
-                        )}
-                      >
-                        Write question with AI
-                      </Button>
-                    </div>
+                  <div className='w-full relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
+                    {mode === 'simple' ? (
+                      <>
+                        <QuillEditor
+                          value={form.getValues('question')}
+                          onChange={(content) => form.setValue('question', content)}
+                          placeholder='Type here...'
+                        />
+                        <div className='relative p-4 pt-2'>
+                          <Button
+                            type='button'
+                            onClick={() => handleProcessText('question')}
+                            loading={processingText}
+                            variant='outline'
+                            className={cn(
+                              'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                              'bg-gray-200',
+                              {
+                                'bg-primary': processingText,
+                              },
+                            )}
+                          >
+                            Write question with AI
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      <MathLiveInput
+                        value={form.getValues('question')}
+                        onChange={(value) => {
+                          form.setValue('question', value); // Update the form state
+                        }}
+                        placeholder='Type your algebraic expression here...'
+                      />
+                    )}
                   </div>
                   {errors.question && (
                     <span className='text-sm text-red-500'>{errors.question.message}</span>
                   )}
                 </div>
-                <DisplayHtml htmlContent={form.getValues('question')} />
+                {/* <MathFormulaDisplay formula={form.getValues('question')} /> */}
+
+                {/* <DisplayHtml htmlContent={form.getValues('question')} /> */}
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Answer
                   </Label>
                   <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
-                    <QuillEditor
-                      value={form.getValues('answer')}
-                      onChange={(content) => form.setValue('answer', content)} // Set the value in the form
-                      placeholder='Type here...'
-                    />
-
-                    <div className='relative p-4 pt-2'>
-                      <Button
-                        type='button'
-                        onClick={() => handleProcessText('answer')}
-                        loading={processingTextAnswer}
-                        variant='outline'
-                        className={cn(
-                          'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
-                          'bg-gray-200',
-                          {
-                            'bg-primary': processingTextAnswer,
-                          },
-                        )}
-                      >
-                        Write answer with AI
-                      </Button>
-                    </div>
+                    {mode === 'simple' ? (
+                      <>
+                        <QuillEditor
+                          value={form.getValues('answer')}
+                          onChange={(content) => form.setValue('answer', content)}
+                          placeholder='Type here...'
+                        />
+                        <div className='relative p-4 pt-2'>
+                          <Button
+                            type='button'
+                            onClick={() => handleProcessText('answer')}
+                            loading={processingTextAnswer}
+                            variant='outline'
+                            className={cn(
+                              'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
+                              'bg-gray-200',
+                              {
+                                'bg-primary': processingTextAnswer,
+                              },
+                            )}
+                          >
+                            Write answer with AI
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      <MathLiveInput
+                        value={form.getValues('answer')}
+                        onChange={(value) => {
+                          form.setValue('answer', value); // Update the form state
+                        }}
+                        placeholder='Type your algebraic expression here...'
+                      />
+                    )}
                   </div>
                   {errors.answer && (
                     <span className='text-sm text-red-500'>{errors.answer.message}</span>
@@ -423,7 +485,11 @@ export const Question: FC = () => {
                 {questions.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
-                      <DisplayHtml htmlContent={item.question} />{' '}
+                      {item.type === 'simple' ? (
+                        <DisplayHtml htmlContent={item.question} />
+                      ) : (
+                        <MathFormulaDisplay formula={item.question} />
+                      )}
                     </TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
                       <div className='flex gap-2'>
