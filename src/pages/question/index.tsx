@@ -330,7 +330,7 @@ export const Question: FC = () => {
                     Select Mode
                   </Label>
                   <RadioGroup value={mode} onValueChange={(value) => handleModeChange(value)}>
-                    <div className='flex gap-x-3'>
+                    <div className='flex gap-x-3 py-3'>
                       <label htmlFor='simple'>
                         <div className='flex items-center space-x-2'>
                           <RadioGroupItem value='simple' id='simple' />
@@ -350,7 +350,7 @@ export const Question: FC = () => {
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
-                  <div className='relative w-full overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
+                  <div className='relative ring-neutral-200 ring-1 rounded-md focus-visible:outline-none focus-visible:ring-1 focus:border-blue-500'>
                     {mode === 'simple' ? (
                       <>
                         <QuillEditor
@@ -393,7 +393,7 @@ export const Question: FC = () => {
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Answer
                   </Label>
-                  <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
+                  <div className='relative ring-neutral-200 ring-1 rounded-md focus-visible:outline-none focus-visible:ring-1 focus:border-blue-500'>
                     {mode === 'simple' ? (
                       <>
                         <QuillEditor

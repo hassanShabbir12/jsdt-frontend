@@ -35,7 +35,7 @@ const MathLiveInput: React.FC<MathLiveInputProps> = ({ value, onChange }) => {
       ref={(el) => (mathFieldRef.current = el as unknown as MathfieldElement)}
       onInput={handleInput}
       onFocus={handleFocus}
-      style={{ width: '100%', border: '1px solid #ccc', borderRadius: '4px', padding: '8px' }}
+      style={{ width: '100%', borderRadius: '10px', outline: "none", padding: '8px' }}
     >
       {value}
     </math-field>
