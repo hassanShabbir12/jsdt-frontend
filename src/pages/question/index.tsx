@@ -104,379 +104,374 @@ export const Question: FC = () => {
                 Add New Question
               </Button>
             </DialogTrigger>
-            <DialogContent className='max-h-full max-w-full overflow-hidden border-0 bg-transparent !p-0'>
-              <div className='!container max-h-screen max-w-[96%] px-5 py-10'>
-                <div className='relative max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden rounded-xl bg-white px-6 py-10'>
-                  <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <DialogHeader>
-                      <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
-                        {isEditing ? 'Edit Question' : 'Add New Question'}
-                      </DialogTitle>
-                    </DialogHeader>
-                    <div className='grow-1 -mx-2.5 block flex-wrap sm:flex'>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          IEB/NSC
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='certificateType'
-                            control={control}
-                            render={({ field }) => (
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className='w-full'>
-                                  <SelectValue placeholder='Select certificate type' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Types</SelectLabel>
-                                    <SelectItem value='IEB'>IEB</SelectItem>
-                                    <SelectItem value='NSC'>NSC</SelectItem>
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            )}
-                          />
-                        </div>
-                        {errors.certificateType && (
-                          <span className='text-sm text-red-500'>
-                            {errors.certificateType.message}
-                          </span>
+            <DialogContent
+              className='!container max-h-[80%] max-w-[96%] overflow-y-auto overflow-x-hidden'
+              onPointerDownOutside={(e) => e.preventDefault()}
+            >
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <DialogHeader>
+                  <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
+                    {isEditing ? 'Edit Question' : 'Add New Question'}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className='grow-1 -mx-2.5 block flex-wrap sm:flex'>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      IEB/NSC
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='certificateType'
+                        control={control}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <SelectTrigger className='w-full'>
+                              <SelectValue placeholder='Select certificate type' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Types</SelectLabel>
+                                <SelectItem value='IEB'>IEB</SelectItem>
+                                <SelectItem value='NSC'>NSC</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
                         )}
-                      </div>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          Grade
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='grade'
-                            control={control}
-                            render={({ field }) => (
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className='w-full'>
-                                  <SelectValue placeholder='Select grade' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Grades</SelectLabel>
-                                    {grades.map((grade) => (
-                                      <SelectItem key={grade.id} value={grade.title}>
-                                        {grade.title}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            )}
-                          />
-                          {errors.grade && (
-                            <span className='text-sm text-red-500'>{errors.grade.message}</span>
-                          )}
-                        </div>
-                      </div>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          Assessment Type
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='assessmentType'
-                            control={control}
-                            render={({ field }) => (
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className='w-full'>
-                                  <SelectValue placeholder='Select assessment type' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Types</SelectLabel>
-                                    <SelectItem value='Formative'>Formative</SelectItem>
-                                    <SelectItem value='Summative'>Summative</SelectItem>
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            )}
-                          />
-                          {errors.assessmentType && (
-                            <span className='text-sm text-red-500'>
-                              {errors.assessmentType.message}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          Topic
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='topic'
-                            control={control}
-                            render={({ field }) => (
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className='w-full'>
-                                  <SelectValue placeholder='Select topic' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Topics</SelectLabel>
-                                    {topics.map((topic) => (
-                                      <SelectItem key={topic.id} value={topic.title}>
-                                        {topic.title}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            )}
-                          />
-                          {errors.topic && (
-                            <span className='text-sm text-red-500'>{errors.topic.message}</span>
-                          )}
-                        </div>
-                      </div>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          Subject
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='subject'
-                            control={control}
-                            render={({ field }) => (
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className='w-full'>
-                                  <SelectValue placeholder='Select subject' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Subjects</SelectLabel>
-                                    {subjects.map((subject) => (
-                                      <SelectItem key={subject.id} value={subject.title}>
-                                        {subject.title}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            )}
-                          />
-                          {errors.subject && (
-                            <span className='text-sm text-red-500'>{errors.subject.message}</span>
-                          )}
-                        </div>
-                      </div>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          Difficulty Level
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='difficultyLevel'
-                            control={control}
-                            render={({ field }) => (
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className='w-full'>
-                                  <SelectValue placeholder='Select difficulty level' />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectLabel>Difficulty</SelectLabel>
-                                    <SelectItem value='Easy'>Easy</SelectItem>
-                                    <SelectItem value='Intermediate'>Intermediate</SelectItem>
-                                    <SelectItem value='Difficult'>Difficult</SelectItem>
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            )}
-                          />
-                          {errors.difficultyLevel && (
-                            <span className='text-sm text-red-500'>
-                              {errors.difficultyLevel.message}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div className='mb-4 w-full px-2.5 sm:w-1/2'>
-                        <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                          Total Marks
-                        </Label>
-                        <div className='w-full'>
-                          <Controller
-                            name='totalMarks'
-                            control={control}
-                            render={({ field: { onChange, value } }) => (
-                              <Input
-                                min='0'
-                                type='number'
-                                value={value || ''}
-                                onChange={(e) => onChange(e.target.value)}
-                                placeholder='Enter total marks (e.g., 500, 1000)'
-                                className='h-12 rounded-lg border border-solid 
+                      />
+                    </div>
+                    {errors.certificateType && (
+                      <span className='text-sm text-red-500'>{errors.certificateType.message}</span>
+                    )}
+                  </div>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      Grade
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='grade'
+                        control={control}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <SelectTrigger className='w-full'>
+                              <SelectValue placeholder='Select grade' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Grades</SelectLabel>
+                                {grades.map((grade) => (
+                                  <SelectItem key={grade.id} value={grade.title}>
+                                    {grade.title}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.grade && (
+                        <span className='text-sm text-red-500'>{errors.grade.message}</span>
+                      )}
+                    </div>
+                  </div>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      Assessment Type
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='assessmentType'
+                        control={control}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <SelectTrigger className='w-full'>
+                              <SelectValue placeholder='Select assessment type' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Types</SelectLabel>
+                                <SelectItem value='Formative'>Formative</SelectItem>
+                                <SelectItem value='Summative'>Summative</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.assessmentType && (
+                        <span className='text-sm text-red-500'>
+                          {errors.assessmentType.message}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      Topic
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='topic'
+                        control={control}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <SelectTrigger className='w-full'>
+                              <SelectValue placeholder='Select topic' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Topics</SelectLabel>
+                                {topics.map((topic) => (
+                                  <SelectItem key={topic.id} value={topic.title}>
+                                    {topic.title}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.topic && (
+                        <span className='text-sm text-red-500'>{errors.topic.message}</span>
+                      )}
+                    </div>
+                  </div>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      Subject
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='subject'
+                        control={control}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <SelectTrigger className='w-full'>
+                              <SelectValue placeholder='Select subject' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Subjects</SelectLabel>
+                                {subjects.map((subject) => (
+                                  <SelectItem key={subject.id} value={subject.title}>
+                                    {subject.title}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.subject && (
+                        <span className='text-sm text-red-500'>{errors.subject.message}</span>
+                      )}
+                    </div>
+                  </div>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      Difficulty Level
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='difficultyLevel'
+                        control={control}
+                        render={({ field }) => (
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <SelectTrigger className='w-full'>
+                              <SelectValue placeholder='Select difficulty level' />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Difficulty</SelectLabel>
+                                <SelectItem value='Easy'>Easy</SelectItem>
+                                <SelectItem value='Intermediate'>Intermediate</SelectItem>
+                                <SelectItem value='Difficult'>Difficult</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      {errors.difficultyLevel && (
+                        <span className='text-sm text-red-500'>
+                          {errors.difficultyLevel.message}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className='mb-4 w-full px-2.5 sm:w-1/2'>
+                    <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                      Total Marks
+                    </Label>
+                    <div className='w-full'>
+                      <Controller
+                        name='totalMarks'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                          <Input
+                            min='0'
+                            type='number'
+                            value={value || ''}
+                            onChange={(e) => onChange(e.target.value)}
+                            placeholder='Enter total marks (e.g., 500, 1000)'
+                            className='h-12 rounded-lg border border-solid 
                         border-neutral-200 px-4 py-2 text-sm 
           text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm 
           placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 
           lg:px-3 [&::-webkit-inner-spin-button]:appearance-none 
           [&::-webkit-outer-spin-button]:appearance-none'
-                              />
-                            )}
-                          />
-                          {errors.totalMarks && (
-                            <span className='text-sm text-red-500'>
-                              {errors.totalMarks.message}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className='mb-4 w-full'>
-                      <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                        Select Mode
-                      </Label>
-                      <div className='flex space-x-4'>
-                        <label>
-                          <input
-                            type='radio'
-                            value='simple'
-                            checked={mode === 'simple'}
-                            onChange={() => setMode('simple')}
-                          />
-                          Simple
-                        </label>
-                        <label>
-                          <input
-                            type='radio'
-                            value='algebra'
-                            checked={mode === 'algebra'}
-                            onChange={() => setMode('algebra')}
-                          />
-                          Algebra
-                        </label>
-                      </div>
-                    </div>
-                    <div className='mb-4 w-full'>
-                      <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                        Question
-                      </Label>
-                      <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
-                        {mode === 'simple' ? (
-                          <>
-                            <QuillEditor
-                              value={form.getValues('question')}
-                              onChange={(content) => form.setValue('question', content)}
-                              placeholder='Type here...'
-                            />
-                            <div className='relative p-4 pt-2'>
-                              <Button
-                                type='button'
-                                onClick={() => handleProcessText('question')}
-                                loading={processingText}
-                                variant='outline'
-                                className={cn(
-                                  'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
-                                  'bg-gray-200',
-                                  {
-                                    'bg-primary': processingText,
-                                  },
-                                )}
-                              >
-                                Write question with AI
-                              </Button>
-                            </div>
-                          </>
-                        ) : (
-                          <MathLiveInput
-                            value={form.getValues('question')}
-                            onChange={(value) => {
-                              form.setValue('question', value); // Update the form state
-                            }}
-                            placeholder='Type your algebraic expression here...'
                           />
                         )}
-                      </div>
-                      {errors.question && (
-                        <span className='text-sm text-red-500'>{errors.question.message}</span>
+                      />
+                      {errors.totalMarks && (
+                        <span className='text-sm text-red-500'>{errors.totalMarks.message}</span>
                       )}
                     </div>
-                    {/* <MathFormulaDisplay formula={form.getValues('question')} /> */}
-
-                    {/* <DisplayHtml htmlContent={form.getValues('question')} /> */}
-                    <div className='w-full'>
-                      <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                        Answer
-                      </Label>
-                      <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
-                        {mode === 'simple' ? (
-                          <>
-                            <QuillEditor
-                              value={form.getValues('answer')}
-                              onChange={(content) => form.setValue('answer', content)}
-                              placeholder='Type here...'
-                            />
-                            <div className='relative p-4 pt-2'>
-                              <Button
-                                type='button'
-                                onClick={() => handleProcessText('answer')}
-                                loading={processingTextAnswer}
-                                variant='outline'
-                                className={cn(
-                                  'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
-                                  'bg-gray-200',
-                                  {
-                                    'bg-primary': processingTextAnswer,
-                                  },
-                                )}
-                              >
-                                Write answer with AI
-                              </Button>
-                            </div>
-                          </>
-                        ) : (
-                          <MathLiveInput
-                            value={form.getValues('answer')}
-                            onChange={(value) => {
-                              form.setValue('answer', value); // Update the form state
-                            }}
-                            placeholder='Type your algebraic expression here...'
-                          />
-                        )}
-                      </div>
-                      {errors.answer && (
-                        <span className='text-sm text-red-500'>{errors.answer.message}</span>
-                      )}
-                    </div>
-
-                    <DialogFooter>
-                      <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
-                        <div className='w-32 sm:w-40 md:w-64'>
+                  </div>
+                </div>
+                <div className='mb-4 w-full'>
+                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                    Select Mode
+                  </Label>
+                  <div className='flex space-x-4'>
+                    <label>
+                      <input
+                        type='radio'
+                        value='simple'
+                        checked={mode === 'simple'}
+                        onChange={() => setMode('simple')}
+                      />
+                      Simple
+                    </label>
+                    <label>
+                      <input
+                        type='radio'
+                        value='algebra'
+                        checked={mode === 'algebra'}
+                        onChange={() => setMode('algebra')}
+                      />
+                      Algebra
+                    </label>
+                  </div>
+                </div>
+                <div className='mb-4 w-full'>
+                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                    Question
+                  </Label>
+                  <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
+                    {mode === 'simple' ? (
+                      <>
+                        <QuillEditor
+                          value={form.getValues('question')}
+                          onChange={(content) => form.setValue('question', content)}
+                          placeholder='Type here...'
+                        />
+                        <div className='relative p-4 pt-2'>
                           <Button
                             type='button'
+                            onClick={() => handleProcessText('question')}
+                            loading={processingText}
                             variant='outline'
-                            className='h-12 w-full text-base font-semibold hover:!bg-primary hover:text-white'
-                            onClick={() => {
-                              setModalOpen(false);
-                              resetFormFields();
-                              setIsEditing(false);
-                            }}
+                            className={cn(
+                              'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                              'bg-gray-200',
+                              {
+                                'bg-primary': processingText,
+                              },
+                            )}
                           >
-                            Cancel
+                            Write question with AI
                           </Button>
                         </div>
-                        <div className='w-32 sm:w-40 md:w-64'>
-                          <Button
-                            type='submit'
-                            loading={loading}
-                            className='h-12 w-full text-base font-semibold'
-                          >
-                            {isEditing ? 'Update' : 'Save'}
-                          </Button>
-                        </div>
-                      </div>
-                    </DialogFooter>
-                  </form>
+                      </>
+                    ) : (
+                      <MathLiveInput
+                        value={form.getValues('question')}
+                        onChange={(value) => {
+                          form.setValue('question', value); // Update the form state
+                        }}
+                        placeholder='Type your algebraic expression here...'
+                      />
+                    )}
+                  </div>
+                  {errors.question && (
+                    <span className='text-sm text-red-500'>{errors.question.message}</span>
+                  )}
                 </div>
-              </div>
+                {/* <MathFormulaDisplay formula={form.getValues('question')} /> */}
+
+                {/* <DisplayHtml htmlContent={form.getValues('question')} /> */}
+                <div className='w-full'>
+                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                    Answer
+                  </Label>
+                  <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700 [&_>div]:border-0'>
+                    {mode === 'simple' ? (
+                      <>
+                        <QuillEditor
+                          value={form.getValues('answer')}
+                          onChange={(content) => form.setValue('answer', content)}
+                          placeholder='Type here...'
+                        />
+                        <div className='relative p-4 pt-2'>
+                          <Button
+                            type='button'
+                            onClick={() => handleProcessText('answer')}
+                            loading={processingTextAnswer}
+                            variant='outline'
+                            className={cn(
+                              'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
+                              'bg-gray-200',
+                              {
+                                'bg-primary': processingTextAnswer,
+                              },
+                            )}
+                          >
+                            Write answer with AI
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      <MathLiveInput
+                        value={form.getValues('answer')}
+                        onChange={(value) => {
+                          form.setValue('answer', value); // Update the form state
+                        }}
+                        placeholder='Type your algebraic expression here...'
+                      />
+                    )}
+                  </div>
+                  {errors.answer && (
+                    <span className='text-sm text-red-500'>{errors.answer.message}</span>
+                  )}
+                </div>
+
+                <DialogFooter>
+                  <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
+                    <div className='w-32 sm:w-40 md:w-64'>
+                      <Button
+                        type='button'
+                        variant='outline'
+                        className='h-12 w-full text-base font-semibold hover:!bg-primary hover:text-white'
+                        onClick={() => {
+                          setModalOpen(false);
+                          resetFormFields();
+                          setIsEditing(false);
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                    <div className='w-32 sm:w-40 md:w-64'>
+                      <Button
+                        type='submit'
+                        loading={loading}
+                        className='h-12 w-full text-base font-semibold'
+                      >
+                        {isEditing ? 'Update' : 'Save'}
+                      </Button>
+                    </div>
+                  </div>
+                </DialogFooter>
+              </form>
             </DialogContent>
           </Dialog>
         </div>
