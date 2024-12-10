@@ -18,6 +18,8 @@ import {
 
 export function useQuestionOperations(
   form: UseFormReturn<QuestionFormValues>,
+  mode: string,
+  setMode: (newMode: string) => void,
 ): UseQuestionOperationsReturn {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
@@ -80,7 +82,10 @@ export function useQuestionOperations(
     setLoading(true);
     try {
       if (isEditing && questionToDelete?.id) {
-        await apiClient.questions.questionsControllerUpdate(questionToDelete.id, questiondata);
+        await apiClient.questions.questionsControllerUpdate(questionToDelete.id, {
+          ...questiondata,
+          type: mode,
+        });
         setQuestions(
           questions.map((question) =>
             question.id === questionToDelete.id ? { ...question, ...questiondata } : question,
@@ -91,9 +96,10 @@ export function useQuestionOperations(
           description: 'Question updated successfully',
         });
       } else {
-        const response = (await apiClient.questions.questionsControllerCreate(
-          questiondata,
-        )) as unknown as AxiosResponse<QuestionResponse>;
+        const response = (await apiClient.questions.questionsControllerCreate({
+          ...questiondata,
+          type: mode,
+        })) as unknown as AxiosResponse<QuestionResponse>;
         const newquestion = Array.isArray(response.data.data)
           ? response.data.data
           : [response.data.data];
@@ -132,6 +138,7 @@ export function useQuestionOperations(
     setQuestionToDelete(question);
     setIsEditing(true);
     setModalOpen(true);
+    setMode(question.type);
   };
 
   useEffect(() => {

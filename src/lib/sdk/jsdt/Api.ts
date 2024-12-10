@@ -97,6 +97,7 @@ export interface CreateQuestionDto {
   topic: string;
   difficultyLevel: string;
   totalMarks: string;
+  type: string;
 }
 
 export interface UpdateQuestionDto {
@@ -109,6 +110,7 @@ export interface UpdateQuestionDto {
   topic?: string;
   difficultyLevel?: string;
   totalMarks?: string;
+  type?: string;
 }
 
 export interface GenerateDescriptionDto {
@@ -128,21 +130,21 @@ export interface CoverDataDto {
   /** URL of the image */
   imageURL?: string;
   /** nsc/ieb name */
-  nsc: string;
+  nsc?: string;
   /** Grade */
-  grade: string;
+  grade?: string;
   /** Subject name */
-  subject: string;
+  subject?: string;
   /** Time allocated */
-  topic: string;
+  topic?: string;
   /** Marks obtained */
-  totalMarks: number;
+  totalMarks?: number;
   /** Page obtained */
-  page: number;
+  page?: number;
   /** Date in the format DD/MM/YYYY */
-  date: string;
+  date?: string;
   /** Description obtained */
-  des: string;
+  des?: string;
 }
 
 export interface InstructionsDataDto {
@@ -152,9 +154,9 @@ export interface InstructionsDataDto {
 
 export interface IGeneratePdfDto {
   /** Cover data */
-  coverData: CoverDataDto;
-  /** Instructions data */
-  instructionsData: InstructionsDataDto;
+  coverData?: CoverDataDto;
+  /** Array of instructions data */
+  instructionsData: InstructionsDataDto[];
   /**
    * List of item IDs, at least one non-empty string required
    * @minItems 1
@@ -178,6 +180,7 @@ export enum CreateUserDtoRoleEnum {
 export enum GenerateDescriptionDtoTypeEnum {
   Question = 'question',
   Answer = 'answer',
+  Algebra = 'algebra',
 }
 
 export type QueryParamsType = Record<string | number, any>;

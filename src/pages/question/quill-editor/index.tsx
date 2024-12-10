@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 interface QuillEditorProps {
-  onChange: (content: string) => void; // Callback to handle content changes
+  onChange: (content: string) => void;
   placeholder?: string;
   value: string;
 }
