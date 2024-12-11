@@ -101,7 +101,7 @@ export const Subjects: FC = () => {
                       {...register('title')}
                       id='title'
                       className='h-10 rounded-lg border-neutral-200 px-4 text-base text-zinc-800 shadow-none placeholder:text-stone-300 lg:h-12 lg:px-3 lg:py-2'
-                      placeholder='Enter subject'
+                      placeholder='Enter Subject'
                       error={errors.title?.message}
                     />
                   </div>

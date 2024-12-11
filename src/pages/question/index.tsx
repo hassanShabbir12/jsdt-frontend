@@ -124,7 +124,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select certificate type' />
+                              <SelectValue placeholder='Select Certificate Type' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -152,7 +152,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select grade' />
+                              <SelectValue placeholder='Select Grade' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -183,7 +183,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select assessment type' />
+                              <SelectValue placeholder='Select Assessment Type' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -213,7 +213,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select topic' />
+                              <SelectValue placeholder='Select Topic' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -244,7 +244,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select subject' />
+                              <SelectValue placeholder='Select Subject' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -275,7 +275,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select difficulty level' />
+                              <SelectValue placeholder='Select Difficulty Level' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -309,7 +309,7 @@ export const Question: FC = () => {
                             type='number'
                             value={value || ''}
                             onChange={(e) => onChange(e.target.value)}
-                            placeholder='Enter total marks (e.g., 500, 1000)'
+                            placeholder='Enter Total Marks (e.g., 500, 1000)'
                             className='h-12 rounded-lg border border-solid 
                         border-neutral-200 px-4 py-2 text-sm 
           text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm 
@@ -330,7 +330,7 @@ export const Question: FC = () => {
                     Select Mode
                   </Label>
                   <RadioGroup value={mode} onValueChange={(value) => handleModeChange(value)}>
-                    <div className='flex gap-x-3 py-3'>
+                    <div className='flex gap-x-3 pb-7 pt-3'>
                       <label htmlFor='simple'>
                         <div className='flex items-center space-x-2'>
                           <RadioGroupItem value='simple' id='simple' />
@@ -346,7 +346,7 @@ export const Question: FC = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className='mb-4 w-full'>
+                <div className='mb-6 w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
@@ -432,7 +432,6 @@ export const Question: FC = () => {
                     <span className='text-sm text-red-500'>{errors.answer.message}</span>
                   )}
                 </div>
-
                 <DialogFooter>
                   <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
                     <div className='w-32 sm:w-40 md:w-64'>
