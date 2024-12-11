@@ -46,7 +46,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ onChange, placeholder, value 
   ];
 
   return (
-    <div className='relative overflow-hidden rounded-md border border-input focus-within:border-blue-700'>
+    <div className='relative overflow-hidden rounded-md border outline-0 focus-within:border focus-within:border-blue-700 focus-visible:outline-none'>
       <ReactQuill
         onChange={handleChange}
         placeholder={placeholder}

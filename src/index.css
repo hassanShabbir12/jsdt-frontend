@@ -95,6 +95,20 @@ input[type='number'] {
   content: counters(item, '.') ':';
   counter-increment: item;
 }
+
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 5px;
+}
+
+.ql-toolbar.ql-snow {
+  border: 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ql-container.ql-snow {
+  border: 0;
+}
+
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
