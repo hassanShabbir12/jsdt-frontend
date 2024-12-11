@@ -98,6 +98,7 @@ export interface CreateQuestionDto {
   difficultyLevel: string;
   totalMarks: string;
   type: string;
+  image: string;
 }
 
 export interface UpdateQuestionDto {
@@ -111,6 +112,7 @@ export interface UpdateQuestionDto {
   difficultyLevel?: string;
   totalMarks?: string;
   type?: string;
+  image?: string;
 }
 
 export interface GenerateDescriptionDto {

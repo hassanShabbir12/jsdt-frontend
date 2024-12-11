@@ -400,6 +400,7 @@ export const LearnerTeacher: FC = () => {
                               <MathFormulaDisplay formula={item.question} />
                             )}
                           </p>
+                          {item.image && <img src={item.image} alt='Question Image' />}
                         </div>
                       ))}
                     </div>
@@ -448,6 +449,7 @@ export const LearnerTeacher: FC = () => {
                                 <MathFormulaDisplay formula={item.question} />
                               )}
                             </p>
+                            {item.image && <img src={item.image} alt='Question Image' />}
                           </div>
                           <div className='mb-4 md:mb-7'>
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
@@ -627,6 +629,7 @@ export const LearnerTeacher: FC = () => {
                           <MathFormulaDisplay formula={item.question} />
                         )}
                       </p>
+                      {item.image && <img src={item.image} alt='Question Image' />}
                     </div>
                   </CarouselItem>
                 ))}
@@ -696,6 +699,7 @@ export const LearnerTeacher: FC = () => {
                   <MathFormulaDisplay formula={item.question} />
                 )}
               </p>
+              {item.image && <img src={item.image} alt='Question Image' />}
             </div>
           ))}
         </div>

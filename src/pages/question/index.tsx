@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, Trash2, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -38,6 +38,7 @@ import { useQuestionForm } from '@/hooks/admin/question/useQuestionForm';
 import { useQuestionOperations } from '@/hooks/admin/question/useQuestionOperations';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
+import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/utils';
 
 import DisplayHtml from './dompurify';
@@ -55,6 +56,8 @@ export const Question: FC = () => {
     mode,
     handleModeChange,
     setMode,
+    tempImage,
+    setTempImage,
   } = useQuestionForm();
 
   const {
@@ -71,7 +74,7 @@ export const Question: FC = () => {
     deleteQuestion,
     onSubmit,
     setIsEditing,
-  } = useQuestionOperations(form, mode, setMode);
+  } = useQuestionOperations(form, mode, setMode, setTempImage);
 
   const {
     control,
@@ -94,6 +97,7 @@ export const Question: FC = () => {
               if (!open) {
                 resetFormFields();
                 setIsEditing(false);
+                setTempImage('');
               }
             }}
           >
@@ -325,6 +329,59 @@ export const Question: FC = () => {
                     </div>
                   </div>
                 </div>
+                <div>
+                  {tempImage ? (
+                    <div className='relative'>
+                      <img
+                        src={tempImage}
+                        alt='Uploaded'
+                        className='block h-28 w-28 rounded-full object-cover'
+                      />
+                      <span
+                        className='absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-neutral-600 bg-gray-200'
+                        onClick={() => {
+                          setTempImage('');
+                          form.setValue('image', '');
+                        }}
+                      >
+                        <X className='h-3 w-3 text-neutral-600' />
+                      </span>
+                    </div>
+                  ) : (
+                    <img
+                      src={assetUrl('assets/img/home/upload-logo.png')}
+                      alt='Upload Placeholder'
+                      className='block h-auto'
+                    />
+                  )}
+                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
+                    Image
+                  </Label>
+                  <Controller
+                    name='image'
+                    control={control}
+                    render={({}) => (
+                      <Input
+                        type='file'
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+
+                          if (file) {
+                            const reader = new FileReader();
+
+                            reader.onloadend = (): void => {
+                              const base64Image = reader.result as string;
+
+                              setTempImage(base64Image);
+                              form.setValue('image', base64Image);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    )}
+                  />
+                </div>
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Select Mode
@@ -444,6 +501,7 @@ export const Question: FC = () => {
                           setModalOpen(false);
                           resetFormFields();
                           setIsEditing(false);
+                          setTempImage('');
                         }}
                       >
                         Cancel

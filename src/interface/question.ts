@@ -27,6 +27,7 @@ export const QuestionSchema = z.object({
     .refine((val) => Number(val) <= 1000, {
       message: 'Total marks should not be more than 1000',
     }),
+  image: z.string().optional(),
 });
 
 export type QuestionFormValues = z.infer<typeof QuestionSchema>;
