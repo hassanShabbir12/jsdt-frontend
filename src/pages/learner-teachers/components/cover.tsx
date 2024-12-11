@@ -114,8 +114,8 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
           </div>
         </div>
         <div className='-mx-4 flex flex-wrap'>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='nsc' className='mb-0.5 block'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
+            <Label htmlFor='nsc' className='mb-1 block'>
               IEB/NSC
             </Label>
             <div className='w-full'>
@@ -147,36 +147,38 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='grade'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
             >
               Grade
             </Label>
-            <div className='h-12 w-full'>
+            <div className='w-full'>
               <Controller
                 name='grade'
                 control={form.control}
                 rules={{ required: 'Grade is required' }}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue placeholder='Select' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel className='px-2 py-1.5 text-sm font-semibold text-stone-300'>
-                          Grades
-                        </SelectLabel>
-                        {grades.map((grade) => (
-                          <SelectItem key={grade.id} value={grade.title}>
-                            {grade.title}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <div className='h-12'>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder='Select' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel className='px-2 py-1.5 text-sm font-semibold text-stone-300'>
+                            Grades
+                          </SelectLabel>
+                          {grades.map((grade) => (
+                            <SelectItem key={grade.id} value={grade.title}>
+                              {grade.title}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 )}
               />
               {form.formState.errors.grade && (
@@ -184,7 +186,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='subject'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
@@ -223,14 +225,14 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='topic'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
             >
               Topic
             </Label>
-            <div className='h-12 w-full'>
+            <div className='w-full'>
               <Controller
                 name='topic'
                 control={form.control}
@@ -260,8 +262,8 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-            <Label htmlFor='totalMarks' className='mb-0.5 block'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
+            <Label htmlFor='totalMarks' className='mb-1 block'>
               Total Marks
             </Label>
             <Controller
@@ -284,14 +286,14 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               </span>
             )}
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
             <label
               htmlFor='date'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
             >
               Date
             </label>
-            <div className='h-12 w-full'>
+            <div className='w-full'>
               <Controller
                 name='date'
                 control={form.control}
@@ -336,7 +338,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               )}
             </div>
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='des'
               className='mb-1 block font-normal leading-none text-black lg:text-base'
@@ -359,7 +361,7 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
               <span className='text-sm text-red-500'>{form.formState.errors.des.message}</span>
             )}
           </div>
-          <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
+          <div className='mb-5 w-full px-4 md:mb-6 md:w-1/2'>
             <Label
               htmlFor='page'
               className='mb-1 block font-normal leading-none text-black lg:text-base'

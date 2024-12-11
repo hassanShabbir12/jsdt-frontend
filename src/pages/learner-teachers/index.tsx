@@ -102,7 +102,7 @@ export const LearnerTeacher: FC = () => {
           <div className='relative inline-block'>
             <DropdownMenu>
               <DropdownMenuTrigger className='inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
-                <p className='-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
+                <p className='md:-mt-1 -mt-0.5'>{user?.email.charAt(0).toUpperCase()}</p>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <div
@@ -357,7 +357,7 @@ export const LearnerTeacher: FC = () => {
         <div className='relative mb-10 min-h-72 overflow-hidden rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
-              <div className='mb-2 px-2 md:mb-0'>
+              <div className='mb-2 px-2 lg:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -373,7 +373,7 @@ export const LearnerTeacher: FC = () => {
                         <div className='mb-6 text-left'>
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
-                        <div className='ml-2 h-6 w-6 cursor-pointer pt-1 sm:ml-3'>
+                        <div className='ml-2 h-4 w-4 md:h-6 md:w-6 cursor-pointer pt-1 sm:ml-3'>
                           {loading ? (
                             <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
                           ) : (
@@ -413,7 +413,7 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='mb-2 px-2 md:mb-0'>
+              <div className='mb-2 px-2 lg:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -427,7 +427,7 @@ export const LearnerTeacher: FC = () => {
                     <DialogHeader>
                       <div className='mb-8 flex pt-8 sm:items-center'>
                         <DialogTitle>Answer of the following questions</DialogTitle>
-                        <div className='ml-2 h-6 w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 h-4 w-4 md:h-6 md:w-6 cursor-pointer sm:ml-3'>
                           {loading ? (
                             <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
                           ) : (
@@ -435,7 +435,7 @@ export const LearnerTeacher: FC = () => {
                               onClick={() => downloadQuestions(questions, 'answer')}
                               src={assetUrl('assets/img/home/attach-download.svg')}
                               alt='Generate-2'
-                              className='-mb-11 block h-auto'
+                              className='md:-mb-11 block h-auto'
                             />
                           )}
                         </div>
@@ -482,7 +482,7 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
               {!isLearner && (
-                <div className='mb-2 px-2 md:mb-0'>
+                <div className='mb-2 px-2 lg:mb-0'>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
@@ -574,7 +574,7 @@ export const LearnerTeacher: FC = () => {
                   </Dialog>
                 </div>
               )}
-              <div className='mb-2 px-2 md:mb-0'>
+              <div className='mb-2 px-2 lg:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -590,7 +590,7 @@ export const LearnerTeacher: FC = () => {
                 </Dialog>
               </div>
               {!isLearner && (
-                <div className='mb-2 px-2 md:mb-0'>
+                <div className='mb-2 px-2 lg:mb-0'>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
