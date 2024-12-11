@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useLocalStorage } from '@/hooks/client/useLocalStorage';
+import { toast } from '@/hooks/use-toast';
 import { CoverFormData, CoverSchema, UseCoverForm } from '@/interface/cover';
 
 export const useCoverForm = (): UseCoverForm => {
@@ -30,14 +31,18 @@ export const useCoverForm = (): UseCoverForm => {
   });
 
   const saveToLocalStorage = (): void => {
-    const formData = form.getValues();
-
-    setStoredData(formData);
+    setOpen(true);
   };
 
   const onSubmit: SubmitHandler<CoverFormData> = (data): void => {
-    setOpen(true);
+    const formData = form.getValues();
+
+    setStoredData(formData);
     setValue(data);
+    toast({
+      title: 'Cover page',
+      description: 'Cover page details saved successfully',
+    });
   };
 
   return {
