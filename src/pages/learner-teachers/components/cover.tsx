@@ -390,13 +390,17 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
             )}
           </div>
         </div>
-        <div className='mx-auto mb-8 flex max-w-80 justify-center'>
+        <div className='mx-auto mb-8 flex max-w-80 justify-center gap-x-2'>
           <Button
             className='h-12 w-52 text-base font-semibold md:w-80'
             onClick={() => saveToLocalStorage()}
-            type='submit'
+            type='button'
+            disabled={Object.keys(form.formState.errors).length > 0 || storedData.nsc === ''}
           >
             Preview
+          </Button>
+          <Button className='h-12 w-52 text-base font-semibold md:w-80' type='submit'>
+            Save
           </Button>
           <Dialog open={isOpen} onOpenChange={() => setOpen(false)}>
             <DialogContent className='!container block max-h-[92vh] max-w-[80%] overflow-y-auto overflow-x-hidden lg:px-8'>
