@@ -390,17 +390,23 @@ export const LearnerTeacher: FC = () => {
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
-                          <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Question No. {index + 1}
-                          </h2>
-                          <p className='m-0'>
-                            {item.type === 'simple' ? (
-                              <DisplayHtml htmlContent={item.question} />
-                            ) : (
-                              <MathFormulaDisplay formula={item.question} />
-                            )}
-                          </p>
-                          {item.image && <img src={item.image} alt='Question Image' />}
+                          <div className='flex gap-x-5'>
+                            <div className='w-20 h-10'>
+                              {item.image && <img src={item.image} alt='Question Image' />}
+                            </div>
+                            <div>
+                              <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                                Question No. {index + 1}
+                              </h2>
+                              <p className='m-0'>
+                                {item.type === 'simple' ? (
+                                  <DisplayHtml htmlContent={item.question} />
+                                ) : (
+                                  <MathFormulaDisplay formula={item.question} />
+                                )}
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -439,17 +445,23 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
-                            <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                              Question No. {index + 1}
-                            </h2>
-                            <p className='m-0'>
-                              {item.type === 'simple' ? (
-                                <DisplayHtml htmlContent={item.question} />
-                              ) : (
-                                <MathFormulaDisplay formula={item.question} />
-                              )}
-                            </p>
-                            {item.image && <img src={item.image} alt='Question Image' />}
+                            <div className='flex gap-x-5'>
+                              <div className='w-20 h-10'>
+                                {item.image && <img src={item.image} alt='Question Image' />}
+                              </div>
+                              <div>
+                                <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                                  Question No. {index + 1}
+                                </h2>
+                                <p className='m-0'>
+                                  {item.type === 'simple' ? (
+                                    <DisplayHtml htmlContent={item.question} />
+                                  ) : (
+                                    <MathFormulaDisplay formula={item.question} />
+                                  )}
+                                </p>
+                              </div>
+                            </div>
                           </div>
                           <div className='mb-4 md:mb-7'>
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
@@ -619,17 +631,23 @@ export const LearnerTeacher: FC = () => {
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                      <h3 className='mb-5 text-2xl font-semibold leading-7'>
-                        Question No. {index + 1}
-                      </h3>
-                      <p className='line-clamp-3'>
-                        {item.type === 'simple' ? (
-                          <DisplayHtml htmlContent={item.question} />
-                        ) : (
-                          <MathFormulaDisplay formula={item.question} />
-                        )}
-                      </p>
-                      {item.image && <img src={item.image} alt='Question Image' />}
+                      <div className='flex gap-x-5'>
+                        <div className='w-20 h-10'>
+                          {item.image && <img className='' src={item.image} alt='Question Image' />}
+                        </div>
+                        <div className='w-full'>
+                          <h3 className='mb-5 text-2xl font-semibold leading-7'>
+                            Question No. {index + 1}
+                          </h3>
+                          <p className='line-clamp-3'>
+                            {item.type === 'simple' ? (
+                              <DisplayHtml htmlContent={item.question} />
+                            ) : (
+                              <MathFormulaDisplay formula={item.question} />
+                            )}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}
@@ -650,56 +668,62 @@ export const LearnerTeacher: FC = () => {
               key={item.id}
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
-              <div className='mb-5 flex justify-between'>
-                <span className='inline-block text-2xl font-semibold'>
-                  Question No. {index + 1}
-                </span>
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                  <DialogTrigger asChild>
-                    <i
-                      onClick={() => setIsOpen(true)}
-                      className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'
-                    >
-                      <Trash2 />
-                    </i>
-                  </DialogTrigger>
-                  <DialogContent className='max-w-[620px]'>
-                    <DialogHeader>
-                      <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
-                        Do you want to delete that question?
-                      </DialogTitle>
-                    </DialogHeader>
-                    <DialogFooter>
-                      <div className='w-1/2'>
-                        <Button
-                          variant='outline'
-                          onClick={() => setIsOpen(false)}
-                          className='h-12 w-full text-base font-semibold'
+              <div className='flex gap-x-5'>
+                <div className='w-20 h-10'>
+                  {item.image && <img src={item.image} alt='Question Image' />}
+                </div>
+                <div className='w-full'>
+                  <div className='mb-5 w-full flex justify-between'>
+                    <span className='inline-block text-2xl font-semibold'>
+                      Question No. {index + 1}
+                    </span>
+                    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                      <DialogTrigger asChild>
+                        <i
+                          onClick={() => setIsOpen(true)}
+                          className='inline-block cursor-pointer transition-all duration-300 hover:text-primary'
                         >
-                          Cancel
-                        </Button>
-                      </div>
-                      <div
-                        onClick={() => {
-                          handleDeleteQuestion(item.id);
-                          setIsOpen(false);
-                        }}
-                        className='w-1/2'
-                      >
-                        <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
-                      </div>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+                          <Trash2 />
+                        </i>
+                      </DialogTrigger>
+                      <DialogContent className='max-w-[620px]'>
+                        <DialogHeader>
+                          <DialogTitle className='mb-6 pt-6 text-center text-lg sm:pt-0 md:text-xl lg:text-2xl'>
+                            Do you want to delete that question?
+                          </DialogTitle>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <div className='w-1/2'>
+                            <Button
+                              variant='outline'
+                              onClick={() => setIsOpen(false)}
+                              className='h-12 w-full text-base font-semibold'
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                          <div
+                            onClick={() => {
+                              handleDeleteQuestion(item.id);
+                              setIsOpen(false);
+                            }}
+                            className='w-1/2'
+                          >
+                            <Button className='h-12 w-full text-base font-semibold'>Yes</Button>
+                          </div>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                  <p className='mb-10 mt-6 block text-black'>
+                    {item.type === 'simple' ? (
+                      <DisplayHtml htmlContent={item.question} />
+                    ) : (
+                      <MathFormulaDisplay formula={item.question} />
+                    )}
+                  </p>
+                </div>
               </div>
-              <p className='mb-10 mt-6 block text-black'>
-                {item.type === 'simple' ? (
-                  <DisplayHtml htmlContent={item.question} />
-                ) : (
-                  <MathFormulaDisplay formula={item.question} />
-                )}
-              </p>
-              {item.image && <img src={item.image} alt='Question Image' />}
             </div>
           ))}
         </div>

@@ -54,10 +54,12 @@ export const Question: FC = () => {
     resetFormFields,
     processingTextAnswer,
     mode,
+    handleImageUpload,
     handleModeChange,
     setMode,
     tempImage,
     setTempImage,
+    fileInputRef,
   } = useQuestionForm();
 
   const {
@@ -128,7 +130,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select certificate type' />
+                              <SelectValue placeholder='Select Certificate Type' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -156,7 +158,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select grade' />
+                              <SelectValue placeholder='Select Grade' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -187,7 +189,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select assessment type' />
+                              <SelectValue placeholder='Select Assessment Type' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -217,7 +219,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select topic' />
+                              <SelectValue placeholder='Select Topic' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -248,7 +250,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select subject' />
+                              <SelectValue placeholder='Select Subject' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -279,7 +281,7 @@ export const Question: FC = () => {
                         render={({ field }) => (
                           <Select onValueChange={field.onChange} value={field.value}>
                             <SelectTrigger className='w-full'>
-                              <SelectValue placeholder='Select difficulty level' />
+                              <SelectValue placeholder='Select Difficulty Level' />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -313,7 +315,7 @@ export const Question: FC = () => {
                             type='number'
                             value={value || ''}
                             onChange={(e) => onChange(e.target.value)}
-                            placeholder='Enter total marks (e.g., 500, 1000)'
+                            placeholder='Enter Total Marks (e.g., 500, 1000)'
                             className='h-12 rounded-lg border border-solid 
                         border-neutral-200 px-4 py-2 text-sm 
           text-zinc-800 shadow-none [appearance:textfield] placeholder:text-sm 
@@ -329,7 +331,7 @@ export const Question: FC = () => {
                     </div>
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   {tempImage ? (
                     <div className='relative'>
                       <img
@@ -360,7 +362,7 @@ export const Question: FC = () => {
                   <Controller
                     name='image'
                     control={control}
-                    render={({}) => (
+                    render={({ }) => (
                       <Input
                         type='file'
                         onChange={(event) => {
@@ -381,13 +383,78 @@ export const Question: FC = () => {
                       />
                     )}
                   />
+                </div> */}
+                <div className=''>
+                  {tempImage ? (
+                    <div className="p-5 h-40 border border-neutral-200 rounded-lg flex justify-center">
+                      <div className='relative'>
+                        <img
+                          src={tempImage}
+                          alt="Uploaded"
+                          className="block h-28 w-28 rounded-full object-cover cursor-pointer"
+                          onClick={() => fileInputRef.current?.click()}
+                        />
+                        <span
+                          className="absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-red-600 bg-red-200"
+                          onClick={() => {
+                            setTempImage('');
+                            form.setValue('image', '');
+                          }}
+                        >
+                          <X className='h-3.5 text-red-600 w-3.5' />
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className='p-5 h-40 items-center border border-neutral-200 rounded-lg flex justify-center'>
+                      <div >
+                        <img
+                          src={assetUrl('assets/img/home/upload-logo.png')}
+                          alt='Upload Placeholder'
+                          className='block h-auto'
+                          onClick={() => fileInputRef.current?.click()}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  <div className='flex w-full justify-center py-3 text-sm font-semibold md:mb-5'>
+                    Drop your image here or
+                    <label className='ml-1 cursor-pointer border-b text-blue-500 underline transition-all hover:text-blue-600'>
+                      browse
+                      <input
+                        type='file'
+                        accept='image/*'
+                        className='hidden'
+                        ref={fileInputRef}
+                        onChange={handleImageUpload}
+                      />
+                    </label>
+                  </div>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    className="hidden"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          const base64Image = reader.result as string;
+                          setTempImage(base64Image);
+                          form.setValue('image', base64Image);
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                  />
                 </div>
                 <div className='w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Select Mode
                   </Label>
                   <RadioGroup value={mode} onValueChange={(value) => handleModeChange(value)}>
-                    <div className='flex gap-x-3 py-3'>
+                    <div className='flex gap-x-3 pb-7 pt-3'>
                       <label htmlFor='simple'>
                         <div className='flex items-center space-x-2'>
                           <RadioGroupItem value='simple' id='simple' />
@@ -403,7 +470,7 @@ export const Question: FC = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className='mb-4 w-full'>
+                <div className='mb-6 w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
                   </Label>
@@ -489,7 +556,6 @@ export const Question: FC = () => {
                     <span className='text-sm text-red-500'>{errors.answer.message}</span>
                   )}
                 </div>
-
                 <DialogFooter>
                   <div className='mx-auto flex max-w-xl gap-x-4 pt-5'>
                     <div className='w-32 sm:w-40 md:w-64'>
@@ -528,8 +594,10 @@ export const Question: FC = () => {
               <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
               <TableHeader>
                 <TableRow>
-                  <TableHead className='w-[86%]'>Questions</TableHead>
-                  <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
+                  <TableHead className='w-[80%]'>Questions</TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>Image</TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>Marks</TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -541,6 +609,12 @@ export const Question: FC = () => {
                       ) : (
                         <MathFormulaDisplay formula={item.question} />
                       )}
+                    </TableCell>
+                    <TableCell className='border-l border-solid border-zinc-300'>
+                      {item?.image && <img className='w-8 h-8' src={item?.image} />}
+                    </TableCell>
+                    <TableCell className='font-base text-zinc-800 border-l border-solid border-zinc-300'>
+                      {item?.totalMarks}
                     </TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
                       <div className='flex gap-2'>
