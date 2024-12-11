@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Edit, Trash2, X } from 'lucide-react';
