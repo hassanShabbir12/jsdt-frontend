@@ -14,6 +14,7 @@ interface UseInstructionsReturn {
   setNewInstruction: (value: string) => void;
   handleDelete: (index: number) => void;
   handleUpdate: (index: number, updatedTitle: string) => void;
+  editIndex: number | null;
 }
 
 export const useInstructions = (): UseInstructionsReturn => {
@@ -83,5 +84,6 @@ export const useInstructions = (): UseInstructionsReturn => {
     setNewInstruction,
     handleDelete,
     handleUpdate,
+    editIndex,
   };
 };
