@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { Edit, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -125,7 +126,7 @@ export const Grades: FC = () => {
                       className='h-12 w-full text-base font-semibold'
                       type='submit'
                     >
-                      Save
+                      {selectedGrade ? 'Update' : 'Save'}
                     </Button>
                   </div>
                 </DialogFooter>

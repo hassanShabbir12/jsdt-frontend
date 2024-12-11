@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Edit, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ export const InstructionsList: React.FC = () => {
     setNewInstruction,
     handleDelete,
     handleUpdate,
+    editIndex,
   } = useInstructions();
 
   return (
@@ -61,15 +63,13 @@ export const InstructionsList: React.FC = () => {
         </div>
         <div className='py-14'>
           <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
-            <DialogTrigger
-              className='mx-auto w-60 sm:w-auto flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
-            >
+            <DialogTrigger className='mx-auto flex h-9 w-60 items-center justify-center whitespace-nowrap rounded-md bg-primary px-20 py-6 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 sm:w-auto'>
               Add More Instructions
             </DialogTrigger>
             <DialogContent className='max-w-[680px] !rounded-3xl'>
               <DialogHeader>
                 <DialogTitle className='mb-2 text-center text-xl font-semibold leading-7 text-zinc-800 sm:text-2xl'>
-                  Add New Instruction
+                  {editIndex !== null ? 'Edit Instruction' : 'Add New Instruction'}
                 </DialogTitle>
                 <DialogDescription>
                   <form>
@@ -83,7 +83,7 @@ export const InstructionsList: React.FC = () => {
                           handleSave();
                         }
                       }}
-                      className='mb-4 block h-48 w-full resize-none rounded-md border-input px-4 py-4 text-gray-900 shadow-sm ring-2 ring-gray-300 placeholder:text-gray-400 outline-none focus:ring-blue-500 sm:text-sm sm:leading-6'
+                      className='mb-4 block h-48 w-full resize-none rounded-md border-input px-4 py-4 text-gray-900 shadow-sm outline-none ring-2 ring-gray-300 placeholder:text-gray-400 focus:ring-blue-500 sm:text-sm sm:leading-6'
                     ></textarea>
                   </form>
                   <div className='flex gap-4'>
@@ -97,7 +97,7 @@ export const InstructionsList: React.FC = () => {
                       onClick={handleSave}
                       className='flex w-1/2 border border-primary px-10 py-6 text-base font-semibold'
                     >
-                      Save
+                      {editIndex !== null ? 'Update' : 'Save'}
                     </Button>
                   </div>
                 </DialogDescription>
@@ -109,5 +109,3 @@ export const InstructionsList: React.FC = () => {
     </div>
   );
 };
-
-
