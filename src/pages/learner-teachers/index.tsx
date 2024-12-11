@@ -373,7 +373,7 @@ export const LearnerTeacher: FC = () => {
                         <div className='mb-6 text-left'>
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
-                        <div className='ml-2 h-4 w-4 md:h-6 md:w-6 cursor-pointer pt-1 sm:ml-3'>
+                        <div className='ml-2 h-4 w-4 md:h-6 md:w-6 cursor-pointer sm:pt-1 sm:ml-3'>
                           {loading ? (
                             <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
                           ) : (
@@ -381,7 +381,7 @@ export const LearnerTeacher: FC = () => {
                               onClick={() => downloadQuestions(questions, 'question')}
                               src={assetUrl('assets/img/home/attach-download.svg')}
                               alt='Generate-2'
-                              className='-mb-11 block h-auto'
+                              className='sm:-mb-11 block h-auto'
                             />
                           )}
                         </div>

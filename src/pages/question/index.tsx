@@ -611,7 +611,7 @@ export const Question: FC = () => {
                       )}
                     </TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
-                      {item?.image && <img className='w-8 h-8' src={item?.image} />}
+                      {item?.image && <img className='w-8 h-8 rounded-full' src={item?.image} />}
                     </TableCell>
                     <TableCell className='font-base text-zinc-800 border-l border-solid border-zinc-300'>
                       {item?.totalMarks}
