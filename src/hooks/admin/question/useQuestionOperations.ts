@@ -16,10 +16,15 @@ import {
   UseQuestionOperationsReturn,
 } from '@/interface/question';
 
+interface IUploadedFileResponse {
+  publicUrl: string;
+}
+
 export function useQuestionOperations(
   form: UseFormReturn<QuestionFormValues>,
   mode: string,
   setMode: (newMode: string) => void,
+  setTempImage: (newImage: string) => void,
 ): UseQuestionOperationsReturn {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
@@ -78,12 +83,48 @@ export function useQuestionOperations(
     }
   };
 
+  const processImage = async (image: string): Promise<string> => {
+    // Check if the image string starts with 'https'
+    if (image.startsWith('https')) {
+      return image; // Return the image URL directly if it's already a valid URL
+    }
+
+    const [, base64Data] = image.split(',');
+    const byteCharacters = atob(base64Data);
+    const byteArray = new Uint8Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteArray[i] = byteCharacters.charCodeAt(i);
+    }
+
+    // Create a Blob from the byte array
+    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+    // Create FormData and append the Blob
+    const formData: FormData = new FormData();
+
+    formData.append('file', blob, 'image.jpg');
+
+    // Upload the image and get the response
+    const imageResponse = (await apiClient.upload.uploadControllerUploadMedia({
+      file: formData.get('file') as File,
+    })) as unknown as AxiosResponse<ApiResponse<IUploadedFileResponse>>;
+
+    return imageResponse?.data?.data?.publicUrl; // Return the uploaded image URL
+  };
+
   const onSubmit = async (questiondata: QuestionFormValues): Promise<void> => {
     setLoading(true);
+    let convertImage = '';
+
     try {
+      if (form.getValues('image') !== 'null' && form.getValues('image')) {
+        convertImage = await processImage(form.getValues('image') as string);
+      }
       if (isEditing && questionToDelete?.id) {
         await apiClient.questions.questionsControllerUpdate(questionToDelete.id, {
           ...questiondata,
+          image: convertImage,
           type: mode,
         });
         setQuestions(
@@ -98,6 +139,7 @@ export function useQuestionOperations(
       } else {
         const response = (await apiClient.questions.questionsControllerCreate({
           ...questiondata,
+          image: convertImage,
           type: mode,
         })) as unknown as AxiosResponse<QuestionResponse>;
         const newquestion = Array.isArray(response.data.data)
@@ -139,6 +181,7 @@ export function useQuestionOperations(
     setIsEditing(true);
     setModalOpen(true);
     setMode(question.type);
+    setTempImage(question.image);
   };
 
   useEffect(() => {

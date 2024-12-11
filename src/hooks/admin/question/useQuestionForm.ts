@@ -29,12 +29,15 @@ interface UseQuestionFormReturn {
   mode: string;
   handleModeChange: (newMode: string) => void;
   setMode: (newMode: string) => void;
+  tempImage: string;
+  setTempImage: (image: string) => void;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
   const [processingText, setProcessingText] = useState(false);
   const [processingTextAnswer, setProcessingTextAnswer] = useState(false);
   const [mode, setMode] = useState<string>('simple');
+  const [tempImage, setTempImage] = useState<string>('');
 
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -51,6 +54,7 @@ export function useQuestionForm(): UseQuestionFormReturn {
       topic: '',
       difficultyLevel: '',
       totalMarks: '',
+      image: '',
     },
   });
 
@@ -112,6 +116,7 @@ export function useQuestionForm(): UseQuestionFormReturn {
       topic: '',
       difficultyLevel: '',
       totalMarks: '',
+      image: '',
     });
   };
 
@@ -130,5 +135,7 @@ export function useQuestionForm(): UseQuestionFormReturn {
     mode,
     handleModeChange,
     setMode,
+    tempImage,
+    setTempImage,
   };
 }
