@@ -29,11 +29,11 @@ export interface CreateUserDto {
   schoolName: string;
   gender: string;
   nsc: string;
-  /** @default false */
-  isSubscribed: boolean;
+  /** @default "inctive" */
+  isSubscribed: string;
   subjectTeaching: string;
   gradeTeaching: string;
-  customerId: string;
+  subscriptionId: string;
   email: string;
   password: string;
   role: CreateUserDtoRoleEnum;
@@ -168,6 +168,10 @@ export interface IGeneratePdfDto {
 
 export interface QuestionDto {
   items: string[];
+}
+
+export interface CreateSubscriptionDto {
+  orderId: string;
 }
 
 export enum CreateUserDtoRoleEnum {
@@ -943,6 +947,25 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         method: 'POST',
         body: data,
         type: ContentType.FormData,
+        ...params,
+      }),
+  };
+  paypal = {
+    /**
+     * No description
+     *
+     * @tags Paypal
+     * @name PayPalControllerCreateSubscription
+     * @request POST:/paypal/create-plan
+     * @secure
+     */
+    payPalControllerCreateSubscription: (data: CreateSubscriptionDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/paypal/create-plan`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
   };
