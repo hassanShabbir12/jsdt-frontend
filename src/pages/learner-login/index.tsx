@@ -73,6 +73,12 @@ export const LearnerLogin: FC = () => {
               >
                 Forgot Password?
               </Link>
+              <Link
+                to='/pricing-plan'
+                className='text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'
+              >
+                Sign up
+              </Link>
             </div>
             <div className='flex w-full justify-center px-3'>
               <Button

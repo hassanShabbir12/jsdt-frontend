@@ -331,83 +331,30 @@ export const Question: FC = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div>
-                  {tempImage ? (
-                    <div className='relative'>
-                      <img
-                        src={tempImage}
-                        alt='Uploaded'
-                        className='block h-28 w-28 rounded-full object-cover'
-                      />
-                      <span
-                        className='absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-neutral-600 bg-gray-200'
-                        onClick={() => {
-                          setTempImage('');
-                          form.setValue('image', '');
-                        }}
-                      >
-                        <X className='h-3 w-3 text-neutral-600' />
-                      </span>
-                    </div>
-                  ) : (
-                    <img
-                      src={assetUrl('assets/img/home/upload-logo.png')}
-                      alt='Upload Placeholder'
-                      className='block h-auto'
-                    />
-                  )}
-                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                    Image
-                  </Label>
-                  <Controller
-                    name='image'
-                    control={control}
-                    render={({ }) => (
-                      <Input
-                        type='file'
-                        onChange={(event) => {
-                          const file = event.target.files?.[0];
-
-                          if (file) {
-                            const reader = new FileReader();
-
-                            reader.onloadend = (): void => {
-                              const base64Image = reader.result as string;
-
-                              setTempImage(base64Image);
-                              form.setValue('image', base64Image);
-                            };
-                            reader.readAsDataURL(file);
-                          }
-                        }}
-                      />
-                    )}
-                  />
-                </div> */}
                 <div className=''>
                   {tempImage ? (
-                    <div className="p-5 h-40 border border-neutral-200 rounded-lg flex justify-center">
+                    <div className='flex h-40 justify-center rounded-lg border border-neutral-200 p-5'>
                       <div className='relative'>
                         <img
                           src={tempImage}
-                          alt="Uploaded"
-                          className="block h-28 w-28 rounded-full object-cover cursor-pointer"
+                          alt='Uploaded'
+                          className='block h-28 w-28 cursor-pointer rounded-full object-cover'
                           onClick={() => fileInputRef.current?.click()}
                         />
                         <span
-                          className="absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-red-600 bg-red-200"
+                          className='absolute right-2 top-0 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-red-600 bg-red-200'
                           onClick={() => {
                             setTempImage('');
                             form.setValue('image', '');
                           }}
                         >
-                          <X className='h-3.5 text-red-600 w-3.5' />
+                          <X className='h-3.5 w-3.5 text-red-600' />
                         </span>
                       </div>
                     </div>
                   ) : (
-                    <div className='p-5 h-40 items-center border border-neutral-200 rounded-lg flex justify-center'>
-                      <div >
+                    <div className='flex h-40 items-center justify-center rounded-lg border border-neutral-200 p-5'>
+                      <div>
                         <img
                           src={assetUrl('assets/img/home/upload-logo.png')}
                           alt='Upload Placeholder'
@@ -431,16 +378,18 @@ export const Question: FC = () => {
                     </label>
                   </div>
                   <input
-                    type="file"
+                    type='file'
                     ref={fileInputRef}
-                    className="hidden"
+                    className='hidden'
                     onChange={(event) => {
                       const file = event.target.files?.[0];
 
                       if (file) {
                         const reader = new FileReader();
-                        reader.onloadend = () => {
+
+                        reader.onloadend = (): void => {
                           const base64Image = reader.result as string;
+
                           setTempImage(base64Image);
                           form.setValue('image', base64Image);
                         };
@@ -595,9 +544,15 @@ export const Question: FC = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className='w-[80%]'>Questions</TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>Image</TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>Marks</TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>Action</TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Image
+                  </TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Marks
+                  </TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Action
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -611,9 +566,9 @@ export const Question: FC = () => {
                       )}
                     </TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
-                      {item?.image && <img className='w-8 h-8' src={item?.image} />}
+                      {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
                     </TableCell>
-                    <TableCell className='font-base text-zinc-800 border-l border-solid border-zinc-300'>
+                    <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
                       {item?.totalMarks}
                     </TableCell>
                     <TableCell className='border-l border-solid border-zinc-300'>
