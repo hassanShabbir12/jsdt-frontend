@@ -1,26 +1,85 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+// {{ edit_1 }}
 import { Label } from '@radix-ui/react-label';
+import axios, { AxiosResponse } from 'axios';
 import { MoveLeft } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { apiClient } from '@/api/clients/apiClient';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/context/AuthContext';
+import { toast } from '@/hooks/use-toast';
+import { ApiResponse } from '@/interface/generic';
 import { assetUrl } from '@/lib/asset-url';
+import { SubscriptionPlan } from '@/utils/enums';
+
+interface PaymentDetails {
+  facilitatorAccessToken: string | undefined;
+  orderID: string | undefined;
+  paymentSource: string;
+  subscriptionID: string | null | undefined;
+}
+
+interface ICreateSubscriptionResponse {
+  message: string;
+  subscriptionId: string;
+}
 
 export const Payment: FC = () => {
   const navigate = useNavigate();
-  const { setIsPayment } = useAuth();
+  const { isPayment, signupData } = useAuth();
 
-  const handlePayment = (): void => {
-    setIsPayment(true);
+  const handleSubscription = async (signup: PaymentDetails): Promise<void> => {
+    try {
+      const obj = {
+        orderId: signup.subscriptionID as string,
+      };
+      const response = (await apiClient.paypal.payPalControllerCreateSubscription(
+        obj,
+      )) as unknown as AxiosResponse<ApiResponse<ICreateSubscriptionResponse>>;
+      const { data } = response;
 
-    setTimeout(() => {
-      navigate('/signup');
-    }, 1000);
+      if (data.data.subscriptionId && signupData) {
+        const userData = {
+          ...signupData,
+          isSubscribed: 'active',
+          subscriptionId: data.data.subscriptionId,
+        };
+
+        await apiClient.auth.usersControllerCreate(userData);
+        toast({
+          title: 'Success',
+          description: 'Signup successful',
+        });
+        navigate('/login');
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast({
+          title: 'Error',
+          description: error.response.data.message,
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'An unexpected error occurred',
+        });
+      }
+    }
   };
+
+  useEffect(() => {
+    if (!isPayment) {
+      toast({
+        title: 'Error',
+        description: 'No subscription plan selected. Please select a plan.',
+      });
+      navigate('/pricing-plan');
+    }
+  }, [isPayment, navigate]);
 
   return (
     <section className='pb-20 pt-16'>
@@ -36,13 +95,19 @@ export const Payment: FC = () => {
               </div>
               <h3 className='mb-2 text-base text-neutral-400'>Subscribe to JSDT Subscription</h3>
               <div className='mb-4 flex w-56 items-center gap-2 text-base text-neutral-400'>
-                <h3 className='text-5xl font-bold text-zinc-800'>R39,99</h3>
-                <p className='m-0 -mb-1'>per month</p>
+                <h3 className='text-5xl font-bold text-zinc-800'>
+                  ${isPayment === SubscriptionPlan.PlanA ? '39.99' : '349.99'}
+                </h3>
+                <p className='m-0 -mb-1'>
+                  {isPayment === SubscriptionPlan.PlanA ? 'per month' : 'per year'}
+                </p>
               </div>
               <div className='border-b border-solid border-neutral-400 py-4 '>
                 <div className='mb-3 flex items-center justify-between'>
                   <h3 className='m-0 text-xl'>JSDT Subscription</h3>
-                  <p className='m-0'>R39,99</p>
+                  <p className='m-0'>
+                    ${isPayment === SubscriptionPlan.PlanA ? '39.99' : '349.99'}
+                  </p>
                 </div>
                 <div className=''>
                   <h3 className='m-0 text-base text-neutral-400'>JSDT Subscription</h3>
@@ -51,7 +116,9 @@ export const Payment: FC = () => {
               <div className='border-b border-solid border-neutral-400 py-4 '>
                 <div className='mb-3 flex items-center justify-between'>
                   <h3 className='m-0 text-xl'>Subtotal</h3>
-                  <p className='m-0'>R39,99</p>
+                  <p className='m-0'>
+                    ${isPayment === SubscriptionPlan.PlanA ? '39.99' : '349.99'}
+                  </p>
                 </div>
                 <div className='flex items-center justify-between'>
                   <h3 className='m-0 text-base text-neutral-400'>Tax</h3>
@@ -60,7 +127,7 @@ export const Payment: FC = () => {
               </div>
               <div className='flex items-center justify-between py-4'>
                 <h3 className='m-0 text-base text-zinc-800'>Total due today</h3>
-                <p className='m-0'>R39,99</p>
+                <p className='m-0'>${isPayment === SubscriptionPlan.PlanA ? '39.99' : '349.99'}</p>
               </div>
             </div>
           </div>
@@ -74,6 +141,8 @@ export const Payment: FC = () => {
                 Email
               </Label>
               <Input
+                disabled={true}
+                value={signupData?.email}
                 id='iem'
                 type='email'
                 className='h-12 rounded-lg border border-solid border-neutral-200 bg-gray-50 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
@@ -82,11 +151,41 @@ export const Payment: FC = () => {
             <div className='w-full'>
               <Dialog>
                 <DialogTrigger asChild>
-                  <div className='w-full'>
-                    <Button onClick={handlePayment} className='h-12 w-full text-base font-semibold'>
-                      Pay Now
-                    </Button>
-                  </div>
+                  <PayPalScriptProvider
+                    options={{
+                      clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
+                      vault: true,
+                      intent: 'subscription',
+                      currency: 'USD',
+                    }}
+                  >
+                    <div className='w-full'>
+                      <PayPalButtons
+                        createSubscription={(_, actions) =>
+                          actions.subscription
+                            .create({
+                              plan_id:
+                                isPayment === SubscriptionPlan.PlanA
+                                  ? import.meta.env.VITE_PAYPAL_MONTHLY_PLAN_ID
+                                  : import.meta.env.VITE_PAYPAL_YEARLY_PLAN_ID,
+                            })
+                            .catch((error) => {
+                              throw error;
+                            })
+                        }
+                        onApprove={async (data, _) => {
+                          const paymentDetails: PaymentDetails = {
+                            facilitatorAccessToken: data.facilitatorAccessToken,
+                            orderID: data.orderID,
+                            paymentSource: 'PayPal',
+                            subscriptionID: data.subscriptionID,
+                          };
+
+                          await handleSubscription(paymentDetails);
+                        }}
+                      />
+                    </div>
+                  </PayPalScriptProvider>
                 </DialogTrigger>
                 <DialogContent showCloseIcon={false} className='max-w-[620px]  rounded-3xl'>
                   <div className='py-9'>

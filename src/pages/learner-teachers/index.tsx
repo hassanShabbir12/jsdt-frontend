@@ -373,7 +373,7 @@ export const LearnerTeacher: FC = () => {
                         <div className='mb-6 text-left'>
                           <DialogTitle>Following are the questions</DialogTitle>
                         </div>
-                        <div className='ml-2 h-4 w-4 md:h-6 md:w-6 cursor-pointer sm:pt-1 sm:ml-3'>
+                        <div className='ml-2 h-4 w-4 cursor-pointer sm:ml-3 sm:pt-1 md:h-6 md:w-6'>
                           {loading ? (
                             <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
                           ) : (
@@ -381,7 +381,7 @@ export const LearnerTeacher: FC = () => {
                               onClick={() => downloadQuestions(questions, 'question')}
                               src={assetUrl('assets/img/home/attach-download.svg')}
                               alt='Generate-2'
-                              className='sm:-mb-11 block h-auto'
+                              className='block h-auto sm:-mb-11'
                             />
                           )}
                         </div>
@@ -391,7 +391,7 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
                           <div className='flex gap-x-5'>
-                            <div className='w-20 h-10'>
+                            <div className='h-10 w-20'>
                               {item.image && <img src={item.image} alt='Question Image' />}
                             </div>
                             <div>
@@ -427,7 +427,7 @@ export const LearnerTeacher: FC = () => {
                     <DialogHeader>
                       <div className='mb-8 flex pt-8 sm:items-center'>
                         <DialogTitle>Answer of the following questions</DialogTitle>
-                        <div className='ml-2 h-4 w-4 md:h-6 md:w-6 cursor-pointer sm:ml-3'>
+                        <div className='ml-2 h-4 w-4 cursor-pointer sm:ml-3 md:h-6 md:w-6'>
                           {loading ? (
                             <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
                           ) : (
@@ -435,7 +435,7 @@ export const LearnerTeacher: FC = () => {
                               onClick={() => downloadQuestions(questions, 'answer')}
                               src={assetUrl('assets/img/home/attach-download.svg')}
                               alt='Generate-2'
-                              className='md:-mb-11 block h-auto'
+                              className='block h-auto md:-mb-11'
                             />
                           )}
                         </div>
@@ -446,7 +446,7 @@ export const LearnerTeacher: FC = () => {
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
                             <div className='flex gap-x-5'>
-                              <div className='w-20 h-10'>
+                              <div className='h-10 w-20'>
                                 {item.image && <img src={item.image} alt='Question Image' />}
                               </div>
                               <div>
@@ -632,7 +632,7 @@ export const LearnerTeacher: FC = () => {
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <div className='flex gap-x-5'>
-                        <div className='w-20 h-10'>
+                        <div className='h-10 w-20'>
                           {item.image && <img className='' src={item.image} alt='Question Image' />}
                         </div>
                         <div className='w-full'>
@@ -669,11 +669,11 @@ export const LearnerTeacher: FC = () => {
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
               <div className='flex gap-x-5'>
-                <div className='w-20 h-10'>
+                <div className='h-10 w-20'>
                   {item.image && <img src={item.image} alt='Question Image' />}
                 </div>
                 <div className='w-full'>
-                  <div className='mb-5 w-full flex justify-between'>
+                  <div className='mb-5 flex w-full justify-between'>
                     <span className='inline-block text-2xl font-semibold'>
                       Question No. {index + 1}
                     </span>

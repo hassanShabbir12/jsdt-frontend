@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.tsx';
+// {{ edit_1 }}
 import { AuthProvider } from './context/AuthContext.tsx';
 // eslint-disable-next-line no-restricted-syntax
 import './index.css';

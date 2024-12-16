@@ -5,18 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 
-import { apiClient } from '@/api/clients/apiClient';
 import { useAuth } from '@/context/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { SignupFormData, signupSchema, UseSignupReturn } from '@/interface/auth';
 import { CreateUserDto, CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 
 export const useSignup = (): UseSignupReturn => {
-  const { userRole, isPayment } = useAuth();
+  const { userRole } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const { setSignupData } = useAuth();
   const validRole = userRole === 'teacher' ? 'TEACHER' : 'LEARNER';
 
   const form = useForm<SignupFormData>({
@@ -40,13 +39,7 @@ export const useSignup = (): UseSignupReturn => {
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    if (!isPayment) {
-      navigate('/');
-    }
-  }, [isPayment, navigate]);
-
-  const onSubmit: SubmitHandler<SignupFormData> = async (data) => {
+  const onSubmit: SubmitHandler<SignupFormData> = (data): void => {
     try {
       setIsLoading(true);
       const createUserDto: CreateUserDto = {
@@ -65,16 +58,13 @@ export const useSignup = (): UseSignupReturn => {
           data.role === 'TEACHER' ? CreateUserDtoRoleEnum.Teacher : CreateUserDtoRoleEnum.Learner,
         subjectTeaching: data.subjectTeaching || '',
         gradeTeaching: data.gradeTeaching || '',
-        isSubscribed: false,
-        customerId: '',
+        isSubscribed: '',
+        subscriptionId: '',
       };
 
-      await apiClient.auth.usersControllerCreate(createUserDto);
-      toast({
-        title: 'Success',
-        description: 'Signup successful',
-      });
-      navigate('/login');
+      setSignupData(createUserDto);
+
+      navigate('/payment');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast({
