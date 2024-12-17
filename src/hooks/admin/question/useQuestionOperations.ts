@@ -140,7 +140,7 @@ export function useQuestionOperations(
         const response = (await apiClient.questions.questionsControllerCreate({
           ...questiondata,
           image: convertImage,
-          type: mode,
+          type: 'simple',
         })) as unknown as AxiosResponse<QuestionResponse>;
         const newquestion = Array.isArray(response.data.data)
           ? response.data.data

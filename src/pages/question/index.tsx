@@ -1,6 +1,11 @@
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// eslint-disable-next-line no-restricted-syntax
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
+// eslint-disable-next-line no-restricted-syntax
+import 'ckeditor5/ckeditor5.css';
 import { Edit, Trash2, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -14,7 +19,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Select,
   SelectContent,
@@ -41,10 +45,9 @@ import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/utils';
 
-import DisplayHtml from './dompurify';
+import RichTextEditor from './ckeditor';
 import MathFormulaDisplay from './formula';
 import MathLiveInput from './math-live';
-import QuillEditor from './quill-editor';
 
 export const Question: FC = () => {
   const {
@@ -55,7 +58,6 @@ export const Question: FC = () => {
     processingTextAnswer,
     mode,
     handleImageUpload,
-    handleModeChange,
     setMode,
     tempImage,
     setTempImage,
@@ -398,27 +400,6 @@ export const Question: FC = () => {
                     }}
                   />
                 </div>
-                <div className='w-full'>
-                  <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
-                    Select Mode
-                  </Label>
-                  <RadioGroup value={mode} onValueChange={(value) => handleModeChange(value)}>
-                    <div className='flex gap-x-3 pb-7 pt-3'>
-                      <label htmlFor='simple'>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value='simple' id='simple' />
-                          <span className='block text-base'>Simple</span>
-                        </div>
-                      </label>
-                      <label htmlFor='algebra'>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value='algebra' id='algebra' />
-                          <span className='block text-base'>Algebra</span>
-                        </div>
-                      </label>
-                    </div>
-                  </RadioGroup>
-                </div>
                 <div className='mb-6 w-full'>
                   <Label className='mb-2 block text-base font-normal leading-none text-zinc-800'>
                     Question
@@ -426,10 +407,10 @@ export const Question: FC = () => {
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
                     {mode === 'simple' ? (
                       <>
-                        <QuillEditor
+                        <RichTextEditor
                           value={form.getValues('question')}
                           onChange={(content) => form.setValue('question', content)}
-                          placeholder='Type here...'
+                          showToolbar={true}
                         />
                         <div className='relative p-4 pt-2'>
                           <Button
@@ -469,10 +450,10 @@ export const Question: FC = () => {
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
                     {mode === 'simple' ? (
                       <>
-                        <QuillEditor
+                        <RichTextEditor
                           value={form.getValues('answer')}
                           onChange={(content) => form.setValue('answer', content)}
-                          placeholder='Type here...'
+                          showToolbar={true}
                         />
                         <div className='relative p-4 pt-2'>
                           <Button
@@ -560,7 +541,7 @@ export const Question: FC = () => {
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
                       {item.type === 'simple' ? (
-                        <DisplayHtml htmlContent={item.question} />
+                        <RichTextEditor value={item.question} showToolbar={false} />
                       ) : (
                         <MathFormulaDisplay formula={item.question} />
                       )}

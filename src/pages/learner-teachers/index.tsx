@@ -45,7 +45,7 @@ import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { assetUrl } from '@/lib/asset-url';
 import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
-import DisplayHtml from '../question/dompurify';
+import RichTextEditor from '../question/ckeditor';
 import MathFormulaDisplay from '../question/formula';
 import { Cover } from './components/cover';
 import { InstructionsList } from './components/instructions';
@@ -400,7 +400,7 @@ export const LearnerTeacher: FC = () => {
                               </h2>
                               <p className='m-0'>
                                 {item.type === 'simple' ? (
-                                  <DisplayHtml htmlContent={item.question} />
+                                  <RichTextEditor value={item.question} showToolbar={false} />
                                 ) : (
                                   <MathFormulaDisplay formula={item.question} />
                                 )}
@@ -455,7 +455,7 @@ export const LearnerTeacher: FC = () => {
                                 </h2>
                                 <p className='m-0'>
                                   {item.type === 'simple' ? (
-                                    <DisplayHtml htmlContent={item.question} />
+                                    <RichTextEditor value={item.question} showToolbar={false} />
                                   ) : (
                                     <MathFormulaDisplay formula={item.question} />
                                   )}
@@ -469,7 +469,7 @@ export const LearnerTeacher: FC = () => {
                             </h2>
                             <p className='m-0'>
                               {item.type === 'simple' ? (
-                                <DisplayHtml htmlContent={item.answer} />
+                                <RichTextEditor value={item.answer} showToolbar={false} />
                               ) : (
                                 <MathFormulaDisplay formula={item.answer} />
                               )}
@@ -641,7 +641,7 @@ export const LearnerTeacher: FC = () => {
                           </h3>
                           <p className='line-clamp-3'>
                             {item.type === 'simple' ? (
-                              <DisplayHtml htmlContent={item.question} />
+                              <RichTextEditor value={item.question} showToolbar={false} />
                             ) : (
                               <MathFormulaDisplay formula={item.question} />
                             )}
@@ -717,7 +717,7 @@ export const LearnerTeacher: FC = () => {
                   </div>
                   <p className='mb-10 mt-6 block text-black'>
                     {item.type === 'simple' ? (
-                      <DisplayHtml htmlContent={item.question} />
+                      <RichTextEditor value={item.question} showToolbar={false} />
                     ) : (
                       <MathFormulaDisplay formula={item.question} />
                     )}
