@@ -144,26 +144,3 @@ input[type='number'] {
 .ck-custome-editor .ck-editor__top {
   display: none;
 }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-table,
-th,
-td {
-  border: 1px solid #ddd;
-}
-th,
-td {
-  padding: 8px 12px;
-  text-align: left;
-}
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
