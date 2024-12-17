@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
+import { useLocalStorage } from '@/hooks/client/useLocalStorage';
 import { CreateUserDto } from '@/lib/sdk/jsdt/Api';
 
 type AuthContextType = {
@@ -10,8 +11,10 @@ type AuthContextType = {
   logout: () => void;
   userRole: string | null;
   setUserRole: (role: string) => void;
-  setIsPayment: (payment: boolean) => void;
-  isPayment: boolean;
+  setIsPayment: (payment: string) => void;
+  isPayment: string;
+  setSignupData: (data: CreateUserDto) => void;
+  signupData: CreateUserDto | null | undefined;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,7 +24,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<CreateUserDto | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>('learner');
-  const [isPayment, setIsPayment] = useState<boolean>(false);
+  const [isPayment, setIsPayment] = useState<string>('');
+  const [signupData, setSignupData] = useLocalStorage<CreateUserDto | null>('signupData', null);
 
   const login = (user: CreateUserDto, token: string): void => {
     setUser(user);
@@ -63,6 +67,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         isPayment,
         userRole,
         setUserRole,
+        setSignupData,
+        signupData,
       }}
     >
       {children}

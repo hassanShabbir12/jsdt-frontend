@@ -36,16 +36,23 @@ export const useLogin = (): UseLoginReturn => {
       )) as unknown as ApiResponse<LoginResponse>;
       const { data } = response;
 
-      localStorage.setItem('access_token', data.data.access_token);
+      if (data.data.user.isSubscribed === 'active') {
+        localStorage.setItem('access_token', data.data.access_token);
 
-      toast({
-        title: 'Login success',
-        description: 'You are now logged in!',
-      });
-      const { user, access_token } = data.data;
+        toast({
+          title: 'Login success',
+          description: 'You are now logged in!',
+        });
+        const { user, access_token } = data.data;
 
-      login(user, access_token);
-      navigate('/learner-teacher');
+        login(user, access_token);
+        navigate('/learner-teacher');
+      } else {
+        toast({
+          title: 'Login success',
+          description: 'You are not subscribed!',
+        });
+      }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         toast({

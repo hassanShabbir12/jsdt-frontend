@@ -7,12 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/context/AuthContext';
 import { assetUrl } from '@/lib/asset-url';
+import { SubscriptionPlan } from '@/utils/enums';
 
 export const PricingPlan: FC = () => {
   const navigate = useNavigate();
-  const { setUserRole, userRole } = useAuth();
-  const onHandleClick = (): void => {
-    navigate('/payment');
+  const { setUserRole, userRole, setIsPayment } = useAuth();
+  const onHandleClick = (type: string): void => {
+    setIsPayment(type);
+    navigate('/signup');
   };
 
   return (
@@ -139,7 +141,7 @@ export const PricingPlan: FC = () => {
                           </ul>
                           <div className='mb-2 flex justify-center md:mb-0 md:pt-6'>
                             <Button
-                              onClick={onHandleClick}
+                              onClick={() => onHandleClick(SubscriptionPlan.PlanA)}
                               className='h-14 min-w-52 rounded-4xl xl:text-xl'
                               size='lg'
                             >
@@ -196,7 +198,7 @@ export const PricingPlan: FC = () => {
                           </ul>
                           <div className='mb-2 flex justify-center md:mb-0 md:pt-4'>
                             <Button
-                              onClick={onHandleClick}
+                              onClick={() => onHandleClick(SubscriptionPlan.PlanB)}
                               className='h-14 min-w-52 rounded-4xl xl:text-xl'
                               size='lg'
                             >
@@ -293,7 +295,7 @@ export const PricingPlan: FC = () => {
                           </ul>
                           <div className='mb-2 flex justify-center md:mb-0 md:pt-6'>
                             <Button
-                              onClick={onHandleClick}
+                              onClick={() => onHandleClick(SubscriptionPlan.PlanA)}
                               className='h-14 min-w-52 rounded-4xl xl:text-xl'
                               size='lg'
                             >
@@ -350,7 +352,7 @@ export const PricingPlan: FC = () => {
                           </ul>
                           <div className='mb-2 flex justify-center md:mb-0 md:pt-4'>
                             <Button
-                              onClick={onHandleClick}
+                              onClick={() => onHandleClick(SubscriptionPlan.PlanB)}
                               className='h-14 min-w-52 rounded-4xl xl:text-xl'
                               size='lg'
                             >
