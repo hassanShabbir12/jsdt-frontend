@@ -82,20 +82,20 @@ export const Payment: FC = () => {
   }, [isPayment, navigate]);
 
   return (
-    <section className='pb-20 pt-16'>
-      <div className='mx-auto max-w-[1256px] px-4'>
-        <div className='-mx-7 flex justify-between'>
-          <div className='w-1/2 px-7'>
+    <section className='sm:pb-20 sm:pt-16 py-10'>
+      <div className='mx-auto max-w-6xl px-4'>
+        <div className='-mx-7 sm:flex justify-between'>
+          <div className='sm:w-1/2 w-full px-7'>
             <div className='pl-10'>
               <div className='relative mb-4 inline-flex cursor-pointer items-center gap-4'>
                 <div className='absolute -left-10'>
-                  <MoveLeft />
+                  <span onClick={() => navigate(-1)}><MoveLeft className='cursor-pointer transition-all duration-300 hover:text-primary hover:-translate-x-1' /></span>
                 </div>
                 <p className='text-base text-zinc-800'>Back</p>
               </div>
               <h3 className='mb-2 text-base text-neutral-400'>Subscribe to JSDT Subscription</h3>
-              <div className='mb-4 flex w-56 items-center gap-2 text-base text-neutral-400'>
-                <h3 className='text-5xl font-bold text-zinc-800'>
+              <div className='sm:mb-4 flex w-56 items-center gap-2 text-sm sm:text-base text-neutral-400'>
+                <h3 className='text-3xl sm:text-5xl font-bold text-zinc-800'>
                   ${isPayment === SubscriptionPlan.PlanA ? '39.99' : '349.99'}
                 </h3>
                 <p className='m-0 -mb-1'>
@@ -131,80 +131,82 @@ export const Payment: FC = () => {
               </div>
             </div>
           </div>
-          <div className='w-1/2 px-7'>
-            <h3 className='mb-4'>Contact Information</h3>
-            <div className='mb-4 w-full'>
-              <Label
-                htmlFor='name'
-                className='mb-1.5 block font-normal leading-none text-black lg:text-base'
-              >
-                Email
-              </Label>
-              <Input
-                disabled={true}
-                value={signupData?.email}
-                id='iem'
-                type='email'
-                className='h-12 rounded-lg border border-solid border-neutral-200 bg-gray-50 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-              />
-            </div>
-            <div className='w-full'>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <PayPalScriptProvider
-                    options={{
-                      clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
-                      vault: true,
-                      intent: 'subscription',
-                      currency: 'USD',
-                    }}
-                  >
-                    <div className='w-full'>
-                      <PayPalButtons
-                        createSubscription={(_, actions) =>
-                          actions.subscription
-                            .create({
-                              plan_id:
-                                isPayment === SubscriptionPlan.PlanA
-                                  ? import.meta.env.VITE_PAYPAL_MONTHLY_PLAN_ID
-                                  : import.meta.env.VITE_PAYPAL_YEARLY_PLAN_ID,
-                            })
-                            .catch((error) => {
-                              throw error;
-                            })
-                        }
-                        onApprove={async (data, _) => {
-                          const paymentDetails: PaymentDetails = {
-                            facilitatorAccessToken: data.facilitatorAccessToken,
-                            orderID: data.orderID,
-                            paymentSource: 'PayPal',
-                            subscriptionID: data.subscriptionID,
-                          };
+          <div className='sm:w-1/2 w-full px-7'>
+            <div className='pl-10 sm:pl-0'>
+              <h3 className='mb-4'>Contact Information</h3>
+              <div className='mb-4 w-full'>
+                <Label
+                  htmlFor='name'
+                  className='mb-1.5 block font-normal leading-none text-black lg:text-base'
+                >
+                  Email
+                </Label>
+                <Input
+                  disabled={true}
+                  value={signupData?.email}
+                  id='iem'
+                  type='email'
+                  className='h-12 rounded-lg border border-solid border-neutral-200 bg-gray-50 px-4 py-2 text-sm text-zinc-800 shadow-none [appearance:textfield] placeholder:text-stone-300 focus-visible:outline-none focus-visible:ring-0 lg:px-3.5 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                />
+              </div>
+              <div className='w-full'>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <PayPalScriptProvider
+                      options={{
+                        clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
+                        vault: true,
+                        intent: 'subscription',
+                        currency: 'USD',
+                      }}
+                    >
+                      <div className='w-full'>
+                        <PayPalButtons
+                          createSubscription={(_, actions) =>
+                            actions.subscription
+                              .create({
+                                plan_id:
+                                  isPayment === SubscriptionPlan.PlanA
+                                    ? import.meta.env.VITE_PAYPAL_MONTHLY_PLAN_ID
+                                    : import.meta.env.VITE_PAYPAL_YEARLY_PLAN_ID,
+                              })
+                              .catch((error) => {
+                                throw error;
+                              })
+                          }
+                          onApprove={async (data, _) => {
+                            const paymentDetails: PaymentDetails = {
+                              facilitatorAccessToken: data.facilitatorAccessToken,
+                              orderID: data.orderID,
+                              paymentSource: 'PayPal',
+                              subscriptionID: data.subscriptionID,
+                            };
 
-                          await handleSubscription(paymentDetails);
-                        }}
-                      />
+                            await handleSubscription(paymentDetails);
+                          }}
+                        />
+                      </div>
+                    </PayPalScriptProvider>
+                  </DialogTrigger>
+                  <DialogContent showCloseIcon={false} className='max-w-[620px]  rounded-3xl'>
+                    <div className='py-9'>
+                      <div className='mb-12 w-full'>
+                        <img
+                          className='mx-auto w-72'
+                          src={assetUrl('/assets/img/home/successfull-mark.svg')}
+                          alt='Image Description'
+                        />
+                      </div>
+                      <div className='text-center'>
+                        <strong className='mb-2 block text-center text-2xl font-bold text-primary'>
+                          Thank you!
+                        </strong>
+                        <span className='text-base text-zinc-800'>Payment Successful</span>
+                      </div>
                     </div>
-                  </PayPalScriptProvider>
-                </DialogTrigger>
-                <DialogContent showCloseIcon={false} className='max-w-[620px]  rounded-3xl'>
-                  <div className='py-9'>
-                    <div className='mb-12 w-full'>
-                      <img
-                        className='mx-auto w-72'
-                        src={assetUrl('/assets/img/home/successfull-mark.svg')}
-                        alt='Image Description'
-                      />
-                    </div>
-                    <div className='text-center'>
-                      <strong className='mb-2 block text-center text-2xl font-bold text-primary'>
-                        Thank you!
-                      </strong>
-                      <span className='text-base text-zinc-800'>Payment Successful</span>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
           </div>
         </div>
