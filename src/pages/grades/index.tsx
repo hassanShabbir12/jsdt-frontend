@@ -53,7 +53,7 @@ export const Grades: FC = () => {
   } = useGradeForm(grades, setGrades);
 
   return (
-    <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
+    <div className='mb-12 z-20 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='mb-5 flex items-center justify-between border-b border-neutral-200 px-6 py-3'>
           <h1 className='text-lg font-semibold text-zinc-800'>Grades</h1>
@@ -70,7 +70,7 @@ export const Grades: FC = () => {
             <DialogTrigger asChild>
               <div className='flex justify-center'>
                 <Button
-                  className='h-10 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
+                  className='h-10 z-20 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
                   onClick={() => {
                     setValue('title', '');
                     setOpen(true);

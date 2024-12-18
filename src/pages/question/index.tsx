@@ -89,7 +89,7 @@ export const Question: FC = () => {
   const { topics } = useTopicList();
 
   return (
-    <div className='mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
+    <div className='mb-12 px-6 pt-24 md:pl-0 relative z-10 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='mb-6 flex items-center justify-between border-b border-neutral-200 px-6 py-3'>
           <h1 className='text-lg font-semibold text-zinc-800'>Questions</h1>
@@ -105,7 +105,7 @@ export const Question: FC = () => {
             }}
           >
             <DialogTrigger asChild>
-              <Button className='w-34 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
+              <Button className='w-34 h-10 z-50 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
                 Add New Question
               </Button>
             </DialogTrigger>
