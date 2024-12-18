@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
   Alignment,
@@ -49,10 +48,8 @@ import {
   WordCount,
 } from 'ckeditor5';
 import { FormatPainter } from 'ckeditor5-premium-features';
-// eslint-disable-next-line no-restricted-syntax
-import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
-// eslint-disable-next-line no-restricted-syntax
-import 'ckeditor5/ckeditor5.css';
+
+import { cn } from '@/lib/utils';
 
 const RichTextEditor = ({
   value,

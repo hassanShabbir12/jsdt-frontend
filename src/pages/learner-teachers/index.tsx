@@ -396,7 +396,7 @@ export const LearnerTeacher: FC = () => {
                             </div>
                             <div>
                               <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                                Question No. {index + 1}
+                                Question {index + 1}
                               </h2>
                               <p className='m-0'>
                                 {item.type === 'simple' ? (
@@ -451,7 +451,7 @@ export const LearnerTeacher: FC = () => {
                               </div>
                               <div>
                                 <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                                  Question No. {index + 1}
+                                  Question {index + 1}
                                 </h2>
                                 <p className='m-0'>
                                   {item.type === 'simple' ? (
@@ -637,7 +637,7 @@ export const LearnerTeacher: FC = () => {
                         </div>
                         <div className='w-full'>
                           <h3 className='mb-5 text-2xl font-semibold leading-7'>
-                            Question No. {index + 1}
+                            Question {index + 1}
                           </h3>
                           <p className='line-clamp-3'>
                             {item.type === 'simple' ? (
@@ -675,7 +675,7 @@ export const LearnerTeacher: FC = () => {
                 <div className='w-full'>
                   <div className='mb-5 flex w-full justify-between'>
                     <span className='inline-block text-2xl font-semibold'>
-                      Question No. {index + 1}
+                      Question {index + 1}
                     </span>
                     <Dialog open={isOpen} onOpenChange={setIsOpen}>
                       <DialogTrigger asChild>
