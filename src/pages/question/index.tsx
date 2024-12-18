@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
 // eslint-disable-next-line no-restricted-syntax
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 // eslint-disable-next-line no-restricted-syntax

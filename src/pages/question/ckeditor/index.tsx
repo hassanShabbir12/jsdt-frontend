@@ -145,8 +145,6 @@ const RichTextEditor = ({
             'numberedList',
             'todoList',
             '|',
-            // 'imageUpload',
-            // 'mediaEmbed',
             'htmlEmbed',
             '|',
             'fontFamily',
@@ -190,8 +188,6 @@ const RichTextEditor = ({
             'tableProperties',
           ],
         },
-
-        // initialData: '<p>Hello from CKEditor 5 in React!</p>',
       }}
     />
   </div>
