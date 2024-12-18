@@ -354,7 +354,7 @@ export const LearnerTeacher: FC = () => {
             </Button>
           </div>
         </form>
-        <div className='relative mb-10 min-h-72 overflow-hidden rounded-xl border border-solid border-neutral-200 p-3'>
+        <div className='relative mb-10 h-72 overflow-hidden overflow-y-auto rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
               <div className='mb-2 px-2 lg:mb-0'>
@@ -390,7 +390,7 @@ export const LearnerTeacher: FC = () => {
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
-                          <div className='flex gap-x-5'>
+                          <div className='sm:flex block gap-x-5'>
                             <div className='h-10 w-20'>
                               {item.image && <img src={item.image} alt='Question Image' />}
                             </div>
@@ -445,7 +445,7 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
-                            <div className='flex gap-x-5'>
+                            <div className='sm:flex block gap-x-5'>
                               <div className='h-10 w-20'>
                                 {item.image && <img src={item.image} alt='Question Image' />}
                               </div>
@@ -631,7 +631,7 @@ export const LearnerTeacher: FC = () => {
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                      <div className='flex gap-x-5'>
+                      <div className='sm:flex block gap-x-5'>
                         <div className='h-10 w-20'>
                           {item.image && <img className='' src={item.image} alt='Question Image' />}
                         </div>
@@ -668,7 +668,7 @@ export const LearnerTeacher: FC = () => {
               key={item.id}
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
-              <div className='flex gap-x-5'>
+              <div className='sm:flex block gap-x-5'>
                 <div className='h-10 w-20'>
                   {item.image && <img src={item.image} alt='Question Image' />}
                 </div>
