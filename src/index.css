@@ -140,3 +140,7 @@ input[type='number'] {
     animation: fadeIn 1.5s ease forwards 0.5s;
   }
 }
+
+.ck-custome-editor .ck-editor__top {
+  display: none;
+}
