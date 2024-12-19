@@ -137,7 +137,6 @@ const RichTextEditor = ({
             'removeFormat',
             '|',
             'link',
-            'unlink',
             'blockQuote',
             '|',
             'bulletedList',
