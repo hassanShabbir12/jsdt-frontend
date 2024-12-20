@@ -49,6 +49,7 @@ import RichTextEditor from '../question/ckeditor';
 import MathFormulaDisplay from '../question/formula';
 import { Cover } from './components/cover';
 import { InstructionsList } from './components/instructions';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
@@ -354,7 +355,7 @@ export const LearnerTeacher: FC = () => {
             </Button>
           </div>
         </form>
-        <div className='relative mb-10 h-72 overflow-hidden overflow-y-auto rounded-xl border border-solid border-neutral-200 p-3'>
+        <div className='relative mb-10 min-h-[300px] overflow-hidden rounded-xl border border-solid border-neutral-200 p-3'>
           <div className='block items-center justify-between lg:flex'>
             <div className='mb-5 block flex-wrap sm:-mx-2 sm:flex sm:justify-start xl:mb-0'>
               <div className='mb-2 px-2 lg:mb-0'>
@@ -390,7 +391,7 @@ export const LearnerTeacher: FC = () => {
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
-                          <div className='sm:flex block gap-x-5'>
+                          <div className='block-scroll sm:flex block gap-x-5'>
                             <div className='h-10 w-20'>
                               {item.image && <img src={item.image} alt='Question Image' />}
                             </div>
@@ -445,7 +446,7 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
-                            <div className='sm:flex block gap-x-5'>
+                            <div className=' sm:flex block gap-x-5'>
                               <div className='h-10 w-20'>
                                 {item.image && <img src={item.image} alt='Question Image' />}
                               </div>
@@ -607,7 +608,7 @@ export const LearnerTeacher: FC = () => {
                 </div>
               )}
             </div>
-            <div className='mb-14 flex gap-x-2 sm:m-0 sm:gap-x-4'>
+            <div className='mb-12 flex gap-x-2 sm:m-0 sm:gap-x-4'>
               <div className='h-6 w-6 cursor-pointer' onClick={handleCheckData}>
                 {pdfLoading ? (
                   <Loader className='mt-1 h-4 w-4 animate-spin text-black' />
@@ -622,30 +623,36 @@ export const LearnerTeacher: FC = () => {
             </div>
           </div>
           {questions.length !== 0 ? (
-            <Carousel className='relative w-full'>
+            <Carousel
+              mouseTracking={false}
+              className='relative w-full'>
               <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
               <div className='relative'>
+
                 <span className='absolute left-0 top-0 z-10 hidden min-h-screen w-14 bg-white sm:block lg:w-20'></span>
               </div>
               <CarouselContent>
                 {questions.map((item, index) => (
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                      <div className='sm:flex block gap-x-5'>
+                      <div className='block-scroll md:h-32 h-28 lg:h-40 overflow-y-auto sm:flex block gap-x-5'>
                         <div className='h-10 w-20'>
                           {item.image && <img className='' src={item.image} alt='Question Image' />}
                         </div>
                         <div className='w-full'>
-                          <h3 className='mb-5 text-2xl font-semibold leading-7'>
+                          <h3 className='mb-3 text-2xl font-semibold leading-7'>
                             Question {index + 1}
                           </h3>
-                          <p className='line-clamp-3'>
-                            {item.type === 'simple' ? (
-                              <RichTextEditor value={item.question} showToolbar={false} />
-                            ) : (
-                              <MathFormulaDisplay formula={item.question} />
-                            )}
-                          </p>
+                          <ScrollArea>
+                            <p className='line-clamp-3'>
+                              {item.type === 'simple' ? (
+                                <RichTextEditor value={item.question} showToolbar={false} />
+                              ) : (
+                                <MathFormulaDisplay formula={item.question} />
+                              )}
+                            </p>
+                            <ScrollBar orientation="horizontal" />
+                          </ScrollArea>
                         </div>
                       </div>
                     </div>
