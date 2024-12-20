@@ -18,6 +18,7 @@ type CarouselProps = {
   orientation?: 'horizontal' | 'vertical';
   setApi?: (api: CarouselApi) => void;
   onSlideChange?: (index: number) => void;
+  mouseTracking?: boolean;
 };
 
 type CarouselContextProps = {
@@ -55,6 +56,7 @@ const Carousel = React.forwardRef<
       className,
       children,
       onSlideChange,
+      mouseTracking = true,
       ...props
     },
     ref,
@@ -64,7 +66,10 @@ const Carousel = React.forwardRef<
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
       },
-      [WheelGesturesPlugin(), ...plugins],
+      [
+        ...(mouseTracking ? [WheelGesturesPlugin()] : []),
+        ...plugins,
+      ],
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
@@ -72,9 +77,7 @@ const Carousel = React.forwardRef<
 
     const onSelect = React.useCallback(
       (api: CarouselApi) => {
-        if (!api) {
-          return;
-        }
+        if (!api) return;
 
         setCurrentSlide(api.selectedScrollSnap());
         onSlideChange?.(api.selectedScrollSnap());
@@ -92,40 +95,21 @@ const Carousel = React.forwardRef<
       api?.scrollNext();
     }, [api]);
 
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === 'ArrowLeft') {
-          event.preventDefault();
-          scrollPrev();
-        } else if (event.key === 'ArrowRight') {
-          event.preventDefault();
-          scrollNext();
-        }
-      },
-      [scrollPrev, scrollNext],
-    );
-
     React.useEffect(() => {
-      if (!api || !setApi) {
-        return;
-      }
-
+      if (!api || !setApi) return;
       setApi(api);
     }, [api, setApi]);
 
     React.useEffect(() => {
-      if (!api) {
-        return;
-      }
+      if (!api) return;
 
       onSelect(api);
       api.on('reInit', onSelect);
       api.on('select', onSelect);
       api.on('slidesChanged', onSelect);
 
-      // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       return () => {
-        api?.off('select', onSelect);
+        api.off('select', onSelect);
       };
     }, [api, onSelect]);
 
@@ -133,7 +117,7 @@ const Carousel = React.forwardRef<
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           opts,
           orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
           scrollPrev,
@@ -145,7 +129,6 @@ const Carousel = React.forwardRef<
       >
         <div
           ref={ref}
-          onKeyDownCapture={handleKeyDown}
           className={cn('relative', className)}
           role='region'
           aria-roledescription='carousel'
@@ -201,7 +184,7 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 
 CarouselItem.displayName = 'CarouselItem';
 
-export const CarouselDots = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+const CarouselDots = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
     const { api, currentSlide } = useCarousel();
 
@@ -240,7 +223,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         variant={variant}
         size={size}
         className={cn(
-          'absolute h-8 w-8 rounded-full shadow-round-shadow border-none text-stone-300',
+          'absolute h-8 w-8 z-10 rounded-full shadow-round-shadow border-none text-stone-300',
           orientation === 'horizontal' ? '-top-5 sm:!left-0 sm:!top-20' : '',
           canScrollPrev ? '' : 'bg-zinc-100 text-stone-300',
           className,
@@ -268,7 +251,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         variant={variant}
         size={size}
         className={cn(
-          'absolute h-8 w-8 rounded-full shadow-round-shadow border-none text-stone-300',
+          'absolute h-8 w-8 z-10 rounded-full shadow-round-shadow border-none text-stone-300',
           orientation === 'horizontal' ? '-top-5 left-24 sm:right-0 sm:left-auto sm:!top-20' : '',
           canScrollNext ? '' : 'bg-zinc-100 text-stone-300',
           className,
@@ -290,7 +273,8 @@ export {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
+  CarouselDots,
   CarouselPrevious,
+  CarouselNext,
   type CarouselApi,
 };
