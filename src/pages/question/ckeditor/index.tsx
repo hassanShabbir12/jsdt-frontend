@@ -171,11 +171,6 @@ const RichTextEditor = ({
           ],
           shouldNotGroupWhenFull: true,
         },
-        // math: {
-        //   engine: 'mathjax', // Specify MathJax rendering engine
-        //   outputType: 'script', // Output type, e.g., TeX or MathML
-        //   mathjaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js', // MathJax library
-        // },
         heading: {
           options: [
             { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },

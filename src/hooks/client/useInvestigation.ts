@@ -19,8 +19,6 @@ import { ExtendedCreateQuestionDto } from '@/interface/question';
 import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 import { initialInstructions, staticImage } from '@/utils/dump';
 
-// import useEditor from './useGrid';
-
 export const useInvestigation = (editorValue: string): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);

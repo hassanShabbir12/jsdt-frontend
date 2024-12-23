@@ -35,7 +35,6 @@ interface UseQuestionFormReturn {
   fileInputRef: React.RefObject<HTMLInputElement>;
   image: string | null | undefined;
   setImage?: React.Dispatch<React.SetStateAction<string | null | undefined>>;
-  // handleImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
@@ -112,28 +111,6 @@ export function useQuestionForm(): UseQuestionFormReturn {
     }
   };
 
-  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
-  //   const file: File | undefined = event.target.files?.[0];
-
-  //   if (file) {
-  //     if (file.type.startsWith('image/')) {
-  //       const reader = new FileReader();
-
-  //       reader.onloadend = (): void => {
-  //         const base64Image = reader.result as string;
-
-  //         setImage(base64Image);
-  //       };
-
-  //       reader.readAsDataURL(file);
-  //     } else {
-  //       toast({
-  //         description: 'Please upload a valid image file.',
-  //       });
-  //     }
-  //   }
-  // };
-
   const resetFormFields = (): void => {
     form.reset({
       question: '',
@@ -163,12 +140,11 @@ export function useQuestionForm(): UseQuestionFormReturn {
     processingTextAnswer,
     mode,
     handleModeChange,
-    // handleImageUpload,
     setMode,
     image,
     setImage,
     tempImage,
     setTempImage,
-    fileInputRef, // Return file input reference
+    fileInputRef,
   };
 }
