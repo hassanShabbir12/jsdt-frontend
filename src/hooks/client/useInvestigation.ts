@@ -19,13 +19,16 @@ import { ExtendedCreateQuestionDto } from '@/interface/question';
 import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 import { initialInstructions, staticImage } from '@/utils/dump';
 
-export const useInvestigation = (): UseInvestigationReturn => {
+// import useEditor from './useGrid';
+
+export const useInvestigation = (editorValue: string): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [isLearner, setIsLearner] = useState<boolean | null>(null);
+  const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -203,6 +206,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
         instructionsData:
           typeof instructions === 'object' ? instructions : JSON.parse(instructions),
         items: questions.map((item) => item.id),
+        grid: editorValue,
       };
       const response = (await apiClient.pdf.pdfControllerDownloadPdf(data)) as unknown as {
         data: Blob;
@@ -287,5 +291,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
     isOpen,
     setIsOpen,
     pdfLoading,
+    currentQuestionId,
+    setCurrentQuestionId,
   };
 };

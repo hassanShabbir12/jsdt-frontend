@@ -1,5 +1,4 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import MathType from '@wiris/mathtype-ckeditor5/dist/index.js';
 import {
   Alignment,
   Autoformat,
@@ -8,15 +7,7 @@ import {
   CKFinder,
   CKFinderUploadAdapter,
   ClassicEditor,
-  CloudServices,
   Essentials,
-  FontBackgroundColor,
-  FontColor,
-  FontFamily,
-  FontSize,
-  Highlight,
-  HorizontalLine,
-  HtmlEmbed,
   Image,
   ImageCaption,
   ImageResize,
@@ -52,20 +43,17 @@ import { FormatPainter } from 'ckeditor5-premium-features';
 
 import { cn } from '@/lib/utils';
 
-const RichTextEditor = ({
+const GTextEditor = ({
   value,
   onChange,
   showToolbar = true,
-  disabled = false,
 }: {
   value: string;
   onChange?: (content: string) => void;
   showToolbar?: boolean;
-  disabled?: boolean;
 }): React.ReactNode => (
   <div className={cn(!showToolbar && 'ck-custome-editor')}>
     <CKEditor
-      disabled={disabled}
       editor={ClassicEditor}
       data={value}
       onChange={(_, editor) => {
@@ -86,14 +74,6 @@ const RichTextEditor = ({
           BlockQuote,
           CKFinderUploadAdapter,
           CKFinder,
-          CloudServices,
-          FontBackgroundColor,
-          FontColor,
-          FontFamily,
-          FontSize,
-          Highlight,
-          HorizontalLine,
-          HtmlEmbed,
           Image,
           ImageCaption,
           ImageResize,
@@ -123,77 +103,17 @@ const RichTextEditor = ({
           Underline,
           WordCount,
           FormatPainter,
-          MathType,
         ],
         toolbar: {
           items: [
-            'undo',
-            'redo',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'superscript',
-            'subscript',
-            'highlight',
-            '|',
-            'alignment',
-            'removeFormat',
-            '|',
-            'link',
-            'blockQuote',
-            '|',
-            'bulletedList',
-            'numberedList',
-            'todoList',
-            '|',
-            'htmlEmbed',
-            '|',
-            'fontFamily',
-            'fontSize',
-            'fontColor',
-            'fontBackgroundColor',
-            '|',
             'insertTable',
             'tableColumn',
             'tableRow',
             'mergeTableCells',
             'tableCellProperties',
             'tableProperties',
-            '|',
-            'specialCharacters',
-            'horizontalLine',
-            'sourceEditing',
-            '|',
-            'MathType',
-            'ChemType',
           ],
           shouldNotGroupWhenFull: true,
-        },
-        // math: {
-        //   engine: 'mathjax', // Specify MathJax rendering engine
-        //   outputType: 'script', // Output type, e.g., TeX or MathML
-        //   mathjaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js', // MathJax library
-        // },
-        heading: {
-          options: [
-            { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
-            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-            { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-            { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' },
-          ],
-        },
-        image: {
-          toolbar: [
-            'imageTextAlternative',
-            'imageStyle:inline',
-            'imageStyle:block',
-            'imageStyle:side',
-          ],
         },
         table: {
           contentToolbar: [
@@ -209,4 +129,4 @@ const RichTextEditor = ({
   </div>
 );
 
-export default RichTextEditor;
+export default GTextEditor;

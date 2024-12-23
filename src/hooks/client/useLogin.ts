@@ -36,7 +36,7 @@ export const useLogin = (): UseLoginReturn => {
       )) as unknown as ApiResponse<LoginResponse>;
       const { data } = response;
 
-      if (data.data.user.isSubscribed === 'active') {
+      if (data.data.user.subscriptionId) {
         localStorage.setItem('access_token', data.data.access_token);
 
         toast({
