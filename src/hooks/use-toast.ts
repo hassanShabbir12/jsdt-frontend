@@ -149,6 +149,7 @@ function toast({ ...props }: Toast): {
       ...props,
       id,
       open: true,
+      onClick: () => dismiss(),
       onOpenChange: (open) => {
         if (!open) {
           dismiss();

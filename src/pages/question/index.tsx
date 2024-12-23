@@ -56,7 +56,7 @@ export const Question: FC = () => {
     resetFormFields,
     processingTextAnswer,
     mode,
-    handleImageUpload,
+    // handleImageUpload,
     setMode,
     tempImage,
     setTempImage,
@@ -89,7 +89,7 @@ export const Question: FC = () => {
   const { topics } = useTopicList();
 
   return (
-    <div className='mb-12 px-6 pt-24 md:pl-0 relative z-10 md:pr-6 md:pt-16'>
+    <div className='relative z-10 mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='mb-6 flex items-center justify-between border-b border-neutral-200 px-6 py-3'>
           <h1 className='text-lg font-semibold text-zinc-800'>Questions</h1>
@@ -105,7 +105,7 @@ export const Question: FC = () => {
             }}
           >
             <DialogTrigger asChild>
-              <Button className='w-34 h-10 z-50 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
+              <Button className='w-34 z-50 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
                 Add New Question
               </Button>
             </DialogTrigger>
@@ -374,7 +374,21 @@ export const Question: FC = () => {
                         accept='image/*'
                         className='hidden'
                         ref={fileInputRef}
-                        onChange={handleImageUpload}
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+
+                          if (file) {
+                            const reader = new FileReader();
+
+                            reader.onloadend = (): void => {
+                              const base64Image = reader.result as string;
+
+                              setTempImage(base64Image);
+                              form.setValue('image', base64Image);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
                       />
                     </label>
                   </div>
@@ -540,7 +554,7 @@ export const Question: FC = () => {
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
                       {item.type === 'simple' ? (
-                        <RichTextEditor value={item.question} showToolbar={false} />
+                        <RichTextEditor value={item.question} showToolbar={false} disabled={true} />
                       ) : (
                         <MathFormulaDisplay formula={item.question} />
                       )}

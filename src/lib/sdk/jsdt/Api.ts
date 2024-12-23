@@ -63,6 +63,10 @@ export interface NewPasswordDto {
 
 export type VerifyAndResetPasswordDto = object;
 
+export interface CreateSubscriptionDto {
+  orderId: string;
+}
+
 export interface CreateGradeDto {
   title: string;
 }
@@ -157,6 +161,8 @@ export interface InstructionsDataDto {
 export interface IGeneratePdfDto {
   /** Cover data */
   coverData?: CoverDataDto;
+  /** Grid property */
+  grid?: string;
   /** Array of instructions data */
   instructionsData: InstructionsDataDto[];
   /**
@@ -168,10 +174,6 @@ export interface IGeneratePdfDto {
 
 export interface QuestionDto {
   items: string[];
-}
-
-export interface CreateSubscriptionDto {
-  orderId: string;
 }
 
 export enum CreateUserDtoRoleEnum {
@@ -508,6 +510,41 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
       this.request<void, any>({
         path: `/auth/${id}`,
         method: 'DELETE',
+        ...params,
+      }),
+  };
+  paypal = {
+    /**
+     * No description
+     *
+     * @tags Paypal
+     * @name PayPalControllerCreateSubscription
+     * @request POST:/paypal/create-plan
+     * @secure
+     */
+    payPalControllerCreateSubscription: (data: CreateSubscriptionDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/paypal/create-plan`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paypal
+     * @name PayPalControllerHandlePayPalWebhook
+     * @request POST:/paypal/webhook
+     * @secure
+     */
+    payPalControllerHandlePayPalWebhook: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/paypal/webhook`,
+        method: 'POST',
+        secure: true,
         ...params,
       }),
   };
@@ -947,25 +984,6 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
         method: 'POST',
         body: data,
         type: ContentType.FormData,
-        ...params,
-      }),
-  };
-  paypal = {
-    /**
-     * No description
-     *
-     * @tags Paypal
-     * @name PayPalControllerCreateSubscription
-     * @request POST:/paypal/create-plan
-     * @secure
-     */
-    payPalControllerCreateSubscription: (data: CreateSubscriptionDto, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/paypal/create-plan`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
         ...params,
       }),
   };

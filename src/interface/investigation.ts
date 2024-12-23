@@ -66,4 +66,6 @@ export interface UseInvestigationReturn {
   handleCheckData: () => void;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  currentQuestionId: string | null;
+  setCurrentQuestionId: (id: string | null) => void;
 }

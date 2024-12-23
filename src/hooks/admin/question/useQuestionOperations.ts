@@ -156,6 +156,7 @@ export function useQuestionOperations(
       setModalOpen(false);
       setIsEditing(false);
       setQuestionToDelete(null);
+      setTempImage('');
     } catch (error) {
       if (error instanceof AxiosError) {
         handleError(error, logout, toast, navigate);

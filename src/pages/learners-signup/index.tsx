@@ -22,6 +22,10 @@ export const LearnerSignUp: FC = () => {
   const { form, isLoading, onSubmit, isTeacher, showPassword, setShowPassword } = useSignup();
   const { userRole } = useAuth();
 
+  if (userRole === null) {
+    return;
+  }
+
   return (
     <section className='relative flex min-h-full flex-col overflow-hidden bg-white p-4 sm:w-1/2 lg:p-6 xl:p-10'>
       <form onSubmit={onSubmit} noValidate>

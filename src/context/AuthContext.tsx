@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<CreateUserDto | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [userRole, setUserRole] = useState<string | null>('learner');
+  const [userRole, setUserRole] = useState<string | null>(null);
   const [isPayment, setIsPayment] = useState<string>('');
   const [signupData, setSignupData] = useLocalStorage<CreateUserDto | null>('signupData', null);
 
@@ -36,6 +36,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   useEffect(() => {
+    const userType = localStorage.getItem('userType') || 'learner';
+
+    localStorage.setItem('userType', userType);
+    setUserRole(userType);
     const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('user');
 
