@@ -149,10 +149,22 @@ input[type='number'] {
   display: none;
 }
 
-.ck.ck-balloon-panel.ck-evaluation-badge-balloon[class*="position_border"] {
+.ck.ck-balloon-panel.ck-evaluation-badge-balloon[class*='position_border'] {
   border-color: #fff;
 }
 
+.ck .ck-powered-by {
+  display: none;
+}
+
 .ck-custome-editor p br {
+  display: none;
+}
+.block-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.block-scroll::-webkit-scrollbar {
   display: none;
 }
