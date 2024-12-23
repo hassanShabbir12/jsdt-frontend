@@ -70,8 +70,7 @@ const RichTextEditor = ({
         onChange?.(data);
       }}
       config={{
-        licenseKey:
-          'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3MzU2MDMxOTksImp0aSI6IjViYWJkYzFkLTIxZmMtNDIyOC1hNzM0LTRhZDZlZDc3NDJmOSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImIxMDE2OTA3In0.r3YY7GTKcdPwkgxMORhn1GOq7nJBMD6I92IxDRGpDzMDJHX6hNjlmHo8Pj5ecsE038LZRevNej0CKrGN6m7whQ', // Or 'GPL'.
+        licenseKey: import.meta.env.VITE_CKEDITOR_LICENSE_KEY,
         removePlugins: ['Title'],
         plugins: [
           Essentials,
@@ -138,7 +137,6 @@ const RichTextEditor = ({
             'removeFormat',
             '|',
             'link',
-            'unlink',
             'blockQuote',
             '|',
             'bulletedList',
@@ -153,6 +151,11 @@ const RichTextEditor = ({
             'fontBackgroundColor',
             '|',
             'insertTable',
+            'tableColumn',
+            'tableRow',
+            'mergeTableCells',
+            'tableCellProperties',
+            'tableProperties',
             '|',
             'specialCharacters',
             'horizontalLine',
