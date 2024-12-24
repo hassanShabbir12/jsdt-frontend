@@ -167,7 +167,7 @@ const RichTextEditor = ({
             'sourceEditing',
             '|',
             'MathType',
-            'ChemType',
+            // 'ChemType',
           ],
           shouldNotGroupWhenFull: true,
         },
