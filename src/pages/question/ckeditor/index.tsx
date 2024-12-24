@@ -1,5 +1,4 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import MathType from '@wiris/mathtype-ckeditor5/dist/index.js';
 import {
   Alignment,
   Autoformat,
@@ -123,7 +122,6 @@ const RichTextEditor = ({
           Underline,
           WordCount,
           FormatPainter,
-          MathType,
         ],
         toolbar: {
           items: [
@@ -165,9 +163,6 @@ const RichTextEditor = ({
             'specialCharacters',
             'horizontalLine',
             'sourceEditing',
-            '|',
-            'MathType',
-            // 'ChemType',
           ],
           shouldNotGroupWhenFull: true,
         },
