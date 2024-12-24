@@ -46,7 +46,6 @@ import { cn } from '@/lib/utils';
 
 import RichTextEditor from './ckeditor';
 import MathFormulaDisplay from './formula';
-import MathLiveInput from './math-live';
 
 export const Question: FC = () => {
   const {
@@ -418,39 +417,28 @@ export const Question: FC = () => {
                     Question
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
-                    {mode === 'simple' ? (
-                      <>
-                        <RichTextEditor
-                          value={form.getValues('question')}
-                          onChange={(content) => form.setValue('question', content)}
-                          showToolbar={true}
-                        />
-                        <div className='relative p-4 pt-2'>
-                          <Button
-                            type='button'
-                            onClick={() => handleProcessText('question')}
-                            loading={processingText}
-                            variant='outline'
-                            className={cn(
-                              'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
-                              'bg-gray-200',
-                              {
-                                'bg-primary': processingText,
-                              },
-                            )}
-                          >
-                            Write question with AI
-                          </Button>
-                        </div>
-                      </>
-                    ) : (
-                      <MathLiveInput
-                        value={form.getValues('question')}
-                        onChange={(value) => {
-                          form.setValue('question', value);
-                        }}
-                      />
-                    )}
+                    <RichTextEditor
+                      value={form.getValues('question')}
+                      onChange={(content) => form.setValue('question', content)}
+                      showToolbar={true}
+                    />
+                    <div className='relative p-4 pt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('question')}
+                        loading={processingText}
+                        variant='outline'
+                        className={cn(
+                          'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingText,
+                          },
+                        )}
+                      >
+                        Write question with AI
+                      </Button>
+                    </div>
                   </div>
                   {errors.question && (
                     <span className='text-sm text-red-500'>{errors.question.message}</span>
@@ -461,39 +449,28 @@ export const Question: FC = () => {
                     Answer
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
-                    {mode === 'simple' ? (
-                      <>
-                        <RichTextEditor
-                          value={form.getValues('answer')}
-                          onChange={(content) => form.setValue('answer', content)}
-                          showToolbar={true}
-                        />
-                        <div className='relative p-4 pt-2'>
-                          <Button
-                            type='button'
-                            onClick={() => handleProcessText('answer')}
-                            loading={processingTextAnswer}
-                            variant='outline'
-                            className={cn(
-                              'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
-                              'bg-gray-200',
-                              {
-                                'bg-primary': processingTextAnswer,
-                              },
-                            )}
-                          >
-                            Write answer with AI
-                          </Button>
-                        </div>
-                      </>
-                    ) : (
-                      <MathLiveInput
-                        value={form.getValues('answer')}
-                        onChange={(value) => {
-                          form.setValue('answer', value);
-                        }}
-                      />
-                    )}
+                    <RichTextEditor
+                      value={form.getValues('answer')}
+                      onChange={(content) => form.setValue('answer', content)}
+                      showToolbar={true}
+                    />
+                    <div className='relative p-4 pt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('answer')}
+                        loading={processingTextAnswer}
+                        variant='outline'
+                        className={cn(
+                          'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingTextAnswer,
+                          },
+                        )}
+                      >
+                        Write answer with AI
+                      </Button>
+                    </div>
                   </div>
                   {errors.answer && (
                     <span className='text-sm text-red-500'>{errors.answer.message}</span>
