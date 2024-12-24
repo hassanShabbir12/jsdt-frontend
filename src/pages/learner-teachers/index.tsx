@@ -636,8 +636,8 @@ export const LearnerTeacher: FC = () => {
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <div className='block-scroll md:h-32 h-28 lg:h-40 overflow-y-auto sm:flex block gap-x-5'>
-                        <div className='h-10 w-20'>
-                          {item.image && <img className='' src={item.image} alt='Question Image' />}
+                        <div className='h-10 w-20 mb-10'>
+                          {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
                         </div>
                         <div className='w-full'>
                           <h3 className='mb-3 text-2xl font-semibold leading-7'>
@@ -676,8 +676,8 @@ export const LearnerTeacher: FC = () => {
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
               <div className='sm:flex block gap-x-5'>
-                <div className='h-10 w-20'>
-                  {item.image && <img src={item.image} alt='Question Image' />}
+                <div className='h-10 w-20 mb-10'>
+                  {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
                 </div>
                 <div className='w-full'>
                   <div className='mb-5 flex w-full justify-between'>
