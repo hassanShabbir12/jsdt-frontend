@@ -55,21 +55,34 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
     mode: 'onTouched',
   });
 
+  const checkUserSubscription = async (
+    token: string | undefined | null,
+    setIsLoading: (loading: boolean) => void,
+  ): Promise<boolean> => {
+    const responseMe = (await apiClient.auth.usersControllerGetMe()) as unknown as AxiosResponse<
+      ApiResponse<CreateUserDto>
+    >;
+
+    if (responseMe.data.data.isSubscribed === 'inactive') {
+      toast({
+        title: 'Subscription',
+        description: 'Please subscribe to continue.',
+      });
+      login(responseMe.data.data, token as string);
+      setIsLoading(false);
+
+      return false;
+    }
+
+    return true;
+  };
+
   const onSubmit: SubmitHandler<InvestigationFormData> = async (data): Promise<void> => {
     try {
       setIsLoading(true);
-      const responseMe = (await apiClient.auth.usersControllerGetMe()) as unknown as AxiosResponse<
-        ApiResponse<CreateUserDto>
-      >;
+      const isSubscribed = await checkUserSubscription(token, setIsLoading);
 
-      if (responseMe.data.data.isSubscribed === 'inactive') {
-        toast({
-          title: 'Subscription',
-          description: 'Please subscribe to continue.',
-        });
-        login(responseMe.data.data, token as string);
-        setIsLoading(false);
-
+      if (!isSubscribed) {
         return;
       }
       const response = (await apiClient.questions.questionsControllerGetQuestion({
@@ -262,6 +275,12 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
   }, [user, form]);
 
   useEffect(() => {
+    const isSubscribed = checkUserSubscription(token, setIsLoading);
+
+    if (!isSubscribed) {
+      return;
+    }
+
     localStorage.setItem('instructions', JSON.stringify(initialInstructions));
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
