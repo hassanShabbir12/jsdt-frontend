@@ -615,7 +615,7 @@ export const LearnerTeacher: FC = () => {
                   ))}
                 </CarouselContent >
                 <div className='relative'>
-                  <span className='absolute -top-48 right-0 z-10 hidden min-h-screen w-20 bg-white sm:block'></span>
+                  <span className='absolute -top-52 right-0 z-10 hidden min-h-screen w-20 bg-white sm:block'></span>
                 </div>
                 <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
               </Carousel >
