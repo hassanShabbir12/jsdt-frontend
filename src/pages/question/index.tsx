@@ -55,7 +55,6 @@ export const Question: FC = () => {
     resetFormFields,
     processingTextAnswer,
     mode,
-    // handleImageUpload,
     setMode,
     tempImage,
     setTempImage,
@@ -394,6 +393,7 @@ export const Question: FC = () => {
                   <input
                     type='file'
                     ref={fileInputRef}
+                    accept='image/*'
                     className='hidden'
                     onChange={(event) => {
                       const file = event.target.files?.[0];

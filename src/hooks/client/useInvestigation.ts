@@ -118,6 +118,10 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
         setQuestions(questions);
       } else {
         setQuestions([response.data.data[0]]);
+        toast({
+          title: 'Questions Added',
+          description: 'Questions have been added to your list.',
+        });
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
