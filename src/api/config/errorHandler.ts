@@ -32,6 +32,7 @@ export const handleError = (
   logout?: () => void | undefined,
   toast?: ToastFunction,
   navigate?: (text: string) => void | undefined,
+  success?: boolean | undefined,
 ): Promise<never> => {
   if (error.response) {
     const responseData = error.response.data as ErrorResponse;
@@ -39,11 +40,15 @@ export const handleError = (
     if (error.response.status === 401) {
       if (logout && navigate) {
         logout();
-        navigate('/');
+        if (success) {
+          navigate('/admin/login');
+        } else {
+          navigate('/');
+        }
       }
       if (toast) {
         toast({
-          title: 'Error',
+          title: success ? 'Success' : 'Error',
           description: responseData.message,
         });
       }

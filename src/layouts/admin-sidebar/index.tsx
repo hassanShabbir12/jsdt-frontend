@@ -27,7 +27,7 @@ export const Sidebar: FC = () => {
       },
     };
 
-    handleError(error as AxiosError, logout, toast, navigate);
+    handleError(error as AxiosError, logout, toast, navigate, true);
   };
 
   const [activeIndex, setActiveIndex] = useState(() =>
