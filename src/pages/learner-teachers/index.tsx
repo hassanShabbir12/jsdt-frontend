@@ -636,23 +636,29 @@ export const LearnerTeacher: FC = () => {
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <div className='block-scroll md:h-32 h-28 lg:h-40 overflow-y-auto sm:flex block gap-x-5'>
-                        <div className='h-10 w-20 mb-10'>
-                          {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
-                        </div>
                         <div className='w-full'>
-                          <h3 className='mb-3 text-2xl font-semibold leading-7'>
-                            Question {index + 1}
-                          </h3>
-                          <ScrollArea>
-                            <p className='line-clamp-3'>
-                              {item.type === 'simple' ? (
-                                <RichTextEditor value={item.question} showToolbar={false} />
-                              ) : (
-                                <MathFormulaDisplay formula={item.question} />
-                              )}
-                            </p>
-                            <ScrollBar orientation="horizontal" />
-                          </ScrollArea>
+                          <div className='flex gap-x-2 align-center relative pt-12'>
+                            <div className='h-10 w-20'>
+                              {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
+                            </div>
+                            <div>
+                              <div className='absolute top-0'>
+                                <h3 className='mb-3 text-2xl font-semibold leading-7'>
+                                  Question {index + 1}
+                                </h3>
+                              </div>
+                              <ScrollArea>
+                                <p className='line-clamp-3'>
+                                  {item.type === 'simple' ? (
+                                    <RichTextEditor value={item.question} showToolbar={false} />
+                                  ) : (
+                                    <MathFormulaDisplay formula={item.question} />
+                                  )}
+                                </p>
+                                <ScrollBar orientation="horizontal" />
+                              </ScrollArea>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -666,9 +672,11 @@ export const LearnerTeacher: FC = () => {
             </Carousel>
           ) : null}
         </div>
-        <Button onClick={handleAddQuestion} className='mx-auto flex w-80 px-20 py-6 text-base'>
-          Add
-        </Button>
+        <div className="pt-10">
+          <Button onClick={handleAddQuestion} className='mx-auto flex w-80 px-20 py-6 text-base'>
+            Add
+          </Button>
+        </div>
         <div className='pt-12'>
           {questions.map((item, index) => (
             <div
@@ -676,11 +684,8 @@ export const LearnerTeacher: FC = () => {
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
               <div className='sm:flex block gap-x-5'>
-                <div className='h-10 w-20 mb-10'>
-                  {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
-                </div>
                 <div className='w-full'>
-                  <div className='mb-5 flex w-full justify-between'>
+                  <div className='mb-10 flex w-full justify-between'>
                     <span className='inline-block text-2xl font-semibold'>
                       Question {index + 1}
                     </span>
@@ -722,13 +727,18 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <p className='mb-10 mt-6 block text-black'>
-                    {item.type === 'simple' ? (
-                      <RichTextEditor value={item.question} showToolbar={false} />
-                    ) : (
-                      <MathFormulaDisplay formula={item.question} />
-                    )}
-                  </p>
+                  <div className='flex items-center'>
+                    <div className='h-10 w-20'>
+                      {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
+                    </div>
+                    <p className='block text-black'>
+                      {item.type === 'simple' ? (
+                        <RichTextEditor value={item.question} showToolbar={false} />
+                      ) : (
+                        <MathFormulaDisplay formula={item.question} />
+                      )}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
