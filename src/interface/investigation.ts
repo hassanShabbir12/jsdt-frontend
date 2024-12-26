@@ -29,12 +29,6 @@ const baseInvestigationSchema = {
       required_error: 'Please select a topic',
     })
     .min(1, 'Topic is required'),
-  totalMarks: z
-    .number({
-      required_error: 'Total marks is required',
-    })
-    .min(1, 'Total marks must be greater than 0')
-    .max(1000, 'Total marks cannot exceed 1000'),
 };
 
 export const investigationSchema = z.discriminatedUnion('role', [

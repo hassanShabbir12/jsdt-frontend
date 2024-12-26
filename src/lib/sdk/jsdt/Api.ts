@@ -489,6 +489,22 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
      * No description
      *
      * @tags Auth
+     * @name UsersControllerGetMe
+     * @request GET:/auth/me
+     * @secure
+     */
+    usersControllerGetMe: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/auth/me`,
+        method: 'GET',
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Auth
      * @name UsersControllerFindOne
      * @request GET:/auth/{id}
      */
@@ -543,6 +559,22 @@ export class JsdtAPI<SecurityDataType extends unknown> extends HttpClient<Securi
     payPalControllerHandlePayPalWebhook: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/paypal/webhook`,
+        method: 'POST',
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paypal
+     * @name PayPalControllerHandleIpn
+     * @request POST:/paypal/ipn
+     * @secure
+     */
+    payPalControllerHandleIpn: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/paypal/ipn`,
         method: 'POST',
         secure: true,
         ...params,

@@ -26,7 +26,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -334,30 +333,6 @@ export const LearnerTeacher: FC = () => {
                 </div>
               </div>
             )}
-            <div className='mb-4 w-full px-4 md:mb-6 md:w-1/2'>
-              <Label htmlFor='totalMarks' className='mb-0.5 block'>
-                Total Marks
-              </Label>
-              <Controller
-                name='totalMarks'
-                control={form.control}
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    min='0'
-                    type='number'
-                    value={value || ''}
-                    onChange={(e) => onChange(Number(e.target.value))}
-                    placeholder='Enter total marks (e.g., 500, 1000)'
-                    className='h-12 rounded-lg border border-solid border-neutral-200 px-4 py-2 placeholder:text-stone-300'
-                  />
-                )}
-              />
-              {form.formState.errors.totalMarks && (
-                <span className='text-sm text-red-500'>
-                  {form.formState.errors.totalMarks.message}
-                </span>
-              )}
-            </div>
           </div>
           <div className='mb-8 inline-flex w-full justify-end md:w-full'>
             <Button

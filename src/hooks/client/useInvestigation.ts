@@ -16,7 +16,7 @@ import {
   UseInvestigationReturn,
 } from '@/interface/investigation';
 import { ExtendedCreateQuestionDto } from '@/interface/question';
-import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
+import { CreateUserDto, CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 import { initialInstructions, staticImage } from '@/utils/dump';
 
 export const useInvestigation = (editorValue: string): UseInvestigationReturn => {
@@ -28,7 +28,7 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
   const [isLearner, setIsLearner] = useState<boolean | null>(null);
   const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
-  const { user, logout } = useAuth();
+  const { user, login, logout, token } = useAuth();
   const navigate = useNavigate();
 
   interface IUploadedFileResponse {
@@ -51,7 +51,6 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
       topic: '',
       role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
       difficultyLevel: isLearner ? undefined : undefined,
-      totalMarks: undefined,
     },
     mode: 'onTouched',
   });
@@ -59,14 +58,26 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
   const onSubmit: SubmitHandler<InvestigationFormData> = async (data): Promise<void> => {
     try {
       setIsLoading(true);
+      const responseMe = (await apiClient.auth.usersControllerGetMe()) as unknown as AxiosResponse<
+        ApiResponse<CreateUserDto>
+      >;
 
+      if (responseMe.data.data.isSubscribed === 'inactive') {
+        toast({
+          title: 'Subscription',
+          description: 'Please subscribe to continue.',
+        });
+        login(responseMe.data.data, token as string);
+        setIsLoading(false);
+
+        return;
+      }
       const response = (await apiClient.questions.questionsControllerGetQuestion({
         grade: data.grade,
         subject: data.subject,
         topic: data.topic,
         assessmentType: data.assessmentType,
         difficultyLevel: data.difficultyLevel,
-        totalMarks: String(data.totalMarks),
         certificateType: data.nsc,
       })) as unknown as AxiosResponse<ApiResponse<ExtendedCreateQuestionDto[]>>;
       const newQuestions = response.data.data.filter(
@@ -246,7 +257,6 @@ export const useInvestigation = (editorValue: string): UseInvestigationReturn =>
         topic: '',
         role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
         difficultyLevel: isLearner ? undefined : undefined,
-        totalMarks: undefined,
       });
     }
   }, [user, form]);
