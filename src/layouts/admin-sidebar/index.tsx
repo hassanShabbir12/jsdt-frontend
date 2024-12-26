@@ -27,7 +27,7 @@ export const Sidebar: FC = () => {
       },
     };
 
-    handleError(error as AxiosError, logout, toast, navigate);
+    handleError(error as AxiosError, logout, toast, navigate, true);
   };
 
   const [activeIndex, setActiveIndex] = useState(() =>
@@ -66,7 +66,7 @@ export const Sidebar: FC = () => {
         navigate('/admin/settings');
         break;
       default:
-        navigate('/admin'); // Fallback navigation
+        // navigate('/admin'); // Fallback navigation
         break;
     }
   }, []);
