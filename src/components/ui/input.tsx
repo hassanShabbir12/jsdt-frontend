@@ -8,11 +8,12 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, ...props }, ref) => {
-    const handleWheel = (event: React.WheelEvent<HTMLInputElement>) => {
+    const handleWheel = (event: React.WheelEvent<HTMLInputElement>): void => {
       if (type === 'number') {
         event.currentTarget.blur();
       }
     };
+
     return (
       <>
         <input
@@ -26,7 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           tabIndex={-1}
           {...props}
         />
-        {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+        {error && <p className='mt-1 text-sm text-red-500'>{error}</p>}
       </>
     );
   },

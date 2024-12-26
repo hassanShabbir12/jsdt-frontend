@@ -149,7 +149,7 @@ input[type='number'] {
   display: none;
 }
 
-.ck.ck-balloon-panel.ck-evaluation-badge-balloon[class*="position_border"] {
+.ck.ck-balloon-panel.ck-evaluation-badge-balloon[class*='position_border'] {
   border-color: #fff;
 }
 
@@ -161,10 +161,10 @@ input[type='number'] {
   display: none;
 }
 .block-scroll {
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .block-scroll::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }

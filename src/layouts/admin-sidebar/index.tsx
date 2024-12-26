@@ -1,22 +1,35 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { AxiosError } from 'axios';
+
+import { handleError } from '@/api/config/errorHandler';
 import { Grades } from '@/components/icon/grades';
 import { Logout } from '@/components/icon/logout';
 import { Question } from '@/components/icon/question';
 import { Settings } from '@/components/icon/settings';
 import { Subject } from '@/components/icon/subject';
 import { Topics } from '@/components/icon/topics';
+import { useAuth } from '@/context/AuthContext';
+import { toast } from '@/hooks/use-toast';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const onHandleClick = (): void => {
-    localStorage.clear();
-    navigate('/admin/login');
+    const error = {
+      response: {
+        status: 401,
+        data: {
+          message: 'You have been logged out',
+        },
+      },
+    };
+
+    handleError(error as AxiosError, logout, toast, navigate);
   };
 
-  const location = useLocation();
   const [activeIndex, setActiveIndex] = useState(() =>
     Number.parseInt(localStorage.getItem('activeIndex') || '0', 10),
   );
@@ -33,29 +46,30 @@ export const Sidebar: FC = () => {
     }
   };
 
-  const determineActiveIndex = (): number => {
-    switch (location.pathname) {
-      case '/admin':
-        return 0;
-      case '/admin/subjects':
-        return 1;
-      case '/admin/topics':
-        return 2;
-      case '/admin/questions':
-        return 3;
-      case '/admin/settings':
-        return 4;
-      default:
-        return 0;
-    }
-  };
-
   useEffect(() => {
-    const newIndex = determineActiveIndex();
+    const newIndex = Number.parseInt(localStorage.getItem('activeIndex') || '0', 10);
 
-    setActiveIndex(newIndex);
-    localStorage.setItem('activeIndex', newIndex.toString());
-  }, [location]);
+    switch (newIndex) {
+      case 0:
+        navigate('/admin');
+        break;
+      case 1:
+        navigate('/admin/subjects');
+        break;
+      case 2:
+        navigate('/admin/topics');
+        break;
+      case 3:
+        navigate('/admin/questions');
+        break;
+      case 4:
+        navigate('/admin/settings');
+        break;
+      default:
+        navigate('/admin'); // Fallback navigation
+        break;
+    }
+  }, []);
 
   useEffect(() => {
     if (isToggled) {
@@ -69,9 +83,10 @@ export const Sidebar: FC = () => {
     };
   }, [isToggled]);
 
-  const handleSidebar = (type: number): void => {
+  const handleSidebar = (type: number, path: string): void => {
     setActiveIndex(type);
     localStorage.setItem('activeIndex', type.toString());
+    navigate(path);
 
     if (window.innerWidth <= 768) {
       handleToggle();
@@ -96,9 +111,9 @@ export const Sidebar: FC = () => {
           <ul className='m-0 list-none px-2 pb-16'>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 0 ? 'bg-blue-500' : ''}`}
-              onClick={() => handleSidebar(0)}
+              onClick={() => handleSidebar(0, '/admin')}
             >
-              <Link to='/admin' className='ml-1 flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
+              <div className='ml-1 flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 0 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -109,16 +124,13 @@ export const Sidebar: FC = () => {
                 >
                   Grades
                 </h2>
-              </Link>
+              </div>
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 1 ? 'bg-blue-500' : ''}`}
-              onClick={() => handleSidebar(1)}
+              onClick={() => handleSidebar(1, '/admin/subjects')}
             >
-              <Link
-                to='/admin/subjects'
-                className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
-              >
+              <div className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 1 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -129,13 +141,13 @@ export const Sidebar: FC = () => {
                 >
                   Subjects
                 </h2>
-              </Link>
+              </div>
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 2 ? 'bg-blue-500' : ''}`}
-              onClick={() => handleSidebar(2)}
+              onClick={() => handleSidebar(2, '/admin/topics')}
             >
-              <Link to='/admin/topics' className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
+              <div className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 2 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -146,16 +158,13 @@ export const Sidebar: FC = () => {
                 >
                   Topics
                 </h2>
-              </Link>
+              </div>
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 3 ? 'bg-blue-500' : ''}`}
-              onClick={() => handleSidebar(3)}
+              onClick={() => handleSidebar(3, '/admin/questions')}
             >
-              <Link
-                to='/admin/questions'
-                className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
-              >
+              <div className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 3 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -166,16 +175,13 @@ export const Sidebar: FC = () => {
                 >
                   Questions
                 </h2>
-              </Link>
+              </div>
             </li>
             <li
               className={`group mb-4 cursor-pointer rounded transition-all hover:bg-blue-500 ${activeIndex === 4 ? 'bg-blue-500' : ''}`}
-              onClick={() => handleSidebar(4)}
+              onClick={() => handleSidebar(4, '/admin/settings')}
             >
-              <Link
-                to='/admin/settings'
-                className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'
-              >
+              <div className='flex items-center gap-x-3 pb-3.5 pl-5 pr-2 pt-3'>
                 <div
                   className={`${activeIndex === 4 ? 'text-white' : 'text-zinc-800 group-hover:text-white'}`}
                 >
@@ -186,7 +192,7 @@ export const Sidebar: FC = () => {
                 >
                   Settings
                 </h2>
-              </Link>
+              </div>
             </li>
           </ul>
         </div>

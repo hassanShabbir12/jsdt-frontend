@@ -113,6 +113,21 @@ export function useQuestionOperations(
     return imageResponse?.data?.data?.publicUrl; // Return the uploaded image URL
   };
 
+  const resetFormFields = (): void => {
+    form.reset({
+      question: '',
+      answer: '',
+      certificateType: '',
+      grade: '',
+      subject: '',
+      assessmentType: '',
+      topic: '',
+      difficultyLevel: '',
+      totalMarks: '',
+      image: '',
+    });
+  };
+
   const onSubmit = async (questiondata: QuestionFormValues): Promise<void> => {
     setLoading(true);
     let convertImage = '';
@@ -152,10 +167,12 @@ export function useQuestionOperations(
           description: 'Question created successfully',
         });
       }
-      form.reset(); // Use the passed form
+      form.reset();
       setModalOpen(false);
       setIsEditing(false);
       setQuestionToDelete(null);
+      resetFormFields();
+      setTempImage('');
     } catch (error) {
       if (error instanceof AxiosError) {
         handleError(error, logout, toast, navigate);

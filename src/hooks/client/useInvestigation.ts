@@ -16,18 +16,19 @@ import {
   UseInvestigationReturn,
 } from '@/interface/investigation';
 import { ExtendedCreateQuestionDto } from '@/interface/question';
-import { CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
+import { CreateUserDto, CreateUserDtoRoleEnum } from '@/lib/sdk/jsdt/Api';
 import { initialInstructions, staticImage } from '@/utils/dump';
 
-export const useInvestigation = (): UseInvestigationReturn => {
+export const useInvestigation = (editorValue: string): UseInvestigationReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [questions, setQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [clonedQuestions, setClonedQuestions] = useState<ExtendedCreateQuestionDto[]>([]);
   const [isLearner, setIsLearner] = useState<boolean | null>(null);
+  const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
-  const { user, logout } = useAuth();
+  const { user, login, logout, token } = useAuth();
   const navigate = useNavigate();
 
   interface IUploadedFileResponse {
@@ -50,22 +51,46 @@ export const useInvestigation = (): UseInvestigationReturn => {
       topic: '',
       role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
       difficultyLevel: isLearner ? undefined : undefined,
-      totalMarks: undefined,
     },
     mode: 'onTouched',
   });
 
+  const checkUserSubscription = async (
+    token: string | undefined | null,
+    setIsLoading: (loading: boolean) => void,
+  ): Promise<boolean> => {
+    const responseMe = (await apiClient.auth.usersControllerGetMe()) as unknown as AxiosResponse<
+      ApiResponse<CreateUserDto>
+    >;
+
+    if (responseMe.data.data.isSubscribed === 'inactive') {
+      toast({
+        title: 'Subscription',
+        description: 'Please subscribe to continue.',
+      });
+      login(responseMe.data.data, token as string);
+      setIsLoading(false);
+
+      return false;
+    }
+
+    return true;
+  };
+
   const onSubmit: SubmitHandler<InvestigationFormData> = async (data): Promise<void> => {
     try {
       setIsLoading(true);
+      const isSubscribed = await checkUserSubscription(token, setIsLoading);
 
+      if (!isSubscribed) {
+        return;
+      }
       const response = (await apiClient.questions.questionsControllerGetQuestion({
         grade: data.grade,
         subject: data.subject,
         topic: data.topic,
         assessmentType: data.assessmentType,
         difficultyLevel: data.difficultyLevel,
-        totalMarks: String(data.totalMarks),
         certificateType: data.nsc,
       })) as unknown as AxiosResponse<ApiResponse<ExtendedCreateQuestionDto[]>>;
       const newQuestions = response.data.data.filter(
@@ -93,6 +118,10 @@ export const useInvestigation = (): UseInvestigationReturn => {
         setQuestions(questions);
       } else {
         setQuestions([response.data.data[0]]);
+        toast({
+          title: 'Questions Added',
+          description: 'Questions have been added to your list.',
+        });
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -203,6 +232,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
         instructionsData:
           typeof instructions === 'object' ? instructions : JSON.parse(instructions),
         items: questions.map((item) => item.id),
+        grid: editorValue,
       };
       const response = (await apiClient.pdf.pdfControllerDownloadPdf(data)) as unknown as {
         data: Blob;
@@ -244,12 +274,17 @@ export const useInvestigation = (): UseInvestigationReturn => {
         topic: '',
         role: isLearner ? CreateUserDtoRoleEnum.Learner : CreateUserDtoRoleEnum.Teacher,
         difficultyLevel: isLearner ? undefined : undefined,
-        totalMarks: undefined,
       });
     }
   }, [user, form]);
 
   useEffect(() => {
+    const isSubscribed = checkUserSubscription(token, setIsLoading);
+
+    if (!isSubscribed) {
+      return;
+    }
+
     localStorage.setItem('instructions', JSON.stringify(initialInstructions));
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -287,5 +322,7 @@ export const useInvestigation = (): UseInvestigationReturn => {
     isOpen,
     setIsOpen,
     pdfLoading,
+    currentQuestionId,
+    setCurrentQuestionId,
   };
 };

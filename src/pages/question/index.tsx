@@ -46,7 +46,6 @@ import { cn } from '@/lib/utils';
 
 import RichTextEditor from './ckeditor';
 import MathFormulaDisplay from './formula';
-import MathLiveInput from './math-live';
 
 export const Question: FC = () => {
   const {
@@ -56,7 +55,6 @@ export const Question: FC = () => {
     resetFormFields,
     processingTextAnswer,
     mode,
-    handleImageUpload,
     setMode,
     tempImage,
     setTempImage,
@@ -89,7 +87,7 @@ export const Question: FC = () => {
   const { topics } = useTopicList();
 
   return (
-    <div className='mb-12 px-6 pt-24 md:pl-0 relative z-10 md:pr-6 md:pt-16'>
+    <div className='relative z-10 mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='mb-6 flex items-center justify-between border-b border-neutral-200 px-6 py-3'>
           <h1 className='text-lg font-semibold text-zinc-800'>Questions</h1>
@@ -105,7 +103,7 @@ export const Question: FC = () => {
             }}
           >
             <DialogTrigger asChild>
-              <Button className='w-34 h-10 z-50 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
+              <Button className='w-34 z-50 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
                 Add New Question
               </Button>
             </DialogTrigger>
@@ -374,13 +372,28 @@ export const Question: FC = () => {
                         accept='image/*'
                         className='hidden'
                         ref={fileInputRef}
-                        onChange={handleImageUpload}
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+
+                          if (file) {
+                            const reader = new FileReader();
+
+                            reader.onloadend = (): void => {
+                              const base64Image = reader.result as string;
+
+                              setTempImage(base64Image);
+                              form.setValue('image', base64Image);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
                       />
                     </label>
                   </div>
                   <input
                     type='file'
                     ref={fileInputRef}
+                    accept='image/*'
                     className='hidden'
                     onChange={(event) => {
                       const file = event.target.files?.[0];
@@ -404,39 +417,28 @@ export const Question: FC = () => {
                     Question
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
-                    {mode === 'simple' ? (
-                      <>
-                        <RichTextEditor
-                          value={form.getValues('question')}
-                          onChange={(content) => form.setValue('question', content)}
-                          showToolbar={true}
-                        />
-                        <div className='relative p-4 pt-2'>
-                          <Button
-                            type='button'
-                            onClick={() => handleProcessText('question')}
-                            loading={processingText}
-                            variant='outline'
-                            className={cn(
-                              'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
-                              'bg-gray-200',
-                              {
-                                'bg-primary': processingText,
-                              },
-                            )}
-                          >
-                            Write question with AI
-                          </Button>
-                        </div>
-                      </>
-                    ) : (
-                      <MathLiveInput
-                        value={form.getValues('question')}
-                        onChange={(value) => {
-                          form.setValue('question', value);
-                        }}
-                      />
-                    )}
+                    <RichTextEditor
+                      value={form.getValues('question')}
+                      onChange={(content) => form.setValue('question', content)}
+                      showToolbar={true}
+                    />
+                    <div className='relative p-4 pt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('question')}
+                        loading={processingText}
+                        variant='outline'
+                        className={cn(
+                          'cursor-pointer w-40 rounded-full !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingText,
+                          },
+                        )}
+                      >
+                        Write question with AI
+                      </Button>
+                    </div>
                   </div>
                   {errors.question && (
                     <span className='text-sm text-red-500'>{errors.question.message}</span>
@@ -447,39 +449,28 @@ export const Question: FC = () => {
                     Answer
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
-                    {mode === 'simple' ? (
-                      <>
-                        <RichTextEditor
-                          value={form.getValues('answer')}
-                          onChange={(content) => form.setValue('answer', content)}
-                          showToolbar={true}
-                        />
-                        <div className='relative p-4 pt-2'>
-                          <Button
-                            type='button'
-                            onClick={() => handleProcessText('answer')}
-                            loading={processingTextAnswer}
-                            variant='outline'
-                            className={cn(
-                              'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
-                              'bg-gray-200',
-                              {
-                                'bg-primary': processingTextAnswer,
-                              },
-                            )}
-                          >
-                            Write answer with AI
-                          </Button>
-                        </div>
-                      </>
-                    ) : (
-                      <MathLiveInput
-                        value={form.getValues('answer')}
-                        onChange={(value) => {
-                          form.setValue('answer', value);
-                        }}
-                      />
-                    )}
+                    <RichTextEditor
+                      value={form.getValues('answer')}
+                      onChange={(content) => form.setValue('answer', content)}
+                      showToolbar={true}
+                    />
+                    <div className='relative p-4 pt-2'>
+                      <Button
+                        type='button'
+                        onClick={() => handleProcessText('answer')}
+                        loading={processingTextAnswer}
+                        variant='outline'
+                        className={cn(
+                          'cursor-pointer rounded-full w-40 !border-0 px-3 py-2 text-xs text-blue-500',
+                          'bg-gray-200',
+                          {
+                            'bg-primary': processingTextAnswer,
+                          },
+                        )}
+                      >
+                        Write answer with AI
+                      </Button>
+                    </div>
                   </div>
                   {errors.answer && (
                     <span className='text-sm text-red-500'>{errors.answer.message}</span>
@@ -540,7 +531,7 @@ export const Question: FC = () => {
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
                       {item.type === 'simple' ? (
-                        <RichTextEditor value={item.question} showToolbar={false} />
+                        <RichTextEditor value={item.question} showToolbar={false} disabled={true} />
                       ) : (
                         <MathFormulaDisplay formula={item.question} />
                       )}

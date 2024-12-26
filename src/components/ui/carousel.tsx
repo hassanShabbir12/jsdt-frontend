@@ -66,10 +66,7 @@ const Carousel = React.forwardRef<
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
       },
-      [
-        ...(mouseTracking ? [WheelGesturesPlugin()] : []),
-        ...plugins,
-      ],
+      [...(mouseTracking ? [WheelGesturesPlugin()] : []), ...plugins],
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
@@ -77,7 +74,9 @@ const Carousel = React.forwardRef<
 
     const onSelect = React.useCallback(
       (api: CarouselApi) => {
-        if (!api) return;
+        if (!api) {
+          return;
+        }
 
         setCurrentSlide(api.selectedScrollSnap());
         onSlideChange?.(api.selectedScrollSnap());
@@ -96,19 +95,23 @@ const Carousel = React.forwardRef<
     }, [api]);
 
     React.useEffect(() => {
-      if (!api || !setApi) return;
+      if (!api || !setApi) {
+        return;
+      }
       setApi(api);
     }, [api, setApi]);
 
     React.useEffect(() => {
-      if (!api) return;
+      if (!api) {
+        return;
+      }
 
       onSelect(api);
       api.on('reInit', onSelect);
       api.on('select', onSelect);
       api.on('slidesChanged', onSelect);
 
-      return () => {
+      return (): void => {
         api.off('select', onSelect);
       };
     }, [api, onSelect]);
@@ -211,6 +214,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
     );
   },
 );
+
 CarouselDots.displayName = 'CarouselDots';
 
 const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
