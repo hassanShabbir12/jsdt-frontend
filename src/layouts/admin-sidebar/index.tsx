@@ -66,7 +66,7 @@ export const Sidebar: FC = () => {
         navigate('/admin/settings');
         break;
       default:
-        // navigate('/admin'); // Fallback navigation
+        navigate('/admin'); // Fallback navigation
         break;
     }
   }, []);
