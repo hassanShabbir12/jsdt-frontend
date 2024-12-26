@@ -392,20 +392,28 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
                           <div className='block-scroll sm:flex block gap-x-5'>
-                            <div className='h-10 w-20'>
-                              {item.image && <img src={item.image} alt='Question Image' />}
-                            </div>
                             <div>
-                              <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                                Question {index + 1}
-                              </h2>
-                              <p className='m-0'>
-                                {item.type === 'simple' ? (
-                                  <RichTextEditor value={item.question} showToolbar={false} />
-                                ) : (
-                                  <MathFormulaDisplay formula={item.question} />
-                                )}
-                              </p>
+                              <div className='flex items-center gap-x-2'>
+                                <div className='h-10 mt-8 w-20'>
+                                  {item.image && <img src={item.image} alt='Question Image' />}
+                                </div>
+                                <div className='relative'>
+                                  <div className='absolute top-0'>
+                                    <h2 className='text-lg font-semibold md:mb-3 md:text-2xl'>
+                                      Question {index + 1}
+                                    </h2>
+                                  </div>
+                                  <div className='pt-10'>
+                                    <p className='m-0'>
+                                      {item.type === 'simple' ? (
+                                        <RichTextEditor value={item.question} showToolbar={false} />
+                                      ) : (
+                                        <MathFormulaDisplay formula={item.question} />
+                                      )}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -446,21 +454,26 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
-                            <div className=' sm:flex block gap-x-5'>
-                              <div className='h-10 w-20'>
-                                {item.image && <img src={item.image} alt='Question Image' />}
+
+                            <div className='flex items-center gap-x-2'>
+                              <div className='h-10 w-20 sm:mt-8 mt-10'>
+                                <img src={item.image} alt='Question Image' />
                               </div>
-                              <div>
-                                <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                                  Question {index + 1}
-                                </h2>
-                                <p className='m-0'>
-                                  {item.type === 'simple' ? (
-                                    <RichTextEditor value={item.question} showToolbar={false} />
-                                  ) : (
-                                    <MathFormulaDisplay formula={item.question} />
-                                  )}
-                                </p>
+                              <div className='relative'>
+                                <div className='absolute top-0'>
+                                  <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
+                                    Question {index + 1}
+                                  </h2>
+                                </div>
+                                <div className='pt-10'>
+                                  <p className='m-0'>
+                                    {item.type === 'simple' ? (
+                                      <RichTextEditor value={item.question} showToolbar={false} />
+                                    ) : (
+                                      <MathFormulaDisplay formula={item.question} />
+                                    )}
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -637,7 +650,7 @@ export const LearnerTeacher: FC = () => {
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <div className='block-scroll md:h-32 h-28 lg:h-40 overflow-y-auto sm:flex block gap-x-5'>
                         <div className='w-full'>
-                          <div className='flex gap-x-2 align-center relative pt-12'>
+                          <div className='flex gap-x-2 items-center relative pt-12'>
                             <div className='h-10 w-20'>
                               {item.image && <img className='w-full rounded-full block h-auto' src={item.image} alt='Question Image' />}
                             </div>
