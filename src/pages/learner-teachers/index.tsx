@@ -104,7 +104,7 @@ export const LearnerTeacher: FC = () => {
                 className='group inline-flex items-center gap-x-1 font-bold text-red-700 underline transition-all duration-300 hover:text-red-500'
                 to='#'
               >
-                Update payment method
+                Update Subscription Plan
                 <span className='duration-400 inline-block h-6 w-6 transition-all group-hover:translate-x-2'>
                   <MoveRight />
                 </span>
