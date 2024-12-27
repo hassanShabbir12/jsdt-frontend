@@ -490,14 +490,14 @@ export const Cover: FC<CoverProps> = ({ topics, grades, subjects }) => {
                     </span>{' '}
                     pages.
                   </div>
-                  <div className='flex items-center justify-between'>
-                    <h3 className='text-base text-zinc-800'>Copyrights reserved</h3>
-                    <div className='flex items-center'>
-                      <h3 className='-mr-5 sm:m-0 text-base text-zinc-800'>Please turnover</h3>
+                  <div className='sm:flex items-center sm:justify-between'>
+                    <h3 className='sm:text-base text-sm mb-3 sm:mb-0 text-zinc-800'>Copyrights reserved</h3>
+                    <div className='flex sm:gap-4 items-center'>
+                      <h3 className='text-sm sm:m-0 sm:text-base text-zinc-800'>Please turnover</h3>
                       <img
                         src={assetUrl('assets/img/home/arrow-right-around.svg')}
                         alt='round-arrow'
-                        className='sm:ml-2 block h-auto'
+                        className='ml-2 block h-auto'
                       />
                     </div>
                   </div>
