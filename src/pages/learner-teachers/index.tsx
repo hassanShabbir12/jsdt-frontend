@@ -390,9 +390,11 @@ export const LearnerTeacher: FC = () => {
                                 Question {index + 1}
                               </h2>
                               <div className='sm:flex gap-x-2'>
-                                <div className="w-20 mb-3">
-                                  {item.image && <img src={item.image} alt="Question Image" />}
-                                </div>
+                                {item.image && (
+                                  <div className="w-20 mb-3">
+                                    <img src={item.image} alt="Question Image" />
+                                  </div>
+                                )}
                                 <div className='relative grow basis-0 min-w-0'>
                                   <div>
                                     <p className='m-0'>
@@ -450,9 +452,11 @@ export const LearnerTeacher: FC = () => {
                               Question {index + 1}
                             </h2>
                             <div className='sm:flex gap-x-2'>
-                              <div className="mb-3 sm:mb-0 w-20">
-                                {item.image && <img src={item.image} alt="Question Image" />}
-                              </div>
+                              {item.image && (
+                                <div className="mb-3 sm:mb-0 w-20">
+                                  <img src={item.image} alt="Question Image" />
+                                </div>
+                              )}
                               <div className='relative w-full'>
                                 <div>
                                   <p className='m-0'>
@@ -583,9 +587,11 @@ export const LearnerTeacher: FC = () => {
                               Question {index + 1}
                             </h3>
                             <div className='sm:flex gap-x-2 relative'>
-                              <div className='w-20 lg:mt-4 mb-2'>
-                                {item.image && <img className='w-full block h-auto' src={item.image} alt='Question Image' />}
-                              </div>
+                              {item.image && (
+                                <div className='w-20 mb-3 sm:mb-0'>
+                                  <img className='w-full block h-auto' src={item.image} alt='Question Image' />
+                                </div>
+                              )}
                               <div className="w-full">
                                 <ScrollArea>
                                   <div className=''>
@@ -675,9 +681,11 @@ export const LearnerTeacher: FC = () => {
                     </Dialog>
                   </div>
                   <div className='sm:flex gap-x-3'>
-                    <div className='w-20 mb-5'>
-                      {item.image && <img className='w-full block h-auto' src={item.image} alt='Question Image' />}
-                    </div>
+                    {item.image && (
+                      <div className='w-20 mb-5'>
+                        <img className='w-full block h-auto' src={item.image} alt='Question Image' />
+                      </div>
+                    )}
                     <div className='w-full'>
                       <p className='block text-black w-full'>
                         {item.type === 'simple' ? (
