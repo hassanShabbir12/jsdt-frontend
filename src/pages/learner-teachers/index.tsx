@@ -451,13 +451,13 @@ export const LearnerTeacher: FC = () => {
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Question {index + 1}
                             </h2>
-                            <div className='sm:flex gap-x-2'>
+                            <div className='sm:flex flex-wrap items-start gap-x-2'>
                               {item.image && (
                                 <div className="mb-3 sm:mb-0 w-20">
                                   <img src={item.image} alt="Question Image" />
                                 </div>
                               )}
-                              <div className='relative w-full'>
+                              <div className='relative sm:grow sm:basis-0 sm:min-w-0'>
                                 <div>
                                   <p className='m-0'>
                                     {item.type === 'simple' ? (
