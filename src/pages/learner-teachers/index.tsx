@@ -387,13 +387,13 @@ export const LearnerTeacher: FC = () => {
                           <div className='block-scroll sm:flex block gap-x-5'>
                             <div>
                               <div className='sm:flex gap-x-2'>
-                                <div className='h-10 sm:mt-12 w-20 mb-14'>
-                                  {item.image && <img src={item.image} alt='Question Image' />}
+                                <div className="h-10 w-20 sm:mt-11 mb-12">
+                                  {item.image && <img src={item.image} alt="Question Image" />}
                                 </div>
-                                <div className='relative w-full'>
+                                <div className='relative grow basis-0 min-w-0'>
                                   <div className='absolute top-0'>
                                     <h2 className='text-lg font-semibold md:mb-3 md:text-2xl'>
-                                      Question {index + 1}
+                                      Question:{index + 1}
                                     </h2>
                                   </div>
                                   <div className='pt-10'>
@@ -448,15 +448,14 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
-
                             <div className='sm:flex gap-x-2'>
-                              <div className='h-10 w-20 sm:mt-11 mb-12'>
-                                <img src={item.image} alt='Question Image' />
+                              <div className="h-10 w-20 sm:mt-11 mb-12">
+                                {item.image && <img src={item.image} alt="Question Image" />}
                               </div>
                               <div className='relative w-full'>
                                 <div className='absolute top-0'>
                                   <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                                    Question {index + 1}
+                                    Question:{index + 1}
                                   </h2>
                                 </div>
                                 <div className='pt-10'>
@@ -591,7 +590,7 @@ export const LearnerTeacher: FC = () => {
                               <div className="w-full">
                                 <div className='absolute top-0'>
                                   <h3 className='mb-3 text-2xl font-semibold leading-7'>
-                                    Question {index + 1}
+                                    Question:{index + 1}
                                   </h3>
                                 </div>
                                 <ScrollArea>
@@ -636,7 +635,7 @@ export const LearnerTeacher: FC = () => {
                 <div className='w-full'>
                   <div className='sm:mb-10 mb-5 flex w-full justify-between'>
                     <span className='inline-block text-2xl font-semibold'>
-                      Question {index + 1}
+                      Question:{index + 1}
                     </span>
                     <Dialog open={isOpen} onOpenChange={setIsOpen}>
                       <DialogTrigger asChild>
