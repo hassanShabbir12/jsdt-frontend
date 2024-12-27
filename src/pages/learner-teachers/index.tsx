@@ -682,7 +682,7 @@ export const LearnerTeacher: FC = () => {
                   </div>
                   <div className='sm:flex gap-x-3'>
                     {item.image && (
-                      <div className='w-20 mb-5'>
+                      <div className='w-20 mb-5 sm:mb-0'>
                         <img className='w-full block h-auto' src={item.image} alt='Question Image' />
                       </div>
                     )}
