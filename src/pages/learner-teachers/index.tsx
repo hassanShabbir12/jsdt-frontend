@@ -3,6 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Label } from '@radix-ui/react-label';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { Loader, LogOut, MoveRight, Trash2, TriangleAlert } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -26,6 +27,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ScrollBar } from '@/components/ui/scroll-area';
 import {
   Select,
   SelectContent,
@@ -50,8 +52,6 @@ import MathFormulaDisplay from '../question/formula';
 import { Cover } from './components/cover';
 import GridTextEditor from './components/grid-editor';
 import { InstructionsList } from './components/instructions';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
-import { ScrollBar } from '@/components/ui/scroll-area';
 
 export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
@@ -384,22 +384,26 @@ export const LearnerTeacher: FC = () => {
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
-                          <div className='block-scroll sm:flex block gap-x-5'>
+                          <div className='block-scroll block gap-x-5 sm:flex'>
                             <div>
-                              <h2 className='text-lg font-semibold mb-2 md:mb-3 md:text-2xl'>
+                              <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
                                 Question {index + 1}
                               </h2>
-                              <div className='sm:flex gap-x-2'>
+                              <div className='gap-x-2 sm:flex'>
                                 {item.image && (
-                                  <div className="w-20 mb-3">
-                                    <img src={item.image} alt="Question Image" />
+                                  <div className='mb-3 w-20'>
+                                    <img src={item.image} alt='Question Image' />
                                   </div>
                                 )}
-                                <div className='relative grow basis-0 min-w-0'>
+                                <div className='relative min-w-0 grow basis-0'>
                                   <div>
                                     <p className='m-0'>
                                       {item.type === 'simple' ? (
-                                        <RichTextEditor value={item.question} showToolbar={false} />
+                                        <RichTextEditor
+                                          value={item.question}
+                                          showToolbar={false}
+                                          disabled={true}
+                                        />
                                       ) : (
                                         <MathFormulaDisplay formula={item.question} />
                                       )}
@@ -412,9 +416,9 @@ export const LearnerTeacher: FC = () => {
                         </div>
                       ))}
                     </div>
-                  </DialogContent >
-                </Dialog >
-              </div >
+                  </DialogContent>
+                </Dialog>
+              </div>
               <div className='mb-2 px-2 lg:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
@@ -451,17 +455,21 @@ export const LearnerTeacher: FC = () => {
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Question {index + 1}
                             </h2>
-                            <div className='sm:flex flex-wrap items-start gap-x-2'>
+                            <div className='flex-wrap items-start gap-x-2 sm:flex'>
                               {item.image && (
-                                <div className="mb-3 sm:mb-0 w-20">
-                                  <img src={item.image} alt="Question Image" />
+                                <div className='mb-3 w-20 sm:mb-0'>
+                                  <img src={item.image} alt='Question Image' />
                                 </div>
                               )}
-                              <div className='relative sm:grow sm:basis-0 sm:min-w-0'>
+                              <div className='relative sm:min-w-0 sm:grow sm:basis-0'>
                                 <div>
                                   <p className='m-0'>
                                     {item.type === 'simple' ? (
-                                      <RichTextEditor value={item.question} showToolbar={false} />
+                                      <RichTextEditor
+                                        value={item.question}
+                                        showToolbar={false}
+                                        disabled={true}
+                                      />
                                     ) : (
                                       <MathFormulaDisplay formula={item.question} />
                                     )}
@@ -492,33 +500,31 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              {
-                !isLearner && (
-                  <div className='mb-2 px-2 lg:mb-0'>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          disabled={user?.isSubscribed === 'inactive'}
-                          variant='destructive'
-                          className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                        >
-                          Tax. Grid
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                        <div className='md:px-2'>
-                          <div className='mx-auto max-w-[1340px] md:py-8 lg:pb-24 lg:pt-16'>
-                            <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
-                              Taxonomy Grid
-                            </h1>
-                            <GridTextEditor value={editorValue} onChange={handleEditorChange} />
-                          </div>
+              {!isLearner && (
+                <div className='mb-2 px-2 lg:mb-0'>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        disabled={user?.isSubscribed === 'inactive'}
+                        variant='destructive'
+                        className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                      >
+                        Tax. Grid
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                      <div className='md:px-2'>
+                        <div className='mx-auto max-w-[1340px] md:py-8 lg:pb-24 lg:pt-16'>
+                          <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
+                            Taxonomy Grid
+                          </h1>
+                          <GridTextEditor value={editorValue} onChange={handleEditorChange} />
                         </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                )
-              }
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
               <div className='mb-2 px-2 lg:mb-0'>
                 <Dialog>
                   <DialogTrigger asChild>
@@ -535,27 +541,25 @@ export const LearnerTeacher: FC = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              {
-                !isLearner && (
-                  <div className='mb-2 px-2 lg:mb-0'>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          disabled={user?.isSubscribed === 'inactive'}
-                          variant='destructive'
-                          className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
-                        >
-                          Cover Page
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
-                        <Cover topics={topics} grades={grades} subjects={subjects} />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                )
-              }
-            </div >
+              {!isLearner && (
+                <div className='mb-2 px-2 lg:mb-0'>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        disabled={user?.isSubscribed === 'inactive'}
+                        variant='destructive'
+                        className='mb-1 w-full px-6 py-5 text-base sm:px-9 sm:py-6 md:mb-0 lg:w-40'
+                      >
+                        Cover Page
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className='!container block max-h-[92vh] max-w-[96%] overflow-y-auto overflow-x-hidden lg:px-8'>
+                      <Cover topics={topics} grades={grades} subjects={subjects} />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
+            </div>
             <div className='mb-12 flex gap-x-2 sm:m-0 sm:gap-x-4'>
               <div className='h-6 w-6 cursor-pointer' onClick={handleCheckData}>
                 {pdfLoading ? (
@@ -569,58 +573,65 @@ export const LearnerTeacher: FC = () => {
                 )}
               </div>
             </div>
-          </div >
-          {
-            questions.length !== 0 ? (
-              <Carousel mouseTracking={false} className='relative w-full'>
-                <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
-                <div className='relative'>
-                  <span className='absolute left-0 top-0 z-10 hidden min-h-screen w-14 bg-white sm:block lg:w-20'></span>
-                </div>
-                <CarouselContent>
-                  {questions.map((item, index) => (
-                    <CarouselItem className='carousel-item' key={index}>
-                      <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
-                        < div className='block-scroll md:h-32 h-28 lg:h-40 overflow-y-auto sm:flex block gap-x-5' >
-                          <div className='w-full'>
-                            <h3 className='mb-3 text-2xl font-semibold leading-7'>
-                              Question {index + 1}
-                            </h3>
-                            <div className='sm:flex gap-x-2 relative'>
-                              {item.image && (
-                                <div className='w-20 mb-3 sm:mb-0'>
-                                  <img className='w-full block h-auto' src={item.image} alt='Question Image' />
-                                </div>
-                              )}
-                              <div className="w-full">
-                                <ScrollArea>
-                                  <div className=''>
-                                    <p className='line-clamp-3'>
-                                      {item.type === 'simple' ? (
-                                        <RichTextEditor value={item.question} showToolbar={false} />
-                                      ) : (
-                                        <MathFormulaDisplay formula={item.question} />
-                                      )}
-                                    </p>
-                                  </div>
-                                  <ScrollBar orientation="horizontal" />
-                                </ScrollArea>
+          </div>
+          {questions.length !== 0 ? (
+            <Carousel mouseTracking={false} className='relative w-full'>
+              <CarouselPrevious className='z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselPrevious>
+              <div className='relative'>
+                <span className='absolute left-0 top-0 z-10 hidden min-h-screen w-14 bg-white sm:block lg:w-20'></span>
+              </div>
+              <CarouselContent>
+                {questions.map((item, index) => (
+                  <CarouselItem className='carousel-item' key={index}>
+                    <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
+                      <div className='block-scroll block h-28 gap-x-5 overflow-y-auto sm:flex md:h-32 lg:h-40'>
+                        <div className='w-full'>
+                          <h3 className='mb-3 text-2xl font-semibold leading-7'>
+                            Question {index + 1}
+                          </h3>
+                          <div className='relative gap-x-2 sm:flex'>
+                            {item.image && (
+                              <div className='mb-3 w-20 sm:mb-0'>
+                                <img
+                                  className='block h-auto w-full'
+                                  src={item.image}
+                                  alt='Question Image'
+                                />
                               </div>
+                            )}
+                            <div className='w-full'>
+                              <ScrollArea>
+                                <div className=''>
+                                  <p className='line-clamp-3'>
+                                    {item.type === 'simple' ? (
+                                      <RichTextEditor
+                                        value={item.question}
+                                        showToolbar={false}
+                                        disabled={true}
+                                      />
+                                    ) : (
+                                      <MathFormulaDisplay formula={item.question} />
+                                    )}
+                                  </p>
+                                </div>
+                                <ScrollBar orientation='horizontal' />
+                              </ScrollArea>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </CarouselItem >
-                  ))}
-                </CarouselContent >
-                <div className='relative'>
-                  <span className='absolute -top-52 right-0 z-10 hidden min-h-screen w-20 bg-white sm:block'></span>
-                </div>
-                <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
-              </Carousel >
-            ) : null}
-        </div >
-        <div className="pt-10">
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className='relative'>
+                <span className='absolute -top-52 right-0 z-10 hidden min-h-screen w-20 bg-white sm:block'></span>
+              </div>
+              <CarouselNext className='!absolute z-50 h-12 w-12 bg-blue-500 text-white !opacity-100 hover:bg-blue-400 hover:text-white disabled:bg-zinc-100 disabled:text-stone-300 lg:h-16 lg:w-16'></CarouselNext>
+            </Carousel>
+          ) : null}
+        </div>
+        <div className='pt-10'>
           <Button onClick={handleAddQuestion} className='mx-auto flex w-80 px-20 py-6 text-base'>
             Add
           </Button>
@@ -631,9 +642,9 @@ export const LearnerTeacher: FC = () => {
               key={item.id}
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
-              <div className='sm:flex block gap-x-5'>
+              <div className='block gap-x-5 sm:flex'>
                 <div className='w-full'>
-                  <div className='sm:mb-8 mb-5 flex w-full justify-between'>
+                  <div className='mb-5 flex w-full justify-between sm:mb-8'>
                     <span className='inline-block text-2xl font-semibold'>
                       Question {index + 1}
                     </span>
@@ -680,28 +691,36 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className='sm:flex gap-x-3'>
+                  <div className='gap-x-3 sm:flex'>
                     {item.image && (
-                      <div className='w-20 mb-5 sm:mb-0'>
-                        <img className='w-full block h-auto' src={item.image} alt='Question Image' />
+                      <div className='mb-5 w-20 sm:mb-0'>
+                        <img
+                          className='block h-auto w-full'
+                          src={item.image}
+                          alt='Question Image'
+                        />
                       </div>
                     )}
                     <div className='w-full'>
-                      <p className='block text-black w-full'>
+                      <p className='block w-full text-black'>
                         {item.type === 'simple' ? (
-                          <RichTextEditor value={item.question} showToolbar={false} />
+                          <RichTextEditor
+                            value={item.question}
+                            showToolbar={false}
+                            disabled={true}
+                          />
                         ) : (
                           <MathFormulaDisplay formula={item.question} />
                         )}
                       </p>
                     </div>
                   </div>
-                </div >
-              </div >
-            </div >
+                </div>
+              </div>
+            </div>
           ))}
-        </div >
-      </div >
-    </section >
+        </div>
+      </div>
+    </section>
   );
 };
