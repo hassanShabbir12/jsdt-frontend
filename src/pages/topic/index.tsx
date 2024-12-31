@@ -149,12 +149,12 @@ export const Topic: FC = () => {
                 <TableRow>
                   <TableCell colSpan={4}>
                     <div className='flex items-center justify-center'>
-                      <LoaderCircle className='h-20 text-primary w-10 animate-spin' />
+                      <LoaderCircle className='h-20 text-black w-10 animate-spin' />
                     </div>
                   </TableCell>
                 </TableRow>
               ) : (
-                Question.length === 0 ? <TableRow>
+                topics.length === 0 ? <TableRow>
                   <TableCell colSpan={4}>
                     <div className='flex items-center justify-center'>
                       <AdminRecord />
