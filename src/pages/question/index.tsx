@@ -508,71 +508,71 @@ export const Question: FC = () => {
           </Dialog>
         </div>
         <div className='px-6'>
-          <div className='overflow-auto'>
-            <Table className='w-[800px] sm:w-full'>
-              <TableHeader>
+          <Table className='w-[800px] sm:w-full'>
+            <TableHeader>
+              <TableRow>
+                <TableHead className='w-[80%]'>Questions</TableHead>
+                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                  Image
+                </TableHead>
+                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                  Marks
+                </TableHead>
+                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                  Action
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {questionLoading ? (
                 <TableRow>
-                  <TableHead className='w-[80%]'>Questions</TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                    Image
-                  </TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                    Marks
-                  </TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                    Action
-                  </TableHead>
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center'>
+                      <LoaderCircle className='h-20 text-primary w-10 animate-spin' />
+                    </div>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {questionLoading ? (
-                  <TableRow>
-                    <TableCell colSpan={4} className='flex items-center justify-center'>
-                      <LoaderCircle className='h-20 w-10 animate-spin' />
+              ) : (
+                questions.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className='font-base text-zinc-800'>
+                      {item.type === 'simple' ? (
+                        <RichTextEditor
+                          value={item.question}
+                          showToolbar={false}
+                          disabled={true}
+                        />
+                      ) : (
+                        <MathFormulaDisplay formula={item.question} />
+                      )}
+                    </TableCell>
+                    <TableCell className='border-l border-solid border-zinc-300'>
+                      {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
+                    </TableCell>
+                    <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
+                      {item?.totalMarks}
+                    </TableCell>
+                    <TableCell className='border-l border-solid border-zinc-300'>
+                      <div className='flex gap-2'>
+                        <i
+                          onClick={() => handleEditClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Edit />
+                        </i>
+                        <i
+                          onClick={() => handleDeleteClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Trash2 />
+                        </i>
+                      </div>
                     </TableCell>
                   </TableRow>
-                ) : (
-                  questions.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell className='font-base text-zinc-800'>
-                        {item.type === 'simple' ? (
-                          <RichTextEditor
-                            value={item.question}
-                            showToolbar={false}
-                            disabled={true}
-                          />
-                        ) : (
-                          <MathFormulaDisplay formula={item.question} />
-                        )}
-                      </TableCell>
-                      <TableCell className='border-l border-solid border-zinc-300'>
-                        {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
-                      </TableCell>
-                      <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
-                        {item?.totalMarks}
-                      </TableCell>
-                      <TableCell className='border-l border-solid border-zinc-300'>
-                        <div className='flex gap-2'>
-                          <i
-                            onClick={() => handleEditClick(item)}
-                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                          >
-                            <Edit />
-                          </i>
-                          <i
-                            onClick={() => handleDeleteClick(item)}
-                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                          >
-                            <Trash2 />
-                          </i>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </div>
+                ))
+              )}
+            </TableBody>
+          </Table>
         </div>
         <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
           <DialogContent className='max-w-[620px]'>

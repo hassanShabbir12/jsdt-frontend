@@ -16,7 +16,6 @@ import { Label } from '@/components/ui/label';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -137,7 +136,6 @@ export const Grades: FC = () => {
         </div>
         <div className='px-6'>
           <Table>
-            <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className='w-[86%]'>Grades</TableHead>
@@ -147,8 +145,10 @@ export const Grades: FC = () => {
             <TableBody>
               {gradeLoading ? (
                 <TableRow>
-                  <TableCell colSpan={4} className='flex items-center justify-center'>
-                    <LoaderCircle className='h-10 w-10 animate-spin' />
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center text-primary'>
+                      <LoaderCircle className='h-10 w-10 animate-spin' />
+                    </div>
                   </TableCell>
                 </TableRow>
               ) : (
