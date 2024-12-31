@@ -103,7 +103,7 @@ export const Question: FC = () => {
             }}
           >
             <DialogTrigger asChild>
-              <Button className='w-34 z-50 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
+              <Button className='w-34 z-50 h-10 text-sm font-semibold sm:h-12 sm:w-44 md:w-48 md:text-base'>
                 Add New Question
               </Button>
             </DialogTrigger>
@@ -357,7 +357,7 @@ export const Question: FC = () => {
                         <img
                           src={assetUrl('assets/img/home/upload-logo.png')}
                           alt='Upload Placeholder'
-                          className='block h-auto'
+                          className='block h-auto cursor-pointer'
                           onClick={() => fileInputRef.current?.click()}
                         />
                       </div>
@@ -511,7 +511,6 @@ export const Question: FC = () => {
         <div className='px-6'>
           <div className='overflow-auto'>
             <Table className='w-[800px] sm:w-full'>
-              <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead className='w-[80%]'>Questions</TableHead>

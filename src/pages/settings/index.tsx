@@ -109,10 +109,11 @@ export const Settings: FC = () => {
               )}
             </div>
           </div>
-
-          <Button type='submit' className='h-12 w-52 text-base md:w-80' loading={loading}>
-            Save Changes
-          </Button>
+          <div className='mb-5'>
+            <Button type='submit' className='h-12 w-52 text-base md:w-80' loading={loading}>
+              Save Changes
+            </Button>
+          </div>
         </form>
       </div>
     </div>
