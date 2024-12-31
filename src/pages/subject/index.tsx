@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, LoaderCircle, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -16,7 +16,6 @@ import { Label } from '@/components/ui/label';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -36,6 +35,7 @@ export const Subjects: FC = () => {
     setDeleteModalOpen,
     subjectToDelete,
     setSubjectToDelete,
+    subjectLoading,
   } = useSubjectList();
 
   const {
@@ -70,7 +70,7 @@ export const Subjects: FC = () => {
             <DialogTrigger asChild>
               <div className='max-w-80 justify-center'>
                 <Button
-                  className='h-10 z-20 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
+                  className='z-20 h-10 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
                   onClick={() => {
                     setValue('title', '');
                     setOpen(true);
@@ -138,7 +138,6 @@ export const Subjects: FC = () => {
           <div className='overflow-auto'>
             <div>
               <Table className='w-[800px] sm:w-full'>
-                <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
                 <TableHeader>
                   <TableRow>
                     <TableHead className='w-[86%]'>Subject</TableHead>
@@ -146,30 +145,40 @@ export const Subjects: FC = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {subjects.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                      <TableCell className='border-l border-solid border-zinc-300'>
-                        <div className='flex gap-2'>
-                          <i
-                            onClick={() => {
-                              handleEdit(item);
-                              setValue('title', item.title);
-                            }}
-                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                          >
-                            <Edit />
-                          </i>
-                          <i
-                            onClick={() => handleDeleteClick(item)}
-                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                          >
-                            <Trash2 />
-                          </i>
+                  {subjectLoading ? (
+                    <TableRow>
+                      <TableCell colSpan={4} className='flex items-center justify-center'>
+                        <div className='flex items-center justify-center text-primary'>
+                          <LoaderCircle className='h-20 w-10 animate-spin' />
                         </div>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ) : (
+                    subjects.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                        <TableCell className='border-l border-solid border-zinc-300'>
+                          <div className='flex gap-2'>
+                            <i
+                              onClick={() => {
+                                handleEdit(item);
+                                setValue('title', item.title);
+                              }}
+                              className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                            >
+                              <Edit />
+                            </i>
+                            <i
+                              onClick={() => handleDeleteClick(item)}
+                              className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                            >
+                              <Trash2 />
+                            </i>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
                 </TableBody>
               </Table>
             </div>

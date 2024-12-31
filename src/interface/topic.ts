@@ -30,6 +30,7 @@ export interface TopicListReturn {
   setDeleteModalOpen: (open: boolean) => void;
   topicToDelete: ExtendedCreateTopicDto | null;
   setTopicToDelete: (topic: ExtendedCreateTopicDto | null) => void;
+  topicLoading: boolean;
 }
 
 export interface TopicFormReturn {

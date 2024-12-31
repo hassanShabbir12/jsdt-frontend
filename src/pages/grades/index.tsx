@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, LoaderCircle, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -16,7 +16,6 @@ import { Label } from '@/components/ui/label';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -36,6 +35,7 @@ export const Grades: FC = () => {
     setDeleteModalOpen,
     gradeToDelete,
     setGradeToDelete,
+    gradeLoading,
   } = useGradeList();
 
   const {
@@ -53,7 +53,7 @@ export const Grades: FC = () => {
   } = useGradeForm(grades, setGrades);
 
   return (
-    <div className='mb-12 z-20 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
+    <div className='z-20 mb-12 px-6 pt-24 md:pl-0 md:pr-6 md:pt-16'>
       <div className='rounded-md bg-white pb-7 shadow-lg'>
         <div className='mb-5 flex items-center justify-between border-b border-neutral-200 px-6 py-3'>
           <h1 className='text-lg font-semibold text-zinc-800'>Grades</h1>
@@ -70,7 +70,7 @@ export const Grades: FC = () => {
             <DialogTrigger asChild>
               <div className='flex justify-center'>
                 <Button
-                  className='h-10 z-20 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
+                  className='z-20 h-10 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
                   onClick={() => {
                     setValue('title', '');
                     setOpen(true);
@@ -136,7 +136,6 @@ export const Grades: FC = () => {
         </div>
         <div className='px-6'>
           <Table>
-            <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className='w-[86%]'>Grades</TableHead>
@@ -144,30 +143,40 @@ export const Grades: FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {grades.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                  <TableCell className='border-l border-solid border-zinc-300'>
-                    <div className='flex gap-2'>
-                      <i
-                        onClick={() => {
-                          handleEdit(item);
-                          setValue('title', item.title);
-                        }}
-                        className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                      >
-                        <Edit />
-                      </i>
-                      <i
-                        onClick={() => handleDeleteClick(item)}
-                        className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                      >
-                        <Trash2 />
-                      </i>
+              {gradeLoading ? (
+                <TableRow>
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center text-primary'>
+                      <LoaderCircle className='h-10 w-10 animate-spin' />
                     </div>
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                grades.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                    <TableCell className='border-l border-solid border-zinc-300'>
+                      <div className='flex gap-2'>
+                        <i
+                          onClick={() => {
+                            handleEdit(item);
+                            setValue('title', item.title);
+                          }}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Edit />
+                        </i>
+                        <i
+                          onClick={() => handleDeleteClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Trash2 />
+                        </i>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </div>

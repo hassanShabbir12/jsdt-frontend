@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 // eslint-disable-next-line no-restricted-syntax
 import 'ckeditor5/ckeditor5.css';
-import { Edit, Trash2, X } from 'lucide-react';
+import { Edit, LoaderCircle, Trash2, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +30,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -75,8 +74,8 @@ export const Question: FC = () => {
     deleteQuestion,
     onSubmit,
     setIsEditing,
+    questionLoading,
   } = useQuestionOperations(form, mode, setMode, setTempImage);
-
   const {
     control,
     formState: { errors },
@@ -103,7 +102,7 @@ export const Question: FC = () => {
             }}
           >
             <DialogTrigger asChild>
-              <Button className='w-34 z-50 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'>
+              <Button className='w-34 z-50 h-10 text-sm font-semibold sm:h-12 sm:w-44 md:w-48 md:text-base'>
                 Add New Question
               </Button>
             </DialogTrigger>
@@ -357,7 +356,7 @@ export const Question: FC = () => {
                         <img
                           src={assetUrl('assets/img/home/upload-logo.png')}
                           alt='Upload Placeholder'
-                          className='block h-auto'
+                          className='block h-auto cursor-pointer'
                           onClick={() => fileInputRef.current?.click()}
                         />
                       </div>
@@ -509,25 +508,32 @@ export const Question: FC = () => {
           </Dialog>
         </div>
         <div className='px-6'>
-          <div className='overflow-auto'>
-            <Table className='w-[800px] sm:w-full'>
-              <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
-              <TableHeader>
+          <Table className='w-[800px] sm:w-full'>
+            <TableHeader>
+              <TableRow>
+                <TableHead className='w-[80%]'>Questions</TableHead>
+                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                  Image
+                </TableHead>
+                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                  Marks
+                </TableHead>
+                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                  Action
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {questionLoading ? (
                 <TableRow>
-                  <TableHead className='w-[80%]'>Questions</TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                    Image
-                  </TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                    Marks
-                  </TableHead>
-                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                    Action
-                  </TableHead>
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center'>
+                      <LoaderCircle className='h-20 w-10 animate-spin text-primary' />
+                    </div>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {questions.map((item, index) => (
+              ) : (
+                questions.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
                       {item.type === 'simple' ? (
@@ -559,10 +565,10 @@ export const Question: FC = () => {
                       </div>
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+                ))
+              )}
+            </TableBody>
+          </Table>
         </div>
         <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
           <DialogContent className='max-w-[620px]'>

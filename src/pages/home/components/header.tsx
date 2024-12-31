@@ -28,7 +28,7 @@ export const Header: FC = () => {
               />
             </button>
           </div>
-          <div className='flex items-center gap-x-5'>
+          <div className='flex items-center gap-x-2 sm:gap-x-5'>
             <Button
               className='h-10 text-sm text-blue-500 sm:h-12 sm:w-40 sm:px-6 md:!h-16 md:!px-9 md:text-base'
               variant='secondary'
