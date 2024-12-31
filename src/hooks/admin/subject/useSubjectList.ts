@@ -14,6 +14,7 @@ export function useSubjectList(): SubjectListReturn {
   const [subjects, setSubjects] = useState<ExtendedCreateSubjectDto[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [subjectToDelete, setSubjectToDelete] = useState<ExtendedCreateSubjectDto | null>(null);
+  const [subjectLoading, setSubjectLoading] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
   const handleDeleteClick = (subject: ExtendedCreateSubjectDto): void => {
@@ -22,6 +23,7 @@ export function useSubjectList(): SubjectListReturn {
   };
 
   const fetchSubjects = async (): Promise<void> => {
+    setSubjectLoading(true);
     try {
       const response =
         // eslint-disable-next-line max-len
@@ -38,7 +40,7 @@ export function useSubjectList(): SubjectListReturn {
         handleError(error, logout, toast, navigate);
       }
     } finally {
-      setLoading(false);
+      setSubjectLoading(false);
     }
   };
 
@@ -77,5 +79,6 @@ export function useSubjectList(): SubjectListReturn {
     setDeleteModalOpen,
     subjectToDelete,
     setSubjectToDelete,
+    subjectLoading,
   };
 }

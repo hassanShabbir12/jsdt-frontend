@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 // eslint-disable-next-line no-restricted-syntax
 import 'ckeditor5/ckeditor5.css';
-import { Edit, Trash2, X } from 'lucide-react';
+import { Edit, LoaderCircle, Trash2, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -75,8 +75,8 @@ export const Question: FC = () => {
     deleteQuestion,
     onSubmit,
     setIsEditing,
+    questionLoading,
   } = useQuestionOperations(form, mode, setMode, setTempImage);
-
   const {
     control,
     formState: { errors },
@@ -527,39 +527,51 @@ export const Question: FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {questions.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className='font-base text-zinc-800'>
-                      {item.type === 'simple' ? (
-                        <RichTextEditor value={item.question} showToolbar={false} disabled={true} />
-                      ) : (
-                        <MathFormulaDisplay formula={item.question} />
-                      )}
-                    </TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
-                    </TableCell>
-                    <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
-                      {item?.totalMarks}
-                    </TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      <div className='flex gap-2'>
-                        <i
-                          onClick={() => handleEditClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Edit />
-                        </i>
-                        <i
-                          onClick={() => handleDeleteClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Trash2 />
-                        </i>
-                      </div>
+                {questionLoading ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className='flex items-center justify-center'>
+                      <LoaderCircle className='h-20 w-10 animate-spin' />
                     </TableCell>
                   </TableRow>
-                ))}
+                ) : (
+                  questions.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-base text-zinc-800'>
+                        {item.type === 'simple' ? (
+                          <RichTextEditor
+                            value={item.question}
+                            showToolbar={false}
+                            disabled={true}
+                          />
+                        ) : (
+                          <MathFormulaDisplay formula={item.question} />
+                        )}
+                      </TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
+                      </TableCell>
+                      <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
+                        {item?.totalMarks}
+                      </TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        <div className='flex gap-2'>
+                          <i
+                            onClick={() => handleEditClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Edit />
+                          </i>
+                          <i
+                            onClick={() => handleDeleteClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Trash2 />
+                          </i>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
               </TableBody>
             </Table>
           </div>

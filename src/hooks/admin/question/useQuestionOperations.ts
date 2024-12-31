@@ -32,11 +32,12 @@ export function useQuestionOperations(
   const [questionToDelete, setQuestionToDelete] = useState<ExtendedCreateQuestionDto | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [questionLoading, setQuestionLoading] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   const fetchQuestions = async (): Promise<void> => {
-    setLoading(true);
+    setQuestionLoading(true);
     try {
       const response =
         (await apiClient.questions.questionsControllerGetQuestion()) as unknown as AxiosResponse<
@@ -54,7 +55,7 @@ export function useQuestionOperations(
         handleError(error, logout, toast, navigate);
       }
     } finally {
-      setLoading(false);
+      setQuestionLoading(false);
     }
   };
 
@@ -219,5 +220,6 @@ export function useQuestionOperations(
     setIsEditing,
     setModalOpen,
     handleEditClick,
+    questionLoading,
   };
 }
