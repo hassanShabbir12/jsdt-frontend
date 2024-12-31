@@ -13,7 +13,7 @@ export const ForgotPassword: FC = () => {
 
   return (
     <div className='mx-auto max-w-[468px] py-20'>
-      <div className='mx-auto mb-14 max-w-80 text-center text-base text-zinc-800'>
+      <div className='max-w-90 mx-auto mb-14 text-center text-sm text-zinc-800 sm:text-base'>
         <h1 className='text-2xl font-semibold text-zinc-800'>Forgot Password</h1>
         <p className='m-0'>Enter your email address to get reset password link</p>
       </div>
