@@ -14,6 +14,7 @@ export function useTopicList(): TopicListReturn {
   const [topics, setTopics] = useState<ExtendedCreateTopicDto[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [topicToDelete, setTopicToDelete] = useState<ExtendedCreateTopicDto | null>(null);
+  const [topicLoading, setTopicLoading] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ export function useTopicList(): TopicListReturn {
   };
 
   const fetchTopics = async (): Promise<void> => {
+    setTopicLoading(true);
     try {
       const response =
         (await apiClient.topic.topicControllerFindAll()) as unknown as AxiosResponse<TopicResponse>;
@@ -38,7 +40,7 @@ export function useTopicList(): TopicListReturn {
         handleError(error, logout, toast, navigate);
       }
     } finally {
-      setLoading(false);
+      setTopicLoading(false);
     }
   };
 
@@ -77,5 +79,6 @@ export function useTopicList(): TopicListReturn {
     setDeleteModalOpen,
     topicToDelete,
     setTopicToDelete,
+    topicLoading,
   };
 }

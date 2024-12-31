@@ -46,6 +46,7 @@ export interface GradeListReturn {
   setDeleteModalOpen: (open: boolean) => void;
   gradeToDelete: ExtendedCreateGradeDto | null;
   setGradeToDelete: (grade: ExtendedCreateGradeDto | null) => void;
+  gradeLoading: boolean;
 }
 
 export interface GradeFormReturn {

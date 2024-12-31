@@ -30,6 +30,7 @@ export interface SubjectListReturn {
   setDeleteModalOpen: (open: boolean) => void;
   subjectToDelete: ExtendedCreateSubjectDto | null;
   setSubjectToDelete: (subject: ExtendedCreateSubjectDto | null) => void;
+  subjectLoading: boolean;
 }
 
 export interface SubjectFormReturn {

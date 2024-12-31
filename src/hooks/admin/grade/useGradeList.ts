@@ -13,6 +13,7 @@ export function useGradeList(): GradeListReturn {
   const [loading, setLoading] = useState(false);
   const [grades, setGrades] = useState<ExtendedCreateGradeDto[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [gradeLoading, setGradeLoading] = useState(false);
   const [gradeToDelete, setGradeToDelete] = useState<ExtendedCreateGradeDto | null>(null);
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export function useGradeList(): GradeListReturn {
   };
 
   const fetchGrades = async (): Promise<void> => {
+    setGradeLoading(true);
     try {
       const response =
         // eslint-disable-next-line max-len
@@ -39,7 +41,7 @@ export function useGradeList(): GradeListReturn {
         handleError(error, logout, toast, navigate);
       }
     } finally {
-      setLoading(false);
+      setGradeLoading(false);
     }
   };
 
@@ -78,5 +80,6 @@ export function useGradeList(): GradeListReturn {
     setDeleteModalOpen,
     gradeToDelete,
     setGradeToDelete,
+    gradeLoading,
   };
 }

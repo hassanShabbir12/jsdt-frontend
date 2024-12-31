@@ -56,6 +56,7 @@ export interface UseQuestionOperationsReturn {
   setIsEditing: (editing: boolean) => void;
   setModalOpen: (open: boolean) => void;
   handleEditClick: (question: ExtendedCreateQuestionDto) => void;
+  questionLoading: boolean;
 }
 
 export type QuestionResponse = ApiResponse<ExtendedCreateQuestionDto[]>;
