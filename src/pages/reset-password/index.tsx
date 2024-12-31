@@ -37,7 +37,7 @@ export const ResetPassword: FC = () => {
 
   return (
     <div className='mx-auto max-w-[468px] py-20'>
-      <div className='mx-auto mb-14 max-w-80 text-center text-base text-zinc-800'>
+      <div className='mx-auto mb-14 max-w-90 text-center text-base text-zinc-800'>
         <h1 className='text-2xl font-semibold text-zinc-800'>Reset Password</h1>
         <p className='m-0'>Enter New Password</p>
       </div>
