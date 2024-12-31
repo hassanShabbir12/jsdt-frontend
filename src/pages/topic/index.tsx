@@ -23,6 +23,8 @@ import {
 } from '@/components/ui/table';
 import { useTopicForm } from '@/hooks/admin/topic/useTopicForm';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
+import { Question } from '../question';
+import AdminRecord from '../admin-record';
 
 export const Topic: FC = () => {
   const {
@@ -152,30 +154,38 @@ export const Topic: FC = () => {
                   </TableCell>
                 </TableRow>
               ) : (
-                topics.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      <div className='flex gap-2'>
-                        <i
-                          onClick={() => {
-                            handleEdit(item);
-                            setValue('title', item.title);
-                          }}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Edit />
-                        </i>
-                        <i
-                          onClick={() => handleDeleteClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Trash2 />
-                        </i>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
+                Question.length === 0 ? <TableRow>
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center'>
+                      <AdminRecord />
+                    </div>
+                  </TableCell>
+                </TableRow>
+                  :
+                  topics.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        <div className='flex gap-2'>
+                          <i
+                            onClick={() => {
+                              handleEdit(item);
+                              setValue('title', item.title);
+                            }}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Edit />
+                          </i>
+                          <i
+                            onClick={() => handleDeleteClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Trash2 />
+                          </i>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
               )}
             </TableBody>
           </Table>

@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/table';
 import { useGradeForm } from '@/hooks/admin/grade/useGradeForm';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
+import AdminRecord from '../admin-record';
 
 export const Grades: FC = () => {
   const {
@@ -152,30 +153,39 @@ export const Grades: FC = () => {
                   </TableCell>
                 </TableRow>
               ) : (
-                grades.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      <div className='flex gap-2'>
-                        <i
-                          onClick={() => {
-                            handleEdit(item);
-                            setValue('title', item.title);
-                          }}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Edit />
-                        </i>
-                        <i
-                          onClick={() => handleDeleteClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Trash2 />
-                        </i>
+                grades.length === 0 ?
+                  <TableRow>
+                    <TableCell colSpan={4}>
+                      <div className='flex items-center justify-center'>
+                        <AdminRecord />
                       </div>
                     </TableCell>
                   </TableRow>
-                ))
+                  :
+                  grades.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        <div className='flex gap-2'>
+                          <i
+                            onClick={() => {
+                              handleEdit(item);
+                              setValue('title', item.title);
+                            }}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Edit />
+                          </i>
+                          <i
+                            onClick={() => handleDeleteClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Trash2 />
+                          </i>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
               )}
             </TableBody>
           </Table>
@@ -221,6 +231,6 @@ export const Grades: FC = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </div>
+    </div >
   );
 };
