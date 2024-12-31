@@ -147,7 +147,7 @@ export const Grades: FC = () => {
               {gradeLoading ? (
                 <TableRow>
                   <TableCell colSpan={4}>
-                    <div className='flex items-center justify-center text-primary'>
+                    <div className='flex p-5 items-center justify-center text-black'>
                       <LoaderCircle className='h-10 w-10 animate-spin' />
                     </div>
                   </TableCell>
