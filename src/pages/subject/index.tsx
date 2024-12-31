@@ -16,7 +16,6 @@ import { Label } from '@/components/ui/label';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -139,7 +138,6 @@ export const Subjects: FC = () => {
           <div className='overflow-auto'>
             <div>
               <Table className='w-[800px] sm:w-full'>
-                <TableCaption>Showing 1 to 10 of 100 listings</TableCaption>
                 <TableHeader>
                   <TableRow>
                     <TableHead className='w-[86%]'>Subject</TableHead>
@@ -150,7 +148,9 @@ export const Subjects: FC = () => {
                   {subjectLoading ? (
                     <TableRow>
                       <TableCell colSpan={4} className='flex items-center justify-center'>
-                        <LoaderCircle className='h-20 w-10 animate-spin' />
+                        <div className='flex items-center justify-center text-primary'>
+                          <LoaderCircle className='h-20 w-10 animate-spin' />
+                        </div>
                       </TableCell>
                     </TableRow>
                   ) : (
