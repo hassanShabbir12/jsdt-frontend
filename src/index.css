@@ -168,3 +168,7 @@ input[type='number'] {
 .block-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
