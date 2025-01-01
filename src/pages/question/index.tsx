@@ -114,7 +114,7 @@ export const Question: FC = () => {
               className='!container max-h-[80%] max-w-[96%] overflow-y-auto overflow-x-hidden'
               onPointerDownOutside={(e) => e.preventDefault()}
             >
-              <form onSubmit={form.handleSubmit(onSubmit)}>
+              <form className='overflow-hidden w-full' onSubmit={form.handleSubmit(onSubmit)}>
                 <DialogHeader>
                   <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
                     {isEditing ? 'Edit Question' : 'Add New Question'}
@@ -427,11 +427,13 @@ export const Question: FC = () => {
                     Question
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
-                    <RichTextEditor
-                      value={form.getValues('question')}
-                      onChange={(content) => form.setValue('question', content)}
-                      showToolbar={true}
-                    />
+                    <div className='table-scroll'>
+                      <RichTextEditor
+                        value={form.getValues('question')}
+                        onChange={(content) => form.setValue('question', content)}
+                        showToolbar={true}
+                      />
+                    </div>
                     <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
@@ -459,11 +461,13 @@ export const Question: FC = () => {
                     Answer
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
-                    <RichTextEditor
-                      value={form.getValues('answer')}
-                      onChange={(content) => form.setValue('answer', content)}
-                      showToolbar={true}
-                    />
+                    <div className='table-scroll'>
+                      <RichTextEditor
+                        value={form.getValues('answer')}
+                        onChange={(content) => form.setValue('answer', content)}
+                        showToolbar={true}
+                      />
+                    </div>
                     <div className='relative p-4 pt-2'>
                       <Button
                         type='button'
