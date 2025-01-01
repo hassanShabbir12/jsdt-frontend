@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, LoaderCircle, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -147,13 +147,17 @@ export const Grades: FC = () => {
             <TableBody>
               {gradeLoading && (
                 <TableRow>
-                  <TableHead className='w-[86%]'>Grades</TableHead>
-                  <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
+                  <TableHead colSpan={4}>
+                    <div className='flex items-center justify-center text-primary'>
+                      <LoaderCircle className='h-20 w-10 animate-spin' />
+                    </div>
+                  </TableHead>
+
                 </TableRow>
               )}
               {!gradeLoading && grades.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={4}>
+                  <TableCell>
                     <AdminRecord />
                   </TableCell>
                 </TableRow>
