@@ -1,4 +1,3 @@
-// src/pages/PageNotFound.tsx
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 

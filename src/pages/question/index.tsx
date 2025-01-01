@@ -43,6 +43,7 @@ import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/utils';
 
+import AdminRecord from '../admin-record';
 import RichTextEditor from './ckeditor';
 import MathFormulaDisplay from './formula';
 
@@ -524,7 +525,7 @@ export const Question: FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {questionLoading ? (
+              {questionLoading && (
                 <TableRow>
                   <TableCell colSpan={4}>
                     <div className='flex items-center justify-center'>
@@ -532,7 +533,20 @@ export const Question: FC = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ) : (
+              )}
+
+              {!questionLoading && questions.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center'>
+                      <AdminRecord />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )}
+
+              {!questionLoading &&
+                questions.length > 0 &&
                 questions.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
@@ -565,8 +579,7 @@ export const Question: FC = () => {
                       </div>
                     </TableCell>
                   </TableRow>
-                ))
-              )}
+                ))}
             </TableBody>
           </Table>
         </div>

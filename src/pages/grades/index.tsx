@@ -24,6 +24,8 @@ import {
 import { useGradeForm } from '@/hooks/admin/grade/useGradeForm';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 
+import AdminRecord from '../admin-record';
+
 export const Grades: FC = () => {
   const {
     loading: listLoading,
@@ -143,7 +145,7 @@ export const Grades: FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {gradeLoading ? (
+              {gradeLoading && (
                 <TableRow>
                   <TableCell colSpan={4}>
                     <div className='flex items-center justify-center text-primary'>
@@ -151,7 +153,16 @@ export const Grades: FC = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ) : (
+              )}
+              {!gradeLoading && grades.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={4}>
+                    <AdminRecord />
+                  </TableCell>
+                </TableRow>
+              )}
+              {!gradeLoading &&
+                grades.length > 0 &&
                 grades.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
@@ -175,8 +186,7 @@ export const Grades: FC = () => {
                       </div>
                     </TableCell>
                   </TableRow>
-                ))
-              )}
+                ))}
             </TableBody>
           </Table>
         </div>

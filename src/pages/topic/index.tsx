@@ -24,6 +24,8 @@ import {
 import { useTopicForm } from '@/hooks/admin/topic/useTopicForm';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
 
+import AdminRecord from '../admin-record';
+
 export const Topic: FC = () => {
   const {
     loading: listLoading,
@@ -143,7 +145,7 @@ export const Topic: FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {topicLoading ? (
+              {topicLoading && (
                 <TableRow>
                   <TableCell colSpan={4}>
                     <div className='flex items-center justify-center'>
@@ -151,7 +153,20 @@ export const Topic: FC = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ) : (
+              )}
+
+              {!topicLoading && topics.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={4}>
+                    <div className='flex items-center justify-center'>
+                      <AdminRecord />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )}
+
+              {!topicLoading &&
+                topics.length > 0 &&
                 topics.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
@@ -175,8 +190,7 @@ export const Topic: FC = () => {
                       </div>
                     </TableCell>
                   </TableRow>
-                ))
-              )}
+                ))}
             </TableBody>
           </Table>
         </div>

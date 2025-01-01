@@ -24,6 +24,8 @@ import {
 import { useSubjectForm } from '@/hooks/admin/subject/useSubjectForm';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
 
+import AdminRecord from '../admin-record';
+
 export const Subjects: FC = () => {
   const {
     loading: listLoading,
@@ -145,15 +147,26 @@ export const Subjects: FC = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {subjectLoading ? (
+                  {subjectLoading && (
                     <TableRow>
-                      <TableCell colSpan={4} className='flex items-center justify-center'>
+                      <TableCell colSpan={4}>
                         <div className='flex items-center justify-center text-primary'>
                           <LoaderCircle className='h-20 w-10 animate-spin' />
                         </div>
                       </TableCell>
                     </TableRow>
-                  ) : (
+                  )}
+                  {!subjectLoading && subjects.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={4}>
+                        <div className='flex items-center justify-center'>
+                          <AdminRecord />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {!subjectLoading &&
+                    subjects.length > 0 &&
                     subjects.map((item, index) => (
                       <TableRow key={index}>
                         <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
@@ -177,8 +190,7 @@ export const Subjects: FC = () => {
                           </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  )}
+                    ))}
                 </TableBody>
               </Table>
             </div>
