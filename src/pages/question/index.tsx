@@ -31,8 +31,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
