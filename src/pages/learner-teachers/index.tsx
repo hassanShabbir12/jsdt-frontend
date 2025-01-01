@@ -125,7 +125,7 @@ export const LearnerTeacher: FC = () => {
                     logout();
                     navigate('/login');
                   }}
-                  className='duration-400 group flex p-2 items-center absolute -left-16 bg-white shadow-xl rounded-md justify-center gap-3 transition-all hover:cursor-pointer'
+                  className='duration-400 group flex p-2 items-center absolute -left-20 sm:-left-16 bg-white shadow-xl rounded-md justify-center gap-3 transition-all hover:cursor-pointer'
                 >
                   <span>
                     <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
