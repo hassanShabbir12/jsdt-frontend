@@ -137,62 +137,64 @@ export const Topic: FC = () => {
           </Dialog>
         </div>
         <div className='px-6'>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className='w-[86%]'>Topics</TableHead>
-                <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {topicLoading && (
+          <div className='overflow-auto'>
+            <Table className='w-[800px] sm:w-full'>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={4}>
-                    <div className='flex items-center justify-center'>
-                      <LoaderCircle className='h-20 w-10 animate-spin text-primary' />
-                    </div>
-                  </TableCell>
+                  <TableHead className='w-[86%]'>Topics</TableHead>
+                  <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
                 </TableRow>
-              )}
-
-              {!topicLoading && topics.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={4}>
-                    <div className='flex items-center justify-center'>
-                      <AdminRecord />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )}
-
-              {!topicLoading &&
-                topics.length > 0 &&
-                topics.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      <div className='flex gap-2'>
-                        <i
-                          onClick={() => {
-                            handleEdit(item);
-                            setValue('title', item.title);
-                          }}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Edit />
-                        </i>
-                        <i
-                          onClick={() => handleDeleteClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Trash2 />
-                        </i>
+              </TableHeader>
+              <TableBody>
+                {topicLoading && (
+                  <TableRow>
+                    <TableCell colSpan={4}>
+                      <div className='flex items-center justify-center'>
+                        <LoaderCircle className='h-20 w-10 animate-spin text-primary' />
                       </div>
                     </TableCell>
                   </TableRow>
-                ))}
-            </TableBody>
-          </Table>
+                )}
+
+                {!topicLoading && topics.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={4}>
+                      <div className='flex items-center justify-center'>
+                        <AdminRecord />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )}
+
+                {!topicLoading &&
+                  topics.length > 0 &&
+                  topics.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        <div className='flex gap-2'>
+                          <i
+                            onClick={() => {
+                              handleEdit(item);
+                              setValue('title', item.title);
+                            }}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Edit />
+                          </i>
+                          <i
+                            onClick={() => handleDeleteClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Trash2 />
+                          </i>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
         <Dialog
           open={deleteModalOpen}
