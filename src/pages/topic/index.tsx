@@ -72,7 +72,7 @@ export const Topic: FC = () => {
             <DialogTrigger asChild>
               <div className='max-w-80 justify-center'>
                 <Button
-                  className='z-20 h-10 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
+                  className='z-20 h-10 w-36 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
                   onClick={() => {
                     setValue('title', '');
                     setOpen(true);
