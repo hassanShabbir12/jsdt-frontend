@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
@@ -16,6 +16,7 @@ import { toast } from '@/hooks/use-toast';
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const location = useLocation();
 
   const onHandleClick = (): void => {
     const error = {
@@ -95,6 +96,35 @@ export const Sidebar: FC = () => {
       handleToggle();
     }
   };
+
+  const handleLocationChange = (): void => {
+    const path = location.pathname;
+
+    switch (path) {
+      case '/admin':
+        setActiveIndex(0);
+        break;
+      case '/admin/subjects':
+        setActiveIndex(1);
+        break;
+      case '/admin/topics':
+        setActiveIndex(2);
+        break;
+      case '/admin/questions':
+        setActiveIndex(3);
+        break;
+      case '/admin/settings':
+        setActiveIndex(4);
+        break;
+      default:
+        setActiveIndex(0); // Fallback to default
+        break;
+    }
+  };
+
+  useEffect(() => {
+    handleLocationChange(); // Call the function to set the initial active index
+  }, [location]);
 
   return (
     <>

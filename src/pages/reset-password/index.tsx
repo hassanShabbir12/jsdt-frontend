@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
@@ -9,7 +10,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useResetPasswordToken } from '@/hooks/client/useResetPasswordToken';
 import { ResetPasswordFormValues, ResetPasswordSchema } from '@/interface/password';
-import { useNavigate } from 'react-router-dom';
 
 export const ResetPassword: FC = () => {
   const {
@@ -37,7 +37,7 @@ export const ResetPassword: FC = () => {
 
   return (
     <div className='mx-auto max-w-[468px] py-20'>
-      <div className='mx-auto mb-14 max-w-90 text-center text-sm sm:text-base text-zinc-800'>
+      <div className='max-w-90 mx-auto mb-14 text-center text-sm text-zinc-800 sm:text-base'>
         <h1 className='text-2xl font-semibold text-zinc-800'>Reset Password</h1>
         <p className='m-0'>Enter New Password</p>
       </div>
@@ -92,8 +92,13 @@ export const ResetPassword: FC = () => {
             <p className='text-sm text-red-500'>{errors.confirmPassword.message}</p>
           )}
         </div>
-        <div className='flex justify-end pb-4 px-3'>
-          <p onClick={() => navigate("/login")} className='text-xs mb-5 pt-1.5 font-semibold text-blue-500 cursor-pointer underline hover:text-blue-700 md:text-sm'>Return to Login</p>
+        <div className='flex justify-end px-3 pb-4'>
+          <p
+            onClick={() => navigate('/login')}
+            className='mb-5 cursor-pointer pt-1.5 text-xs font-semibold text-blue-500 underline hover:text-blue-700 md:text-sm'
+          >
+            Return to Login
+          </p>
         </div>
         <div className='flex justify-center'>
           <Button loading={loading} type='submit' className='mx-auto h-12 w-52 md:w-80'>

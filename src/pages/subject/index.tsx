@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/table';
 import { useSubjectForm } from '@/hooks/admin/subject/useSubjectForm';
 import { useSubjectList } from '@/hooks/admin/subject/useSubjectList';
+
 import AdminRecord from '../admin-record';
 
 export const Subjects: FC = () => {
@@ -71,7 +72,7 @@ export const Subjects: FC = () => {
             <DialogTrigger asChild>
               <div className='max-w-80 justify-center'>
                 <Button
-                  className='z-20 h-10 w-34 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
+                  className='w-34 z-20 h-10 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
                   onClick={() => {
                     setValue('title', '');
                     setOpen(true);
@@ -146,7 +147,7 @@ export const Subjects: FC = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {subjectLoading ? (
+                  {subjectLoading && (
                     <TableRow>
                       <TableCell colSpan={4}>
                         <div className='flex items-center justify-center text-primary'>
@@ -154,41 +155,42 @@ export const Subjects: FC = () => {
                         </div>
                       </TableCell>
                     </TableRow>
-                  ) : (
-                    subjects.length === 0 ?
-                      <TableRow>
-                        <TableCell colSpan={4}>
-                          <div className='flex items-center justify-center'>
-                            <AdminRecord />
+                  )}
+                  {!subjectLoading && subjects.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={4}>
+                        <div className='flex items-center justify-center'>
+                          <AdminRecord />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {!subjectLoading &&
+                    subjects.length > 0 &&
+                    subjects.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                        <TableCell className='border-l border-solid border-zinc-300'>
+                          <div className='flex gap-2'>
+                            <i
+                              onClick={() => {
+                                handleEdit(item);
+                                setValue('title', item.title);
+                              }}
+                              className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                            >
+                              <Edit />
+                            </i>
+                            <i
+                              onClick={() => handleDeleteClick(item)}
+                              className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                            >
+                              <Trash2 />
+                            </i>
                           </div>
                         </TableCell>
                       </TableRow>
-                      :
-                      subjects.map((item, index) => (
-                        <TableRow key={index}>
-                          <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                          <TableCell className='border-l border-solid border-zinc-300'>
-                            <div className='flex gap-2'>
-                              <i
-                                onClick={() => {
-                                  handleEdit(item);
-                                  setValue('title', item.title);
-                                }}
-                                className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                              >
-                                <Edit />
-                              </i>
-                              <i
-                                onClick={() => handleDeleteClick(item)}
-                                className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                              >
-                                <Trash2 />
-                              </i>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                  )}
+                    ))}
                 </TableBody>
               </Table>
             </div>

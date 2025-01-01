@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Edit, LoaderCircle, Trash2 } from 'lucide-react';
+import { Edit, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/table';
 import { useGradeForm } from '@/hooks/admin/grade/useGradeForm';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
+
 import AdminRecord from '../admin-record';
 
 export const Grades: FC = () => {
@@ -136,61 +137,55 @@ export const Grades: FC = () => {
           </Dialog>
         </div>
         <div className='px-6'>
-          <div className='overflow-auto'>
-            <Table className='w-[800px] sm:w-full'>
-              <TableHeader>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className='w-[86%]'>Grades</TableHead>
+                <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {gradeLoading && (
                 <TableRow>
                   <TableHead className='w-[86%]'>Grades</TableHead>
                   <TableHead className='border-l border-solid border-zinc-300'>Action</TableHead>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {gradeLoading ? (
-                  <TableRow className='p-4'>
-                    <TableCell colSpan={4}>
-                      <div className='flex items-center justify-center text-primary'>
-                        <LoaderCircle className='h-10 w-10 animate-spin' />
+              )}
+              {!gradeLoading && grades.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={4}>
+                    <AdminRecord />
+                  </TableCell>
+                </TableRow>
+              )}
+              {!gradeLoading &&
+                grades.length > 0 &&
+                grades.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
+                    <TableCell className='border-l border-solid border-zinc-300'>
+                      <div className='flex gap-2'>
+                        <i
+                          onClick={() => {
+                            handleEdit(item);
+                            setValue('title', item.title);
+                          }}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Edit />
+                        </i>
+                        <i
+                          onClick={() => handleDeleteClick(item)}
+                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                        >
+                          <Trash2 />
+                        </i>
                       </div>
                     </TableCell>
                   </TableRow>
-                ) : (
-                  grades.length === 0 ?
-                    <TableRow>
-                      <TableCell colSpan={4}>
-                        <div className='flex items-center justify-center'>
-                          <AdminRecord />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                    :
-                    grades.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell className='font-base text-zinc-800'>{item.title}</TableCell>
-                        <TableCell className='border-l border-solid border-zinc-300'>
-                          <div className='flex gap-2'>
-                            <i
-                              onClick={() => {
-                                handleEdit(item);
-                                setValue('title', item.title);
-                              }}
-                              className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                            >
-                              <Edit />
-                            </i>
-                            <i
-                              onClick={() => handleDeleteClick(item)}
-                              className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                            >
-                              <Trash2 />
-                            </i>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))
-                )}
-              </TableBody>
-            </Table>
-          </div>
+                ))}
+            </TableBody>
+          </Table>
         </div>
         <Dialog
           open={deleteModalOpen}
@@ -233,6 +228,6 @@ export const Grades: FC = () => {
           </DialogContent>
         </Dialog>
       </div>
-    </div >
+    </div>
   );
 };
