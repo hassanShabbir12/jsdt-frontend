@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -58,10 +58,24 @@ export const LearnerTeacher: FC = () => {
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
   const navigate = useNavigate();
-  const handleAddClassToBody = () => {
-    document.body.classList.add("scroll");
-  };
   const { editorValue, handleEditorChange } = useEditor('');
+  const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    if (isClicked) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [isClicked]);
+
+  const handleTriggerClick = () => {
+    setIsClicked((prev: any) => !prev);
+  };
   const {
     form,
     isLoading,
@@ -119,10 +133,10 @@ export const LearnerTeacher: FC = () => {
           <h2 className='text-base font-semibold leading-7 text-zinc-800 sm:text-2xl md:text-xl'>
             Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
           </h2>
-          <div className='relative inline-block'>
+          <div onClick={handleTriggerClick} className='relative inline-block'>
             <DropdownMenu>
-              <DropdownMenuTrigger onClick={handleAddClassToBody} className='inline-flex sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
-                <p className='-mt-[3px] sm:-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
+              <DropdownMenuTrigger className='inline-flex w-7 h-7 sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-base sm:text-2xl font-semibold text-white outline-none'>
+                <p className='-mt-[1.5px] sm:-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <div
@@ -387,26 +401,28 @@ export const LearnerTeacher: FC = () => {
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
                         <div className='font-regular mb-5 md:mb-10'>
-                          <div className='block-scroll block gap-x-5 sm:flex'>
+                          <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
+                            Question {index + 1}
+                          </h2>
+                          <div className={`relative ${item.image ? 'sm:pl-24' : ''}`}>
                             <div>
-                              <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                                Question {index + 1}
-                              </h2>
-                              <div className='gap-x-2 sm:flex'>
-                                {item.image && (
-                                  <div className='mb-3 w-20'>
-                                    <img src={item.image} alt='Question Image' />
-                                  </div>
-                                )}
-                                <div className='relative min-w-0 grow basis-0'>
-                                  <div>
-                                    <p className='m-0'>
-                                      {item.type === 'simple' ? (
-                                        <QuestionContent content={item.question} />
-                                      ) : (
-                                        <MathFormulaDisplay formula={item.question} />
-                                      )}
-                                    </p>
+                              <div className='overflow-hidden w-full'>
+                                <div className='gap-x-2 sm:flex overflow-hidden w-full'>
+                                  {item.image && (
+                                    <div className='mb-3 w-20 sm:absolute sm:left-0 sm:top-0'>
+                                      <img src={item.image} alt='Question Image' />
+                                    </div>
+                                  )}
+                                  <div className='relative min-w-0 grow basis-0'>
+                                    <div className='overflow-auto'>
+                                      <p className='m-0'>
+                                        {item.type === 'simple' ? (
+                                          <QuestionContent content={item.question} />
+                                        ) : (
+                                          <MathFormulaDisplay formula={item.question} />
+                                        )}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -454,14 +470,14 @@ export const LearnerTeacher: FC = () => {
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Question {index + 1}
                             </h2>
-                            <div className='flex-wrap items-start gap-x-2 sm:flex'>
+                            <div className={`relative ${item.image ? 'sm:pl-24' : ''}`}>
                               {item.image && (
-                                <div className='mb-3 w-20 sm:mb-0'>
+                                <div className='mb-3 w-20 sm:mb-0 sm:absolute sm:left-0 sm:top-0'>
                                   <img src={item.image} alt='Question Image' />
                                 </div>
                               )}
                               <div className='relative sm:min-w-0 sm:grow sm:basis-0'>
-                                <div>
+                                <div className='overflow-auto w-full'>
                                   <p className='m-0'>
                                     {item.type === 'simple' ? (
                                       <QuestionContent content={item.question} />
@@ -477,13 +493,15 @@ export const LearnerTeacher: FC = () => {
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Answer :
                             </h2>
-                            <p className='m-0'>
-                              {item.type === 'simple' ? (
-                                <QuestionContent content={item.answer} />
-                              ) : (
-                                <MathFormulaDisplay formula={item.answer} />
-                              )}
-                            </p>
+                            <div className='overflow-auto w-full'>
+                              <p className='m-0'>
+                                {item.type === 'simple' ? (
+                                  <QuestionContent content={item.answer} />
+                                ) : (
+                                  <MathFormulaDisplay formula={item.answer} />
+                                )}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -582,7 +600,7 @@ export const LearnerTeacher: FC = () => {
                           </h3>
                           <div className='relative gap-x-2 sm:flex'>
                             {item.image && (
-                              <div className='mb-3 mt-[22px] w-20 sm:mb-0'>
+                              <div className='mb-3 w-20 sm:mb-0'>
                                 <img
                                   className='block h-auto w-full'
                                   src={item.image}
@@ -678,24 +696,26 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className='gap-x-3 sm:flex'>
-                    {item.image && (
-                      <div className='mb-5 mt-[22px] w-20 sm:mb-0'>
-                        <img
-                          className='block h-auto w-full'
-                          src={item.image}
-                          alt='Question Image'
-                        />
+                  <div className='overflow-hidden w-full'>
+                    <div className='gap-x-3 sm:flex'>
+                      {item.image && (
+                        <div className='mb-5 w-20 sm:mb-0'>
+                          <img
+                            className='block h-auto w-full'
+                            src={item.image}
+                            alt='Question Image'
+                          />
+                        </div>
+                      )}
+                      <div className='flex-grow basis-0 min-w-0'>
+                        <p className='block w-full text-black overflow-auto'>
+                          {item.type === 'simple' ? (
+                            <QuestionContent content={item.question} />
+                          ) : (
+                            <MathFormulaDisplay formula={item.question} />
+                          )}
+                        </p>
                       </div>
-                    )}
-                    <div className='flex-grow basis-0 min-w-0'>
-                      <p className='block w-full text-black overflow-auto'>
-                        {item.type === 'simple' ? (
-                          <QuestionContent content={item.question} />
-                        ) : (
-                          <MathFormulaDisplay formula={item.question} />
-                        )}
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -704,6 +724,6 @@ export const LearnerTeacher: FC = () => {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 };
