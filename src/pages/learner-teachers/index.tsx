@@ -47,8 +47,8 @@ import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { toast } from '@/hooks/use-toast';
 import { assetUrl } from '@/lib/asset-url';
 
-import RichTextEditor from '../question/ckeditor';
 import MathFormulaDisplay from '../question/formula';
+import QuestionContent from '../question/question-content';
 import { Cover } from './components/cover';
 import GridTextEditor from './components/grid-editor';
 import { InstructionsList } from './components/instructions';
@@ -399,11 +399,7 @@ export const LearnerTeacher: FC = () => {
                                   <div>
                                     <p className='m-0'>
                                       {item.type === 'simple' ? (
-                                        <RichTextEditor
-                                          value={item.question}
-                                          showToolbar={false}
-                                          disabled={true}
-                                        />
+                                        <QuestionContent content={item.question} />
                                       ) : (
                                         <MathFormulaDisplay formula={item.question} />
                                       )}
@@ -465,11 +461,7 @@ export const LearnerTeacher: FC = () => {
                                 <div>
                                   <p className='m-0'>
                                     {item.type === 'simple' ? (
-                                      <RichTextEditor
-                                        value={item.question}
-                                        showToolbar={false}
-                                        disabled={true}
-                                      />
+                                      <QuestionContent content={item.question} />
                                     ) : (
                                       <MathFormulaDisplay formula={item.question} />
                                     )}
@@ -484,11 +476,7 @@ export const LearnerTeacher: FC = () => {
                             </h2>
                             <p className='m-0'>
                               {item.type === 'simple' ? (
-                                <RichTextEditor
-                                  disabled={true}
-                                  value={item.answer}
-                                  showToolbar={false}
-                                />
+                                <QuestionContent content={item.answer} />
                               ) : (
                                 <MathFormulaDisplay formula={item.answer} />
                               )}
@@ -604,11 +592,7 @@ export const LearnerTeacher: FC = () => {
                                 <div className=''>
                                   <p className='line-clamp-3'>
                                     {item.type === 'simple' ? (
-                                      <RichTextEditor
-                                        value={item.question}
-                                        showToolbar={false}
-                                        disabled={true}
-                                      />
+                                      <QuestionContent content={item.question} />
                                     ) : (
                                       <MathFormulaDisplay formula={item.question} />
                                     )}
@@ -704,11 +688,7 @@ export const LearnerTeacher: FC = () => {
                     <div className='flex-grow basis-0 min-w-0'>
                       <p className='block w-full text-black'>
                         {item.type === 'simple' ? (
-                          <RichTextEditor
-                            value={item.question}
-                            showToolbar={false}
-                            disabled={true}
-                          />
+                          <QuestionContent content={item.question} />
                         ) : (
                           <MathFormulaDisplay formula={item.question} />
                         )}
