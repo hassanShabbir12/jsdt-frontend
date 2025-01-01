@@ -510,7 +510,7 @@ export const Question: FC = () => {
           </Dialog>
         </div>
         <div className='sm:px-6 px-3'>
-          <div className='overflow-auto overflow-y-hidden'>
+          <div className='overflow-y-hidden'>
             <Table className='w-[800px] sm:w-full'>
               <TableBody>
                 {questionLoading && (
@@ -571,39 +571,39 @@ export const Question: FC = () => {
               </TableBody>
             </Table>
           </div>
-          <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
-            <DialogContent className='max-w-[620px]'>
-              <DialogHeader>
-                <DialogTitle className='mb-6 text-center'>Do you want to delete?</DialogTitle>
-              </DialogHeader>
-              <p className='mb-6 text-center text-gray-600'>
-                Are you sure you want to delete this question? This action cannot be undone.
-              </p>
-              <DialogFooter>
-                <div className='flex w-full justify-center gap-4'>
-                  <div className='w-1/2'>
-                    <Button
-                      variant='outline'
-                      className='h-12 w-full text-base font-semibold hover:!bg-primary'
-                      onClick={() => setDeleteModalOpen(false)}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                  <div className='w-1/2'>
-                    <Button
-                      className='h-12 w-full text-base font-semibold'
-                      loading={loading}
-                      onClick={() => questionToDelete && deleteQuestion(questionToDelete.id)}
-                    >
-                      Yes
-                    </Button>
-                  </div>
-                </div>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
         </div>
+        <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+          <DialogContent className='max-w-[620px]'>
+            <DialogHeader>
+              <DialogTitle className='mb-6 text-center'>Do you want to delete?</DialogTitle>
+            </DialogHeader>
+            <p className='mb-6 text-center text-gray-600'>
+              Are you sure you want to delete this question? This action cannot be undone.
+            </p>
+            <DialogFooter>
+              <div className='flex w-full justify-center gap-4'>
+                <div className='w-1/2'>
+                  <Button
+                    variant='outline'
+                    className='h-12 w-full text-base font-semibold hover:!bg-primary'
+                    onClick={() => setDeleteModalOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+                <div className='w-1/2'>
+                  <Button
+                    className='h-12 w-full text-base font-semibold'
+                    loading={loading}
+                    onClick={() => questionToDelete && deleteQuestion(questionToDelete.id)}
+                  >
+                    Yes
+                  </Button>
+                </div>
+              </div>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
