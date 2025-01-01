@@ -31,6 +31,8 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
@@ -510,6 +512,20 @@ export const Question: FC = () => {
         <div className='sm:px-6 px-3'>
           <div className='overflow-y-hidden'>
             <Table className='w-[800px] sm:w-full'>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className='w-[80%]'>Questions</TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Image
+                  </TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Marks
+                  </TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Action
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
               <TableBody>
                 {questionLoading && (
                   <TableRow>
