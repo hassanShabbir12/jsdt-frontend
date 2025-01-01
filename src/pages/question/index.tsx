@@ -509,113 +509,101 @@ export const Question: FC = () => {
             </DialogContent>
           </Dialog>
         </div>
-        <div className='px-6'>
-          <Table className='w-[800px] sm:w-full'>
-            <TableHeader>
-              <TableRow>
-                <TableHead className='w-[80%]'>Questions</TableHead>
-                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                  Image
-                </TableHead>
-                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                  Marks
-                </TableHead>
-                <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
-                  Action
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {questionLoading && (
-                <TableRow>
-                  <TableCell colSpan={4}>
-                    <div className='flex items-center justify-center'>
-                      <LoaderCircle className='h-20 w-10 animate-spin text-primary' />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )}
-
-              {!questionLoading && questions.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={4}>
-                    <div className='flex items-center justify-center'>
-                      <AdminRecord />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )}
-
-              {!questionLoading &&
-                questions.length > 0 &&
-                questions.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className='font-base text-zinc-800'>
-                      {item.type === 'simple' ? (
-                        <QuestionContent content={item.question} />
-                      ) : (
-                        <MathFormulaDisplay formula={item.question} />
-                      )}
-                    </TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
-                    </TableCell>
-                    <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
-                      {item?.totalMarks}
-                    </TableCell>
-                    <TableCell className='border-l border-solid border-zinc-300'>
-                      <div className='flex gap-2'>
-                        <i
-                          onClick={() => handleEditClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Edit />
-                        </i>
-                        <i
-                          onClick={() => handleDeleteClick(item)}
-                          className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
-                        >
-                          <Trash2 />
-                        </i>
+        <div className='sm:px-6 px-3'>
+          <div className='overflow-auto overflow-y-hidden'>
+            <Table className='w-[800px] sm:w-full'>
+              <TableBody>
+                {questionLoading && (
+                  <TableRow>
+                    <TableCell colSpan={4}>
+                      <div className='flex items-center justify-center'>
+                        <LoaderCircle className='h-20 w-10 animate-spin text-primary' />
                       </div>
                     </TableCell>
                   </TableRow>
-                ))}
-            </TableBody>
-          </Table>
+                )}
+
+                {!questionLoading && questions.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={4}>
+                      <div className='flex items-center justify-center'>
+                        <AdminRecord />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )}
+
+                {!questionLoading &&
+                  questions.length > 0 &&
+                  questions.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='font-base text-zinc-800'>
+                        {item.type === 'simple' ? (
+                          <QuestionContent content={item.question} />
+                        ) : (
+                          <MathFormulaDisplay formula={item.question} />
+                        )}
+                      </TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        {item?.image && <img className='h-8 w-8 rounded-full' src={item?.image} />}
+                      </TableCell>
+                      <TableCell className='font-base border-l border-solid border-zinc-300 text-zinc-800'>
+                        {item?.totalMarks}
+                      </TableCell>
+                      <TableCell className='border-l border-solid border-zinc-300'>
+                        <div className='flex gap-2'>
+                          <i
+                            onClick={() => handleEditClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Edit />
+                          </i>
+                          <i
+                            onClick={() => handleDeleteClick(item)}
+                            className='duration-400 inline-block cursor-pointer transition-all hover:text-primary'
+                          >
+                            <Trash2 />
+                          </i>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </div>
+          <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+            <DialogContent className='max-w-[620px]'>
+              <DialogHeader>
+                <DialogTitle className='mb-6 text-center'>Do you want to delete?</DialogTitle>
+              </DialogHeader>
+              <p className='mb-6 text-center text-gray-600'>
+                Are you sure you want to delete this question? This action cannot be undone.
+              </p>
+              <DialogFooter>
+                <div className='flex w-full justify-center gap-4'>
+                  <div className='w-1/2'>
+                    <Button
+                      variant='outline'
+                      className='h-12 w-full text-base font-semibold hover:!bg-primary'
+                      onClick={() => setDeleteModalOpen(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                  <div className='w-1/2'>
+                    <Button
+                      className='h-12 w-full text-base font-semibold'
+                      loading={loading}
+                      onClick={() => questionToDelete && deleteQuestion(questionToDelete.id)}
+                    >
+                      Yes
+                    </Button>
+                  </div>
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
-        <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
-          <DialogContent className='max-w-[620px]'>
-            <DialogHeader>
-              <DialogTitle className='mb-6 text-center'>Do you want to delete?</DialogTitle>
-            </DialogHeader>
-            <p className='mb-6 text-center text-gray-600'>
-              Are you sure you want to delete this question? This action cannot be undone.
-            </p>
-            <DialogFooter>
-              <div className='flex w-full justify-center gap-4'>
-                <div className='w-1/2'>
-                  <Button
-                    variant='outline'
-                    className='h-12 w-full text-base font-semibold hover:!bg-primary'
-                    onClick={() => setDeleteModalOpen(false)}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-                <div className='w-1/2'>
-                  <Button
-                    className='h-12 w-full text-base font-semibold'
-                    loading={loading}
-                    onClick={() => questionToDelete && deleteQuestion(questionToDelete.id)}
-                  >
-                    Yes
-                  </Button>
-                </div>
-              </div>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
   );
