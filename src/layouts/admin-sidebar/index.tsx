@@ -66,7 +66,7 @@ export const Sidebar: FC = () => {
         navigate('/admin/settings');
         break;
       default:
-        navigate('/admin'); // Fallback navigation
+        navigate('/admin');
         break;
     }
   }, []);
@@ -74,12 +74,15 @@ export const Sidebar: FC = () => {
   useEffect(() => {
     if (isToggled) {
       document.addEventListener('mousedown', handleClickOutside);
+      document.body.classList.add('no-scroll');
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.body.classList.remove('no-scroll');
     }
 
     return (): void => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.body.classList.remove('no-scroll');
     };
   }, [isToggled]);
 
@@ -96,8 +99,8 @@ export const Sidebar: FC = () => {
   return (
     <>
       <div className='relative' onClick={handleToggle}>
-        <div className='fixed left-8 top-8 z-40 sm:absolute'>
-          <div className='relative z-40 block h-5 w-4 cursor-pointer border-t-2 border-zinc-800 before:absolute before:top-3.5 before:h-0.5 before:w-4 before:bg-zinc-800 after:absolute after:right-0 after:top-1.5 after:m-0 after:h-0.5 after:w-4 after:bg-zinc-800 after:transition-all md:hidden'></div>
+        <div className='fixed left-8 top-8 z-30 sm:absolute'>
+          <div className='relative z-20 block h-5 w-4 cursor-pointer border-t-2 border-zinc-800 before:absolute before:top-3.5 before:h-0.5 before:w-4 before:bg-zinc-800 after:absolute after:right-0 after:top-1.5 after:m-0 after:h-0.5 after:w-4 after:bg-zinc-800 after:transition-all md:hidden'></div>
         </div>
       </div>
       <div

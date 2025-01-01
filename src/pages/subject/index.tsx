@@ -71,7 +71,7 @@ export const Subjects: FC = () => {
             <DialogTrigger asChild>
               <div className='max-w-80 justify-center'>
                 <Button
-                  className='z-20 h-10 w-32 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
+                  className='z-20 h-10 w-34 text-sm font-semibold sm:h-12 sm:w-40 sm:text-base'
                   onClick={() => {
                     setValue('title', '');
                     setOpen(true);
@@ -149,7 +149,7 @@ export const Subjects: FC = () => {
                   {subjectLoading ? (
                     <TableRow>
                       <TableCell colSpan={4}>
-                        <div className='flex items-center justify-center text-black'>
+                        <div className='flex items-center justify-center text-primary'>
                           <LoaderCircle className='h-20 w-10 animate-spin' />
                         </div>
                       </TableCell>
