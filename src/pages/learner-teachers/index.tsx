@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -22,11 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+
 import { ScrollBar } from '@/components/ui/scroll-area';
 import {
   Select,
@@ -52,6 +48,7 @@ import QuestionContent from '../question/question-content';
 import { Cover } from './components/cover';
 import GridTextEditor from './components/grid-editor';
 import { InstructionsList } from './components/instructions';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
@@ -59,23 +56,6 @@ export const LearnerTeacher: FC = () => {
   const { topics } = useTopicList();
   const navigate = useNavigate();
   const { editorValue, handleEditorChange } = useEditor('');
-  const [isClicked, setIsClicked] = useState(false);
-
-  useEffect(() => {
-    if (isClicked) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-
-    return () => {
-      document.body.classList.remove('no-scroll');
-    };
-  }, [isClicked]);
-
-  const handleTriggerClick = () => {
-    setIsClicked((prev: any) => !prev);
-  };
   const {
     form,
     isLoading,
@@ -93,6 +73,7 @@ export const LearnerTeacher: FC = () => {
   } = useInvestigation(editorValue);
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
   const { logout, user } = useAuth();
+
 
   if (isLearner === null) {
     return;
@@ -133,18 +114,18 @@ export const LearnerTeacher: FC = () => {
           <h2 className='text-base font-semibold leading-7 text-zinc-800 sm:text-2xl md:text-xl'>
             Investigation/Exam ({isLearner ? 'Learner' : 'Educator'}&rsquo;s account)
           </h2>
-          <div onClick={handleTriggerClick} className='relative inline-block'>
-            <DropdownMenu>
-              <DropdownMenuTrigger className='inline-flex w-7 h-7 sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-base sm:text-2xl font-semibold text-white outline-none'>
+          <div className='relative inline-block'>
+            <Popover>
+              <PopoverTrigger className='inline-flex relative w-7 h-7 sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-base sm:text-2xl font-semibold text-white outline-none'>
                 <p className='-mt-[1.5px] sm:-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              </PopoverTrigger>
+              <PopoverContent>
                 <div
                   onClick={() => {
                     logout();
                     navigate('/login');
                   }}
-                  className='duration-400 flex items-center justify-center gap-3 transition-all hover:cursor-pointer'
+                  className='duration-400 group flex p-2 items-center absolute -left-16 bg-white shadow-xl rounded-md justify-center gap-3 transition-all hover:cursor-pointer'
                 >
                   <span>
                     <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
@@ -153,8 +134,8 @@ export const LearnerTeacher: FC = () => {
                     Logout
                   </span>
                 </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
         <form onSubmit={onSubmit}>

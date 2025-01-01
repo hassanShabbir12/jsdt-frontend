@@ -138,8 +138,8 @@ export const Subjects: FC = () => {
         </div>
         <div className='px-6'>
           <div className='overflow-auto'>
-            <div>
-              <Table className='w-[800px] sm:w-full'>
+            <div className={subjects.length > 0 ? 'overflow-auto' : ''}>
+              <Table className={subjects.length > 0 ? 'w-[800px] sm:w-full' : 'w-full'}>
                 <TableHeader>
                   <TableRow>
                     <TableHead className='w-[86%]'>Subject</TableHead>
