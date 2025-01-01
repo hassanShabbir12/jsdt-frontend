@@ -58,6 +58,9 @@ export const LearnerTeacher: FC = () => {
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
   const navigate = useNavigate();
+  const handleAddClassToBody = () => {
+    document.body.classList.add("scroll");
+  };
   const { editorValue, handleEditorChange } = useEditor('');
   const {
     form,
@@ -118,8 +121,8 @@ export const LearnerTeacher: FC = () => {
           </h2>
           <div className='relative inline-block'>
             <DropdownMenu>
-              <DropdownMenuTrigger className='inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
-                <p className='sm:-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
+              <DropdownMenuTrigger onClick={handleAddClassToBody} className='inline-flex sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-2xl font-semibold text-white outline-none'>
+                <p className='-mt-[3px] sm:-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <div
@@ -590,7 +593,7 @@ export const LearnerTeacher: FC = () => {
                             <div className='min-w-0 flex-grow basis-0'>
                               <ScrollArea>
                                 <div className=''>
-                                  <p className='line-clamp-3'>
+                                  <p className='w-full overflow-auto line-clamp-3'>
                                     {item.type === 'simple' ? (
                                       <QuestionContent content={item.question} />
                                     ) : (
@@ -686,7 +689,7 @@ export const LearnerTeacher: FC = () => {
                       </div>
                     )}
                     <div className='flex-grow basis-0 min-w-0'>
-                      <p className='block w-full text-black'>
+                      <p className='block w-full text-black overflow-auto'>
                         {item.type === 'simple' ? (
                           <QuestionContent content={item.question} />
                         ) : (
