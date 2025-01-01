@@ -23,7 +23,6 @@ import {
 } from '@/components/ui/table';
 import { useTopicForm } from '@/hooks/admin/topic/useTopicForm';
 import { useTopicList } from '@/hooks/admin/topic/useTopicList';
-import { Question } from '../question';
 import AdminRecord from '../admin-record';
 
 export const Topic: FC = () => {

@@ -66,7 +66,7 @@ export const Sidebar: FC = () => {
         navigate('/admin/settings');
         break;
       default:
-        navigate('/admin'); // Fallback navigation
+        navigate('/admin');
         break;
     }
   }, []);
@@ -74,15 +74,15 @@ export const Sidebar: FC = () => {
   useEffect(() => {
     if (isToggled) {
       document.addEventListener('mousedown', handleClickOutside);
-      document.body.classList.add('no-scroll'); // Prevent scrolling
+      document.body.classList.add('no-scroll');
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.classList.remove('no-scroll'); // Restore scrolling
+      document.body.classList.remove('no-scroll');
     }
 
     return (): void => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.classList.remove('no-scroll'); // Cleanup
+      document.body.classList.remove('no-scroll');
     };
   }, [isToggled]);
 
