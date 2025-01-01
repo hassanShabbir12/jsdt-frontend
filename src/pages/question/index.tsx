@@ -60,6 +60,8 @@ export const Question: FC = () => {
     tempImage,
     setTempImage,
     fileInputRef,
+    fileInputKey,
+    setFileInputKey,
   } = useQuestionForm();
 
   const {
@@ -346,6 +348,7 @@ export const Question: FC = () => {
                           onClick={() => {
                             setTempImage('');
                             form.setValue('image', '');
+                            setFileInputKey((prevKey) => prevKey + 1);
                           }}
                         >
                           <X className='h-3.5 w-3.5 text-red-600' />
@@ -369,6 +372,7 @@ export const Question: FC = () => {
                     <label className='ml-1 cursor-pointer border-b text-blue-500 underline transition-all hover:text-blue-600'>
                       browse
                       <input
+                        key={fileInputKey}
                         type='file'
                         accept='image/*'
                         className='hidden'
@@ -384,6 +388,8 @@ export const Question: FC = () => {
 
                               setTempImage(base64Image);
                               form.setValue('image', base64Image);
+
+                              setFileInputKey((prevKey: number) => prevKey + 1);
                             };
                             reader.readAsDataURL(file);
                           }
@@ -409,6 +415,9 @@ export const Question: FC = () => {
                           form.setValue('image', base64Image);
                         };
                         reader.readAsDataURL(file);
+                      }
+                      if (fileInputRef.current) {
+                        fileInputRef.current.value = '';
                       }
                     }}
                   />
@@ -509,7 +518,7 @@ export const Question: FC = () => {
             </DialogContent>
           </Dialog>
         </div>
-        <div className='sm:px-6 px-3'>
+        <div className='px-3 sm:px-6'>
           <div className='overflow-y-hidden'>
             <Table className='w-[800px] sm:w-full'>
               <TableHeader>

@@ -35,6 +35,8 @@ interface UseQuestionFormReturn {
   fileInputRef: React.RefObject<HTMLInputElement>;
   image: string | null | undefined;
   setImage?: React.Dispatch<React.SetStateAction<string | null | undefined>>;
+  fileInputKey: number;
+  setFileInputKey: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
@@ -43,7 +45,8 @@ export function useQuestionForm(): UseQuestionFormReturn {
   const [processingTextAnswer, setProcessingTextAnswer] = useState(false);
   const [mode, setMode] = useState<string>('simple');
   const [tempImage, setTempImage] = useState<string>('');
-  const fileInputRef = useRef<HTMLInputElement | null>(null); // Add file input reference
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [fileInputKey, setFileInputKey] = useState(0);
 
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -146,5 +149,7 @@ export function useQuestionForm(): UseQuestionFormReturn {
     tempImage,
     setTempImage,
     fileInputRef,
+    fileInputKey,
+    setFileInputKey,
   };
 }

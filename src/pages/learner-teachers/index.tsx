@@ -579,7 +579,7 @@ export const LearnerTeacher: FC = () => {
                           </h3>
                           <div className='relative gap-x-2 sm:flex'>
                             {item.image && (
-                              <div className='mb-3 w-20 sm:mb-0 mt-[22px]'>
+                              <div className='mb-3 mt-[22px] w-20 sm:mb-0'>
                                 <img
                                   className='block h-auto w-full'
                                   src={item.image}
@@ -627,7 +627,7 @@ export const LearnerTeacher: FC = () => {
               className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
               <div className='block gap-x-5 sm:flex'>
-                <div className='flex-grow basis-0 min-w-0'>
+                <div className='min-w-0 flex-grow basis-0'>
                   <div className='mb-5 flex w-full justify-between sm:mb-8'>
                     <span className='inline-block text-2xl font-semibold'>
                       Question {index + 1}
@@ -677,7 +677,7 @@ export const LearnerTeacher: FC = () => {
                   </div>
                   <div className='gap-x-3 sm:flex'>
                     {item.image && (
-                      <div className='mb-5 w-20 sm:mb-0 mt-[22px]'>
+                      <div className='mb-5 mt-[22px] w-20 sm:mb-0'>
                         <img
                           className='block h-auto w-full'
                           src={item.image}
@@ -685,7 +685,7 @@ export const LearnerTeacher: FC = () => {
                         />
                       </div>
                     )}
-                    <div className='flex-grow basis-0 min-w-0'>
+                    <div className='min-w-0 flex-grow basis-0'>
                       <p className='block w-full text-black'>
                         {item.type === 'simple' ? (
                           <QuestionContent content={item.question} />
