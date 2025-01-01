@@ -46,6 +46,7 @@ import { cn } from '@/lib/utils';
 import AdminRecord from '../admin-record';
 import RichTextEditor from './ckeditor';
 import MathFormulaDisplay from './formula';
+import QuestionContent from './question-content';
 
 export const Question: FC = () => {
   const {
@@ -551,7 +552,7 @@ export const Question: FC = () => {
                   <TableRow key={index}>
                     <TableCell className='font-base text-zinc-800'>
                       {item.type === 'simple' ? (
-                        <RichTextEditor value={item.question} showToolbar={false} disabled={true} />
+                        <QuestionContent content={item.question} />
                       ) : (
                         <MathFormulaDisplay formula={item.question} />
                       )}

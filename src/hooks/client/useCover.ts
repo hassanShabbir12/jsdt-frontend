@@ -45,6 +45,10 @@ export const useCover = (): UseCoverReturn => {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file: File | undefined = event.target.files?.[0];
 
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+
     if (file && file.size > 2 * 1024 * 1024) {
       toast({
         description: 'Image size should not exceed 2MB.',
@@ -76,6 +80,14 @@ export const useCover = (): UseCoverReturn => {
     event.preventDefault();
     const file = event.dataTransfer.files?.[0];
 
+    if (file && file.size > 2 * 1024 * 1024) {
+      toast({
+        description: 'Image size should not exceed 2MB.',
+      });
+
+      return;
+    }
+
     if (file) {
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
@@ -100,6 +112,9 @@ export const useCover = (): UseCoverReturn => {
   };
 
   const handleButtonClick = (): void => {
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
     fileInputRef.current?.click();
   };
 

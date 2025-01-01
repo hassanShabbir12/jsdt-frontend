@@ -175,6 +175,7 @@ export function useQuestionOperations(
       resetFormFields();
       setTempImage('');
     } catch (error) {
+      setLoading(false);
       if (error instanceof AxiosError) {
         handleError(error, logout, toast, navigate);
       }
