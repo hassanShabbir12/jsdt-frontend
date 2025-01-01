@@ -137,8 +137,8 @@ export const Topic: FC = () => {
           </Dialog>
         </div>
         <div className='px-6'>
-          <div className='overflow-auto'>
-            <Table className='w-[800px] sm:w-full'>
+          <div className={topics.length > 0 ? 'overflow-auto' : ''}>
+            <Table className={topics.length > 0 ? 'w-[800px] sm:w-full' : 'w-full'}>
               <TableHeader>
                 <TableRow>
                   <TableHead className='w-[86%]'>Topics</TableHead>
@@ -196,6 +196,7 @@ export const Topic: FC = () => {
             </Table>
           </div>
         </div>
+
         <Dialog
           open={deleteModalOpen}
           onOpenChange={(open) => {
