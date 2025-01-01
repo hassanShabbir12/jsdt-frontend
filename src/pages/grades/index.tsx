@@ -153,14 +153,15 @@ export const Grades: FC = () => {
                         <LoaderCircle className='h-20 w-10 animate-spin' />
                       </div>
                     </TableHead>
-
                   </TableRow>
                 )}
                 {!gradeLoading && grades.length === 0 && (
                   <TableRow>
-                    <TableCell>
-                      <AdminRecord />
-                    </TableCell>
+                    <TableHead colSpan={4}>
+                      <div className='flex items-center justify-center'>
+                        <AdminRecord />
+                      </div>
+                    </TableHead>
                   </TableRow>
                 )}
                 {!gradeLoading &&

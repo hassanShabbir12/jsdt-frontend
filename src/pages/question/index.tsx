@@ -27,7 +27,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { useGradeList } from '@/hooks/admin/grade/useGradeList';
 import { useQuestionForm } from '@/hooks/admin/question/useQuestionForm';
 import { useQuestionOperations } from '@/hooks/admin/question/useQuestionOperations';
@@ -514,6 +521,20 @@ export const Question: FC = () => {
         <div className='px-3 sm:px-6'>
           <div className='overflow-y-hidden'>
             <Table className='w-[800px] sm:w-full'>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className='w-[80%]'>Questions</TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Image
+                  </TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Marks
+                  </TableHead>
+                  <TableHead className='w-[80%] border-l border-solid border-zinc-300'>
+                    Action
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
               <TableBody>
                 {questionLoading && (
                   <TableRow>
