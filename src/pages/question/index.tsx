@@ -62,6 +62,7 @@ export const Question: FC = () => {
     fileInputRef,
     fileInputKey,
     setFileInputKey,
+    handleFileChange,
   } = useQuestionForm();
 
   const {
@@ -377,23 +378,7 @@ export const Question: FC = () => {
                         accept='image/*'
                         className='hidden'
                         ref={fileInputRef}
-                        onChange={(event) => {
-                          const file = event.target.files?.[0];
-
-                          if (file) {
-                            const reader = new FileReader();
-
-                            reader.onloadend = (): void => {
-                              const base64Image = reader.result as string;
-
-                              setTempImage(base64Image);
-                              form.setValue('image', base64Image);
-
-                              setFileInputKey((prevKey: number) => prevKey + 1);
-                            };
-                            reader.readAsDataURL(file);
-                          }
-                        }}
+                        onChange={handleFileChange}
                       />
                     </label>
                   </div>
@@ -402,24 +387,7 @@ export const Question: FC = () => {
                     ref={fileInputRef}
                     accept='image/*'
                     className='hidden'
-                    onChange={(event) => {
-                      const file = event.target.files?.[0];
-
-                      if (file) {
-                        const reader = new FileReader();
-
-                        reader.onloadend = (): void => {
-                          const base64Image = reader.result as string;
-
-                          setTempImage(base64Image);
-                          form.setValue('image', base64Image);
-                        };
-                        reader.readAsDataURL(file);
-                      }
-                      if (fileInputRef.current) {
-                        fileInputRef.current.value = '';
-                      }
-                    }}
+                    onChange={handleFileChange}
                   />
                 </div>
                 <div className='mb-6 w-full'>

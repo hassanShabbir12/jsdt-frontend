@@ -37,6 +37,7 @@ interface UseQuestionFormReturn {
   setImage?: React.Dispatch<React.SetStateAction<string | null | undefined>>;
   fileInputKey: number;
   setFileInputKey: React.Dispatch<React.SetStateAction<number>>;
+  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function useQuestionForm(): UseQuestionFormReturn {
@@ -135,6 +136,33 @@ export function useQuestionForm(): UseQuestionFormReturn {
     form.setValue('answer', '');
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        setFileInputKey((prevKey: number) => prevKey + 1);
+        toast({
+          title: 'Error',
+          description: 'File size should not exceed 2MB.',
+        });
+
+        return;
+      }
+      const reader = new FileReader();
+
+      reader.onloadend = (): void => {
+        const base64Image = reader.result as string;
+
+        setTempImage(base64Image);
+        form.setValue('image', base64Image);
+
+        setFileInputKey((prevKey: number) => prevKey + 1);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return {
     form,
     processingText,
@@ -151,5 +179,6 @@ export function useQuestionForm(): UseQuestionFormReturn {
     fileInputRef,
     fileInputKey,
     setFileInputKey,
+    handleFileChange,
   };
 }
