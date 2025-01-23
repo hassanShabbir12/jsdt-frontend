@@ -377,21 +377,21 @@ export const LearnerTeacher: FC = () => {
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
-                        <div className='font-regular mb-5 md:mb-10'>
-                          <h2 className='mb-2 text-lg font-semibold md:mb-3 md:text-2xl'>
-                            Question {index + 1}
-                          </h2>
+                        <div className='font-regular mb-5 md:mb-10 p-3 border-neutral-200 md:p-7 rounded-xl border'>
                           <div className={`relative ${item.image ? 'sm:pl-24' : ''}`}>
                             <div>
                               <div className='overflow-hidden w-full'>
                                 <div className='gap-x-2 sm:flex overflow-hidden w-full'>
                                   {item.image && (
-                                    <div className='mb-3 w-20 sm:absolute sm:left-0 sm:top-0'>
+                                    <div className='mb-3 w-20 sm:absolute sm:left-0 sm:top-0 sm:pt-2'>
                                       <img src={item.image} alt='Question Image' />
                                     </div>
                                   )}
                                   <div className='relative min-w-0 grow basis-0'>
                                     <div className='overflow-auto'>
+                                      <h2 className='mb-2 text-lg font-semibold md:mb-1 md:text-2xl leading-3'>
+                                        Question {index + 1}
+                                      </h2>
                                       <p className='m-0'>{item.question}</p>
                                     </div>
                                   </div>
@@ -438,17 +438,17 @@ export const LearnerTeacher: FC = () => {
                       {questions.map((item, index) => (
                         <div className='mb-7 w-full rounded-xl border border-solid border-neutral-200 p-3 text-sm sm:text-lg md:p-7'>
                           <div className='mb-4 md:mb-7'>
-                            <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
-                              Question {index + 1}
-                            </h2>
                             <div className={`relative ${item.image ? 'sm:pl-24' : ''}`}>
                               {item.image && (
-                                <div className='mb-3 w-20 sm:mb-0 sm:absolute sm:left-0 sm:top-0'>
+                                <div className='mb-3 w-20 sm:mb-0 sm:absolute sm:left-0 sm:top-0 sm:pt-2.5'>
                                   <img src={item.image} alt='Question Image' />
                                 </div>
                               )}
                               <div className='relative sm:min-w-0 sm:grow sm:basis-0'>
                                 <div className='overflow-auto w-full'>
+                                  <h2 className='mb-1.5 text-lg font-semibold md:mb-2 md:text-2xl'>
+                                    Question {index + 1}
+                                  </h2>
                                   <p className='m-0'>{item.question}</p>
                                 </div>
                               </div>
@@ -622,11 +622,8 @@ export const LearnerTeacher: FC = () => {
                   <CarouselItem className='carousel-item' key={index}>
                     <div className='mb-10 text-sm text-black sm:pl-16 sm:pr-20 md:text-base lg:pl-24 lg:pr-36 lg:text-2xl'>
                       <div className='block-scroll block h-28 gap-x-5 overflow-y-auto sm:flex md:h-32 lg:h-40'>
-                        <div className='w-full'>
-                          <h3 className='mb-3 text-2xl font-semibold leading-7'>
-                            Question {index + 1}
-                          </h3>
-                          <div className='relative gap-x-2 sm:flex'>
+                        <div className='w-full pt-5'>
+                          <div className='relative gap-x-4 sm:flex'>
                             {item.image && (
                               <div className='mb-3 w-20 sm:mb-0'>
                                 <img
@@ -638,7 +635,10 @@ export const LearnerTeacher: FC = () => {
                             )}
                             <div className='min-w-0 flex-grow basis-0'>
                               <ScrollArea>
-                                <p className='line-clamp-3 w-full overflow-auto'>{item.question}</p>
+                                <h3 className='mb-3 text-2xl font-semibold leading-4'>
+                                  Question {index + 1}
+                                </h3>
+                                <p className='line-clamp-3 w-full'>{item.question}</p>
                                 <ScrollBar orientation='horizontal' />
                               </ScrollArea>
                             </div>
@@ -665,14 +665,11 @@ export const LearnerTeacher: FC = () => {
           {questions.map((item, index) => (
             <div
               key={item.id}
-              className='mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
+              className='mb-6 relative rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
               <div className='block gap-x-5 sm:flex'>
                 <div className='min-w-0 flex-grow basis-0'>
-                  <div className='mb-5 flex w-full justify-between sm:mb-8'>
-                    <span className='inline-block text-2xl font-semibold'>
-                      Question {index + 1}
-                    </span>
+                  <div className='flex w-full justify-end absolute top-4 right-4'>
                     <Dialog open={isOpen} onOpenChange={setIsOpen}>
                       <DialogTrigger asChild>
                         <i
@@ -728,6 +725,9 @@ export const LearnerTeacher: FC = () => {
                         </div>
                       )}
                       <div className='flex-grow basis-0 min-w-0'>
+                        <span className='block text-2xl font-semibold leading-4 mb-3'>
+                          Question {index + 1}
+                        </span>
                         <p className='block w-full text-black overflow-auto'>{item.question}</p>
                       </div>
                     </div>
