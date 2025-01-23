@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollBar } from '@/components/ui/scroll-area';
 import {
   Select,
@@ -42,20 +42,17 @@ import useEditor from '@/hooks/client/useGrid';
 import { useInvestigation } from '@/hooks/client/useInvestigation';
 import { toast } from '@/hooks/use-toast';
 import { assetUrl } from '@/lib/asset-url';
+import { calculatePercentage, calculateTotalMarks } from '@/utils/helper';
 
-import MathFormulaDisplay from '../question/formula';
-import QuestionContent from '../question/question-content';
 import { Cover } from './components/cover';
-import GridTextEditor from './components/grid-editor';
 import { InstructionsList } from './components/instructions';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export const LearnerTeacher: FC = () => {
   const { grades } = useGradeList();
   const { subjects } = useSubjectList();
   const { topics } = useTopicList();
   const navigate = useNavigate();
-  const { editorValue, handleEditorChange } = useEditor('');
+  const { editorValue } = useEditor('');
   const {
     form,
     isLoading,
@@ -73,7 +70,6 @@ export const LearnerTeacher: FC = () => {
   } = useInvestigation(editorValue);
   const { downloadQuestions, containerRef, loading } = useDownloadQuestions();
   const { logout, user } = useAuth();
-
 
   if (isLearner === null) {
     return;
@@ -396,13 +392,7 @@ export const LearnerTeacher: FC = () => {
                                   )}
                                   <div className='relative min-w-0 grow basis-0'>
                                     <div className='overflow-auto'>
-                                      <p className='m-0'>
-                                        {item.type === 'simple' ? (
-                                          <QuestionContent content={item.question} />
-                                        ) : (
-                                          <MathFormulaDisplay formula={item.question} />
-                                        )}
-                                      </p>
+                                      <p className='m-0'>{item.question}</p>
                                     </div>
                                   </div>
                                 </div>
@@ -459,13 +449,7 @@ export const LearnerTeacher: FC = () => {
                               )}
                               <div className='relative sm:min-w-0 sm:grow sm:basis-0'>
                                 <div className='overflow-auto w-full'>
-                                  <p className='m-0'>
-                                    {item.type === 'simple' ? (
-                                      <QuestionContent content={item.question} />
-                                    ) : (
-                                      <MathFormulaDisplay formula={item.question} />
-                                    )}
-                                  </p>
+                                  <p className='m-0'>{item.question}</p>
                                 </div>
                               </div>
                             </div>
@@ -474,14 +458,8 @@ export const LearnerTeacher: FC = () => {
                             <h2 className='mb-1.5 text-lg font-semibold md:mb-3 md:text-2xl'>
                               Answer :
                             </h2>
-                            <div className='overflow-auto w-full'>
-                              <p className='m-0'>
-                                {item.type === 'simple' ? (
-                                  <QuestionContent content={item.answer} />
-                                ) : (
-                                  <MathFormulaDisplay formula={item.answer} />
-                                )}
-                              </p>
+                            <div className='w-full overflow-auto'>
+                              <p className='m-0'>{item.answer}</p>
                             </div>
                           </div>
                         </div>
@@ -508,7 +486,76 @@ export const LearnerTeacher: FC = () => {
                           <h1 className='mb-8 text-center text-2xl font-semibold text-zinc-800 sm:mb-12'>
                             Taxonomy Grid
                           </h1>
-                          <GridTextEditor value={editorValue} onChange={handleEditorChange} />
+                          <div className='overflow-auto'>
+                            <table className='mx-auto mb-3 w-[625px] border-collapse border border-black lg:w-[825px]'>
+                              <thead>
+                                <tr>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'></th>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                    Easy
+                                  </th>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                    Intermediate
+                                  </th>
+                                  <th className='w-1/5 border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-3 sm:py-5 sm:text-base'>
+                                    Difficult
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {questions.map((item, index) => (
+                                  <tr key={item.id}>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      {index + 1}
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      {item.difficultyLevel === 'Easy'
+                                        ? `Marks (${item.totalMarks})`
+                                        : ''}
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      {item.difficultyLevel === 'Intermediate'
+                                        ? `Marks (${item.totalMarks})`
+                                        : ''}
+                                    </td>
+                                    <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                      {item.difficultyLevel === 'Difficult'
+                                        ? `Marks (${item.totalMarks})`
+                                        : ''}
+                                    </td>
+                                  </tr>
+                                ))}
+                                <tr>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    Total Marks
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculateTotalMarks(questions, 'Easy')}
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculateTotalMarks(questions, 'Intermediate')}
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculateTotalMarks(questions, 'Difficult')}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    Percentage
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculatePercentage(questions, 'Easy')}%
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculatePercentage(questions, 'Intermediate')}%
+                                  </td>
+                                  <td className='border-2 border-black px-1 py-3 text-center text-xs font-semibold sm:px-4 sm:py-5 sm:text-base'>
+                                    {calculatePercentage(questions, 'Difficult')}%
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </DialogContent>
@@ -591,15 +638,7 @@ export const LearnerTeacher: FC = () => {
                             )}
                             <div className='min-w-0 flex-grow basis-0'>
                               <ScrollArea>
-                                <div className=''>
-                                  <p className='w-full overflow-auto line-clamp-3'>
-                                    {item.type === 'simple' ? (
-                                      <QuestionContent content={item.question} />
-                                    ) : (
-                                      <MathFormulaDisplay formula={item.question} />
-                                    )}
-                                  </p>
-                                </div>
+                                <p className='line-clamp-3 w-full overflow-auto'>{item.question}</p>
                                 <ScrollBar orientation='horizontal' />
                               </ScrollArea>
                             </div>
@@ -689,13 +728,7 @@ export const LearnerTeacher: FC = () => {
                         </div>
                       )}
                       <div className='flex-grow basis-0 min-w-0'>
-                        <p className='block w-full text-black overflow-auto'>
-                          {item.type === 'simple' ? (
-                            <QuestionContent content={item.question} />
-                          ) : (
-                            <MathFormulaDisplay formula={item.question} />
-                          )}
-                        </p>
+                        <p className='block w-full text-black overflow-auto'>{item.question}</p>
                       </div>
                     </div>
                   </div>
@@ -705,6 +738,6 @@ export const LearnerTeacher: FC = () => {
           ))}
         </div>
       </div>
-    </section >
+    </section>
   );
 };
