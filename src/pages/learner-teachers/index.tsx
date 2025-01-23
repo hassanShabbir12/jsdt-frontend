@@ -112,7 +112,7 @@ export const LearnerTeacher: FC = () => {
           </h2>
           <div className='relative inline-block'>
             <Popover>
-              <PopoverTrigger className='inline-flex relative w-7 h-7 sm:h-10 sm:w-10 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-base sm:text-2xl font-semibold text-white outline-none'>
+              <PopoverTrigger className='relative inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-sky-900 text-base font-semibold text-white outline-none sm:h-10 sm:w-10 sm:text-2xl'>
                 <p className='-mt-[1.5px] sm:-mt-1'>{user?.email.charAt(0).toUpperCase()}</p>
               </PopoverTrigger>
               <PopoverContent>
@@ -121,7 +121,7 @@ export const LearnerTeacher: FC = () => {
                     logout();
                     navigate('/login');
                   }}
-                  className='duration-400 group flex p-2 items-center absolute -left-20 sm:-left-16 bg-white shadow-xl rounded-md justify-center gap-3 transition-all hover:cursor-pointer'
+                  className='duration-400 group absolute -left-20 flex items-center justify-center gap-3 rounded-md bg-white p-2 shadow-xl transition-all hover:cursor-pointer sm:-left-16'
                 >
                   <span>
                     <LogOut className='duration-400 h-5 w-5 transition-all group-hover:text-primary' />
@@ -377,11 +377,11 @@ export const LearnerTeacher: FC = () => {
                     </DialogHeader>
                     <div className='w-full text-sm sm:text-lg'>
                       {questions.map((item, index) => (
-                        <div className='font-regular mb-5 md:mb-10 p-3 border-neutral-200 md:p-7 rounded-xl border'>
+                        <div className='font-regular mb-5 rounded-xl border border-neutral-200 p-3 md:mb-10 md:p-7'>
                           <div className={`relative ${item.image ? 'sm:pl-24' : ''}`}>
                             <div>
-                              <div className='overflow-hidden w-full'>
-                                <div className='gap-x-2 sm:flex overflow-hidden w-full'>
+                              <div className='w-full overflow-hidden'>
+                                <div className='w-full gap-x-2 overflow-hidden sm:flex'>
                                   {item.image && (
                                     <div className='mb-3 w-20 sm:absolute sm:left-0 sm:top-0 sm:pt-2'>
                                       <img src={item.image} alt='Question Image' />
@@ -389,7 +389,7 @@ export const LearnerTeacher: FC = () => {
                                   )}
                                   <div className='relative min-w-0 grow basis-0'>
                                     <div className='overflow-auto'>
-                                      <h2 className='mb-2 text-lg font-semibold md:mb-1 md:text-2xl leading-3'>
+                                      <h2 className='mb-2 pt-1 text-lg font-semibold leading-3 sm:pt-0 md:mb-1 md:text-2xl'>
                                         Question {index + 1}
                                       </h2>
                                       <p className='m-0'>{item.question}</p>
@@ -440,12 +440,12 @@ export const LearnerTeacher: FC = () => {
                           <div className='mb-4 md:mb-7'>
                             <div className={`relative ${item.image ? 'sm:pl-24' : ''}`}>
                               {item.image && (
-                                <div className='mb-3 w-20 sm:mb-0 sm:absolute sm:left-0 sm:top-0 sm:pt-2.5'>
+                                <div className='mb-3 w-20 sm:absolute sm:left-0 sm:top-0 sm:mb-0 sm:pt-2.5'>
                                   <img src={item.image} alt='Question Image' />
                                 </div>
                               )}
                               <div className='relative sm:min-w-0 sm:grow sm:basis-0'>
-                                <div className='overflow-auto w-full'>
+                                <div className='w-full overflow-auto'>
                                   <h2 className='mb-1.5 text-lg font-semibold md:mb-2 md:text-2xl'>
                                     Question {index + 1}
                                   </h2>
@@ -665,11 +665,11 @@ export const LearnerTeacher: FC = () => {
           {questions.map((item, index) => (
             <div
               key={item.id}
-              className='mb-6 relative rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
+              className='relative mb-6 rounded-xl border border-solid border-neutral-200 p-4 text-sm md:text-base lg:text-2xl'
             >
               <div className='block gap-x-5 sm:flex'>
                 <div className='min-w-0 flex-grow basis-0'>
-                  <div className='flex w-full justify-end absolute top-4 right-4'>
+                  <div className='absolute right-4 top-4 flex w-full justify-end'>
                     <Dialog open={isOpen} onOpenChange={setIsOpen}>
                       <DialogTrigger asChild>
                         <i
@@ -713,7 +713,7 @@ export const LearnerTeacher: FC = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className='overflow-hidden w-full'>
+                  <div className='w-full overflow-hidden'>
                     <div className='gap-x-3 sm:flex'>
                       {item.image && (
                         <div className='mb-5 w-20 sm:mb-0'>
@@ -724,11 +724,11 @@ export const LearnerTeacher: FC = () => {
                           />
                         </div>
                       )}
-                      <div className='flex-grow basis-0 min-w-0'>
-                        <span className='block text-2xl font-semibold leading-4 mb-3'>
+                      <div className='min-w-0 flex-grow basis-0'>
+                        <span className='mb-3 block text-2xl font-semibold leading-4'>
                           Question {index + 1}
                         </span>
-                        <p className='block w-full text-black overflow-auto'>{item.question}</p>
+                        <p className='block w-full overflow-auto text-black'>{item.question}</p>
                       </div>
                     </div>
                   </div>
