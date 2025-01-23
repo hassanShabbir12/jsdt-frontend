@@ -44,7 +44,6 @@ import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/utils';
 
 import AdminRecord from '../admin-record';
-import RichTextEditor from './ckeditor';
 import MathFormulaDisplay from './formula';
 import QuestionContent from './question-content';
 
@@ -115,7 +114,7 @@ export const Question: FC = () => {
               className='!container max-h-[80%] max-w-[96%] overflow-y-auto overflow-x-hidden'
               onPointerDownOutside={(e) => e.preventDefault()}
             >
-              <form className='overflow-hidden w-full' onSubmit={form.handleSubmit(onSubmit)}>
+              <form className='w-full overflow-hidden' onSubmit={form.handleSubmit(onSubmit)}>
                 <DialogHeader>
                   <DialogTitle className='mb-4 text-center text-lg md:text-xl lg:text-2xl'>
                     {isEditing ? 'Edit Question' : 'Add New Question'}
@@ -396,10 +395,21 @@ export const Question: FC = () => {
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
                     <div className='table-scroll'>
-                      <RichTextEditor
-                        value={form.getValues('question')}
-                        onChange={(content) => form.setValue('question', content)}
-                        showToolbar={true}
+                      <Controller
+                        name='question'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                          <textarea
+                            value={value || ''}
+                            onChange={(e) => onChange(e.target.value)}
+                            placeholder='Enter your question'
+                            className='h-24 w-full resize-none rounded-lg  border border-solid
+      border-neutral-200 px-4 py-2 text-sm 
+      text-zinc-800 shadow-none placeholder:text-sm 
+      placeholder:text-stone-300 focus-visible:outline-none 
+      focus-visible:ring-0 lg:px-3'
+                          />
+                        )}
                       />
                     </div>
                     <div className='relative p-4 pt-2'>
@@ -430,10 +440,21 @@ export const Question: FC = () => {
                   </Label>
                   <div className='relative rounded-md ring-1 ring-neutral-200 focus:border-blue-500 focus-visible:outline-none focus-visible:ring-1'>
                     <div className='table-scroll'>
-                      <RichTextEditor
-                        value={form.getValues('answer')}
-                        onChange={(content) => form.setValue('answer', content)}
-                        showToolbar={true}
+                      <Controller
+                        name='answer'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                          <textarea
+                            value={value || ''}
+                            onChange={(e) => onChange(e.target.value)}
+                            placeholder='Enter your answer'
+                            className='h-24 w-full resize-none rounded-lg border border-solid
+      border-neutral-200 px-4 py-2 text-sm 
+      text-zinc-800 shadow-none placeholder:text-sm 
+      placeholder:text-stone-300 focus-visible:outline-none 
+      focus-visible:ring-0 lg:px-3'
+                          />
+                        )}
                       />
                     </div>
                     <div className='relative p-4 pt-2'>
