@@ -16,7 +16,7 @@
   "proseWrap": "preserve",
   "htmlWhitespaceSensitivity": "css",
   "vueIndentScriptAndStyle": false,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "embeddedLanguageFormatting": "auto",
   "singleAttributePerLine": false,
   "tailwindConfig": "./tailwind.config.js",
